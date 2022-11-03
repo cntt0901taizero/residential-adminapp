@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright 2019 Coop IT Easy
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="view_tb_khoinha_tree" model="ir.ui.view">
+        <field name="name">tb_khoinha.tree</field>
+        <field name="model">tb_khoinha</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"></field>
+                <field name="ma"></field>
+                <field name="trang_thai"></field>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_tb_khoinha_form" model="ir.ui.view">
+        <field name="name">tb_khoinha.form</field>
+        <field name="model">tb_khoinha</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"></field>
+                            <field name="ma"></field>
+                        </group>
+                        <group>
+                            <field name="trang_thai"></field>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Toà nhà">
+                            <field name="toa_nha_ids" widget="many2many" mode="tree,kanban">
+                                <tree>
+                                    <field name="name"></field>
+                                    <field name="ma"></field>
+                                    <field name="dia_chi"></field>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_tb_khoinha_search">
+        <field name="name">tb_khoinha.search</field>
+        <field name="model">tb_khoinha</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Tên khối nhà"></field>
+                <field name="ma" string="Mã khối nhà"></field>
+
+            </search>
+        </field>
+    </record>
+
+    <record id="action_tb_khoinha" model="ir.actions.act_window">
+        <field name="name">Khối nhà</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">tb_khoinha</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Thêm mới khối nhà!</p>
+        </field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="menu_tb_khoinha"
+              name="Khối nhà"
+              parent="menu_blockhouse"
+              action="action_tb_khoinha"
+              sequence="0"/>
+</odoo>

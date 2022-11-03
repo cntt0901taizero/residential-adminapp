@@ -1,0 +1,9 @@
+.list_tree_image > img {
+    height: 50px; width: 100px;
+}
+.news-content{
+width:100%
+}
+.news-content img {
+    max-width: 100% !important
+}

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="module_resident" model="ir.module.category">
+            <field name="name">Quản lý cư dân</field>
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_administration" model="res.groups">
+            <field name="name">Ban quản trị</field>
+            <field name="category_id" ref="module_resident"/>
+        </record>
+        <record id="group_management" model="res.groups">
+            <field name="name">Ban quản lý</field>
+            <field name="category_id" ref="module_resident"/>
+        </record>
+        <record id="group_resident" model="res.groups">
+            <field name="name">Cư dân</field>
+            <field name="category_id" ref="module_resident"/>
+        </record>
+        <record id="group_nhanvien_sale" model="res.groups">
+            <field name="name">Nhân viên sale</field>
+            <field name="category_id" ref="module_resident"/>
+        </record>
+        <record id="group_nhanvien_dlmg" model="res.groups">
+            <field name="name">Nhân viên sàn/ĐLMG</field>
+            <field name="category_id" ref="module_resident"/>
+        </record>
+        <record id="group_nhanvien_homes" model="res.groups">
+            <field name="name">Nhân viên Homes</field>
+            <field name="category_id" ref="module_resident"/>
+        </record>
+        <record id="group_nhanvien_bank" model="res.groups">
+            <field name="name">Nhân viên BANK</field>
+            <field name="category_id" ref="module_resident"/>
+        </record>
+        <record id="group_chudautu" model="res.groups">
+            <field name="name">Chủ đầu tư</field>
+            <field name="category_id" ref="module_resident"/>
+        </record>
+
+        <record id="ir_cron_scheduler_news_expired_action" model="ir.cron">
+            <field name="name">Quét bản tin hết hạn</field>
+            <field name="model_id" ref="model_tb_news"/>
+            <field name="state">code</field>
+            <field name="code">model.action_date()</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">5</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+        </record>
+
+    </data>
+    <data noupdate="1">
+
+    </data>
+
+</odoo>

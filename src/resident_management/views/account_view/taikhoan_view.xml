@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright 2019 Coop IT Easy
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <!--    <record id="view_users_tree_inherit" model="ir.ui.view">-->
+    <!--        <field name="name">res.users.tree</field>-->
+    <!--        <field name="inherit_id" ref="base.view_users_tree"/>-->
+    <!--        <field name="model">res.users</field>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--            <tree>-->
+    <!--                <field name="name"></field>-->
+    <!--                <field name="login"></field>-->
+    <!--            </tree>-->
+    <!--        </field>-->
+    <!--    </record>-->
+    <record id="view_users_form_simple_modif_inherit" model="ir.ui.view">
+        <field name="name">res.users.preferences.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form_simple_modif"/>
+        <field name="arch" type="xml">
+            <field name="image_1920" position="replace">
+            </field>
+            <field name="name" position="replace">
+                <group>
+                    <group>
+                        <h1>
+                            <field name="name" readonly="0" class="oe_inline"></field>
+                        </h1>
+                        <br/>
+                        <h4>
+                            <group>
+                                <field name="phone_number" readonly="0" class="o_event_fontsize_11 p-0"></field>
+                            </group>
+                        </h4>
+
+                    </group>
+                    <field name="image_1920" readonly="0" widget="image" class="oe_right oe_avatar"
+                           options="{&quot;preview_image&quot;: &quot;avatar_128&quot;}"/>
+
+                </group>
+
+
+            </field>
+
+        </field>
+    </record>
+    <record id="view_users_form_inherit" model="ir.ui.view">
+        <field name="name">res.users.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <div class="oe_button_box" name="button_box" position="replace">
+            </div>
+            <field name="login" position="after">
+                <br/>
+                <sheet>
+                    <group>
+                        <field name="phone_number"></field>
+                    </group>
+                    <group>
+
+                    </group>
+                </sheet>
+
+            </field>
+
+        </field>
+    </record>
+
+    <record id="action_tb_taikhoan" model="ir.actions.act_window">
+        <field name="name">Tài khoản</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.users</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('base.view_users_tree')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('view_users_form_inherit')})]"/>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Thêm mới tài khoản!</p>
+        </field>
+    </record>
+
+    <record id="menu_tb_taikhoan" model="ir.ui.menu">
+        <field name="name">Tài khoản</field>
+        <field name="action" ref="resident_management.action_tb_taikhoan"/>
+        <field name="parent_id" ref="menu_resident_root"/>
+        <field name="groups_id"
+               eval="[(4, ref('resident_management.group_administration')), (4, ref('resident_management.group_management')), (4, ref('base.group_system')), (4, ref('base.group_erp_manager'))]"
+        />
+    </record>
+
+</odoo>

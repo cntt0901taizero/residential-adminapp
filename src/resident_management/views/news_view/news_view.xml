@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_tb_news_tree" model="ir.ui.view">
+        <field name="name">tb_news.tree</field>
+        <field name="model">tb_news</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" decoration-bf="1"></field>
+                <field name="create_date" widget="date"></field>
+                <field name="image" widget="image" width="120px"></field>
+                <field groups="resident_management.group_administration, resident_management.group_management"
+                       name="state"></field>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="view_tb_news_form" model="ir.ui.view">
+        <field name="name">tb_news.form</field>
+        <field name="model">tb_news</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                            icon="fa-check"
+                            class="oe_highlight"
+                            states="DRAFT, REJECT"
+                            name="set_status_active" string="Phê duyệt" type="object"
+                            groups="resident_management.group_administration"
+                    />
+                    <button
+                            icon="fa-times"
+                            name="set_status_reject" string="Từ chối duyệt" type="object" states="DRAFT, ACTIVE"
+                            groups="resident_management.group_administration"/>
+                    <field name="state" widget="statusbar"
+                           groups="resident_management.group_administration, resident_management.group_management"/>
+                </header>
+                <sheet>
+                    <field name="image" readonly="0" widget="image" class="oe_right oe_avatar"/>
+                    <xpath expr="//form" position="attributes">
+                        <attribute name="name">Tiêu đề</attribute>
+                    </xpath>
+                    <h1>
+                        <field name="name" class="oe_inline"/>
+                    </h1>
+                    <group>
+                        <field name="file_name"></field>
+                        <field name="file" filename="file_name" widget='binary'></field>
+                        <field name="expired_date"/>
+                    </group>
+                    <group>
+                        <field name="content" class="news-content">Nội dung</field>
+                    </group>
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_tb_news_search">
+        <field name="name">tb_news.search</field>
+        <field name="model">tb_news</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Tiêu đề"></field>
+                <group expand="0" string="Group By">
+                    <field groups="resident_management.group_administration, resident_management.group_management" name="state"
+                           string="Trạng thái" context="{'group_by': 'state'}"></field>
+                </group>
+<!--                    <searchpanel>-->
+<!--                        <field groups="resident_management.group_administration, resident_management.group_management"-->
+<!--                               name="state" icon="fa-users" select="multi"/>-->
+<!--                    </searchpanel>-->
+                <filter groups="resident_management.group_administration, resident_management.group_management" name="filter_draft" string="Nháp" domain="[('state', '=', 'DRAFT')]"></filter>
+                <filter groups="resident_management.group_administration, resident_management.group_management" name="filter_active" string="Đã đăng" domain="[('state', '=', 'ACTIVE')]"></filter>
+            </search>
+        </field>
+    </record>
+
+
+    <record id="action_tb_news" model="ir.actions.act_window">
+        <field name="name">Bản tin</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">tb_news</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p
+                    class="o_view_nocontent_smiling_face">Chưa có bản tin nào.
+            </p>
+        </field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="menu_tb_news"
+              name="Bản tin"
+              parent="menu_resident_root"
+              action="action_tb_news"
+              sequence="0"/>
+</odoo>
+

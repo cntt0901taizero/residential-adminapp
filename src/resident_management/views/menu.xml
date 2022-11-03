@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright 2019 Coop IT Easy
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="menu_resident_root"
+              name="Quản lý cư dân"
+              sequence="0"/>
+
+    <menuitem id="menu_blockhouse"
+              name="Quản lý khối nhà"
+              parent="menu_resident_root"
+              sequence="0"/>
+
+    <menuitem id="menu_fee"
+              name="Thu phí cư dân"
+              parent="menu_resident_root"
+              sequence="0"/>
+</odoo>
