@@ -4,7 +4,7 @@
     'category': 'Resident',
     'summary': 'RESIDENTIAL MANAGEMENT',
     'description': """RESIDENTIAL MANAGEMENT""",
-    'depends': ['base', 'mail'],
+    'depends': ['base', 'mail', 'website_profile'],
     'sequence': -100,
     'data': [
         'security/resident_security.xml',
