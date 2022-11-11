@@ -44,6 +44,6 @@ class Users_Controller(http.Controller):
                 'signature': user.signature,
                 'active': user.active
             }
-            return valid_response(data, status=200)
+            return valid_response(data, 200)
         except Exception as e:
-            return invalid_response("Failed", message=e.name)
+            return invalid_response(e.name, 500)

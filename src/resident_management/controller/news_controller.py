@@ -31,6 +31,6 @@ class NewsController(http.Controller):
                 "current_page": current_page if current_page > 0 else 0,
             }
 
-            return valid_response(data_page, status=200)
+            return valid_response(data_page, 200)
         except Exception as e:
-            return invalid_response("failed", message=e.name)
+            return invalid_response(e.name, 500)

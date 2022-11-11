@@ -16,13 +16,13 @@ message_body = "Hi john, your customized news for today is ready"
 
 class tb_news(models.Model):
     _name = 'tb_news'
-    _description = 'Bảng tin'
+    _description = 'Bản tin'
 
-    name = fields.Char(string='Tiêu đề bảng tin', required=True, )
+    name = fields.Char(string='Tiêu đề bản tin', required=True, )
     content = fields.Html(string='Nội dung', copy=False, )
     file = fields.Binary(string='Tài liệu', attachment=True, help='Chọn tài liệu tải lên')
     file_name = fields.Char(string='Tên tài liệu')
-    image = fields.Image(string="Ảnh bảng tin")
+    image = fields.Image(string="Ảnh bản tin")
     create_date = fields.Date(string="Ngày tạo", default=datetime.datetime.today())
     # active = fields.Boolean(string='Trạng thái', default=True)
     expired_date = fields.Date(string="Ngày hết hạn", default=datetime.datetime.today())
@@ -33,24 +33,22 @@ class tb_news(models.Model):
     ], required=True, default='DRAFT', tracking=True, string="Trạng thái", )
 
     def set_status_active(self):
-        try:
-            result = push_service.notify_single_device(registration_id=registration_id, message_title="Bản tin mới",
-                                                       message_body=self.name)
-        except Exception as e:
-            print(e)
+        # try:
+        #     push_service.notify_single_device(
+        #         registration_id=registration_id,
+        #         message_title="Bản tin mới",
+        #         message_body=self.name
+        #     )
+        # except Exception as e:
+        #     print(e)
 
         self.write({'state': 'ACTIVE'})
 
     def set_status_reject(self):
-        # for rec in self:
-        #     rec.state = 'ACTIVE'
         self.write({'state': 'REJECT'})
 
     def set_status_draft(self):
-        # for rec in self:
-        #     rec.state = 'DRAFT'
         self.write({'state': 'DRAFT'})
-
 
     def write(self, values):
         if 'state' in values and self.env.user.has_group('resident_management.group_management'):
