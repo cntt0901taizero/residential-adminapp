@@ -19,11 +19,11 @@
         <field name="model">tb_news</field>
         <field name="arch" type="xml">
             <kanban records_draggable="0" quick_create="false">
-                <field name="id" />
-                <field name="name" />
-                <field name="create_date" />
-                <field name="expired_date" />
-                <field name="image" />
+                <field name="id"/>
+                <field name="name"/>
+                <field name="create_date"/>
+                <field name="expired_date"/>
+                <field name="image"/>
                 <field name="state"/>
                 <templates>
                     <t t-name="kanban-box">
@@ -41,18 +41,24 @@
                                     </div>
                                 </div>
                                 <div name="product_lst_price" class="mt-1">
-                                    <span>Ngày tạo: <field name="create_date" widget="date"/></span>
+                                    <span>Ngày tạo:
+                                        <field name="create_date" widget="date"/>
+                                    </span>
                                 </div>
                                 <div name="product_lst_price" class="mt-1">
-                                    <span>Ngày hết hạn: <field name="expired_date" widget="date"/></span>
+                                    <span>Ngày hết hạn:
+                                        <field name="expired_date" widget="date"/>
+                                    </span>
                                 </div>
                                 <div name="product_lst_price" class="mt-1">
-                                    <span><field name="state" widget="label_selection" /></span>
+                                    <span>
+                                        <field name="state" widget="label_selection"/>
+                                    </span>
                                 </div>
-<!--                                <div class="o_kanban_record_bottom">-->
-<!--                                    <div class="oe_kanban_bottom_left"></div>-->
-<!--                                    <div class="oe_kanban_bottom_right"></div>-->
-<!--                                </div>-->
+                                <!--                                <div class="o_kanban_record_bottom">-->
+                                <!--                                    <div class="oe_kanban_bottom_left"></div>-->
+                                <!--                                    <div class="oe_kanban_bottom_right"></div>-->
+                                <!--                                </div>-->
                             </div>
                         </div>
                     </t>

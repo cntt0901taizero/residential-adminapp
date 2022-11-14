@@ -34,3 +34,7 @@ access_change_password_user_management,access_change_password_user_management,ba
 
 access_res_groups_administration,access_res_groups_administration,base.model_res_groups,group_administration,1,1,1,0
 access_res_groups_management,access_res_groups_management,base.model_res_groups,group_management,1,1,1,0
+
+access_notifications_administration, access_notifications_administration,model_tb_notification,group_administration,1,1,0,1
+access_notifications_management, access_notifications_management,model_tb_notification,group_management,1,1,1,1
+access_notifications_resident, access_notifications_resident,model_tb_notification,group_resident,1,0,0,0

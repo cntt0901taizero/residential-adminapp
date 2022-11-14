@@ -13,6 +13,7 @@
         'views/blockhouse_view/khoinha_view.xml',
         'views/blockhouse_view/toanha_view.xml',
         'views/news_view/news_view.xml',
+        'views/notification_view/notification_view.xml',
         'views/account_view/taikhoan_view.xml',
         'views/fee_view/paybillconfigrender_view.xml',
         'views/fee_view/feekind_view.xml',
