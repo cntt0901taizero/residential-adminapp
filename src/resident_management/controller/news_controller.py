@@ -1,7 +1,7 @@
 import json
 
 from odoo import http
-from odoo.addons.resident_management.controller.common import valid_response, invalid_response
+from odoo.addons.resident_management.controller.common import common_response
 
 
 class NewsController(http.Controller):
@@ -31,6 +31,6 @@ class NewsController(http.Controller):
                 "current_page": current_page if current_page > 0 else 0,
             }
 
-            return valid_response(data_page, 200)
+            return common_response('200', '', data_page)
         except Exception as e:
-            return invalid_response(e.name, 500)
+            return common_response('500', e.name, [])

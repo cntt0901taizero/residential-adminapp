@@ -1,40 +1,19 @@
 import ast
-import datetime
 import json
+import datetime
 import logging
-
-import werkzeug.wrappers
+from werkzeug.wrappers import Request, Response
 
 _logger = logging.getLogger(__name__)
 
 
-def default(o):
-    if isinstance(o, (datetime.date, datetime.datetime)):
-        return o.isoformat()
-    if isinstance(o, bytes):
-        return str(o)
-
-
-def valid_response(data, status=200):
-    """Valid Response
-    This will be return when the http request was successfully processed."""
-    data = {"count": len(data) if not isinstance(data, str) else 1, "data": data}
-    return werkzeug.wrappers.Response(
-        status=status,
-        content_type="application/json; charset=utf-8",
-        response=json.dumps(data, default=default)
-    )
-
-
-def invalid_response(message=None, status=401):
-    """Invalid Response
-    This will be the return value whenever the server runs into an error
-    either from the client or the server."""
-    return werkzeug.wrappers.Response(
-        status=status,
-        content_type="application/json; charset=utf-8",
-        response=json.dumps({"message": message}, default=default)
-    )
+def common_response(status='404', message='', data=[]):
+    response_data = {
+        'status': status,
+        'message': message,
+        'data': data
+    }
+    return response_data
 
 
 def extract_arguments(limit="80", offset=0, order="id", domain="", fields=[]):

@@ -1,12 +1,9 @@
 import json
-
 import werkzeug
-
 from odoo import http
 from odoo.http import request
-from odoo.addons.resident_management.controller.common import valid_response, invalid_response
+from odoo.addons.resident_management.controller.common import common_response
 from odoo.service import security
-
 import xmlrpc.client
 
 
@@ -44,6 +41,6 @@ class Users_Controller(http.Controller):
                 'signature': user.signature,
                 'active': user.active
             }
-            return valid_response(data, 200)
+            return common_response('200', '', data)
         except Exception as e:
-            return invalid_response(e.name, 500)
+            return common_response('500', e.name, [])
