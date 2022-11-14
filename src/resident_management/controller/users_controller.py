@@ -9,9 +9,7 @@ import xmlrpc.client
 
 class Users_Controller(http.Controller):
 
-    @http.route([
-        '/auth/login/email',
-    ], type='http', auth="public", website=True, methods=["POST"], csrf=False)
+    @http.route('/auth/login/email', auth="public", methods=["POST"], type='json', cors='*', csrf=False)
     def users_login_email(self, **kwargs):
         url = 'http://localhost:8069/'
         db_name = 'my_db_1'
@@ -20,9 +18,8 @@ class Users_Controller(http.Controller):
         print("ui id")
         return "123"
 
-    @http.route('/api/users/user-info', methods=['GET'], auth='user', cors='*')
+    @http.route('/api/users/user-info', methods=['GET'], auth='user', type='json', cors='*', csrf=False)
     def user_info(self, **kwargs):
-        headers_json = {'Content-Type': 'application/json'}
         try:
             user = request.env.user
             sid = request.session.sid
