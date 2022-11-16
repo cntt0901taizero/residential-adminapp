@@ -19,7 +19,7 @@ class Users_Controller(http.Controller):
         return "123"
 
     @http.route('/api/users/user-info', methods=['GET'], auth='user', type='json', cors='*', csrf=False)
-    def user_info(self, **kwargs):
+    def user_info(self, *args, **kwargs):
         try:
             user = request.env.user
             sid = request.session.sid
