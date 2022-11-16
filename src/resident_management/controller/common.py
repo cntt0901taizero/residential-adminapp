@@ -1,20 +1,33 @@
-import ast
 import json
-import datetime
 import logging
-from werkzeug.wrappers import Request, Response
+from odoo.http import request, JsonRequest, Response
+from odoo.tools import date_utils
 
 _logger = logging.getLogger(__name__)
 
 
-def common_response(status='404', message='', data=[]):
-    # headers_json = {'Content-Type': 'application/json'}
+def alternative_json_response(self, result=None, error=None):
+    if error is not None:
+        response = error
+    if result is not None:
+        response = result
+
+    mime = 'application/json'
+    body = json.dumps(response, default=date_utils.json_default)
+    return Response(
+        body, status=error and error.pop('http_status', 200) or 200,
+        headers=[('Content-Type', mime), ('Content-Length', len(body))]
+    )
+
+
+def common_response(status='', message=None, data=None):
+    headers_json = {'Content-Type': 'application/json'}
     response_data = {
         'status': status,
         'message': message,
         'data': data
     }
-    # return Response(json.dumps(response_data), headers=headers_json)
+    request._json_response = alternative_json_response.__get__(request, JsonRequest)
     return response_data
 
 

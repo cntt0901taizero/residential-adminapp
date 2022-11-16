@@ -11,8 +11,11 @@ class tb_building(models.Model):
     founding_date = fields.Date(string='Ngày thành lập', copy=False,)
     image = fields.Image(string='Ngày thành lập', copy=False,)
     address = fields.Char(string='Địa chỉ', size=500, copy=False,)
-    blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Toà nhà")
     is_active = fields.Boolean(string='Trạng thái', default=True)
+
+    blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Toà nhà")
+
+    buiding_floors_id = fields.One2many('tb_building_floors', 'building_id', string="Tầng sàn")
 
     def set_status_active(self):
         self.is_active = True
@@ -21,6 +24,7 @@ class tb_building(models.Model):
         ('name', 'unique(name)', 'Tên tòa nhà không được trùng lặp'),
         ('code', 'unique(code)', 'Mã tòa nhà không được trùng lặp')
     ]
+
 
 
 
