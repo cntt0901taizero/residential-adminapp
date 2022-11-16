@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright 2019 Coop IT Easy
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="view_tb_building_tree" model="ir.ui.view">
+        <field name="name">tb_building.tree</field>
+        <field name="model">tb_building</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"></field>
+                <field name="code"></field>
+                <field name="address"></field>
+                <field name="total_floors"></field>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_tb_building_form" model="ir.ui.view">
+        <field name="name">tb_building.form</field>
+        <field name="model">tb_building</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+<!--                    <div class="oe_title">-->
+<!--                        <h1>-->
+<!--                            <field name="chat_luong" widget="priority" class="mr-3"/>-->
+<!--                        </h1>-->
+<!--                    </div>-->
+                    <group>
+                        <group>
+                            <field name="name"></field>
+                            <field name="address"></field>
+                        </group>
+                        <group>
+                            <field name="code"></field>
+                            <field name="total_floors"></field>
+                        </group>
+                    </group>
+
+<!--                    <notebook>-->
+<!--                        <page string="Căn hộ">-->
+<!--                            <field name="can_ho_ids" widget="many2many" mode="tree,kanban">-->
+<!--                                <tree>-->
+<!--                                    <field name="name"></field>-->
+<!--                                    <field name="ma"></field>-->
+<!--                                    <field name="chu_so_huu"></field>-->
+<!--                                </tree>-->
+<!--                                <form>-->
+<!--                                    <sheet>-->
+<!--                                        <group>-->
+<!--                                            <group>-->
+<!--                                                <field name="name"></field>-->
+<!--                                                </group>-->
+<!--                                            <group>-->
+<!--                                                <field name="ma"></field>-->
+<!--                                                <field name="chu_so_huu"></field>-->
+<!--                                            </group>-->
+<!--                                        </group>-->
+<!--                                    </sheet>-->
+<!--                                </form>-->
+<!--                            </field>-->
+<!--                        </page>-->
+<!--                        <page string="Cư dân">-->
+
+<!--                        </page>-->
+<!--                    </notebook>-->
+                </sheet>
+<!--                <div class="oe_chatter">-->
+<!--                    <field name="message_follower_ids"/>-->
+<!--                    <field name="activity_ids"/>-->
+<!--                    <field name="message_ids"/>-->
+<!--                </div>-->
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_tb_building_search">
+        <field name="name">tb_building.search</field>
+        <field name="model">tb_building</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Tên toà nhà"></field>
+
+
+            </search>
+        </field>
+    </record>
+
+    <record id="action_tb_building" model="ir.actions.act_window">
+        <field name="name">Toà nhà</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">tb_building</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Thêm mới toà nhà!</p>
+        </field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="menu_tb_building"
+              name="Toà nhà"
+              parent="menu_blockhouse"
+              action="action_tb_building"
+              sequence="0"/>
+</odoo>
