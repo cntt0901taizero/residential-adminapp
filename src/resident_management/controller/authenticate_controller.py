@@ -3,8 +3,6 @@ from odoo.addons.web.controllers.main import ensure_db
 from odoo import http
 from odoo.http import request
 from odoo.tools import GettextAlias
-from werkzeug.wrappers import Request, Response
-import json
 from odoo.addons.resident_management.controller.common import common_response
 
 
