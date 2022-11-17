@@ -21,7 +21,6 @@ def alternative_json_response(self, result=None, error=None):
 
 
 def common_response(status='', message=None, data=None):
-    headers_json = {'Content-Type': 'application/json'}
     response_data = {
         'status': status,
         'message': message,

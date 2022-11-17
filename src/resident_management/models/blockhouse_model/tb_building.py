@@ -11,6 +11,9 @@ class tb_building(models.Model):
     founding_date = fields.Date(string='Ngày thành lập', copy=False,)
     image = fields.Image(string='Ngày thành lập', copy=False,)
     address = fields.Char(string='Địa chỉ', size=500, copy=False,)
+    website = fields.Char(string='Website', size=200, copy=False)
+    phone = fields.Char(string='Điện thoại', size=50, copy=False)
+    location_link = fields.Char(string='link vị trí', size=500, copy=False)
     is_active = fields.Boolean(string='Trạng thái', default=True)
 
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Toà nhà")

@@ -9,8 +9,12 @@
         <field name="model">tb_blockhouse</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="name"></field>
+                <field name="image" widget="image" width="100px"/>
+                <field name="name" decoration-bf="1"></field>
                 <field name="code"></field>
+                <field name="address"></field>
+                <field name="website"></field>
+                <field name="phone"></field>
                 <field name="is_active"></field>
             </tree>
         </field>
@@ -23,31 +27,16 @@
             <form>
                 <sheet>
                     <group>
-                        <group>
-                            <field name="name"></field>
-                            <field name="code"></field>
-                        </group>
-                        <group>
-                            <field name="is_active"></field>
-                        </group>
+                        <field name="code"></field>
+                        <field name="name"></field>
+                        <field name="website"></field>
+                        <field name="phone"></field>
+                        <field name="image" height="400px" widget="image" class="oe_left oe_avatar"/>
+                        <field name="location_link"></field>
+                        <field name="address" widget="text"></field>
+                        <field name="is_active" widget="boolean_toggle"></field>
                     </group>
-<!--                    <notebook>-->
-<!--                        <page string="Toà nhà">-->
-<!--                            <field name="building_id" widget="many2many" mode="tree,kanban">-->
-<!--                                <tree>-->
-<!--                                    <field name="name"></field>-->
-<!--                                    <field name="code"></field>-->
-<!--                                    <field name="address"></field>-->
-<!--                                </tree>-->
-<!--                            </field>-->
-<!--                        </page>-->
-<!--                    </notebook>-->
                 </sheet>
-<!--                <div class="oe_chatter">-->
-<!--                    <field name="message_follower_ids"/>-->
-<!--                    <field name="activity_ids"/>-->
-<!--                    <field name="message_ids"/>-->
-<!--                </div>-->
             </form>
         </field>
     </record>

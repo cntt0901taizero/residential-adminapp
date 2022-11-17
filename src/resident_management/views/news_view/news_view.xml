@@ -5,10 +5,10 @@
         <field name="model">tb_news</field>
         <field name="arch" type="xml">
             <tree>
+                <field name="image" widget="image" width="100px"/>
                 <field name="name" decoration-bf="1"/>
                 <field name="create_date" widget="date"/>
                 <field name="expired_date" widget="date"/>
-                <field name="image" widget="image" width="120px"/>
                 <field name="state" widget="label_selection"/>
             </tree>
         </field>
