@@ -9,8 +9,8 @@
         <field name="model">tb_blockhouse</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="image" widget="image" width="100px"/>
-                <field name="name" decoration-bf="1"></field>
+                <field name="image" widget="image" width="100px"></field>
+                <field name="name"></field>
                 <field name="code"></field>
                 <field name="address"></field>
                 <field name="website"></field>
