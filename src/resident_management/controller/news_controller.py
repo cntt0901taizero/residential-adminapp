@@ -34,3 +34,7 @@ class NewsController(http.Controller):
             return common_response('200', '', data_page)
         except Exception as e:
             return common_response('500', e.name, [])
+
+    @http.route('/api/news/hello', methods=['GET'], auth='none', type='json', cors='*', csrf=False)
+    def search_page(self, **kwargs):
+        return 'Hello'

@@ -61,5 +61,9 @@ class AuthenticateController(http.Controller):
 
     @http.route('/api/authenticate/logout', method=['POST'], auth="none", type='json', cors='*', csrf=False)
     def mobile_logout(self, **kwargs):
-        request.session.logout(keep_db=True)
-        return common_response('200', 'Success', [])
+        try:
+            rs = request.session.logout(keep_db=True)
+            return common_response('200', 'Success', [])
+        except Exception as e:
+            return common_response('500', 'Error', [])
+
