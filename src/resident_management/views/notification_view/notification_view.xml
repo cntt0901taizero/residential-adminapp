@@ -42,11 +42,11 @@
                     <group>
                         <field name="name"></field>
                     </group>
-                    <group>
-                        <group>
-                            <field name="type"></field>
-                        </group>
-                    </group>
+<!--                    <group>-->
+<!--                        <group>-->
+<!--                            <field name="type"></field>-->
+<!--                        </group>-->
+<!--                    </group>-->
                     <group colspan="4">
                         <field name="content" class="oe-bordered-editor"
                                placeholder="Nội dung thông báo..." modifiers="{}"/>
