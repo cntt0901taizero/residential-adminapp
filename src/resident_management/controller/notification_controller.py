@@ -9,7 +9,7 @@ import xmlrpc.client
 
 class Notification_Controller(http.Controller):
 
-    @http.route('/api/notifications/get-page', methods=['GET'], auth='none', type='json', cors='*', csrf=False)
+    @http.route('/api/notifications/search-page', methods=['POST'], auth='none', type='json', cors='*', csrf=False)
     def get_page(self, **kwargs):
         current_page = int(kwargs.get('current_page', 0))
         page_size = int(kwargs.get('page_size', 10))
