@@ -27,9 +27,9 @@ class Users_Controller(http.Controller):
                 'signature': user.signature,
                 'active': user.active
             }
-            return common_response('200', '', data)
+            return common_response(200, '', data)
         except Exception as e:
-            return common_response('500', e.name, [])
+            return common_response(500, e.name, [])
 
     @http.route('/api/users/user-by-id/{self_id}', methods=['GET'], auth='none', type='json', cors='*', csrf=False)
     def user_info(self, self_id, **kwargs):
@@ -50,6 +50,6 @@ class Users_Controller(http.Controller):
                 'signature': user.signature,
                 'active': user.active
             }
-            return common_response('200', '', data)
+            return common_response(200, '', data)
         except Exception as e:
-            return common_response('500', e.name, [])
+            return common_response(500, e.name, [])

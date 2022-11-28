@@ -20,9 +20,9 @@ class FeeKind_Controller(http.Controller):
                     'note': item.note,
                     'is_active': item.is_active
                 })
-            return common_response('200', '', list)
+            return common_response(200, '', list)
         except Exception as e:
-            return common_response('500', e.name, [])
+            return common_response(500, e.name, [])
 
     @http.route('/api/fee/fee-kind/find-by-code/<self_code>', methods=['GET'], auth='none', cors='*')
     def find_by_id(self, self_code, **kwargs):
@@ -35,6 +35,6 @@ class FeeKind_Controller(http.Controller):
                 'note': reports.note,
                 'is_active': reports.is_active
             }
-            return common_response('200', '', data)
+            return common_response(200, '', data)
         except Exception as e:
-            return common_response('500', 'Data not found', [])
+            return common_response(500, 'Data not found', [])

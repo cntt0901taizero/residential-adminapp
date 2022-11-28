@@ -30,6 +30,6 @@ class Notification_Controller(http.Controller):
                 "current_page": current_page if current_page > 0 else 0,
             }
 
-            return common_response('200', '', data_page)
+            return common_response(200, '', data_page)
         except Exception as e:
-            return common_response('500', e.name, [])
+            return common_response(500, e.name, [])

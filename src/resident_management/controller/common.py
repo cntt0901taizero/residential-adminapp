@@ -20,7 +20,7 @@ def alternative_json_response(self, result=None, error=None):
     )
 
 
-def common_response(status='', message=None, data=None):
+def common_response(status: int = 500, message: str = '', data=None):
     response_data = {
         'status': status,
         'message': message,
