@@ -69,8 +69,8 @@ class AuthenticateController(http.Controller):
         try:
             user = request.env.user
             if user.id > 0:
-                return True
+                return common_response(200, 'Success', user.id)
             else:
-                return False
+                return common_response(401, 'Error', 0)
         except Exception as e:
-            return False
+            return common_response(500, 'Error', 0)
