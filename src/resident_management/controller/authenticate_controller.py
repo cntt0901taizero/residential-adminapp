@@ -11,7 +11,7 @@ _ = GettextAlias()
 class AuthenticateController(http.Controller):
 
     @http.route('/api/authenticate/login', method=['POST'], auth='public', type='json', cors='*', csrf=False)
-    def login(self, *args, **kwargs):
+    def login(self, **kwargs):
         uid = None
         session_info = None
         ensure_db()
@@ -54,7 +54,7 @@ class AuthenticateController(http.Controller):
 
         except Exception as e:
             request.session.logout(keep_db=True)
-            return common_response(500, e.name, [])
+            return common_response(500, e.args[0], [])
 
     @http.route('/api/authenticate/logout', method=['POST'], auth="user", type='json', cors='*', csrf=False)
     def logout(self, **kwargs):

@@ -1,5 +1,6 @@
 import json
 from odoo import http
+from odoo.http import request
 from odoo.addons.resident_management.controller.common import common_response, alternative_json_response
 
 
@@ -7,11 +8,11 @@ class NewsController(http.Controller):
 
     @http.route('/api/news/search-page', methods=['POST'], auth='none', type='json', cors='*', csrf=False)
     def search_page(self, **kwargs):
-        current_page = int(kwargs.get('current_page', 0))
-        page_size = int(kwargs.get('page_size', 10))
+        current_page = request.params['current_page']
+        page_size = request.params['current_page']
         offset = 0 if current_page == 0 else current_page * page_size
         try:
-            news = http.request.env['tb_news'].sudo()\
+            news = request.env['tb_news'].sudo()\
                 .search([('state', '=', 'ACTIVE')], order="id asc", offset=offset, limit=page_size)
             list_data = []
             for item in news:
@@ -35,6 +36,3 @@ class NewsController(http.Controller):
         except Exception as e:
             return common_response(500, e.name, [])
 
-    @http.route('/api/news/hello', methods=['GET'], auth='none')
-    def search_page(self, **kwargs):
-        return 'Hello'
