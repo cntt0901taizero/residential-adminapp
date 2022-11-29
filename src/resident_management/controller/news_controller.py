@@ -16,10 +16,10 @@ class NewsController(http.Controller):
                 .search([('state', '=', 'ACTIVE')], order="id asc", offset=offset, limit=page_size)
             list_data = []
             for item in news:
-                # base_url = http.request.env['ir.config_parameter'].sudo().get_param('web.base.url')
-                image_url = '/web/image?' + 'model=tb_news&id=' + str(
+                base_url = http.request.env['ir.config_parameter'].sudo().get_param('web.base.url')
+                image_url = base_url + '/web/image?' + 'model=tb_news&id=' + str(
                     item.id) + '&field=image' if item.image else None
-                file_url = '/web/content/tb_news/' + str(item.id) + '/file' if item.file else None
+                file_url = base_url + '/web/content/tb_news/' + str(item.id) + '/file' if item.file else None
                 list_data.append({'id': item.id, 'name': item.name, 'content': item.content,
                                   'image_url': image_url, 'file_url': file_url,
                                   'state': item.state, 'write_date': item.write_date})
