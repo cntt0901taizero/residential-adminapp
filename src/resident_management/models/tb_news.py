@@ -33,15 +33,11 @@ class tb_news(models.Model):
     ], required=True, default='DRAFT', tracking=True, string="Trạng thái", )
 
     def set_status_active(self):
-        # try:
-        #     push_service.notify_single_device(
-        #         registration_id=registration_id,
-        #         message_title="Bản tin mới",
-        #         message_body=self.name
-        #     )
-        # except Exception as e:
-        #     print(e)
-
+        push_service.notify_single_device(
+            registration_id=registration_id,
+            message_title="Bản tin mới",
+            message_body=self.name
+        )
         self.write({'state': 'ACTIVE'})
 
     def set_status_reject(self):

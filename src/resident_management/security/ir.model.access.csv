@@ -42,3 +42,4 @@ access_notifications_resident, access_notifications_resident,model_tb_notificati
 access_banner_administration, access_banner_administration,model_tb_banner,group_administration,1,1,1,1
 access_banner_management, access_banner_management,model_tb_banner,group_management,1,1,1,1
 access_banner_resident, access_banner_resident,model_tb_banner,group_resident,1,0,0,0
+access_banner_public,access_banner_public,model_tb_banner,base.group_public,1,0,0,0
