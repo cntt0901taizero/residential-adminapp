@@ -7,8 +7,6 @@ from odoo.exceptions import ValidationError
 from odoo.tools import GettextAlias
 
 _ = GettextAlias()
-push_service = FCMNotification(
-    api_key="AAAAz6dhWnM:APA91bE2nkH_zcfTAlAuMkCLfnZ1m2y7zg_YMEmQnYBPkZ6JHpUQpNkYqh8f9vtRckFZX1Pl50aUXCbfni23b81OyMkDEPwnctsj4Sg9-IZx_tpgFVajvZMamtVz7_aZInJaRMtaGk_5")
 registration_id = 'fOSDRZ9fQDylz6B6EDjQky:APA91bHVSGvQM7C6HYwgTnWI_RgPEZI0G4J2_IQ-UobBZsAK1HrKTI1Y0QlBm7ABd8BLMLCBMWqjSGBM2WhN6pLxj4xt2I4qjNMa3pylwj43jyUVubG9ZdLFKJuiYUus8299RKtDuhA_'
 message_title = "Uber update"
 message_body = "Hi john, your customized news for today is ready"

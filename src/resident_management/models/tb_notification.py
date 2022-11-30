@@ -1,5 +1,6 @@
-from odoo import models, fields
 from pyfcm import FCMNotification
+
+from odoo import models, fields, http
 
 from odoo.exceptions import ValidationError
 from odoo.tools import GettextAlias
@@ -25,16 +26,28 @@ class tb_notification(models.Model):
         ('ACTIVE', 'Đã duyệt'),
         ('REJECT', 'Chưa duyệt'),
     ], required=True, default='PENDING', tracking=True, string="Trạng thái", )
+    # recipient_list = fields.Many2one(comodel_name='res.users', string="Người nhận")
+    # user_ids = fields.One2many('res.users', 'notification_id', string='Users', help="Chọn người nhận")
+    user_ids = fields.Many2many('res.users', string='Chọn người nhận')
     def set_status_active(self):
-        self.write({'state': 'ACTIVE'})
-        # try:
-        #     push_service.notify_single_device(
-        #         registration_id=registration_id,
-        #         message_title="Bản tin mới",
-        #         message_body=self.name
-        #     )
-        # except Exception as e:
-        #     print(e)
+        try:
+            self.write({'state': 'ACTIVE'})
+            list = self.user_ids.ids
+            print(list)
+            token_list = []
+            fcm_token_list = http.request.env['tb_fcm_token'].sudo().search([('user_id', 'in', list)], order="id asc",)
+            for item in fcm_token_list:
+                token_list.append(item.name)
+            # a = token_list
+            # push_service.notify_single_device(
+            #             registration_id='c_J7mNH6SuGZMkCi2VKBSy:APA91bH8wFV7vfudJmx81iogQpVri_v3umxANaGpyCHJ_9Echne93w0LriRpXi_O78E1nUkDCfLcRxYScYlUsMd1X93kv9bKnzK6mSL7OiwPX6migzUGlSwWaa3vEN-erfN7kE5gYHt0',
+            #             message_title="Bản tin mới",
+            #             message_body=self.name
+            #         )
+            push_service.notify_multiple_devices(registration_ids=token_list,
+                                                          message_title="Bản tin mới", message_body=self.name)
+        except Exception as e:
+            print(e)
     def set_status_reject(self):
         self.write({'state': 'REJECT'})
 
