@@ -59,10 +59,11 @@ class AuthenticateController(http.Controller):
     @http.route('/api/authenticate/logout', method=['POST'], auth="user", type='json', cors='*', csrf=False)
     def logout(self, **kwargs):
         try:
-            rs = request.session.logout(keep_db=True)
-            return common_response(200, 'Success', [])
+            user = request.env.user
+            request.session.logout(keep_db=True)
+            return common_response(200, 'Success', user.id)
         except Exception as e:
-            return common_response(500, 'Error', [])
+            return common_response(500, 'Error', 0)
 
     @http.route('/api/authenticate/check-auth', method=['POST'], auth="user", type='json', cors='*', csrf=False)
     def check_auth(self, **kwargs):
