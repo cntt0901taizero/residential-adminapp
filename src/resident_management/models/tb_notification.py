@@ -46,6 +46,7 @@ class tb_notification(models.Model):
             #         )
             push_service.notify_multiple_devices(registration_ids=token_list,
                                                           message_title="Bản tin mới", message_body=self.name)
+
         except Exception as e:
             print(e)
     def set_status_reject(self):
