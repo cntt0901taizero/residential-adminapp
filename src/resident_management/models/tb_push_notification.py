@@ -10,7 +10,6 @@ class tb_push_notification(models.Model):
     name = fields.Char(string='Tiêu đề', required=True, copy=False)
     # user_id = fields.Integer(string="Người dùng")
     notification_id = fields.Integer(string="Thông báo")
-    notification_status = fields.Integer(string="Trạng thái")
     content = fields.Text(string='Nội dung', required=True, copy=False, )
     type = fields.Selection([
         ('NEWS', 'Bản tin'),

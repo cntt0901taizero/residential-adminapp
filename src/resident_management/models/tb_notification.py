@@ -38,14 +38,16 @@ class tb_notification(models.Model):
             fcm_token_list = http.request.env['tb_fcm_token'].sudo().search([('user_id', 'in', list)], order="id asc",)
             for item in fcm_token_list:
                 token_list.append(item.name)
-            # a = token_list
-            # push_service.notify_single_device(
-            #             registration_id='c_J7mNH6SuGZMkCi2VKBSy:APA91bH8wFV7vfudJmx81iogQpVri_v3umxANaGpyCHJ_9Echne93w0LriRpXi_O78E1nUkDCfLcRxYScYlUsMd1X93kv9bKnzK6mSL7OiwPX6migzUGlSwWaa3vEN-erfN7kE5gYHt0',
-            #             message_title="Bản tin mới",
-            #             message_body=self.name
-            #         )
-            push_service.notify_multiple_devices(registration_ids=token_list,
-                                                          message_title="Bản tin mới", message_body=self.name)
+                http.request.env['tb_push_notification'].sudo().create({
+                    'name': self.name,
+                    'notification_id': self.id,
+                    'notification_status': 'SENT',
+                    'content': self.content,
+                    'type': self.type,
+                    'user_id': item.user_id
+                })
+            # push_service.notify_multiple_devices(registration_ids=token_list,
+            #                                               message_title="Bản tin mới", message_body=self.name)
 
         except Exception as e:
             print(e)
