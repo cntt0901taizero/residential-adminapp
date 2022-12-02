@@ -30,16 +30,16 @@ class AuthenticateController(http.Controller):
             image_url = base_url + '/web/image?' + 'model=res.users&id=' + str(
                 user.id) + '&field=avatar_1920' if user.avatar_1920 else None
             data = {
-                'id': user.id,
+                'id': user.id or None,
                 'sid': None,
                 'expires_time': None,
-                'login': user.login,
-                'email': user.email,
-                'phone': user.phone,
-                'display_name': user.display_name,
-                'image_url': image_url,
-                'signature': user.signature,
-                'active': user.active
+                'login': user.login or None,
+                'email': user.email or None,
+                'phone': user.phone or None,
+                'display_name': user.display_name or None,
+                'image_url': image_url or None,
+                'signature': user.signature or None,
+                'active': user.active or None
             }
             return common_response(200, 'Success', data)
 
