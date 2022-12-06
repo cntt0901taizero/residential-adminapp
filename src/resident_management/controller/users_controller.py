@@ -3,7 +3,7 @@ import werkzeug
 from odoo import http
 from odoo.http import request
 from odoo.addons.resident_management.common import common_response
-from odoo.service import security
+from odoo.service import security, model
 import xmlrpc.client
 
 
@@ -35,6 +35,7 @@ class Users_Controller(http.Controller):
     def image_upload(self, *args, **kwargs):
         try:
             user = request.env.user
+            # model.execute('res.partner', 'write', )
 
             return common_response(200, '', [])
         except Exception as e:
