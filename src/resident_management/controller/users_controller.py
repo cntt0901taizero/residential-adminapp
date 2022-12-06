@@ -32,16 +32,21 @@ class Users_Controller(http.Controller):
         except Exception as e:
             return common_response(500, e.name, [])
 
-    @http.route('/api/users/image-upload', methods=['PORT'], auth='user', type='json', cors='*', csrf=False)
+    @http.route('/api/users/put', methods=['PORT'], auth='user', type='json', cors='*', csrf=False)
     def image_upload(self, *args, **kwargs):
         try:
             user = request.env.user
-            request.env['res.users'].sudo().browse(request.params['id'])\
-                .write({'image_1920': request.params['image_data']})
+            request.env['res.users'].sudo().browse(request.params['id']) \
+                .write({
+                    'name': request.params['name'],
+                    'display_name': request.params['display_name'],
+                    'login': request.params['login'],
+                    'phone': request.params['phone'],
+                    'email': request.params['email'],
+                    'image_1920': request.params['image_data'],
+                })
             # model.execute('res.partner', 'write', )
 
             return common_response(200, '', user.id)
         except Exception as e:
             return common_response(500, e.name, [])
-
-
