@@ -1,7 +1,7 @@
 import json
 from odoo import http
 from odoo.http import request
-from odoo.addons.resident_management.controller.common import common_response, alternative_json_response
+from odoo.addons.resident_management.common import common_response, alternative_json_response
 
 
 class NewsController(http.Controller):
