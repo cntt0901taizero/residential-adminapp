@@ -3,7 +3,7 @@ from odoo.addons.web.controllers.main import ensure_db
 from odoo import http
 from odoo.http import request
 from odoo.tools import GettextAlias
-from odoo.addons.resident_management.controller.common import common_response
+from odoo.addons.resident_management.common import common_response
 
 _ = GettextAlias()
 

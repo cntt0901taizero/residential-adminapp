@@ -30,17 +30,4 @@ def common_response(status: int = 500, message: str = '', data=None):
     return response_data
 
 
-def extract_arguments(limit="80", offset=0, order="id", domain="", fields=[]):
-    """Parse additional data  sent along request."""
-    limit = int(limit)
-    expresions = []
-    if domain:
-        expresions = [tuple(preg.replace(":", ",").split(",")) for preg in domain.split(",")]
-        expresions = json.dumps(expresions)
-        expresions = json.loads(expresions, parse_int=True)
-    if fields:
-        fields = fields.split(",")
 
-    if offset:
-        offset = int(offset)
-    return [expresions, fields, offset, limit, order]

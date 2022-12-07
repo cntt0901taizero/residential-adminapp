@@ -9,7 +9,7 @@ from odoo.tools import GettextAlias
 _ = GettextAlias()
 push_service = FCMNotification(
     api_key="AAAAz6dhWnM:APA91bE2nkH_zcfTAlAuMkCLfnZ1m2y7zg_YMEmQnYBPkZ6JHpUQpNkYqh8f9vtRckFZX1Pl50aUXCbfni23b81OyMkDEPwnctsj4Sg9-IZx_tpgFVajvZMamtVz7_aZInJaRMtaGk_5")
-registration_id = 'c_J7mNH6SuGZMkCi2VKBSy:APA91bH8wFV7vfudJmx81iogQpVri_v3umxANaGpyCHJ_9Echne93w0LriRpXi_O78E1nUkDCfLcRxYScYlUsMd1X93kv9bKnzK6mSL7OiwPX6migzUGlSwWaa3vEN-erfN7kE5gYHt0'
+registration_id = 'eP9mbUhLTZujCbTfJd3Dct:APA91bGwPa8vG2e4Vp1MkOlWdoQIVI-xEdgXIwB0JXoxGMWragEXulseCHMMt82UHzRbx3iD_hF-C2jSW6H2WKsCuMlMGtB8d5MuJ0GvjT-wJB0btvzK2VyM30xDnU7eZPQCLw8srGiK'
 message_title = "Uber update"
 message_body = "Hi john, your customized news for today is ready"
 
