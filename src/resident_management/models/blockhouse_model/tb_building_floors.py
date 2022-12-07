@@ -5,8 +5,9 @@ class tb_building_floors(models.Model):
     _name = 'tb_building_floors'
     _description = 'Tầng sàn'
 
-    floors_number = fields.Char(string='Số tầng', size=50, copy=False, )
-    total_house = fields.Integer(string='Tổng căn hộ', copy=False, )
+    floors_number = fields.Char(string='Số tầng', size=100, copy=False)
+    sort = fields.Integer(string='Thứ tự', copy=False)
+    total_house = fields.Integer(string='Tổng căn hộ', copy=False)
     is_active = fields.Boolean(string='Trạng thái', default=True)
 
     building_id = fields.Many2one(comodel_name='tb_building', string="Toà nhà")
