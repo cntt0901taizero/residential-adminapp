@@ -22,3 +22,4 @@ class tb_building_house(models.Model):
     _sql_constraints = [
         ('code', 'unique(code)', 'Mã căn hộ không được trùng lặp')
     ]
+

@@ -8,7 +8,7 @@ class tb_blockhouse(models.Model):
     name = fields.Char(string='Tên khối nhà', size=200, required=True, copy=False)
     code = fields.Char(string='Mã khối nhà', size=50, copy=False)
     address = fields.Char(string='Địa chỉ', size=500, copy=False)
-    image = fields.Image(string='Ảnh', copy=False,)
+    image = fields.Image(string='Ảnh', copy=False)
     website = fields.Char(string='Website', size=200, copy=False)
     phone = fields.Char(string='Điện thoại', size=50, copy=False)
     location_link = fields.Char(string='link vị trí', size=500, copy=False)
