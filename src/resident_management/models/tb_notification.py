@@ -32,18 +32,19 @@ class tb_notification(models.Model):
     def set_status_active(self):
         try:
             self.write({'state': 'ACTIVE'})
-            users_list = self.user_ids.ids
-            token_list = []
-            fcm_token_list = http.request.env['tb_fcm_token'].sudo().search([('user_id', 'in', users_list)], order="id asc")
-            for item in users_list:
+            user_id_list = self.user_ids.ids
+            for user_id in user_id_list:
                 http.request.env['tb_push_notification'].sudo().create({
                     'name': self.name,
                     'notification_id': self.id,
                     'notification_status': 'SENT',
                     'content': self.content,
                     'type': self.type,
-                    'user_id': item.user_id
+                    'user_id': user_id
                 })
+            token_list = []
+            fcm_token_list = http.request.env['tb_fcm_token'].sudo().search([('user_id', 'in', user_id_list)],
+                                                                            order="id asc")
             for item in fcm_token_list:
                 token_list.append(item.name)
             # push_service.notify_multiple_devices(registration_ids=token_list,
