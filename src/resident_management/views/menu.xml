@@ -5,17 +5,18 @@
 -->
 <odoo>
     <!-- This Menu Item must have a parent and an action -->
-    <menuitem id="menu_resident_root"
-              name="Quản lý cư dân"
-              sequence="0"/>
 
     <menuitem id="menu_blockhouse"
-              name="Quản lý khối nhà"
+              name="Quản lý dự án"
               parent="menu_resident_root"
               sequence="0"/>
+
+    <menuitem id="menu_resident_root"
+              name="Quản lý cư dân"
+              sequence="1"/>
 
     <menuitem id="menu_fee"
               name="Thu phí cư dân"
               parent="menu_resident_root"
-              sequence="0"/>
+              sequence="2"/>
 </odoo>

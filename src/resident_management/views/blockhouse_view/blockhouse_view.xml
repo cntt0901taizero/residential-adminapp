@@ -9,13 +9,13 @@
         <field name="model">tb_blockhouse</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="image" widget="image" width="100px"></field>
-                <field name="name"></field>
-                <field name="code"></field>
-                <field name="address"></field>
-                <field name="website"></field>
-                <field name="phone"></field>
-                <field name="is_active"></field>
+                <field name="image" widget="image" width="100px"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="address"/>
+                <field name="website"/>
+                <field name="phone"/>
+                <field name="is_active"/>
             </tree>
         </field>
     </record>
@@ -27,14 +27,14 @@
             <form>
                 <sheet>
                     <group>
-                        <field name="code"></field>
-                        <field name="name"></field>
-                        <field name="website"></field>
-                        <field name="phone"></field>
+                        <field name="code"/>
+                        <field name="name"/>
+                        <field name="website"/>
+                        <field name="phone"/>
                         <field name="image" height="400px" widget="image" class="oe_left oe_avatar"/>
-                        <field name="location_link"></field>
-                        <field name="address" widget="text"></field>
-                        <field name="is_active" widget="boolean_toggle"></field>
+                        <field name="location_link"/>
+                        <field name="address" widget="text"/>
+                        <field name="is_active" widget="boolean_toggle"/>
                     </group>
                 </sheet>
             </form>
@@ -46,15 +46,15 @@
         <field name="model">tb_blockhouse</field>
         <field name="arch" type="xml">
             <search>
-                <field name="name" string="Tên khối nhà"></field>
-                <field name="code" string="Mã khối nhà"></field>
+                <field name="name" string="Tên khối nhà"/>
+                <field name="code" string="Mã khối nhà"/>
 
             </search>
         </field>
     </record>
 
     <record id="action_tb_blockhouse" model="ir.actions.act_window">
-        <field name="name">Khối nhà</field>
+        <field name="name">Quản lý khối nhà</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">tb_blockhouse</field>
         <field name="view_mode">tree,form</field>

@@ -55,10 +55,10 @@
                                         <field name="state" widget="label_selection"/>
                                     </span>
                                 </div>
-                                <!--                                <div class="o_kanban_record_bottom">-->
-                                <!--                                    <div class="oe_kanban_bottom_left"></div>-->
-                                <!--                                    <div class="oe_kanban_bottom_right"></div>-->
-                                <!--                                </div>-->
+<!--                                <div class="o_kanban_record_bottom">-->
+<!--                                    <div class="oe_kanban_bottom_left"></div>-->
+<!--                                    <div class="oe_kanban_bottom_right"></div>-->
+<!--                                </div>-->
                             </div>
                         </div>
                     </t>
