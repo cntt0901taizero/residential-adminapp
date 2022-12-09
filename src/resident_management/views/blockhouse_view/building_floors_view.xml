@@ -29,7 +29,7 @@
                     <group>
                         <field name="name"/>
                         <field name="sort"/>
-                        <field name="floors_type"/>
+                        <field name="floors_type" widget="selection_badge"/>
                         <field name="total_house"/>
                         <field name="building_id"/>
                         <field name="blockhouse_id"/>

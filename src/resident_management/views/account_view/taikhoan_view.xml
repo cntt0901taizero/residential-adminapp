@@ -22,27 +22,27 @@
         <field name="arch" type="xml">
             <field name="image_1920" position="replace">
             </field>
-            <field name="name" position="replace">
-                <group>
-                    <group>
-                        <h1>
-                            <field name="name" readonly="0" class="oe_inline"></field>
-                        </h1>
-                        <br/>
-                        <h4>
-                            <group>
-                                <field name="phone_number" readonly="0" class="o_event_fontsize_11 p-0"></field>
-                            </group>
-                        </h4>
+<!--            <field name="name" position="replace">-->
+<!--                <group>-->
+<!--                    <group>-->
+<!--                        <h1>-->
+<!--                            <field name="name" readonly="0" class="oe_inline"></field>-->
+<!--                        </h1>-->
+<!--                        <br/>-->
+<!--                        <h4>-->
+<!--                            <group>-->
+<!--                                <field name="phone_number" readonly="0" class="o_event_fontsize_11 p-0"></field>-->
+<!--                            </group>-->
+<!--                        </h4>-->
 
-                    </group>
-                    <field name="image_1920" readonly="0" widget="image" class="oe_right oe_avatar"
-                           options="{&quot;preview_image&quot;: &quot;avatar_128&quot;}"/>
+<!--                    </group>-->
+<!--                    <field name="image_1920" readonly="0" widget="image" class="oe_right oe_avatar"-->
+<!--                           options="{&quot;preview_image&quot;: &quot;avatar_128&quot;}"/>-->
 
-                </group>
+<!--                </group>-->
 
 
-            </field>
+<!--            </field>-->
 
         </field>
     </record>
@@ -53,18 +53,18 @@
         <field name="arch" type="xml">
             <div class="oe_button_box" name="button_box" position="replace">
             </div>
-            <field name="login" position="after">
-                <br/>
-                <sheet>
-                    <group>
-                        <field name="phone_number"></field>
-                    </group>
-                    <group>
+<!--            <field name="login" position="after">-->
+<!--                <br/>-->
+<!--                <sheet>-->
+<!--                    <group>-->
+<!--                        <field name="phone_number"></field>-->
+<!--                    </group>-->
+<!--                    <group>-->
 
-                    </group>
-                </sheet>
+<!--                    </group>-->
+<!--                </sheet>-->
 
-            </field>
+<!--            </field>-->
 
         </field>
     </record>

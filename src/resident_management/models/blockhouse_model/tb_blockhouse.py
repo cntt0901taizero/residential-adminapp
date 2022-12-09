@@ -1,4 +1,5 @@
 from odoo import models, fields
+import random
 
 
 class tb_blockhouse(models.Model):
@@ -6,7 +7,7 @@ class tb_blockhouse(models.Model):
     _description = 'Khối nhà'
 
     name = fields.Char(string='Tên khối nhà', size=200, required=True, copy=False)
-    code = fields.Char(string='Mã khối nhà', size=50, copy=False)
+    code = fields.Char(string='Mã khối nhà',  size=50, copy=False)
     address = fields.Char(string='Địa chỉ', size=500, copy=False)
     image = fields.Image(string='Ảnh', copy=False)
     website = fields.Char(string='Website', size=200, copy=False)
@@ -18,6 +19,9 @@ class tb_blockhouse(models.Model):
 
     def set_status_active(self):
         self.is_active = True
+
+    # def _generate_code(self):
+    #     return str(random.seed)
 
     _sql_constraints = [
         ('name', 'unique(name)', 'Tên khối nhà không được trùng lặp'),

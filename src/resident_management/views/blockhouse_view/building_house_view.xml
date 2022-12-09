@@ -12,6 +12,7 @@
                 <field name="name" optional="show"/>
                 <field name="code" optional="show"/>
                 <field name="address" optional="show"/>
+                <field name="house_type" optional="show"/>
                 <field name="owner" widget="many2one_avatar_user" optional="show"/>
                 <field name="building_floors_id" widget="badge" optional="show"/>
                 <field name="building_id" widget="badge" optional="show"/>
@@ -31,6 +32,7 @@
                         <field name="code"/>
                         <field name="name"/>
                         <field name="address"/>
+                        <field name="house_type" widget="selection_badge"/>
                         <field name="owner" widget="many2one_avatar_user"/>
                         <field name="building_floors_id"/>
                         <field name="building_id"/>

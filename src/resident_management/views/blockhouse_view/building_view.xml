@@ -103,18 +103,18 @@
                             <field name="is_active" widget="boolean_toggle"/>
                         </group>
                         <group string="Thông tin địa chỉ liên hệ">
-                            <field name="phone"/>
-                            <field name="website" widget="url"/>
                             <field name="address" widget="text"/>
-                            <field name="location_link" widget="url" placeholder="e.g. /page"/>
+                            <field name="phone" widget="phone" placeholder="e.g. +1 415 555 0100"/>
+                            <field name="website" widget="CopyClipboardChar" placeholder="e.g. /page"/>
+                            <field name="location_link" widget="CopyClipboardChar" placeholder="e.g. /page"/>
                         </group>
                     </group>
                     <notebook>
                         <page string="Tầng sàn">
-                            <field name="building_floors_ids" widget="one2many" mode="tree,kanban">
+                            <field name="building_floors_ids" widget="section_and_note_one2many" mode="tree,kanban">
                                 <tree default_order="sort">
+                                    <field name="sort" widget="handle"/>
                                     <field name="name"/>
-                                    <field name="sort"/>
                                     <field name="floors_type"/>
                                     <field name="total_house"/>
                                     <field name="building_id" widget="badge"/>
@@ -124,11 +124,12 @@
                             </field>
                         </page>
                         <page string="Căn hộ">
-                            <field name="building_house_ids" widget="one2many" mode="tree,kanban">
+                            <field name="building_house_ids" widget="section_and_note_one2many" mode="tree,kanban">
                                 <tree default_order="name">
                                     <field name="name"/>
                                     <field name="code"/>
                                     <field name="address"/>
+                                    <field name="house_type"/>
                                     <field name="owner" widget="many2one_avatar_user"/>
                                     <field name="building_floors_id" widget="badge"/>
                                     <field name="building_id" widget="badge"/>

@@ -1,5 +1,9 @@
 from odoo import models, fields
 
+HOUSE_TYPES = [
+    ('nha_o', 'Nhà ở'),
+    ('thue_dv', 'Thuê dịch vụ'),
+]
 
 class tb_building_house(models.Model):
     _name = 'tb_building_house'
@@ -9,6 +13,7 @@ class tb_building_house(models.Model):
     name = fields.Char(string='Số nhà', size=50, copy=False)
     address = fields.Char(string='Địa chỉ', size=200, copy=False)
     # resident_info_json = fields.Char(string='thông tin cư dân json', copy=False)
+    house_type = fields.Selection(string='Loại căn hộ', selection=HOUSE_TYPES)
     is_active = fields.Boolean(string='Trạng thái', default=True)
 
     owner = fields.Many2one(comodel_name='res.users', string="Chủ sở hữu")
