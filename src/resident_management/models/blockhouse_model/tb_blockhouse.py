@@ -11,8 +11,10 @@ class tb_blockhouse(models.Model):
     image = fields.Image(string='Ảnh', copy=False)
     website = fields.Char(string='Website', size=200, copy=False)
     phone = fields.Char(string='Điện thoại', size=50, copy=False)
-    location_link = fields.Char(string='link vị trí', size=500, copy=False)
+    location_link = fields.Char(string='Link vị trí', size=500, copy=False)
     is_active = fields.Boolean(string='Trạng thái', default=True)
+
+    building_id = fields.One2many('tb_building', 'blockhouse_id', string="Tòa nhà")
 
     def set_status_active(self):
         self.is_active = True

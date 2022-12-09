@@ -13,6 +13,7 @@
         'views/blockhouse_view/blockhouse_view.xml',
         'views/blockhouse_view/building_view.xml',
         'views/blockhouse_view/building_house_view.xml',
+        'views/blockhouse_view/building_floors_view.xml',
         'views/news_view/news_view.xml',
         'views/notification_view/notification_view.xml',
         'views/banner/banner_view.xml',

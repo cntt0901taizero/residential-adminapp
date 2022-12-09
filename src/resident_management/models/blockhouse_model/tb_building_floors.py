@@ -5,7 +5,7 @@ class tb_building_floors(models.Model):
     _name = 'tb_building_floors'
     _description = 'Tầng sàn'
 
-    name = fields.Char(string='Tên tầng sàn', size=100, copy=False)
+    name = fields.Char(string='Tên tầng sàn', size=100, required=True, copy=False)
     sort = fields.Integer(string='Thứ tự', copy=False)
     total_house = fields.Integer(string='Tổng căn hộ', copy=False)
     is_active = fields.Boolean(string='Trạng thái', default=True)

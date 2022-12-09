@@ -8,8 +8,8 @@
         <field name="name">tb_building.tree</field>
         <field name="model">tb_building</field>
         <field name="arch" type="xml">
-            <tree>
-                <field name="name"/>
+            <tree string="Bảng quản lý tòa nhà">
+                <field name="name" />
                 <field name="code"/>
                 <field name="total_floors"/>
                 <field name="founding_date" widget="date"/>
@@ -19,7 +19,6 @@
                 <field name="address"/>
                 <field name="location_link"/>
                 <field name="blockhouse_id"/>
-<!--                <field name="is_active" widget="boolean_toggle"/>-->
             </tree>
         </field>
     </record>
@@ -90,41 +89,58 @@
             <form>
                 <sheet>
                     <div class="oe_title">
-                        <h1>Ảnh đại diện tòa nhà</h1>
+                        <h2>Ảnh đại diện tòa nhà</h2>
                         <field name="image" height="400px" widget="image" class="oe_left oe_avatar"/>
                     </div>
                     <group>
-                        <field name="code"/>
-                        <field name="name"/>
-                        <field name="total_floors"/>
-                        <field name="founding_date" widget="date"/>
-                        <field name="website"/>
-                        <field name="phone"/>
-
-                        <field name="location_link"/>
-                        <field name="address" widget="text"/>
-                        <field name="blockhouse_id" widget="selection"/>
-                        <field name="is_active" widget="boolean_toggle"/>
+                        <group string="Thông tin cơ bản">
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="total_floors"/>
+                            <field name="founding_date" widget="date"/>
+                            <field name="blockhouse_id"/>
+                            <field name="is_active" widget="boolean_toggle"/>
+                        </group>
+                        <group string="Thông tin địa chỉ liên hệ">
+                            <field name="phone"/>
+                            <field name="website"/>
+                            <field name="address" widget="text"/>
+                            <field name="location_link"/>
+                        </group>
                     </group>
 
                     <notebook>
                         <page string="Tầng sàn">
-                            <field name="building_floors_id" widget="one2many" mode="tree,kanban">
-                                <tree>
+                            <field name="building_floors_id" widget="section_and_note_one2many" mode="tree,kanban">
+                                <tree default_order="sort">
                                     <field name="sort"/>
                                     <field name="name"/>
                                     <field name="total_house"/>
                                     <field name="is_active"/>
+                                    <field name="building_house_id" widget="one2many"/>
                                 </tree>
+<!--                                <form>-->
+<!--                                    <sheet>-->
+<!--                                        <group>-->
+<!--                                            <group>-->
+<!--                                                <field name="name"></field>-->
+<!--                                                </group>-->
+<!--                                            <group>-->
+<!--                                                <field name="ma"></field>-->
+<!--                                                <field name="chu_so_huu"></field>-->
+<!--                                            </group>-->
+<!--                                        </group>-->
+<!--                                    </sheet>-->
+<!--                                </form>-->
                             </field>
                         </page>
                         <page string="Căn hộ">
                             <field name="building_house_id" widget="one2many" mode="tree,kanban">
-                                <tree>
-                                    <field name="code"/>
+                                <tree default_order="name">
                                     <field name="name"/>
+                                    <field name="code"/>
                                     <field name="address"/>
-                                    <field name="owner"/>
+                                    <field name="owner" widget="many2one_avatar_user"/>
                                     <field name="building_floors_id"/>
                                     <field name="building_id"/>
                                     <field name="blockhouse_id"/>
