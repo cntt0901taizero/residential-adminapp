@@ -17,8 +17,8 @@ class tb_building(models.Model):
     is_active = fields.Boolean(string='Trạng thái', default=True)
 
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Khối nhà", required=True)
-    building_floors_id = fields.One2many('tb_building_floors', 'building_id', string="Tầng sàn")
-    building_house_id = fields.One2many('tb_building_house', 'building_id', string="Căn hộ")
+    building_floors_ids = fields.One2many('tb_building_floors', 'building_id', string="Tầng sàn")
+    building_house_ids = fields.One2many('tb_building_house', 'building_id', string="Căn hộ")
 
     def set_status_active(self):
         self.is_active = True
