@@ -9,7 +9,7 @@ class tb_building(models.Model):
     _description = 'Toà nhà'
 
     name = fields.Char(string='Tên toà nhà', size=200, required=True, copy=False)
-    code = fields.Char(string='Mã toà nhà', default='_generate_code', size=50, required=True, copy=False, readonly=True)
+    code = fields.Char(string='Mã toà nhà', size=50, required=True, copy=False, readonly=True)
     total_floors = fields.Integer(string='Tổng số tầng sàn', copy=False)
     founding_date = fields.Date(string='Ngày thành lập', copy=False)
     image = fields.Image(string='Ảnh', copy=False)
@@ -27,12 +27,16 @@ class tb_building(models.Model):
         self.is_active = True
 
     @api.model
-    def generate_code(self):
+    def create(self, vals):
         today = date.today()
         d = today.strftime('%d%m%y')
-        return str('BD' + d + random.randint(1000, 9999))
+        vals["code"] = 'BD' + str(d) + str(random.randint(1000, 9999))
+        return super(tb_building, self).create(vals)
 
     def create_building_floors(self):
+        max_number: int = 0
+        if self.building_floors_ids.ids:
+            max_number = max(self.building_floors_ids.ids)
         return {
             'type': 'ir.actions.act_window',
             'name': 'Tạo mới Tầng sàn',
@@ -43,6 +47,7 @@ class tb_building(models.Model):
             'context': {
                 'default_building_id': self.id,
                 'default_blockhouse_id': self.blockhouse_id.id,
+                'default_sort': max_number + 1,
             },
         }
 

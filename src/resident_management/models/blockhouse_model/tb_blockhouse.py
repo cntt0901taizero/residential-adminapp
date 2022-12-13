@@ -8,7 +8,7 @@ class tb_blockhouse(models.Model):
     _description = 'Khối nhà'
 
     name = fields.Char(string='Tên khối nhà', size=200, required=True, copy=False)
-    code = fields.Char(string='Mã khối nhà', default='_generate_code', size=50, required=True, copy=False, readonly=True)
+    code = fields.Char(string='Mã khối nhà', size=50, copy=False, readonly=True)
     address = fields.Char(string='Địa chỉ', size=500, copy=False)
     image = fields.Image(string='Ảnh', copy=False)
     website = fields.Char(string='Website', size=200, copy=False)
@@ -22,10 +22,11 @@ class tb_blockhouse(models.Model):
         self.is_active = True
 
     @api.model
-    def _generate_code(self):
+    def create(self, vals):
         today = date.today()
         d = today.strftime('%d%m%y')
-        return str('BH' + d + random.randint(1000, 9999))
+        vals["code"] = 'BH' + str(d) + str(random.randint(1000, 9999))
+        return super(tb_blockhouse, self).create(vals)
 
     _sql_constraints = [
         ('name', 'unique(name)', 'Tên khối nhà không được trùng lặp'),

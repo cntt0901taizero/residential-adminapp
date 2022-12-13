@@ -14,7 +14,7 @@ class tb_building_house(models.Model):
     _description = 'Căn hộ'
 
     name = fields.Char(string='Số nhà', size=50, copy=False)
-    code = fields.Char(string='Mã căn hộ', default='_generate_code', size=50, required=True, copy=False, readonly=True)
+    code = fields.Char(string='Mã căn hộ', size=50, required=True, copy=False, readonly=True)
     address = fields.Char(string='Địa chỉ', size=200, copy=False)
     # resident_info_json = fields.Char(string='thông tin cư dân json', copy=False)
     house_type = fields.Selection(string='Loại căn hộ', selection=HOUSE_TYPES, default=HOUSE_TYPES[0][0])
@@ -29,10 +29,16 @@ class tb_building_house(models.Model):
         self.is_active = True
 
     @api.model
-    def _generate_code(self):
+    def create(self, vals):
         today = date.today()
         d = today.strftime('%d%m%y')
-        return str('BDH' + d + random.randint(1000, 9999))
+        vals["code"] = 'BDH' + str(d) + str(random.randint(1000, 9999))
+        return super(tb_building_house, self).create(vals)
+
+    @api.model
+    def default_get(self, data):
+        res = super(tb_building_house, self).default_get(data)
+        return res
 
     _sql_constraints = [
         ('code', 'unique(code)', 'Mã căn hộ không được trùng lặp')

@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import models, fields, api
 
 FLOORS_TYPES = [
     ('null)', '...'),
@@ -26,4 +26,24 @@ class tb_building_floors(models.Model):
 
     def set_status_active(self):
         self.is_active = True
+
+    def create_building_house(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Tạo mới Căn hộ',
+            'res_model': 'tb_building_house',
+            'target': 'new',
+            'view_id': self.env.ref('resident_management.view_tb_building_house_form').id,
+            'view_mode': 'form',
+            'context': {
+                'default_building_floors_id': self.id,
+                'default_building_id': self.building_id.id,
+                'default_blockhouse_id': self.blockhouse_id.id,
+            },
+        }
+
+    @api.model
+    def default_get(self, data):
+        res = super(tb_building_floors, self).default_get(data)
+        return res
 

@@ -114,8 +114,11 @@
                     </group>
                     <notebook>
                         <page string="Tầng sàn">
+                            <button name="create_building_floors" string=" Thêm mới Tầng sàn"
+                                    class="fa fa-plus btn btn-info mb-2" type="object"/>
                             <field name="building_floors_ids" widget="section_and_note_one2many" mode="tree,kanban">
-                                <tree default_order="sort">
+<!--                                 create="false" editable="false"-->
+                                <tree string="Bảng tầng sàn" default_order="sort" create="false">
                                     <field name="sort" widget="handle"/>
                                     <field name="name"/>
                                     <field name="floors_type"/>
@@ -128,8 +131,10 @@
                             </field>
                         </page>
                         <page string="Căn hộ">
+                            <button name="create_building_house" string=" Thêm mới Căn hộ"
+                                    class="fa fa-plus btn btn-info mb-2" type="object"/>
                             <field name="building_house_ids" widget="section_and_note_one2many" mode="tree,kanban">
-                                <tree default_order="name">
+                                <tree string="Bảng căn hộ" default_order="name" create="false">
                                     <field name="name"/>
                                     <field name="code"/>
                                     <field name="address"/>

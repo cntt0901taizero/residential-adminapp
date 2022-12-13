@@ -37,8 +37,10 @@
                     </group>
                     <notebook>
                         <page string="Căn hộ">
+                            <button name="create_building_house" string=" Thêm mới Căn hộ"
+                                    class="fa fa-plus btn btn-info mb-2" type="object"/>
                             <field name="building_house_ids" widget="one2many" mode="tree,kanban">
-                                <tree default_order="name">
+                                <tree string="Bảng căn hộ" default_order="name" create="false">
                                     <field name="name"/>
                                     <field name="code"/>
                                     <field name="address"/>
