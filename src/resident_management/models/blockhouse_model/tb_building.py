@@ -1,4 +1,4 @@
-from pkg_resources import _
+# from pkg_resources import _
 from odoo import models, fields, api
 from datetime import date
 import random
@@ -49,7 +49,7 @@ class tb_building(models.Model):
     def create_building_house(self):
         return {
             'type': 'ir.actions.act_window',
-            'name': _('Create Building house'),
+            'name': 'Tạo mới Căn hộ',
             'res_model': 'tb_building_house',
             'target': 'new',
             'view_id': self.env.ref('resident_management.view_tb_building_house_form').id,
