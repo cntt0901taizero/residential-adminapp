@@ -1,7 +1,5 @@
 from pyfcm import FCMNotification
-
 from odoo import models, fields, http
-
 from odoo.exceptions import ValidationError
 from odoo.tools import GettextAlias
 
@@ -11,7 +9,10 @@ push_service = FCMNotification(
 registration_id = 'fOSDRZ9fQDylz6B6EDjQky:APA91bHVSGvQM7C6HYwgTnWI_RgPEZI0G4J2_IQ-UobBZsAK1HrKTI1Y0QlBm7ABd8BLMLCBMWqjSGBM2WhN6pLxj4xt2I4qjNMa3pylwj43jyUVubG9ZdLFKJuiYUus8299RKtDuhA_'
 message_title = "Uber update"
 message_body = "Hi john, your customized news for today is ready"
+
+
 class tb_notification(models.Model):
+
     _name = 'tb_notification'
     _description = 'Thông báo'
 
@@ -29,6 +30,7 @@ class tb_notification(models.Model):
     # recipient_list = fields.Many2one(comodel_name='res.users', string="Người nhận")
     # user_ids = fields.One2many('res.users', 'notification_id', string='Users', help="Chọn người nhận")
     user_ids = fields.Many2many('res.users', string='Chọn người nhận')
+
     def set_status_active(self):
         try:
             self.write({'state': 'ACTIVE'})
@@ -47,11 +49,14 @@ class tb_notification(models.Model):
                                                                             order="id asc")
             for item in fcm_token_list:
                 token_list.append(item.name)
-            # push_service.notify_multiple_devices(registration_ids=token_list,
-            #                                               message_title="Bản tin mới", message_body=self.name)
+            push_service.notify_multiple_devices(
+                registration_ids=token_list,
+                message_title="Bản tin mới",
+                message_body=self.name)
 
         except Exception as e:
             print(e)
+
     def set_status_reject(self):
         self.write({'state': 'REJECT'})
 

@@ -1,6 +1,7 @@
 from odoo import models, fields
 
 FLOORS_TYPES = [
+    ('null)', '...'),
     ('ki_thuat)', 'Kĩ thuật'),
     ('tang_ham', 'Tầng hầm'),
     ('thuong_mai', 'Thương mại'),
@@ -16,7 +17,7 @@ class tb_building_floors(models.Model):
     name = fields.Char(string='Tên tầng sàn', size=100, required=True, copy=False)
     sort = fields.Integer(string='Thứ tự', copy=False)
     total_house = fields.Integer(string='Tổng căn hộ', copy=False)
-    floors_type = fields.Selection(string='Loại tầng', selection=FLOORS_TYPES)
+    floors_type = fields.Selection(string='Loại tầng', selection=FLOORS_TYPES, default=FLOORS_TYPES[0][0])
     is_active = fields.Boolean(string='Trạng thái', default=True)
 
     building_id = fields.Many2one(comodel_name='tb_building', string="Toà nhà", required=True)

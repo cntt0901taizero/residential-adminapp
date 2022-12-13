@@ -108,6 +108,9 @@
                             <field name="website" widget="CopyClipboardChar" placeholder="e.g. /page"/>
                             <field name="location_link" widget="CopyClipboardChar" placeholder="e.g. /page"/>
                         </group>
+
+<!--                        <button name="create_building_floors" type="object" string="button"/>-->
+
                     </group>
                     <notebook>
                         <page string="Tầng sàn">
@@ -121,6 +124,7 @@
                                     <field name="blockhouse_id" widget="badge"/>
 <!--                                    <field name="building_house_ids" widget="one2many" mode="tree,kanban"/>-->
                                 </tree>
+
                             </field>
                         </page>
                         <page string="Căn hộ">
@@ -134,6 +138,7 @@
                                     <field name="building_floors_id" widget="badge"/>
                                     <field name="building_id" widget="badge"/>
                                     <field name="blockhouse_id" widget="badge"/>
+<!--                                    <button name="create_building_house" type="object"/>-->
                                 </tree>
                             </field>
                         </page>
