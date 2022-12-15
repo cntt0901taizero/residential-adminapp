@@ -16,8 +16,6 @@ class tb_blockhouse(models.Model):
     location_link = fields.Char(string='Link vị trí', size=500, copy=False)
     is_active = fields.Boolean(string='Trạng thái', default=True)
 
-
-
     building_ids = fields.One2many('tb_building', 'blockhouse_id', string="Tòa nhà")
 
     def set_status_active(self):
