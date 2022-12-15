@@ -39,18 +39,25 @@
                            groups="resident_management.group_administration, resident_management.group_management"/>
                 </header>
                 <sheet>
-                    <group>
-                        <field name="name"></field>
-                    </group>
+                     <div class="oe_title pr-0">
+                        <h1 class="d-flex flex-row justify-content-between">
+                            <field name="name" class="o_task_name text-truncate" placeholder="Tiêu đề thông báo..." default_focus="1"/>
+                        </h1>
+                    </div>
                     <group>
                         <group>
                             <field name="user_ids" widget="many2many_tags"></field>
                         </group>
                     </group>
-                    <group colspan="4">
-                        <field name="content" class="oe-bordered-editor"
-                               placeholder="Nội dung thông báo..." modifiers="{}"/>
-                    </group>
+<!--                    <group colspan="4">-->
+<!--                        <field type="html" widget="html" name="content" class="oe_account_terms"-->
+<!--                               placeholder="Nội dung thông báo..." modifiers="{}"/>-->
+<!--                    </group>-->
+                     <notebook>
+                        <page name="description_page" string="Nội dung">
+                            <field name="content" type="html" options="{'collaborative': true}" placeholder="Nội dung thông báo..."/>
+                        </page>
+                     </notebook>
                 </sheet>
             </form>
         </field>

@@ -53,19 +53,6 @@
         <field name="arch" type="xml">
             <div class="oe_button_box" name="button_box" position="replace">
             </div>
-<!--            <field name="login" position="after">-->
-<!--                <br/>-->
-<!--                <sheet>-->
-<!--                    <group>-->
-<!--                        <field name="phone_number"></field>-->
-<!--                    </group>-->
-<!--                    <group>-->
-
-<!--                    </group>-->
-<!--                </sheet>-->
-
-<!--            </field>-->
-
         </field>
     </record>
 

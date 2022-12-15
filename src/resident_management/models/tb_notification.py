@@ -17,7 +17,7 @@ class tb_notification(models.Model):
     _description = 'Thông báo'
 
     name = fields.Char(string='Tiêu đề', required=True, copy=False, )
-    content = fields.Text(string='Nội dung', required=True, copy=False, )
+    content = fields.Html(string='Nội dung', copy=False, required=True, )
     type = fields.Selection([
         ('NEWS', 'Bản tin'),
         ('ACTIVE_BY_ADMIN', 'Thông báo từ quản trị viên'),
