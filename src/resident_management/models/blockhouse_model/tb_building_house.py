@@ -9,9 +9,8 @@ HOUSE_TYPES = [
     ('shophouse', 'Shophouse'),
     ('dualkey', 'Dualkey'),
     ('penhouse', 'Penhouse'),
-    ('dualkey', 'Dualkey'),
     ('duplex', 'Duplex'),
-    ('skyvilla', 'Duplex'),
+    ('skyvilla', 'Skyvilla'),
 ]
 
 
@@ -26,9 +25,9 @@ class tb_building_house(models.Model):
     house_type = fields.Selection(string='Loại hình căn hộ', selection=HOUSE_TYPES, default=HOUSE_TYPES[0][0])
 
     area_apartment = fields.Float(string='Diên tích căn hộ', copy=False)
-    bedroom_number = fields.Int(string='Số phòng ngủ', copy=False)
-    bathroom_number = fields.Int(string='Số phòng tắm', copy=False)
-    balcony_number = fields.Int(string='Số ban công', copy=False)
+    bedroom_number = fields.Integer(string='Số phòng ngủ', copy=False)
+    bathroom_number = fields.Integer(string='Số phòng tắm', copy=False)
+    balcony_number = fields.Integer(string='Số ban công', copy=False)
     fee_base = fields.Float(string='Phí cơ bản', copy=False)
     detailed_description = fields.Text(string='Mô tả chi tiết', copy=False)
 

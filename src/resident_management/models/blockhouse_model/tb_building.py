@@ -1,4 +1,3 @@
-# from pkg_resources import _
 from odoo import models, fields, api
 from datetime import date
 import random
@@ -10,13 +9,15 @@ class tb_building(models.Model):
 
     name = fields.Char(string='Tên toà nhà', size=200, required=True, copy=False)
     code = fields.Char(string='Mã toà nhà', size=50, copy=False, readonly=True)
-    total_floors = fields.Integer(string='Tổng số tầng sàn', copy=False)
     founding_date = fields.Date(string='Ngày thành lập', copy=False)
     image = fields.Image(string='Ảnh', copy=False)
     address = fields.Char(string='Địa chỉ', size=500, copy=False)
     website = fields.Char(string='Website', size=200, copy=False)
     phone = fields.Char(string='Điện thoại', size=50, copy=False)
     location_link = fields.Char(string='Link vị trí', size=500, copy=False)
+    total_floors = fields.Integer(string='Tổng số tầng sàn', copy=False)
+    floors_above_ground_number = fields.Integer(string='Số tầng nổi', copy=False)
+    floors_below_ground_number = fields.Integer(string='Số tầng hầm', copy=False)
     is_active = fields.Boolean(string='Trạng thái', default=True)
 
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Khối nhà", required=True)
