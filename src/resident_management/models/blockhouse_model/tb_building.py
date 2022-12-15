@@ -9,7 +9,7 @@ class tb_building(models.Model):
     _description = 'Toà nhà'
 
     name = fields.Char(string='Tên toà nhà', size=200, required=True, copy=False)
-    code = fields.Char(string='Mã toà nhà', size=50, required=True, copy=False, readonly=True)
+    code = fields.Char(string='Mã toà nhà', size=50, copy=False, readonly=True)
     total_floors = fields.Integer(string='Tổng số tầng sàn', copy=False)
     founding_date = fields.Date(string='Ngày thành lập', copy=False)
     image = fields.Image(string='Ảnh', copy=False)
