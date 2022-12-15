@@ -1,7 +1,7 @@
 from odoo import models, fields, api
 
-class tb_users_blochouse_res_groups_rel(models.Model):
-    _name = 'tb_users_blochouse_res_groups_rel'
+class tb_users_blockhouse_res_groups_rel(models.Model):
+    _name = 'tb_users_blockhouse_res_groups_rel'
 
     name = fields.Selection([
         ('ADMINISTRATION', 'Ban quản trị'),
@@ -9,7 +9,7 @@ class tb_users_blochouse_res_groups_rel(models.Model):
         ('RESIDENT', 'Cư dân'),
     ], required=True, default='RESIDENT', string="Nhóm người dùng", )
     user_id = fields.Many2one(comodel_name='res_user')
-    blochouse_id = fields.Many2one(comodel_name='tb_blockhouse', string='Khối nhà')
+    blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string='Khối nhà')
     building_id = fields.Many2one(comodel_name='tb_building', string='Tòa nhà')
     building_house_id = fields.Many2one(comodel_name='tb_building_house', string='Căn hộ')
     owner = fields.Boolean(string='Chủ sở hữu', default=False)
