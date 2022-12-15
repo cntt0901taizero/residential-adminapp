@@ -44,7 +44,6 @@
                                     <field name="name"/>
                                     <field name="code"/>
                                     <field name="address"/>
-                                    <field name="owner"/>
                                     <field name="building_floors_id" widget="badge"/>
                                     <field name="building_id" widget="badge"/>
                                     <field name="blockhouse_id" widget="badge"/>

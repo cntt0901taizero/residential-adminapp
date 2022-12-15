@@ -13,7 +13,6 @@
                 <field name="code" optional="show"/>
                 <field name="address" optional="show"/>
                 <field name="house_type" optional="show"/>
-                <field name="owner" widget="many2one_avatar_user" optional="show"/>
                 <field name="building_floors_id" widget="badge" optional="show"/>
                 <field name="building_id" widget="badge" optional="show"/>
                 <field name="blockhouse_id" widget="badge" optional="show"/>
@@ -29,15 +28,24 @@
             <form>
                 <sheet>
                     <group>
-                        <field name="code"/>
-                        <field name="name"/>
-                        <field name="address"/>
-                        <field name="house_type" widget="selection_badge"/>
-                        <field name="owner" widget="many2one_avatar_user"/>
-                        <field name="building_floors_id"/>
-                        <field name="building_id"/>
-                        <field name="blockhouse_id"/>
-                        <field name="is_active" widget="boolean_toggle"/>
+                        <group string="Thông tin cơ bản">
+                            <field name="code"/>
+                            <field name="name"/>
+                            <field name="address"/>
+                            <field name="house_type" widget="selection_badge"/>
+                            <field name="building_floors_id"/>
+                            <field name="building_id"/>
+                            <field name="blockhouse_id"/>
+                            <field name="is_active" widget="boolean_toggle"/>
+                        </group>
+                        <group string="Thông tin chi tiết">
+                            <field name="area_apartment"/>
+                            <field name="bedroom_number"/>
+                            <field name="bathroom_number"/>
+                            <field name="balcony_number"/>
+                            <field name="detailed_description"/>
+                            <field name="fee_base"/>
+                        </group>
                     </group>
                 </sheet>
             </form>
@@ -54,7 +62,6 @@
                     <filter name="group_block_house" string="Khối nhà" context="{'group_by':'blockhouse_id'}"/>
                     <filter name="group_building" string="Tòa nhà" context="{'group_by':'building_id'}"/>
                     <filter name="group_floors" string="Tầng sàn" context="{'group_by':'building_floors_id'}"/>
-                    <filter name="group_owner" string="User" context="{'group_by':'owner'}"/>
                 </group>
             </search>
         </field>
