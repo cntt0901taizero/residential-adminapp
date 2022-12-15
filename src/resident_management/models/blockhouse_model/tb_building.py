@@ -15,7 +15,6 @@ class tb_building(models.Model):
     website = fields.Char(string='Website', size=200, copy=False)
     phone = fields.Char(string='Điện thoại', size=50, copy=False)
     location_link = fields.Char(string='Link vị trí', size=500, copy=False)
-    total_floors = fields.Integer(string='Tổng số tầng sàn', copy=False)
     floors_above_ground_number = fields.Integer(string='Số tầng nổi', copy=False)
     floors_below_ground_number = fields.Integer(string='Số tầng hầm', copy=False)
     is_active = fields.Boolean(string='Trạng thái', default=True)

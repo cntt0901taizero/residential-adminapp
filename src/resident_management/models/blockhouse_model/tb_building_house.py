@@ -24,16 +24,15 @@ class tb_building_house(models.Model):
     # resident_info_json = fields.Char(string='thông tin cư dân json', copy=False)
     house_type = fields.Selection(string='Loại hình căn hộ', selection=HOUSE_TYPES, default=HOUSE_TYPES[0][0])
 
-    area_apartment = fields.Float(string='Diên tích căn hộ', copy=False)
+    area_apartment = fields.Float(string='Diên tích căn hộ (m²)', copy=False)
     bedroom_number = fields.Integer(string='Số phòng ngủ', copy=False)
     bathroom_number = fields.Integer(string='Số phòng tắm', copy=False)
     balcony_number = fields.Integer(string='Số ban công', copy=False)
-    fee_base = fields.Float(string='Phí cơ bản', copy=False)
+    fee_base = fields.Float(string='Phí cơ bản (vnđ)', copy=False)
     detailed_description = fields.Text(string='Mô tả chi tiết', copy=False)
 
     is_active = fields.Boolean(string='Trạng thái', default=True)
 
-    owner = fields.Many2one(comodel_name='res.users', string="Chủ sở hữu")
     building_floors_id = fields.Many2one(comodel_name='tb_building_floors', string="Tầng sàn", required=True)
     building_id = fields.Many2one(comodel_name='tb_building', string="Tòa nhà", required=True)
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Khối nhà", required=True)
