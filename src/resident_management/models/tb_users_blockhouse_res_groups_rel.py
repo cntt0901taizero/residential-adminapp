@@ -18,5 +18,7 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
     building_house_id = fields.Many2one(comodel_name='tb_building_house', string='Căn hộ', domain="[('building_id', '=', building_id)]")
     owner = fields.Boolean(string='Chủ sở hữu', default=False)
 
-
-
+    @api.onchange('datas')
+    def _on_change_blockhouse_id(selfs):
+        selfs.building_id = None
+        selfs.building_house_id = None
