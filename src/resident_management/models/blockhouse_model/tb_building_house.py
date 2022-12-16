@@ -11,6 +11,7 @@ HOUSE_TYPES = [
     ('penhouse', 'Penhouse'),
     ('duplex', 'Duplex'),
     ('skyvilla', 'Skyvilla'),
+    ('normal', 'Normal'),
 ]
 
 
