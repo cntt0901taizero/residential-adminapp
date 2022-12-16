@@ -11,6 +11,7 @@
             <tree string="Bảng quản lý tòa nhà">
                 <field name="name" optional="show"/>
                 <field name="code" optional="show"/>
+                <field name="building_level" optional="show"/>
                 <field name="floors_above_ground_number" optional="show"/>
                 <field name="floors_below_ground_number" optional="show"/>
                 <field name="founding_date" widget="date" optional="show"/>
@@ -33,6 +34,7 @@
                 <field name="id"/>
                 <field name="name"/>
                 <field name="code"/>
+                <field name="building_level"/>
                 <field name="floors_above_ground_number"/>
                 <field name="floors_below_ground_number"/>
                 <field name="website"/>
@@ -54,6 +56,11 @@
                                             <t t-esc="record.name.value"/>
                                         </strong>
                                     </div>
+                                </div>
+                                <div name="product_lst_price" class="mt-1">
+                                    <span>Xếp hạng:
+                                        <field name="building_level"/>
+                                    </span>
                                 </div>
                                 <div name="product_lst_price" class="mt-1">
                                     <span>Thành lập ngày:
@@ -92,12 +99,14 @@
                 <sheet>
                     <group>
                         <field string="Ảnh đại diện tòa nhà" name="image"
-                               height="400px" widget="image" class="oe_left oe_avatar"/>
+                               height="400px" widget="image"
+                               class="oe_left oe_avatar"/>
                     </group>
                     <group>
                         <group string="Thông tin cơ bản">
                             <field name="name"/>
                             <field name="code"/>
+                            <field name="building_level" widget="selection_badge"/>
                             <field name="floors_above_ground_number"/>
                             <field name="floors_below_ground_number"/>
                             <field name="founding_date" widget="date"/>
@@ -110,16 +119,12 @@
                             <field name="website" widget="CopyClipboardChar" placeholder="e.g. /page"/>
                             <field name="location_link" widget="CopyClipboardChar" placeholder="e.g. /page"/>
                         </group>
-
-<!--                        <button name="create_building_floors" type="object" string="button"/>-->
-
                     </group>
                     <notebook>
                         <page string="Tầng sàn">
                             <button name="create_building_floors" string=" Thêm mới Tầng sàn"
                                     class="fa fa-plus btn btn-info mb-2" type="object"/>
                             <field name="building_floors_ids" widget="section_and_note_one2many" mode="tree,kanban">
-<!--                                 create="false" editable="false"-->
                                 <tree string="Bảng tầng sàn" default_order="sort" create="false">
                                     <field name="sort" widget="handle"/>
                                     <field name="name"/>

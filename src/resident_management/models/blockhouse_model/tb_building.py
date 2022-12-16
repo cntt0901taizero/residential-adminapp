@@ -2,6 +2,12 @@ from odoo import models, fields, api
 from datetime import date
 import random
 
+BUILDING_LEVEL = [
+    ('none)', '...'),
+    ('a', 'Hạng A'),
+    ('b', 'Hạng B'),
+    ('c', 'Hạng C'),
+]
 
 class tb_building(models.Model):
     _name = 'tb_building'
@@ -17,6 +23,7 @@ class tb_building(models.Model):
     location_link = fields.Char(string='Link vị trí', size=500, copy=False)
     floors_above_ground_number = fields.Integer(string='Số tầng nổi', copy=False)
     floors_below_ground_number = fields.Integer(string='Số tầng hầm', copy=False)
+    building_level = fields.Selection(string='Hạng tòa nhà', selection=BUILDING_LEVEL, default=BUILDING_LEVEL[0][0])
     is_active = fields.Boolean(string='Trạng thái', default=True)
 
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Khối nhà", required=True)
