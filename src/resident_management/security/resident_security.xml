@@ -38,16 +38,16 @@
             <field name="category_id" ref="module_resident"/>
         </record>
 
-        <record id="ir_cron_scheduler_news_expired_action" model="ir.cron">
-            <field name="name">Quét bản tin hết hạn</field>
-            <field name="model_id" ref="model_tb_news"/>
-            <field name="state">code</field>
-            <field name="code">model.action_date()</field>
-            <field name="user_id" ref="base.user_root"/>
-            <field name="interval_number">5</field>
-            <field name="interval_type">minutes</field>
-            <field name="numbercall">-1</field>
-        </record>
+<!--        <record id="ir_cron_scheduler_news_expired_action" model="ir.cron">-->
+<!--            <field name="name">Quét bản tin hết hạn</field>-->
+<!--            <field name="model_id" ref="model_tb_news"/>-->
+<!--            <field name="state">code</field>-->
+<!--            <field name="code">model.action_date()</field>-->
+<!--            <field name="user_id" ref="base.user_root"/>-->
+<!--            <field name="interval_number">5</field>-->
+<!--            <field name="interval_type">minutes</field>-->
+<!--            <field name="numbercall">-1</field>-->
+<!--        </record>-->
 
     </data>
     <data noupdate="1">

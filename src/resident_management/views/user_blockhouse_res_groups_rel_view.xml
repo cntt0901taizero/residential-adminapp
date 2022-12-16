@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_tb_users_blockhouse_res_groups_rel_tree" model="ir.ui.view">
+        <field name="name">tb_users_blockhouse_res_groups_rel.tree</field>
+        <field name="model">tb_users_blockhouse_res_groups_rel</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="group_id"/>
+                <field name="user_id"/>
+                <field name="blockhouse_id"/>
+                <field name="building_id"/>
+                <field name="building_house_id"/>
+                <field name="owner" widget="date"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="view_tb_users_blockhouse_res_groups_rel_form" model="ir.ui.view">
+        <field name="name">tb_users_blockhouse_res_groups_rel.form</field>
+        <field name="model">tb_users_blockhouse_res_groups_rel</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="user_id" readonly="1"/>
+                            <field name="group_id"/>
+                            <field name="owner"/>
+                            <field name="selected_group"/>
+                        </group>
+                        <group>
+                            <field name="blockhouse_id"/>
+                            <field name="building_id" />
+                            <field name="building_house_id" />
+                        </group>
+                    </group>
+
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_tb_users_blockhouse_res_groups_rel" model="ir.actions.act_window">
+        <field name="name">Chọn nhóm người dùng</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">tb_users_blockhouse_res_groups_rel</field>
+        <field name="view_mode">tree, form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Tạo bản ghi đầu tiên của bạn</p>
+        </field>
+    </record>
+
+</odoo>
+
