@@ -72,6 +72,19 @@ class tb_building(models.Model):
             },
         }
 
+    def create_building(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Tạo mới khu tòa nhà',
+            'res_model': 'tb_building',
+            'target': 'new',
+            'view_id': self.env.ref('resident_management.view_tb_building_form').id,
+            'view_mode': 'form',
+            'context': {
+                'default_blockhouse_id': self.blockhouse_id.id,
+            },
+        }
+
     _sql_constraints = [
         ('name', 'unique(name)', 'Tên tòa nhà không được trùng lặp'),
         ('code', 'unique(code)', 'Mã tòa nhà không được trùng lặp')

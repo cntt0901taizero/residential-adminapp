@@ -22,6 +22,9 @@
                 <field name="location_link" widget="url" optional="show"/>
                 <field name="blockhouse_id" optional="show"/>
                 <field name="is_active" widget="boolean_toggle" optional="show"/>
+                <groupby name="blockhouse_id">
+                    <button name="" string="click me" class="oe_highlight"/>
+                </groupby>
             </tree>
         </field>
     </record>
@@ -31,6 +34,7 @@
         <field name="model">tb_building</field>
         <field name="arch" type="xml">
             <kanban records_draggable="0" quick_create="false">
+                <button name="" string=" Thêm mới"/>
                 <field name="id"/>
                 <field name="name"/>
                 <field name="code"/>
@@ -124,7 +128,7 @@
                         <page string="Tầng sàn">
                             <button name="create_building_floors" string=" Thêm mới Tầng sàn"
                                     class="fa fa-plus btn btn-info mb-2" type="object"/>
-                            <field name="building_floors_ids" widget="section_and_note_one2many" mode="tree,kanban">
+                            <field name="building_floors_ids" widget="searchbar_one2many_list">
                                 <tree string="Bảng tầng sàn" default_order="sort" create="false">
                                     <field name="sort" widget="handle"/>
                                     <field name="name"/>
@@ -140,7 +144,7 @@
                         <page string="Căn hộ">
                             <button name="create_building_house" string=" Thêm mới Căn hộ"
                                     class="fa fa-plus btn btn-info mb-2" type="object"/>
-                            <field name="building_house_ids" widget="section_and_note_one2many" mode="tree,kanban">
+                            <field name="building_house_ids" widget="searchbar_one2many_list">
                                 <tree string="Bảng căn hộ" default_order="name" create="false">
                                     <field name="name"/>
                                     <field name="code"/>
