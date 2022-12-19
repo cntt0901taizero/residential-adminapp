@@ -8,7 +8,7 @@
         <field name="name">tb_building.tree</field>
         <field name="model">tb_building</field>
         <field name="arch" type="xml">
-            <tree string="Bảng quản lý tòa nhà">
+            <tree string="Bảng quản lý tòa nhà" decoration-danger="is_active == False">
                 <field name="name" optional="show"/>
                 <field name="code" optional="show"/>
                 <field name="building_level" optional="show"/>
@@ -23,7 +23,8 @@
                 <field name="blockhouse_id" optional="show"/>
                 <field name="is_active" widget="boolean_toggle" optional="show"/>
                 <groupby name="blockhouse_id">
-                    <button name="" string="click me" class="oe_highlight"/>
+                    <button name="create_building" string=" Thêm mới khu / tòa nhà"
+                            class="fa fa-plus btn btn-info" type="object"/>
                 </groupby>
             </tree>
         </field>
@@ -33,8 +34,7 @@
         <field name="name">tb_building.kanban</field>
         <field name="model">tb_building</field>
         <field name="arch" type="xml">
-            <kanban records_draggable="0" quick_create="false">
-                <button name="" string=" Thêm mới"/>
+            <kanban records_draggable="0" quick_create="true">
                 <field name="id"/>
                 <field name="name"/>
                 <field name="code"/>
@@ -129,13 +129,15 @@
                             <button name="create_building_floors" string=" Thêm mới Tầng sàn"
                                     class="fa fa-plus btn btn-info mb-2" type="object"/>
                             <field name="building_floors_ids" widget="searchbar_one2many_list">
-                                <tree string="Bảng tầng sàn" default_order="sort" create="false">
+                                <tree string="Bảng tầng sàn" default_order="sort" create="false"
+                                      decoration-danger="is_active == False">
                                     <field name="sort" widget="handle"/>
                                     <field name="name"/>
                                     <field name="floors_type"/>
                                     <field name="total_house"/>
                                     <field name="building_id" widget="badge"/>
                                     <field name="blockhouse_id" widget="badge"/>
+                                    <field name="is_active"/>
 <!--                                    <field name="building_house_ids" widget="one2many" mode="tree,kanban"/>-->
                                 </tree>
 
@@ -145,7 +147,8 @@
                             <button name="create_building_house" string=" Thêm mới Căn hộ"
                                     class="fa fa-plus btn btn-info mb-2" type="object"/>
                             <field name="building_house_ids" widget="searchbar_one2many_list">
-                                <tree string="Bảng căn hộ" default_order="name" create="false">
+                                <tree string="Bảng căn hộ" default_order="name" create="false"
+                                      decoration-danger="is_active == False">
                                     <field name="name"/>
                                     <field name="code"/>
                                     <field name="address"/>
@@ -153,6 +156,7 @@
                                     <field name="building_floors_id" widget="badge"/>
                                     <field name="building_id" widget="badge"/>
                                     <field name="blockhouse_id" widget="badge"/>
+                                    <field name="is_active"/>
 <!--                                    <button name="create_building_house" type="object"/>-->
                                 </tree>
                             </field>
@@ -182,7 +186,7 @@
     </record>
 
     <record id="action_tb_building" model="ir.actions.act_window">
-        <field name="name">Quản lý toà nhà</field>
+        <field name="name">Quản lý khu / toà nhà</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">tb_building</field>
         <field name="view_mode">kanban,tree,form</field>

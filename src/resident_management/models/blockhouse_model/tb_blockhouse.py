@@ -28,6 +28,32 @@ class tb_blockhouse(models.Model):
         vals["code"] = 'BH' + str(d) + str(random.randint(1000, 9999))
         return super(tb_blockhouse, self).create(vals)
 
+    def create_building(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Tạo mới khu/tòa nhà',
+            'res_model': 'tb_building',
+            'target': 'new',
+            'view_id': self.env.ref('resident_management.view_tb_building_form').id,
+            'view_mode': 'form',
+            'context': {
+                'default_blockhouse_id': self.id,
+            },
+        }
+
+    def create_building_house(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Tạo mới Căn hộ',
+            'res_model': 'tb_building_house',
+            'target': 'new',
+            'view_id': self.env.ref('resident_management.view_tb_building_house_form').id,
+            'view_mode': 'form',
+            'context': {
+                'default_blockhouse_id': self.id,
+            },
+        }
+
     _sql_constraints = [
         ('name', 'unique(name)', 'Tên khối nhà không được trùng lặp'),
         ('code', 'unique(code)', 'Mã khối nhà không được trùng lặp')

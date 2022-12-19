@@ -8,7 +8,7 @@
         <field name="name">tb_building_house.tree</field>
         <field name="model">tb_building_house</field>
         <field name="arch" type="xml">
-            <tree string="Bảng căn hộ">
+            <tree string="Bảng căn hộ" decoration-danger="is_active == False" create="false">
                 <field name="name" optional="show"/>
                 <field name="code" optional="show"/>
                 <field name="address" optional="show"/>
@@ -17,6 +17,10 @@
                 <field name="building_id" widget="badge" optional="show"/>
                 <field name="blockhouse_id" widget="badge" optional="show"/>
                 <field name="is_active" widget="boolean_toggle" optional="show"/>
+                <groupby name="building_floors_id">
+                    <button name="create_building_house" string=" Thêm mới căn hộ / biệt thự"
+                            class="fa fa-plus btn btn-info" type="object"/>
+                </groupby>
             </tree>
         </field>
     </record>
@@ -33,9 +37,9 @@
                             <field name="name"/>
                             <field name="address"/>
                             <field name="house_type" widget="selection_badge"/>
-                            <field name="building_floors_id"/>
-                            <field name="building_id"/>
-                            <field name="blockhouse_id"/>
+                            <field name="building_floors_id" readonly="1"/>
+                            <field name="building_id" readonly="1"/>
+                            <field name="blockhouse_id" readonly="1"/>
                             <field name="is_active" widget="boolean_toggle"/>
                         </group>
                         <group string="Thông tin chi tiết">
@@ -68,7 +72,7 @@
     </record>
 
     <record id="action_tb_building_house" model="ir.actions.act_window">
-        <field name="name">Quản lý căn hộ</field>
+        <field name="name">Quản lý căn hộ / biệt thự</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">tb_building_house</field>
         <field name="view_mode">tree,form</field>
