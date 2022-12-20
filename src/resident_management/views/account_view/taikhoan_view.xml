@@ -4,17 +4,6 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 <odoo>
-    <!--    <record id="view_users_tree_inherit" model="ir.ui.view">-->
-    <!--        <field name="name">res.users.tree</field>-->
-    <!--        <field name="inherit_id" ref="base.view_users_tree"/>-->
-    <!--        <field name="model">res.users</field>-->
-    <!--        <field name="arch" type="xml">-->
-    <!--            <tree>-->
-    <!--                <field name="name"></field>-->
-    <!--                <field name="login"></field>-->
-    <!--            </tree>-->
-    <!--        </field>-->
-    <!--    </record>-->
     <record id="view_users_form_simple_modif_inherit" model="ir.ui.view">
         <field name="name">res.users.preferences.form</field>
         <field name="model">res.users</field>
@@ -22,28 +11,6 @@
         <field name="arch" type="xml">
             <field name="image_1920" position="replace">
             </field>
-            <!--            <field name="name" position="replace">-->
-            <!--                <group>-->
-            <!--                    <group>-->
-            <!--                        <h1>-->
-            <!--                            <field name="name" readonly="0" class="oe_inline"></field>-->
-            <!--                        </h1>-->
-            <!--                        <br/>-->
-            <!--                        <h4>-->
-            <!--                            <group>-->
-            <!--                                <field name="phone_number" readonly="0" class="o_event_fontsize_11 p-0"></field>-->
-            <!--                            </group>-->
-            <!--                        </h4>-->
-
-            <!--                    </group>-->
-            <!--                    <field name="image_1920" readonly="0" widget="image" class="oe_right oe_avatar"-->
-            <!--                           options="{&quot;preview_image&quot;: &quot;avatar_128&quot;}"/>-->
-
-            <!--                </group>-->
-
-
-            <!--            </field>-->
-
         </field>
     </record>
     <record id="view_users_form_inherit" model="ir.ui.view">
@@ -53,20 +20,27 @@
         <field name="arch" type="xml">
 
             <div class="oe_title" position="after">
-                <button name="create_user_blockhouse_groups_rel" string="Chọn nhóm quyền cho tài khoản"
-                                    class="fa fa-plus btn btn-info mb-2" type="object"/>
+                <button name="create_user_blockhouse_groups_rel" string=" Chọn nhóm quyền cho tài khoản"
+                        class="fa fa-plus btn btn-info mb-2" type="object"/>
                 <field name="tb_users_blockhouse_res_groups_rel_ids" widget="section_and_note_one2many"
-                       mode="tree,kanban" >
-                    <tree string="Quản lý tài khoản" default_order="sort" create="true">
+                       mode="tree,kanban">
+                    <tree string="Quản lý tài khoản" create="false">
                         <field name="group_id" optional="show"/>
                         <field name="user_id" optional="show"/>
-                        <field name="blockhouse_id" widget="badge" optional="show"/>
-                        <field name="building_id" widget="badge" optional="show"/>
-                        <field name="building_house_id" widget="badge" optional="show"/>
-                        <field name="owner" optional="show"/>
+                        <field name="blockhouse_id"/>
+                        <field name="building_id"/>
+                        <field name="building_house_id"/>
+                        <field name="owner"/>
                     </tree>
+
                 </field>
             </div>
+            <page name="access_rights" position="replace"/>
+<!--            <page name="preferences" position="replace"/>-->
+<!--            <notebook position="replace"/>-->
+<!--             <notebook position="replace">-->
+<!--                        -->
+<!--                </notebook>-->
         </field>
     </record>
 
@@ -75,9 +49,11 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">res.users</field>
         <field name="view_mode">tree,form</field>
+<!--        (0, 0, {'view_mode': 'form', 'view_id': ref('view_users_form_inherit')})]-->
         <field name="view_ids" eval="[(5, 0, 0),
                 (0, 0, {'view_mode': 'tree', 'view_id': ref('base.view_users_tree')}),
-                (0, 0, {'view_mode': 'form', 'view_id': ref('view_users_form_inherit')})]"/>
+                (0, 0, {'view_mode': 'form', 'view_id': ref('view_users_form_inherit')})]"
+        />
         <field name="context">{}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Thêm mới tài khoản!</p>
