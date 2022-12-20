@@ -36,7 +36,7 @@
         <field name="name">tb_blockhouse.form</field>
         <field name="model">tb_blockhouse</field>
         <field name="arch" type="xml">
-            <form>
+            <form create="false">
                 <sheet>
                     <group>
                         <field name="image" string="Ảnh đại diện" height="400px" widget="image" class="oe_left oe_avatar"/>

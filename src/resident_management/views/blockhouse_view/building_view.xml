@@ -34,7 +34,7 @@
         <field name="name">tb_building.kanban</field>
         <field name="model">tb_building</field>
         <field name="arch" type="xml">
-            <kanban records_draggable="0" quick_create="true">
+            <kanban records_draggable="0" quick_create="true" limit="3">
                 <field name="id"/>
                 <field name="name"/>
                 <field name="code"/>
@@ -99,7 +99,7 @@
         <field name="name">tb_building.form</field>
         <field name="model">tb_building</field>
         <field name="arch" type="xml">
-            <form>
+            <form create="false">
                 <sheet>
                     <group>
                         <field string="Ảnh đại diện tòa nhà" name="image"

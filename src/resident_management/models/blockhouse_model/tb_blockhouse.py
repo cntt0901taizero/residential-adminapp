@@ -31,7 +31,7 @@ class tb_blockhouse(models.Model):
     def create_building(self):
         return {
             'type': 'ir.actions.act_window',
-            'name': 'Tạo mới khu/tòa nhà',
+            'name': 'Tạo mới khu / tòa nhà',
             'res_model': 'tb_building',
             'target': 'new',
             'view_id': self.env.ref('resident_management.view_tb_building_form').id,
