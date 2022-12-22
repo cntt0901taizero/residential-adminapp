@@ -27,18 +27,23 @@
             <form create="false">
                 <sheet>
                     <group>
+                        <field name="id" invisible="1"/>
                         <field name="name"/>
                         <field name="sort"/>
                         <field name="floors_type" widget="selection_badge"/>
                         <field name="total_house"/>
-                        <field name="building_id" readonly="1"/>
-                        <field name="blockhouse_id" readonly="1"/>
+                        <field name="building_id" attrs="{'readonly':[('building_id','>',0)]}"/>
+                        <field name="blockhouse_id" attrs="{'readonly':[('blockhouse_id','>',0)]}"/>
                         <field name="is_active" widget="boolean_toggle"/>
                     </group>
                     <notebook>
                         <page string="Căn hộ">
+                            <button string=" Thêm mới Căn hộ" class="fa fa-plus btn btn-info mb-2"
+                                    disabled="True" attrs="{'invisible':[('id','>',0)]}"
+                                    title="Cần lưu tầng sàn trước khi thêm mới căn hộ"/>
                             <button name="create_building_house" string=" Thêm mới Căn hộ"
-                                    class="fa fa-plus btn btn-info mb-2" type="object"/>
+                                    class="fa fa-plus btn btn-info mb-2" type="object"
+                                    attrs="{'invisible':[('id','=',False)]}"/>
                             <field name="building_house_ids" widget="one2many" mode="tree,kanban"
                                    decoration-danger="is_active == False">
                                 <tree string="Bảng căn hộ" default_order="name" create="false">
