@@ -12,7 +12,7 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
     #     ('MANAGEMENT', 'Ban quản lý'),
     #     ('RESIDENT', 'Cư dân'),
     # ], default='RESIDENT', string="Nhóm người dùng", )
-    user_id = fields.Many2one(comodel_name='res.users')
+    user_id = fields.Many2one(comodel_name='res.users', string="Tài khoản")
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string='Khối nhà', )
     building_id = fields.Many2one(comodel_name='tb_building', string='Tòa nhà',
                                   domain="[('blockhouse_id', '=', blockhouse_id)]", )
@@ -52,7 +52,6 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
     #         # if total == 0:
     #         #     self.env.cr.execute("""INSERT INTO res_groups_users_rel(uid, gid) VALUES(%s, %s)""",
     #         #                         (self.user_id, self.group_id))
-    #         super(tb_users_blockhouse_res_groups_rel, self).create(value)
     #     except Exception as e:
     #         print(e)
-    #         # super(tb_users_blockhouse_res_groups_rel, self).create(value)
+    #     return super(tb_users_blockhouse_res_groups_rel, self).create(value)
