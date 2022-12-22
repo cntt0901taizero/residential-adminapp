@@ -5,7 +5,7 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
     _name = 'tb_users_blockhouse_res_groups_rel'
 
     group_id = fields.Many2one(comodel_name='res.groups', string='Nhóm người dùng',
-                               domain="[('category_id', '=', 104)]")
+                               domain="[('category_id', '=', 105)]")
     selected_group = fields.Char(related='group_id.name')
     # name = fields.Selection([
     #     ('ADMINISTRATION', 'Ban quản trị'),
@@ -20,9 +20,9 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
                                         domain="[('building_id', '=', building_id)]", )
     owner = fields.Boolean(string='Chủ sở hữu', default=False)
 
-    _sql_constraints = [
-        ('building_house_id_unique', 'unique(building_house_id)', 'Bạn đã là cư dân của căn hộ này.'),
-    ]
+    # _sql_constraints = [
+    #     ('building_house_id_unique', 'unique(building_house_id)', 'Bạn đã là cư dân của căn hộ này.'),
+    # ]
 
     @api.onchange('blockhouse_id')
     def _on_change_blockhouse_id(self):
@@ -39,19 +39,19 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
         self.building_id = None
         self.building_house_id = None
 
-    # @api.model
-    # def create(self, value):
-    #     try:
-    #         a = value['group_id']
-    #         print(value['group_id'])
-    #
-    #         # self.env.cr.execute("""SELECT count(*) FROM res_groups_users_rel
-    #         #                            WHERE uid=%s AND gid=%s""",
-    #         #                     (value.user_id, self.group_id))
-    #         # total = self.env.cr.fetchone()[0]
-    #         # if total == 0:
-    #         #     self.env.cr.execute("""INSERT INTO res_groups_users_rel(uid, gid) VALUES(%s, %s)""",
-    #         #                         (self.user_id, self.group_id))
-    #     except Exception as e:
-    #         print(e)
-    #     return super(tb_users_blockhouse_res_groups_rel, self).create(value)
+    @api.model
+    def create(self, value):
+        try:
+            a = value['group_id']
+            print(value['group_id'])
+
+            # self.env.cr.execute("""SELECT count(*) FROM res_groups_users_rel
+            #                            WHERE uid=%s AND gid=%s""",
+            #                     (value.user_id, self.group_id))
+            # total = self.env.cr.fetchone()[0]
+            # if total == 0:
+            #     self.env.cr.execute("""INSERT INTO res_groups_users_rel(uid, gid) VALUES(%s, %s)""",
+            #                         (self.user_id, self.group_id))
+        except Exception as e:
+            print(e)
+        return super(tb_users_blockhouse_res_groups_rel, self).create(value)
