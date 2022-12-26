@@ -25,14 +25,14 @@
                     <group>
                         <field name="selected_group" invisible="1"/>
                         <group>
-                            <field name="user_id" readonly="1"/>
+                            <field name="user_id" readonly="1" force_save="1"/>
                             <field name="group_id"/>
                             <field name="owner" attrs="{'invisible': [('selected_group','!=', 'Cư dân')]}"/>
                         </group>
                         <group>
                             <field name="blockhouse_id"
                                    attrs="{'required': True}"/>
-                            <field name="building_id"/>
+                            <field name="building_id" attrs="{'required': True}"/>
                             <field name="building_house_id"
                                    attrs="{'invisible': [('selected_group','!=', 'Cư dân')], 'required': [('selected_group','=', 'Cư dân')]}"/>
                         </group>

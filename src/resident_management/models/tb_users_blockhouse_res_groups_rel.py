@@ -1,4 +1,5 @@
 from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 
 
 class tb_users_blockhouse_res_groups_rel(models.Model):
@@ -20,9 +21,6 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
                                         domain="[('building_id', '=', building_id)]", )
     owner = fields.Boolean(string='Chủ sở hữu', default=False)
 
-    # _sql_constraints = [
-    #     ('building_house_id_unique', 'unique(building_house_id)', 'Bạn đã là cư dân của căn hộ này.'),
-    # ]
 
     @api.onchange('blockhouse_id')
     def _on_change_blockhouse_id(self):
@@ -41,17 +39,44 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
 
     @api.model
     def create(self, value):
-        try:
-            a = value['group_id']
-            print(value['group_id'])
+        uid = value["user_id"]
+        gid = value["group_id"]
+        blockhouse_id = value["blockhouse_id"]
+        building_id = value["building_id"]
+        building_house_id = value["building_house_id"]
+        if not building_house_id:
+            self.env.cr.execute("""SELECT count(*) FROM tb_users_blockhouse_res_groups_rel WHERE user_id=%s AND 
+                                   blockhouse_id=%s AND building_id=%s AND group_id=%s""",
+                                (uid, blockhouse_id, building_id, gid))
+            total = self.env.cr.fetchone()[0]
+            if total > 0:
+                raise ValidationError("Bạn đã là ban quản trị/ ban quản lý của tòa nhà này")
+            else:
+                self._insert_record_res_groups_users_rel(uid, gid)
+        else:
+            self.env.cr.execute("""SELECT count(*) FROM tb_users_blockhouse_res_groups_rel
+                                                                       WHERE user_id=%s AND building_house_id=%s AND group_id=%s""",
+                                (uid, building_house_id, gid))
+            total = self.env.cr.fetchone()[0]
+            if total > 0:
+                raise ValidationError("Bạn đã là cư dân của căn hộ này")
+            else:
+                self._insert_record_res_groups_users_rel(uid, gid)
 
-            # self.env.cr.execute("""SELECT count(*) FROM res_groups_users_rel
-            #                            WHERE uid=%s AND gid=%s""",
-            #                     (value.user_id, self.group_id))
-            # total = self.env.cr.fetchone()[0]
-            # if total == 0:
-            #     self.env.cr.execute("""INSERT INTO res_groups_users_rel(uid, gid) VALUES(%s, %s)""",
-            #                         (self.user_id, self.group_id))
-        except Exception as e:
-            print(e)
+        self.env['ir.actions.actions'].clear_caches()
         return super(tb_users_blockhouse_res_groups_rel, self).create(value)
+
+    def _insert_record_res_groups_users_rel(self, uid, gid, *args, **kwargs):
+        self.env.cr.execute("""SELECT count(*) FROM res_groups_users_rel
+                                               WHERE uid=%s AND gid=%s""",
+                            (uid, gid))
+        total = self.env.cr.fetchone()[0]
+        if total == 0:
+            self.env.cr.execute("""INSERT INTO res_groups_users_rel(uid, gid) VALUES(%s, %s)""", (uid, gid))
+
+    def unlink(self):
+        print(self)
+        query = """DELETE FROM res_groups_users_rel WHERE uid = %s and gid = %s"""
+        self.env.cr.execute(query, (self.user_id.id, self.group_id.id))
+        self.env['ir.actions.actions'].clear_caches()
+        return super(tb_users_blockhouse_res_groups_rel, self).unlink()
