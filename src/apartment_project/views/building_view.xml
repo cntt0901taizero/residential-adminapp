@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright 2019 Coop IT Easy
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="view_tb_building_tree" model="ir.ui.view">
+        <field name="name">tb_building.tree</field>
+        <field name="model">tb_building</field>
+        <field name="arch" type="xml">
+            <tree string="Bảng quản lý tòa nhà" decoration-danger="is_active == False">
+                <field name="name" optional="show"/>
+                <field name="code" optional="show"/>
+                <field name="building_level" optional="show"/>
+                <field name="floors_above_ground_number" optional="show"/>
+                <field name="floors_below_ground_number" optional="show"/>
+                <field name="founding_date" widget="date" optional="show"/>
+                <field name="website" widget="url" optional="show"/>
+                <field name="phone" optional="show"/>
+                <field name="image" width="100px" widget="image" class="oe_left oe_avatar" optional="show"/>
+                <field name="address" optional="show"/>
+                <field name="location_link" widget="url" optional="show"/>
+                <field name="blockhouse_id" optional="show"/>
+                <field name="is_active" widget="boolean_toggle" optional="show"/>
+                <groupby name="blockhouse_id">
+                    <button name="create_building" string=" Thêm mới khu / tòa nhà"
+                            class="fa fa-plus btn btn-info" type="object"/>
+                </groupby>
+            </tree>
+        </field>
+    </record>
+    
+    <record id="view_tb_building_kanban" model="ir.ui.view">
+        <field name="name">tb_building.kanban</field>
+        <field name="model">tb_building</field>
+        <field name="arch" type="xml">
+            <kanban records_draggable="0" quick_create="true" limit="3">
+                <field name="id"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="building_level"/>
+                <field name="floors_above_ground_number"/>
+                <field name="floors_below_ground_number"/>
+                <field name="website"/>
+                <field name="image"/>
+                <field name="address"/>
+                <field name="location_link"/>
+                <field name="blockhouse_id"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_card oe_kanban_global_click">
+                            <div class="o_kanban_image">
+                                <img t-att-src="kanban_image('tb_building', 'image', record.id.raw_value)"
+                                     alt="Tòa nhà" class="o_image_64_contain"/>
+                            </div>
+                            <div class="oe_kanban_details">
+                                <div class="o_kanban_record_top mb-0">
+                                    <div class="o_kanban_record_headings">
+                                        <strong class="o_kanban_record_title">
+                                            <t t-esc="record.name.value"/>
+                                        </strong>
+                                    </div>
+                                </div>
+                                <div name="product_lst_price" class="mt-1">
+                                    <span>Xếp hạng:
+                                        <field name="building_level"/>
+                                    </span>
+                                </div>
+                                <div name="product_lst_price" class="mt-1">
+                                    <span>Thành lập ngày:
+                                        <field name="founding_date" widget="date"/>
+                                    </span>
+                                </div>
+                                <div name="product_lst_price" class="mt-1">
+                                    <span>Website:
+                                        <field name="website" widget="url"/>
+                                    </span>
+                                </div>
+                                <div name="product_lst_price" class="mt-1">
+                                    <span>
+                                        <field name="is_active" widget="boolean_toggle"/>
+                                    </span>
+                                </div>
+<!--                                <div class="o_kanban_record_bottom">-->
+<!--                                    <div class="oe_kanban_bottom_left">-->
+<!--                                        <field name="website" widget="date"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="oe_kanban_bottom_right"></div>-->
+<!--                                </div>-->
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_tb_building_form" model="ir.ui.view">
+        <field name="name">tb_building.form</field>
+        <field name="model">tb_building</field>
+        <field name="arch" type="xml">
+            <form create="false">
+                <sheet>
+                    <group>
+                        <field string="Ảnh đại diện tòa nhà" name="image"
+                               height="400px" widget="image"
+                               class="oe_left oe_avatar"/>
+                    </group>
+                    <group>
+                        <field name="id" invisible="1"/>
+                        <group string="Thông tin cơ bản">
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="building_level" widget="selection_badge"/>
+                            <field name="floors_above_ground_number"/>
+                            <field name="floors_below_ground_number"/>
+                            <field name="founding_date" widget="date"/>
+                            <field name="blockhouse_id"/>
+                            <field name="is_active" widget="boolean_toggle"/>
+                        </group>
+                        <group string="Thông tin địa chỉ liên hệ">
+                            <field name="address" widget="text"/>
+                            <field name="phone" widget="phone" placeholder="e.g. +1 415 555 0100"/>
+                            <field name="website" widget="CopyClipboardChar" placeholder="e.g. /page"/>
+                            <field name="location_link" widget="CopyClipboardChar" placeholder="e.g. /page"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Tầng sàn">
+                            <button string=" Thêm mới Tầng sàn" class="fa fa-plus btn btn-info mb-2"
+                                    disabled="True" attrs="{'invisible':[('id','>',0)]}"
+                                    data-toggle="tooltip" title="Cần lưu tòa nhà trước khi thêm mới tầng sàn"/>
+                            <button name="create_building_floors" string=" Thêm mới Tầng sàn"
+                                    class="fa fa-plus btn btn-info mb-2" type="object"
+                                    attrs="{'invisible':[('id','=',False)]}"/>
+                            <field name="building_floors_ids" widget="searchbar_one2many_list">
+                                <tree string="Bảng tầng sàn" default_order="sort" create="false"
+                                      decoration-danger="is_active == False">
+                                    <field name="sort" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="floors_type"/>
+                                    <field name="total_house"/>
+                                    <field name="building_id" widget="badge"/>
+                                    <field name="blockhouse_id" widget="badge"/>
+                                    <field name="is_active"/>
+<!--                                    <field name="building_house_ids" widget="one2many" mode="tree,kanban"/>-->
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Căn hộ">
+                            <button string=" Thêm mới Căn hộ" class="fa fa-plus btn btn-info mb-2"
+                                    disabled="True" attrs="{'invisible':[('id','>',0)]}"
+                                    title="Cần lưu tòa nhà trước khi thêm mới căn hộ"/>
+                            <button name="create_building_house" string=" Thêm mới Căn hộ"
+                                    class="fa fa-plus btn btn-info mb-2" type="object"
+                                    attrs="{'invisible':[('id','=',False)]}"/>
+                            <field name="building_house_ids" widget="searchbar_one2many_list">
+                                <tree string="Bảng căn hộ" default_order="name" create="false"
+                                      decoration-danger="is_active == False">
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                    <field name="address"/>
+                                    <field name="house_type"/>
+                                    <field name="building_floors_id" widget="badge"/>
+                                    <field name="building_id" widget="badge"/>
+                                    <field name="blockhouse_id" widget="badge"/>
+                                    <field name="is_active"/>
+<!--                                    <button name="create_building_house" type="object"/>-->
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+<!--                <div class="oe_chatter">-->
+<!--                    <field name="name"/>-->
+<!--                    <field name="code"/>-->
+<!--                </div>-->
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_tb_building_search">
+        <field name="name">tb_building.search</field>
+        <field name="model">tb_building</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter name="name" string="Tên toà nhà"/>
+                <filter name="filter_is_active" string="Trạng thái" domain="[('is_active', '=', 'True')]"/>
+                <group expand="1" string="Group By">
+                    <filter name="group_block_house" string="Khối nhà" context="{'group_by': 'blockhouse_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_tb_building" model="ir.actions.act_window">
+        <field name="name">Quản lý khu / toà nhà</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">tb_building</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="context">{'search_default_group_block_house':1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Thêm mới toà nhà!</p>
+        </field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="menu_tb_building"
+              name="Toà nhà"
+              parent="menu_blockhouse"
+              action="action_tb_building"
+              sequence="1"/>
+</odoo>
