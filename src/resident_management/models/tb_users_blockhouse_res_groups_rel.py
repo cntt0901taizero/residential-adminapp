@@ -8,11 +8,6 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
     group_id = fields.Many2one(comodel_name='res.groups', string='Nhóm người dùng',
                                domain="[('category_id', '=', 105)]")
     selected_group = fields.Char(related='group_id.name')
-    # name = fields.Selection([
-    #     ('ADMINISTRATION', 'Ban quản trị'),
-    #     ('MANAGEMENT', 'Ban quản lý'),
-    #     ('RESIDENT', 'Cư dân'),
-    # ], default='RESIDENT', string="Nhóm người dùng", )
     user_id = fields.Many2one(comodel_name='res.users', string="Tài khoản")
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string='Khối nhà', )
     building_id = fields.Many2one(comodel_name='tb_building', string='Tòa nhà',
@@ -44,6 +39,7 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
         blockhouse_id = value["blockhouse_id"]
         building_id = value["building_id"]
         building_house_id = value["building_house_id"]
+        owner = value['owner']
         if not building_house_id:
             self.env.cr.execute("""SELECT count(*) FROM tb_users_blockhouse_res_groups_rel WHERE user_id=%s AND 
                                    blockhouse_id=%s AND building_id=%s AND group_id=%s""",
@@ -58,8 +54,14 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
                                                                        WHERE user_id=%s AND building_house_id=%s AND group_id=%s""",
                                 (uid, building_house_id, gid))
             total = self.env.cr.fetchone()[0]
+            self.env.cr.execute("""SELECT count(*) FROM tb_users_blockhouse_res_groups_rel
+                                                                       WHERE building_house_id=%s AND group_id=%s AND owner=TRUE""",
+                                (building_house_id, gid))
+            count_owner = self.env.cr.fetchone()[0]
             if total > 0:
                 raise ValidationError("Bạn đã là cư dân của căn hộ này")
+            if owner is True and count_owner > 0:
+                raise ValidationError("Bạn không thể là chủ sở hữu của căn hộ do căn hộ này đã có chủ sở hữu.")
             else:
                 self._insert_record_res_groups_users_rel(uid, gid)
 

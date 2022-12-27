@@ -20,8 +20,12 @@
         <field name="arch" type="xml">
 
             <div class="oe_title" position="after">
-                <button name="create_user_blockhouse_groups_rel" string=" Chọn nhóm quyền cho tài khoản"
-                        class="fa fa-plus btn btn-info mb-2" type="object"/>
+                <button string=" Chọn nhóm quyền" class="fa fa-plus btn btn-info mb-2"
+                                    disabled="True" attrs="{'invisible':[('id','>',0)]}"
+                                    data-toggle="tooltip" title="Cần lưu thông tin tài khoản trước khi thêm mới nhóm quyền cho tài khoản"/>
+                            <button name="create_user_blockhouse_groups_rel" string=" Chọn nhóm quyền"
+                                    class="fa fa-plus btn btn-info mb-2" type="object"
+                                    attrs="{'invisible':[('id','=',False)]}"/>
                 <field name="tb_users_blockhouse_res_groups_rel_ids" widget="section_and_note_one2many"
                        mode="tree,kanban">
                     <tree string="Quản lý tài khoản" create="false">
@@ -35,7 +39,8 @@
 
                 </field>
             </div>
-<!--            <page name="access_rights" position="replace"/>-->
+
+            <page name="access_rights" position="replace"/>
 <!--            <page name="preferences" position="replace"/>-->
 <!--            <notebook position="replace"/>-->
 <!--             <notebook position="replace">-->
@@ -68,5 +73,5 @@
                eval="[(4, ref('resident_management.group_administration')), (4, ref('resident_management.group_management')), (4, ref('base.group_system')), (4, ref('base.group_erp_manager'))]"
         />
     </record>
-
+2
 </odoo>
