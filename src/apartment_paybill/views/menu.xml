@@ -6,8 +6,8 @@
 <odoo>
     <!-- This Menu Item must have a parent and an action -->
 
-    <menuitem id="menu_resident_root"
-              name="Tài khoản"
+    <menuitem id="menu_apartment_pay_bill_root"
+              name="Thu phí cư dân"
               sequence="0"/>
 
 </odoo>

@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_news_administration,access_news_administration,model_tb_news,resident_management.group_administration,1,1,0,1
+access_news_management,access_news_management,model_tb_news,resident_management.group_management,1,1,1,1
+access_news_resident,access_news_resident,model_tb_news,resident_management.group_resident,1,0,0,0
+access_news_public,access_news_public,model_tb_news,base.group_public,1,0,0,0

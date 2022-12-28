@@ -6,7 +6,7 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
     _name = 'tb_users_blockhouse_res_groups_rel'
 
     group_id = fields.Many2one(comodel_name='res.groups', string='Nhóm người dùng',
-                               domain="[('category_id', '=', 105)]")
+                               domain="[('category_id', '=', 110)]")
     selected_group = fields.Char(related='group_id.name')
     user_id = fields.Many2one(comodel_name='res.users', string="Tài khoản")
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string='Khối nhà', )

@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_banner_administration, access_banner_administration,model_tb_banner,resident_management.group_administration,1,1,1,1
+access_banner_management, access_banner_management,model_tb_banner,resident_management.group_management,1,1,1,1
+access_banner_resident, access_banner_resident,model_tb_banner,resident_management.group_resident,1,0,0,0
+access_banner_public,access_banner_public,model_tb_banner,base.group_public,1,0,0,0
