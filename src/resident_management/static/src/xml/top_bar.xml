@@ -46,7 +46,7 @@
                         <img src="/resident_management/static/src/img/ab_logo.png"/>
 <!--                        <img src="/web/binary/company_logo" class="logo_img"/>-->
                     </div>
-                    <h6 class="sidebar_head">MENU</h6>
+                    <h6 class="sidebar_head"></h6>
                     <ul class="sidebar_menu">
                         <t t-foreach="menuService.getApps()" t-as="app">
                             <li>

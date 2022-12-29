@@ -8,6 +8,7 @@
 
     <menuitem id="menu_resident_root"
               name="Tài khoản"
+              web_icon="resident_management,static/description/menu-icon.png"
               sequence="0"/>
 
 </odoo>

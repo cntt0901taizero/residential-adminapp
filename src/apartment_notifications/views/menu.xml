@@ -8,6 +8,7 @@
 
     <menuitem id="menu_apartment_notifications_root"
               name="Thông báo"
+              web_icon="apartment_notifications,static/description/menu-icon.png"
               sequence="0"/>
 
 </odoo>

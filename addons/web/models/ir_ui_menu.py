@@ -58,5 +58,4 @@ class IrUiMenu(models.Model):
                     "webIcon": menu['web_icon'],
                     "webIconData": menu['web_icon_data'],
                 }
-
         return web_menus

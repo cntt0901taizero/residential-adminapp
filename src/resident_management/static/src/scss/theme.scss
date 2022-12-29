@@ -1,10 +1,11 @@
 //Top Bar
 @font-face {
-    font-family: 'Poppins' !important;
-    src: url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&amp;display=swap');
+    font-family: 'Montserrat' !important;
+    src: url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+//     src: url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&amp;display=swap');
 }
 body {
-    font-family: 'Poppins', sans-serif !important;
+    font-family: 'Montserrat', sans-serif !important;
     background-color: #f8f8fb;
 }
 a {
@@ -104,6 +105,7 @@ a.btn {
     box-shadow: none;
     border-radius: 5px;
     padding-top: 6px;
+    padding-bottom: 6px;
 }
 .o_searchview .o_searchview_icon {
     position: absolute;
@@ -117,7 +119,13 @@ a.btn {
     background: #f8f8fb;
     border-radius: 10px;
     padding: 0 2px;
-    max-height:20px;
+    max-height:23px;
+}
+.o_searchview .o_searchview_autocomplete li.o_selection_focus {
+        background-color: #25753A;
+        > a {
+            color: white !important;
+        }
 }
 .o_cp_bottom_right  span.o_dropdown_title {
     color: #555b6d;
@@ -491,7 +499,7 @@ th.o_list_record_selector {
     content: '';
     display: block;
     position: absolute;
-    top: 1px;
+//     top: 1px;
     left: 9px;
     width: 6px;
     height: 14px;
@@ -1356,9 +1364,15 @@ select, input {
 //alert ends
 
 //recruitment starts
+
+div.o_boolean_toggle.custom-control.custom-checkbox > label.custom-control-label > i  {
+//     left: 0.1rem !important;
+    top:3px;
+}
+
 div.o_boolean_toggle.custom-control.custom-checkbox > label.custom-control-label::before,
-div.o_boolean_toggle.custom-control.custom-checkbox > label.custom-control-label::after {
-    left: 0.1rem !important;
+div.o_boolean_toggle.custom-control.custom-checkbox > label.custom-control-label::after  {
+//     left: 0.1rem !important;
 }
 div.o_boolean_toggle.custom-control.custom-checkbox > input.custom-control-input:checked + label.custom-control-label::after {
     top: 1.5px !important;
@@ -1634,4 +1648,9 @@ div.dropdown-menu.bootstrap-datetimepicker-widget {
 //new fix
 .o_form_view .oe_button_box + .oe_title, .o_form_view .oe_button_box + .oe_avatar + .oe_title {
     width: 100% !important;
+}
+
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
+  background-image: none
 }

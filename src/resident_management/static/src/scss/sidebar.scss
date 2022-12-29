@@ -83,12 +83,13 @@
     color: #fff;
 }
 .sidebar_panel .nav-link {
-	opacity: .5;
+	opacity: 1;
     transition:.3s all;
 }
 .sidebar_panel .sidebar a.nav-link.active {
     color: #fff !important;
 	opacity: 1;
+	background: #2a6239
 }
 
 .sidebar_panel .sidebar .sidebar_menu li a .sidebar_img {

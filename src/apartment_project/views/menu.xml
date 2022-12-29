@@ -8,6 +8,7 @@
 
     <menuitem id="menu_apartment_project_root"
               name="Quản lý dự án"
+              web_icon="apartment_project,static/description/menu-icon.png"
               sequence="0"/>
 
     <menuitem id="menu_blockhouse"
