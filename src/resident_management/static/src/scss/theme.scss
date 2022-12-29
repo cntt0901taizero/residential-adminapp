@@ -17,7 +17,9 @@ a:hover {
 a.btn {
     height: auto !important;
 }
-
+.o_control_panel .breadcrumb{
+    background: #fff
+}
 .o_main_navbar, .o_searchview_facet_label {
     background-color: transparent !important;
     color: $f_color !important;

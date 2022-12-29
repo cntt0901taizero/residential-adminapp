@@ -12,7 +12,6 @@
         'security/resident_security.xml',
         'security/ir.model.access.csv',
         'views/menu.xml',
-        'views/login/login_view.xml',
         'views/account_view/taikhoan_view.xml',
         'views/user_blockhouse_res_groups_rel_view.xml',
         # 'views/system_parameter_view.xml',
