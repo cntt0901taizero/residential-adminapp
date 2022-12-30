@@ -87,7 +87,7 @@
     <!-- This Menu Item must have a parent and an action -->
     <menuitem id="menu_tb_building_house"
               name="Căn hộ"
-              parent="menu_apartment_project_root"
+              parent="menu_blockhouse"
               action="action_tb_building_house"
               sequence="3"/>
 </odoo>

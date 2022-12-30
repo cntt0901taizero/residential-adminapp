@@ -12,7 +12,7 @@
               sequence="0"/>
 
     <menuitem id="menu_blockhouse"
-              name="Quản lý dự án"
+              name="Dự án"
               parent="menu_apartment_project_root"
               sequence="1"/>
 
