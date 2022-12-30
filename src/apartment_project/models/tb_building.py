@@ -86,7 +86,6 @@ class tb_building(models.Model):
     #     }
 
     _sql_constraints = [
-        ('name', 'unique(name)', 'Tên tòa nhà không được trùng lặp'),
         ('code', 'unique(code)', 'Mã tòa nhà không được trùng lặp')
     ]
 
