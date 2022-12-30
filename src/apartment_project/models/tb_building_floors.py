@@ -35,7 +35,7 @@ class tb_building_floors(models.Model):
             'name': 'Tạo mới Căn hộ',
             'res_model': 'tb_building_house',
             'target': 'new',
-            'view_id': self.env.ref('resident_management.view_tb_building_house_form').id,
+            'view_id': self.env.ref('apartment_project.view_tb_building_house_form').id,
             'view_mode': 'form',
             'context': {
                 'default_building_floors_id': self.id,

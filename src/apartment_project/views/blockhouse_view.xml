@@ -82,7 +82,7 @@
     <!-- This Menu Item must have a parent and an action -->
     <menuitem id="menu_tb_blockhouse"
               name="Khối nhà"
-              parent="menu_blockhouse"
+              parent="menu_apartment_project_root"
               action="action_tb_blockhouse"
               sequence="0"/>
 </odoo>
