@@ -14,7 +14,7 @@
         'views/menu.xml',
         'views/account_view/taikhoan_view.xml',
         'views/user_blockhouse_res_groups_rel_view.xml',
-        # 'views/system_parameter_view.xml',
+        'views/groups_inherit_view.xml',
         # 'views/notification_view.xml',
         # 'views/resident_report_view.xml',
     ],
