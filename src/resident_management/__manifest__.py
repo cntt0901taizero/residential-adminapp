@@ -38,6 +38,7 @@
         'web.assets_qweb': [
             'resident_management/static/src/xml/styles.xml',
             'resident_management/static/src/xml/top_bar.xml',
+            'resident_management/static/src/xml/login_view.xml',
         ],
     },
     'images': [
