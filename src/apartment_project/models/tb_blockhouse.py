@@ -34,7 +34,7 @@ class tb_blockhouse(models.Model):
             'name': 'Tạo mới khu / tòa nhà',
             'res_model': 'tb_building',
             'target': 'new',
-            'view_id': self.env.ref('resident_management.view_tb_building_form').id,
+            'view_id': self.env.ref('apartment_project.view_tb_building_form').id,
             'view_mode': 'form',
             'context': {
                 'default_blockhouse_id': self.id,
@@ -47,7 +47,7 @@ class tb_blockhouse(models.Model):
             'name': 'Tạo mới Căn hộ',
             'res_model': 'tb_building_house',
             'target': 'new',
-            'view_id': self.env.ref('resident_management.view_tb_building_house_form').id,
+            'view_id': self.env.ref('apartment_project.view_tb_building_house_form').id,
             'view_mode': 'form',
             'context': {
                 'default_blockhouse_id': self.id,
