@@ -1,4 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-
-access_feekind_quantrivien,access_feekind_quantrivien,model_tb_feekind,resident_management.group_administration,1,1,1,1
-access_paybill_configrender_quantrivien,access_paybill_configrender_quantrivien,model_tb_paybill_configrender,resident_management.group_administration,1,1,1,1

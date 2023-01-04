@@ -10,7 +10,6 @@
     # 'depends': ['base', 'mail', 'website_profile'],
     'sequence': -100,
     'data': [
-        'security/ir.model.access.csv',
         'views/menu.xml',
         'views/news_view.xml',
     ],

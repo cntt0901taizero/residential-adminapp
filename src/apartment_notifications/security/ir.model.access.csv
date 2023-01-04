@@ -1,5 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-
-access_notifications_administration, access_notifications_administration,model_tb_notification,resident_management.group_administration,1,1,0,1
-access_notifications_management, access_notifications_management,model_tb_notification,resident_management.group_management,1,1,1,1
-access_notifications_resident, access_notifications_resident,model_tb_notification,resident_management.group_resident,1,0,0,0

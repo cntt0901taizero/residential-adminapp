@@ -17,8 +17,6 @@ class tb_users(models.Model):
         return super(tb_users, self).create(vals)
 
     def create_user_blockhouse_groups_rel(self):
-        print("self.display_blockhouse")
-        print(self.display_blockhouse)
         return {
             'type': 'ir.actions.act_window',
             'name': 'Chọn nhóm quyền',
