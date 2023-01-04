@@ -6,9 +6,10 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
     _name = 'tb_users_blockhouse_res_groups_rel'
 
     group_id = fields.Many2one(comodel_name='res.groups', string='Nhóm người dùng',
-                               domain=lambda self: [
-                                   ('category_id', '=',
-                                    self.env['ir.module.category'].search([('name', 'ilike', 'Quản lý cư dân')]).id)])
+                               # domain=lambda self: [
+                               #     ('category_id', '=',
+                               #      self.env['ir.module.category'].search([('name', 'ilike', 'Quản lý cư dân')]).id)]
+                               )
 
     selected_group = fields.Char(related='group_id.name')
     user_id = fields.Many2one(comodel_name='res.users', string="Tài khoản")
