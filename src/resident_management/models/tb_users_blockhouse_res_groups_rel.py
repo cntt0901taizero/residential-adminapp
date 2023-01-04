@@ -6,7 +6,10 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
     _name = 'tb_users_blockhouse_res_groups_rel'
 
     group_id = fields.Many2one(comodel_name='res.groups', string='Nhóm người dùng',
-                               domain="[('category_id', '=', 112)]")
+                               domain=lambda self: [
+                                   ('category_id', '=',
+                                    self.env['ir.module.category'].search([('name', 'ilike', 'Quản lý cư dân')]).id)])
+
     selected_group = fields.Char(related='group_id.name')
     user_id = fields.Many2one(comodel_name='res.users', string="Tài khoản")
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string='Khối nhà', )
@@ -15,7 +18,6 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
     building_house_id = fields.Many2one(comodel_name='tb_building_house', string='Căn hộ',
                                         domain="[('building_id', '=', building_id)]", )
     owner = fields.Boolean(string='Chủ sở hữu', default=False)
-
 
     @api.onchange('blockhouse_id')
     def _on_change_blockhouse_id(self):
@@ -27,7 +29,7 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
         self.building_house_id = None
 
     @api.onchange('group_id')
-    def _on_change_blockhouse_id(self):
+    def _on_change_group_id(self):
         self.blockhouse_id = None
         self.building_id = None
         self.building_house_id = None
