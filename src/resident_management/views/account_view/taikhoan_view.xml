@@ -5,18 +5,18 @@
 -->
 <odoo>
 
-<!--    <record id="view_users_resident_tree" model="ir.ui.view">-->
-<!--        <field name="name">res.users.resident.tree.inherit</field>-->
-<!--        <field name="model">res.users</field>-->
-<!--        <field name="inherit_id" ref="base.view_users_tree"/>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <xpath expr="//field[@name='login_date']" position="after">-->
-<!--                <field name="display_blockhouse"/>-->
-<!--                <field name="display_building"/>-->
-<!--                <field name="display_apartment"/>-->
-<!--            </xpath>-->
-<!--        </field>-->
-<!--    </record>-->
+    <!--    <record id="view_users_resident_tree" model="ir.ui.view">-->
+    <!--        <field name="name">res.users.resident.tree.inherit</field>-->
+    <!--        <field name="model">res.users</field>-->
+    <!--        <field name="inherit_id" ref="base.view_users_tree"/>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--            <xpath expr="//field[@name='login_date']" position="after">-->
+    <!--                <field name="display_blockhouse"/>-->
+    <!--                <field name="display_building"/>-->
+    <!--                <field name="display_apartment"/>-->
+    <!--            </xpath>-->
+    <!--        </field>-->
+    <!--    </record>-->
 
 
     <record id="view_users_form_simple_modif_inherit" model="ir.ui.view">
@@ -62,6 +62,25 @@
             <!--             <notebook position="replace">-->
             <!--                        -->
             <!--                </notebook>-->
+        </field>
+    </record>
+
+    <record id="view_resident_users_search" model="ir.ui.view">
+        <field name="name">resident_users.search</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_search"/>
+        <field name="arch" type="xml">
+            <field name="share" position="after">
+                <field string="Tên dự án" name="tb_users_blockhouse_res_groups_rel_ids"
+                       filter_domain="[('tb_users_blockhouse_res_groups_rel_ids.blockhouse_id','ilike', self)]"/>
+                <field string="Tên tòa nhà" name="tb_users_blockhouse_res_groups_rel_ids"
+                       filter_domain="[('tb_users_blockhouse_res_groups_rel_ids.building_id','ilike', self)]"/>
+                <field string="Tên căn hộ" name="tb_users_blockhouse_res_groups_rel_ids"
+                       filter_domain="[('tb_users_blockhouse_res_groups_rel_ids.building_house_id','ilike', self)]"/>
+                <group expand="1" string="Group By">
+                    <filter name="group_block_house" string="Dự án" context="{'group_by': 'tb_users_blockhouse_res_groups_rel_ids'}"/>
+                </group>
+            </field>
         </field>
     </record>
 

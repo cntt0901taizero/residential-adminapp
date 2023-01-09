@@ -7,9 +7,10 @@ class tb_users(models.Model):
     phone_number = fields.Char(string='Số điện thoại')
     push_notifications = fields.One2many('tb_push_notification', 'user_id', string='Push Notification', readonly=True)
     tb_users_blockhouse_res_groups_rel_ids = fields.One2many('tb_users_blockhouse_res_groups_rel', 'user_id')
-    # display_blockhouse = fields.Char('Dự án', related='tb_users_blockhouse_res_groups_rel_ids.blockhouse_id.name')
+    # display_blockhouse = fields.One2many('tb_users_blockhouse_res_groups_rel','user_id', string='Dự án', related='tb_users_blockhouse_res_groups_rel_ids.blockhouse_id')
     # display_building = fields.Char('Tòa nhà', related='tb_users_blockhouse_res_groups_rel_ids.building_id.name')
     # display_apartment = fields.Char('Căn hộ', related='tb_users_blockhouse_res_groups_rel_ids.building_house_id.name')
+
 
     @api.model
     def create(self, vals):
