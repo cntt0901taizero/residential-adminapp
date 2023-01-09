@@ -77,9 +77,6 @@
                        filter_domain="[('tb_users_blockhouse_res_groups_rel_ids.building_id','ilike', self)]"/>
                 <field string="Tên căn hộ" name="tb_users_blockhouse_res_groups_rel_ids"
                        filter_domain="[('tb_users_blockhouse_res_groups_rel_ids.building_house_id','ilike', self)]"/>
-                <group expand="1" string="Group By">
-                    <filter name="group_block_house" string="Dự án" context="{'group_by': 'tb_users_blockhouse_res_groups_rel_ids'}"/>
-                </group>
             </field>
         </field>
     </record>
