@@ -7,7 +7,7 @@
     <!-- This Menu Item must have a parent and an action -->
 
     <menuitem id="menu_resident_root"
-              name="Tài khoản"
+              name="Quản lý tài khoản"
               web_icon="resident_management,static/description/menu-icon.png"
               sequence="0"/>
 

@@ -9,6 +9,7 @@
     <menuitem id="menu_apartment_news_root"
               name="Bản tin"
               web_icon="apartment_news,static/description/menu-icon.png"
+              action="action_tb_news"
               sequence="0"/>
 
 </odoo>
