@@ -84,11 +84,4 @@
             <p class="o_view_nocontent_smiling_face">Thêm mới thông báo!</p>
         </field>
     </record>
-
-    <!-- This Menu Item must have a parent and an action -->
-    <menuitem id="menu_tb_notification"
-              name="Thông báo"
-              parent="menu_apartment_notifications_root"
-              action="action_tb_notification"
-              sequence="0"/>
 </odoo>

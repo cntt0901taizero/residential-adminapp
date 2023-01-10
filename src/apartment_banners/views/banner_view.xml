@@ -53,11 +53,5 @@
         </field>
     </record>
 
-    <!-- This Menu Item must have a parent and an action -->
-    <menuitem id="menu_tb_banner"
-              name="Banner"
-              parent="menu_apartment_banners_root"
-              action="action_tb_banner"
-              sequence="0"/>
 </odoo>
 

@@ -140,12 +140,5 @@
             <p class="o_view_nocontent_smiling_face">Tạo bản ghi đầu tiên của bạn</p>
         </field>
     </record>
-
-    <!-- This Menu Item must have a parent and an action -->
-    <menuitem id="menu_tb_news"
-              name="Bản tin"
-              parent="menu_apartment_news_root"
-              action="action_tb_news"
-              sequence="0"/>
 </odoo>
 
