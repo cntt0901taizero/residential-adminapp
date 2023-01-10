@@ -9,6 +9,6 @@
     <menuitem id="menu_apartment_pay_bill_root"
               name="Thu phí cư dân"
               web_icon="apartment_paybill,static/description/menu-icon.png"
-              sequence="0"/>
+              sequence="6"/>
 
 </odoo>

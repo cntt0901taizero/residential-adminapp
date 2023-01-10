@@ -1,7 +1,7 @@
 from odoo import models, fields, api
 
 FLOORS_TYPES = [
-    ('none)', '...'),
+    ('none)', '--'),
     ('tang_ham', 'Tầng hầm'),
     ('ki_thuat)', 'Kĩ thuật'),
     ('thuong_mai', 'Thương mại'),

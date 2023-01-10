@@ -10,6 +10,6 @@
               name="Ảnh sự kiện"
               action="action_tb_banner"
               web_icon="apartment_banners,static/description/menu-icon.png"
-              sequence="0"/>
+              sequence="3"/>
 
 </odoo>

@@ -3,7 +3,7 @@ from datetime import date
 import random
 
 BUILDING_LEVEL = [
-    ('none)', '...'),
+    ('none)', '--'),
     ('a', 'Hạng A'),
     ('b', 'Hạng B'),
     ('c', 'Hạng C'),
