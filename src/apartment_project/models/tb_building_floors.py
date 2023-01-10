@@ -20,11 +20,14 @@ class tb_building_floors(models.Model):
     floors_type = fields.Selection(string='Loại tầng', selection=FLOORS_TYPES, default=FLOORS_TYPES[0][0])
     is_active = fields.Boolean(string='Trạng thái', default=True)
 
-    blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Khối nhà", required=True)
+    blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Khối nhà",
+                                    ondelet="cascade", required=True)
     building_id = fields.Many2one(comodel_name='tb_building', string="Toà nhà",
-                                  domain="[('blockhouse_id', '=', blockhouse_id)]", required=True)
+                                  domain="[('blockhouse_id', '=', blockhouse_id)]",
+                                  ondelet="cascade", required=True)
 
-    building_house_ids = fields.One2many('tb_building_house', 'building_floors_id', string="Căn hộ")
+    building_house_ids = fields.One2many(comodel_name='tb_building_house', string="Căn hộ",
+                                         inverse_name='building_floors_id')
 
     def set_status_active(self):
         self.is_active = True
