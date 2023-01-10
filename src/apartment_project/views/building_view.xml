@@ -19,7 +19,7 @@
                 <field name="address" optional="show"/>
                 <field name="location_link" widget="url" optional="show"/>
                 <field name="blockhouse_id" optional="show"/>
-                <field name="is_active" widget="boolean_toggle" optional="show"/>
+                <field name="is_active" optional="show"/>
                 <groupby name="blockhouse_id">
                     <button name="create_building" string=" Thêm mới khu / tòa nhà"
                             class="fa fa-plus btn btn-info" type="object"/>
@@ -114,7 +114,7 @@
                             <field name="floors_below_ground_number"/>
                             <field name="founding_date" widget="date"/>
                             <field name="blockhouse_id"/>
-                            <field name="is_active" widget="boolean_toggle"/>
+                            <field name="is_active"/>
                         </group>
                         <group string="Thông tin địa chỉ liên hệ">
                             <field name="address" widget="text"/>

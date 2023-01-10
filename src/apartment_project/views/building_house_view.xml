@@ -16,7 +16,7 @@
                 <field name="building_floors_id" widget="badge" optional="show"/>
                 <field name="building_id" widget="badge" optional="show"/>
                 <field name="blockhouse_id" widget="badge" optional="show"/>
-                <field name="is_active" widget="boolean_toggle" optional="show"/>
+                <field name="is_active" optional="show"/>
                 <groupby name="building_floors_id">
                     <button name="create_building_house" string=" Thêm mới căn hộ / biệt thự"
                             class="fa fa-plus btn btn-info" type="object"/>
@@ -40,7 +40,7 @@
                             <field name="building_floors_id" attrs="{'readonly':[('building_floors_id','>',0)]}"/>
                             <field name="building_id" attrs="{'readonly':[('building_id','>',0)]}"/>
                             <field name="blockhouse_id" attrs="{'readonly':[('blockhouse_id','>',0)]}"/>
-                            <field name="is_active" widget="boolean_toggle"/>
+                            <field name="is_active"/>
                         </group>
                         <group string="Thông tin chi tiết">
                             <field name="area_apartment"/>
