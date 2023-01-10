@@ -24,7 +24,7 @@
         <field name="name">tb_building_floors.form</field>
         <field name="model">tb_building_floors</field>
         <field name="arch" type="xml">
-            <form create="false">
+            <form>
                 <sheet>
                     <group>
                         <field name="id" invisible="1"/>
