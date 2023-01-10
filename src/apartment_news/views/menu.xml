@@ -10,6 +10,6 @@
               name="Bản tin"
               web_icon="apartment_news,static/description/menu-icon.png"
               action="action_tb_news"
-              sequence="0"/>
+              sequence="4"/>
 
 </odoo>

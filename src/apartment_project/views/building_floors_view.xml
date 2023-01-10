@@ -15,7 +15,8 @@
                 <field name="total_house" optional="show"/>
                 <field name="building_id" widget="badge" optional="show"/>
                 <field name="blockhouse_id" widget="badge" optional="show"/>
-                <field name="is_active" widget="boolean_toggle" optional="show"/>
+                <field name="is_active" optional="show"/>
+<!--                widget="boolean_toggle"-->
             </tree>
         </field>
     </record>
@@ -24,7 +25,7 @@
         <field name="name">tb_building_floors.form</field>
         <field name="model">tb_building_floors</field>
         <field name="arch" type="xml">
-            <form create="false">
+            <form>
                 <sheet>
                     <group>
                         <field name="id" invisible="1"/>
@@ -34,7 +35,7 @@
                         <field name="total_house"/>
                         <field name="building_id" attrs="{'readonly':[('building_id','>',0)]}"/>
                         <field name="blockhouse_id" attrs="{'readonly':[('blockhouse_id','>',0)]}"/>
-                        <field name="is_active" widget="boolean_toggle"/>
+                        <field name="is_active"/>
                     </group>
                     <notebook>
                         <page string="Căn hộ">

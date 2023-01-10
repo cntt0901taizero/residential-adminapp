@@ -571,7 +571,7 @@ th.o_list_record_selector {
     min-width: 650px;
     max-width: initial;
     min-height: 330px;
-    border: 1px solid #c8c8d3;
+    border: 1px solid #ffffff;
     box-shadow: none !important;
     background: white;
     margin: 4.8px auto;
@@ -739,7 +739,7 @@ i.o_PartnerImStatusIcon_outerBackground.fa.fa-circle.fa-stack-1x {
     background: $primary_accent;
     background-color: $primary_accent !important;
     color: #ffffff !important;
-    border-radius: 5px;
+    border-radius: 0px;
 }
 .nav-link {
     display: block;
@@ -750,7 +750,7 @@ i.o_PartnerImStatusIcon_outerBackground.fa.fa-circle.fa-stack-1x {
     margin-top: 25px;
 }
 .nav-tabs {
-    border-bottom: none;
+//     border-bottom: none;
 }
 .nav-tabs .nav-link {
     border: 1px solid #e3e3e3;

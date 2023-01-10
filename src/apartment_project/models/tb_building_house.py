@@ -3,7 +3,7 @@ from datetime import date
 import random
 
 HOUSE_TYPES = [
-    ('none)', '...'),
+    ('none)', '--'),
     ('studio', 'Studio'),
     ('officetel', 'Officetel'),
     ('shophouse', 'Shophouse'),
