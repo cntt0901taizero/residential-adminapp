@@ -22,7 +22,6 @@ class tb_building_house(models.Model):
     name = fields.Char(string='Số nhà', size=50, copy=False)
     code = fields.Char(string='Mã căn hộ', size=50, copy=False, readonly=True)
     address = fields.Char(string='Địa chỉ', size=200, copy=False)
-    # resident_info_json = fields.Char(string='thông tin cư dân json', copy=False)
     house_type = fields.Selection(string='Loại hình căn hộ', selection=HOUSE_TYPES, default=HOUSE_TYPES[0][0])
 
     area_apartment = fields.Float(string='Diên tích căn hộ (m²)', copy=False)
@@ -35,13 +34,13 @@ class tb_building_house(models.Model):
     is_active = fields.Boolean(string='Trạng thái', default=True)
 
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Khối nhà",
-                                    ondelet="cascade", required=True)
+                                    ondelet="cascade")
     building_id = fields.Many2one(comodel_name='tb_building', string="Tòa nhà",
                                   domain="[('blockhouse_id', '=', blockhouse_id)]",
-                                  ondelet="cascade", required=True)
+                                  ondelet="cascade")
     building_floors_id = fields.Many2one(comodel_name='tb_building_floors', string="Tầng sàn",
                                          domain="[('building_id', '=', building_id)]",
-                                         ondelet="cascade", required=True)
+                                         ondelet="cascade")
 
     def set_status_active(self):
         self.is_active = True
