@@ -34,11 +34,14 @@ class tb_building_house(models.Model):
 
     is_active = fields.Boolean(string='Trạng thái', default=True)
 
-    blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Khối nhà", required=True)
+    blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Khối nhà",
+                                    ondelet="cascade", required=True)
     building_id = fields.Many2one(comodel_name='tb_building', string="Tòa nhà",
-                                  domain="[('blockhouse_id', '=', blockhouse_id)]", required=True)
+                                  domain="[('blockhouse_id', '=', blockhouse_id)]",
+                                  ondelet="cascade", required=True)
     building_floors_id = fields.Many2one(comodel_name='tb_building_floors', string="Tầng sàn",
-                                         domain="[('building_id', '=', building_id)]", required=True)
+                                         domain="[('building_id', '=', building_id)]",
+                                         ondelet="cascade", required=True)
 
     def set_status_active(self):
         self.is_active = True
