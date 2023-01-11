@@ -77,13 +77,13 @@
                     <button
                             icon="fa-check"
                             class="oe_highlight"
-                            states="DRAFT, REJECT"
+                            status="DRAFT, REJECT"
                             name="set_status_active" string="Phê duyệt" type="object"
                             groups="resident_management.group_administration"
                     />
                     <button
                             icon="fa-times"
-                            name="set_status_reject" string="Từ chối duyệt" type="object" states="DRAFT, ACTIVE"
+                            name="set_status_reject" string="Từ chối duyệt" type="object" status="DRAFT, ACTIVE"
                             groups="resident_management.group_administration"/>
                     <field name="status" widget="statusbar"
                            groups="resident_management.group_administration, resident_management.group_management"/>
