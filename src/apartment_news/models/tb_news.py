@@ -59,3 +59,40 @@ class tb_news(models.Model):
 
     def action_date(self):
         print("")
+
+    def open_edit_form_news(self):
+        # context = dict(self.env.context)
+        # context['form_view_initital_mode'] = 'edit'
+        # return {
+        #     'type': 'ir.actions.act_window',
+        #     'name': 'Cập nhật bản tin',
+        #     'res_model': 'tb_news',
+        #     'target': 'current',
+        #     # 'view_id': self.env.ref('resident_management.view_tb_users_blockhouse_res_groups_rel_form').id,
+        #     'view_type': 'form',
+        #     'view_mode': 'form',
+        #     'context': context
+        #     # 'context': {
+        #     #     'default_user_id': self.id,
+        #     # },
+        # }
+        # first you need to get the id of your record
+        # you didn't specify what you want to edit exactly
+        rec_id = self.env.context.get('active_id').exists()
+        # then if you have more than one form view then specify the form id
+        form_id = self.env.ref('apartment_news.view_tb_news_form')
+
+        # then open the form
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Cập nhật bản tin',
+            'res_model': 'tb_news',
+            'res_id': rec_id.id,
+            'view_type': 'form',
+            'view_mode': 'form',
+            'view_id': form_id.id,
+            'context': {},
+            # if you want to open the form in edit mode direclty
+            'flags': {'initial_mode': 'edit'},
+            'target': 'current',
+        }

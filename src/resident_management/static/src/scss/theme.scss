@@ -4,6 +4,7 @@
     src: url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
 //     src: url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&amp;display=swap');
 }
+
 body {
     font-family: 'Montserrat', sans-serif !important;
     background-color: #f8f8fb;
@@ -1652,7 +1653,11 @@ div.dropdown-menu.bootstrap-datetimepicker-widget {
     width: 100% !important;
 }
 
-
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
   background-image: none
+}
+
+.form-check-input{
+    position: none
+
 }

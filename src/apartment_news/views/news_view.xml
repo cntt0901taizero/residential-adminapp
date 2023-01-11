@@ -10,6 +10,9 @@
                 <field name="create_date" widget="date"/>
                 <field name="expired_date" widget="date"/>
                 <field name="state" widget="label_selection"/>
+<!--                <button type="object" name="remove" icon="fa-trash"/>-->
+                <button name="open_edit_form_news" class="fa fa-pencil fa-lg float-left o_select_file_button" title="Edit" aria-label="Edit" type="object"/>
+                <button name="unlink" class="fa fa-trash-o fa-lg float-right o_clear_file_button" title="Xóa" aria-label="Clear" type="object"/>
             </tree>
         </field>
     </record>
