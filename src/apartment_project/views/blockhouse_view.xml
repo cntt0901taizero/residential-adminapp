@@ -83,7 +83,7 @@
 
     <!-- This Menu Item must have a parent and an action -->
     <menuitem id="menu_tb_blockhouse"
-              name="dự án"
+              name="Dự án"
               parent="menu_blockhouse"
               action="action_tb_blockhouse"
               sequence="0"/>

@@ -3,7 +3,7 @@
 
 {
     'name': 'Apartment Project Management',
-    'version': '1.0',
+    'version': '1.0.0',
     'category': 'Resident',
     'summary': 'Apartment Project Management features',
     'description': """""",
@@ -15,6 +15,9 @@
         'views/building_view.xml',
         'views/building_house_view.xml',
         'views/building_floors_view.xml',
+        'views/building_floors_view.xml',
+        'views/feekind_view.xml',
+        'views/paybillconfig_view.xml',
     ],
     'installable': True,
     'auto_install': False,

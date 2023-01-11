@@ -14,6 +14,11 @@
     <menuitem id="menu_blockhouse"
               name="Dự án"
               parent="menu_apartment_project_root"
-              sequence="1"/>
+              sequence="0"/>
+
+    <menuitem id="menu_apartment_pay_bill"
+              name="Cấu hình phí"
+              parent="menu_apartment_project_root"
+              sequence="0"/>
 
 </odoo>
