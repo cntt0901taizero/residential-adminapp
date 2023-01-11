@@ -9,7 +9,7 @@
                 <field name="name" decoration-bf="1"/>
                 <field name="create_date" widget="date"/>
                 <field name="expired_date" widget="date"/>
-                <field name="state" widget="label_selection"/>
+                <field name="status" widget="label_selection"/>
             </tree>
         </field>
     </record>
@@ -24,7 +24,7 @@
                 <field name="create_date"/>
                 <field name="expired_date"/>
                 <field name="image"/>
-                <field name="state"/>
+                <field name="status"/>
                 <templates>
                     <t t-name="kanban-box">
                         <div class="oe_kanban_card oe_kanban_global_click">
@@ -52,7 +52,7 @@
                                 </div>
                                 <div name="product_lst_price" class="mt-1">
                                     <span>
-                                        <field name="state" widget="label_selection"/>
+                                        <field name="status" widget="label_selection"/>
                                     </span>
                                 </div>
 <!--                                <div class="o_kanban_record_bottom">-->
@@ -85,7 +85,7 @@
                             icon="fa-times"
                             name="set_status_reject" string="Từ chối duyệt" type="object" states="DRAFT, ACTIVE"
                             groups="resident_management.group_administration"/>
-                    <field name="state" widget="statusbar"
+                    <field name="status" widget="statusbar"
                            groups="resident_management.group_administration, resident_management.group_management"/>
                 </header>
                 <sheet>
@@ -120,10 +120,10 @@
         <field name="arch" type="xml">
             <search>
                 <filter name="name" string="Tiêu đề"/>
-                <filter name="filter_draft" string="Nháp" domain="[('state', '=', 'DRAFT')]"/>
-                <filter name="filter_active" string="Đã đăng" domain="[('state', '=', 'ACTIVE')]"/>
+                <filter name="filter_draft" string="Nháp" domain="[('status', '=', 'DRAFT')]"/>
+                <filter name="filter_active" string="Đã đăng" domain="[('status', '=', 'ACTIVE')]"/>
                 <group expand="1" string="Group By">
-                    <filter name="group_state" string="Trạng thái" context="{'group_by': 'state'}"/>
+                    <filter name="group_status" string="Trạng thái" context="{'group_by': 'status'}"/>
                 </group>
             </search>
         </field>
@@ -135,7 +135,7 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">tb_news</field>
         <field name="view_mode">kanban,tree,form</field>
-        <field name="context">{'search_default_group_state':1}</field>
+        <field name="context">{'search_default_group_status':1}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Tạo bản ghi đầu tiên của bạn</p>
         </field>

@@ -13,7 +13,7 @@
                 <field name="name"></field>
                 <field name="content"></field>
                 <field name="type"></field>
-                <field name="state"></field>
+                <field name="status"></field>
             </tree>
         </field>
     </record>
@@ -35,7 +35,7 @@
                             icon="fa-times"
                             name="set_status_reject" string="Từ chối duyệt" type="object" states="PENDING, ACTIVE"
                             groups="resident_management.group_administration"/>
-                    <field name="state" widget="statusbar"
+                    <field name="status" widget="statusbar"
                            groups="resident_management.group_administration, resident_management.group_management"/>
                 </header>
                 <sheet>
