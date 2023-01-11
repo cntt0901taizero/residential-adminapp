@@ -8,7 +8,7 @@
         <field name="name">tb_blockhouse.tree</field>
         <field name="model">tb_blockhouse</field>
         <field name="arch" type="xml">
-            <tree string="Bảng khối nhà" multi_edit="1" decoration-danger="is_active == False">
+            <tree string="Bảng dự án" multi_edit="1" decoration-danger="is_active == False">
                 <field name="image" widget="image" width="100px" optional="show"/>
                 <field name="name" optional="show" decoration-bf="1"/>
                 <field name="code" optional="show"/>
@@ -19,8 +19,8 @@
                         <field name="name"/>
                         <field name="code"/>
                         <field name="building_level"/>
-                        <field name="floors_above_ground_number"/>
-                        <field name="floors_below_ground_number"/>
+<!--                        <field name="floors_above_ground_number"/>-->
+<!--                        <field name="floors_below_ground_number"/>-->
                         <field name="website"/>
                         <field name="image"/>
                         <field name="address"/>
@@ -63,27 +63,27 @@
         <field name="model">tb_blockhouse</field>
         <field name="arch" type="xml">
             <search>
-                <filter name="name" string="Tên khối nhà"/>
-                <filter name="code" string="Mã khối nhà"/>
+                <filter name="name" string="Tên dự án"/>
+                <filter name="code" string="Mã dự án"/>
             </search>
         </field>
     </record>
 
     <record id="action_tb_blockhouse" model="ir.actions.act_window">
-        <field name="name">Quản lý khối nhà / dự án</field>
+        <field name="name">Quản lý dự án / dự án</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">tb_blockhouse</field>
         <field name="view_mode">tree,form</field>
         <field name="context">{}</field>
         <field name="limit">10</field>
         <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">Thêm mới khối nhà!</p>
+            <p class="o_view_nocontent_smiling_face">Thêm mới dự án!</p>
         </field>
     </record>
 
     <!-- This Menu Item must have a parent and an action -->
     <menuitem id="menu_tb_blockhouse"
-              name="Khối nhà"
+              name="Dự án"
               parent="menu_blockhouse"
               action="action_tb_blockhouse"
               sequence="0"/>

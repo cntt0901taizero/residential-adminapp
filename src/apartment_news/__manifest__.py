@@ -3,14 +3,13 @@
 
 {
     'name': 'Apartment News',
-    'version': '1.0',
+    'version': '1.0.0',
     'category': 'Resident',
     'summary': 'Apartment News features',
     'description': """""",
     # 'depends': ['base', 'mail', 'website_profile'],
     'sequence': -100,
     'data': [
-        'views/menu.xml',
         'views/news_view.xml',
     ],
     'installable': True,

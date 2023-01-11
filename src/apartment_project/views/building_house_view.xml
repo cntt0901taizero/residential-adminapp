@@ -63,7 +63,7 @@
             <search>
                 <filter name="name" string="Số nhà"/>
                 <group expand="1" string="Group By">
-                    <filter name="group_block_house" string="Khối nhà" context="{'group_by':'blockhouse_id'}"/>
+                    <filter name="group_block_house" string="dự án" context="{'group_by':'blockhouse_id'}"/>
                     <filter name="group_building" string="Tòa nhà" context="{'group_by':'building_id'}"/>
                     <filter name="group_floors" string="Tầng sàn" context="{'group_by':'building_floors_id'}"/>
                 </group>

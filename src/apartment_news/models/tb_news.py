@@ -26,11 +26,16 @@ class tb_news(models.Model):
     create_date = fields.Date(string="Ngày tạo", default=datetime.datetime.today())
     # active = fields.Boolean(string='Trạng thái', default=True)
     expired_date = fields.Date(string="Ngày hết hạn", default=datetime.datetime.today())
-    state = fields.Selection([
+    status = fields.Selection([
         ('DRAFT', 'Nháp'),
         ('ACTIVE', 'Đã đăng'),
         ('REJECT', 'Chưa duyệt'),
     ], required=True, default='DRAFT', tracking=True, string="Trạng thái", )
+    blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="dự án",
+                                    ondelet="cascade")
+    building_id = fields.Many2one(comodel_name='tb_building', string="Toà nhà",
+                                  domain="[('blockhouse_id', '=', blockhouse_id)]",
+                                  ondelet="cascade")
 
     def set_status_active(self):
         push_service.notify_single_device(
@@ -38,20 +43,20 @@ class tb_news(models.Model):
             message_title="Bản tin mới",
             message_body=self.name
         )
-        self.write({'state': 'ACTIVE'})
+        self.write({'status': 'ACTIVE'})
 
     def set_status_reject(self):
-        self.write({'state': 'REJECT'})
+        self.write({'status': 'REJECT'})
 
     def set_status_draft(self):
-        self.write({'state': 'DRAFT'})
+        self.write({'status': 'DRAFT'})
 
     def write(self, values):
-        if 'state' in values and self.env.user.has_group('resident_management.group_management'):
+        if 'status' in values and self.env.user.has_group('resident_management.group_management'):
             raise ValidationError(_("Vui lòng liên hệ ban quản trị để được duyệt bản tin!"))
             return super(tb_news, self).write(values)
-        if 'state' not in values:
-            values['state'] = 'DRAFT'
+        if 'status' not in values:
+            values['status'] = 'DRAFT'
             return super(tb_news, self).write(values)
         else:
             return super(tb_news, self).write(values)
@@ -59,3 +64,24 @@ class tb_news(models.Model):
 
     def action_date(self):
         print("")
+
+    def open_edit_form_news(self):
+        # first you need to get the id of your record
+        # you didn't specify what you want to edit exactly
+        # rec_id = self.env.context.get('active_id').exists()
+        # then if you have more than one form view then specify the form id
+        form_id = self.env.ref('apartment_news.view_tb_news_form')
+
+        # then open the form
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Cập nhật bản tin',
+            'res_model': 'tb_news',
+            'res_id': self.id,
+            'view_type': 'form',
+            'view_mode': 'form',
+            'view_id': form_id.id,
+            'context': {'form_view_initial_mode': 'edit'},
+            # if you want to open the form in edit mode direclty
+            'target': 'current',
+        }

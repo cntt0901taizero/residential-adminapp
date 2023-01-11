@@ -3,7 +3,7 @@ from datetime import date
 import random
 
 BUILDING_LEVEL = [
-    ('none)', '--'),
+    ('none', '--'),
     ('a', 'Hạng A'),
     ('b', 'Hạng B'),
     ('c', 'Hạng C'),
@@ -14,19 +14,19 @@ class tb_building(models.Model):
     _description = 'Toà nhà'
 
     name = fields.Char(string='Tên toà nhà', size=200, required=True, copy=False)
-    code = fields.Char(string='Mã toà nhà', size=50, copy=False, readonly=True)
+    code = fields.Char(string='Mã', size=50, copy=False, readonly=True)
     founding_date = fields.Date(string='Ngày thành lập', copy=False)
     image = fields.Image(string='Ảnh', copy=False)
     address = fields.Char(string='Địa chỉ', size=500, copy=False)
     website = fields.Char(string='Website', size=200, copy=False)
     phone = fields.Char(string='Điện thoại', size=50, copy=False)
     location_link = fields.Char(string='Link vị trí', size=500, copy=False)
-    floors_above_ground_number = fields.Integer(string='Số tầng nổi', copy=False)
-    floors_below_ground_number = fields.Integer(string='Số tầng hầm', copy=False)
+    # floors_above_ground_number = fields.Integer(string='Số tầng nổi', copy=False)
+    # floors_below_ground_number = fields.Integer(string='Số tầng hầm', copy=False)
     building_level = fields.Selection(string='Hạng tòa nhà', selection=BUILDING_LEVEL, default=BUILDING_LEVEL[0][0])
     is_active = fields.Boolean(string='Trạng thái', default=True)
 
-    blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Khối nhà", ondelet="cascade")
+    blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Dự án", ondelet="cascade")
 
     building_floors_ids = fields.One2many(comodel_name='tb_building_floors', inverse_name='building_id', string="Tầng sàn")
     building_house_ids = fields.One2many(comodel_name='tb_building_house', inverse_name='building_id', string="Căn hộ")

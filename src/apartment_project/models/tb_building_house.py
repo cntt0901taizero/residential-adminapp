@@ -3,7 +3,7 @@ from datetime import date
 import random
 
 HOUSE_TYPES = [
-    ('none)', '--'),
+    ('none', '--'),
     ('studio', 'Studio'),
     ('officetel', 'Officetel'),
     ('shophouse', 'Shophouse'),
@@ -20,7 +20,7 @@ class tb_building_house(models.Model):
     _description = 'Căn hộ'
 
     name = fields.Char(string='Số nhà', size=50, copy=False)
-    code = fields.Char(string='Mã căn hộ', size=50, copy=False, readonly=True)
+    code = fields.Char(string='Mã', size=50, copy=False, readonly=True)
     address = fields.Char(string='Địa chỉ', size=200, copy=False)
     house_type = fields.Selection(string='Loại hình căn hộ', selection=HOUSE_TYPES, default=HOUSE_TYPES[0][0])
 
@@ -33,7 +33,7 @@ class tb_building_house(models.Model):
 
     is_active = fields.Boolean(string='Trạng thái', default=True)
 
-    blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Khối nhà",
+    blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Dự án",
                                     ondelet="cascade")
     building_id = fields.Many2one(comodel_name='tb_building', string="Tòa nhà",
                                   domain="[('blockhouse_id', '=', blockhouse_id)]",

@@ -37,8 +37,8 @@
                 <field name="name"/>
                 <field name="code"/>
                 <field name="building_level"/>
-                <field name="floors_above_ground_number"/>
-                <field name="floors_below_ground_number"/>
+<!--                <field name="floors_above_ground_number"/>-->
+<!--                <field name="floors_below_ground_number"/>-->
                 <field name="website"/>
                 <field name="image"/>
                 <field name="address"/>
@@ -110,8 +110,8 @@
                             <field name="name"/>
                             <field name="code"/>
                             <field name="building_level" widget="selection_badge"/>
-                            <field name="floors_above_ground_number"/>
-                            <field name="floors_below_ground_number"/>
+<!--                            <field name="floors_above_ground_number"/>-->
+<!--                            <field name="floors_below_ground_number"/>-->
                             <field name="founding_date" widget="date"/>
                             <field name="blockhouse_id"/>
                             <field name="is_active"/>
@@ -185,7 +185,7 @@
                 <filter name="name" string="Tên toà nhà"/>
                 <filter name="filter_is_active" string="Trạng thái" domain="[('is_active', '=', 'True')]"/>
                 <group expand="1" string="Group By">
-                    <filter name="group_block_house" string="Khối nhà" context="{'group_by': 'blockhouse_id'}"/>
+                    <filter name="group_block_house" string="dự án" context="{'group_by': 'blockhouse_id'}"/>
                 </group>
             </search>
         </field>

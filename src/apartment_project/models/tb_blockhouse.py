@@ -5,10 +5,10 @@ import random
 
 class tb_blockhouse(models.Model):
     _name = 'tb_blockhouse'
-    _description = 'Khối nhà'
+    _description = 'Dự án'
 
-    name = fields.Char(string='Tên khối nhà', size=200, required=True, copy=False)
-    code = fields.Char(string='Mã khối nhà', size=50, copy=False, readonly=True)
+    name = fields.Char(string='Tên dự án', size=200, required=True, copy=False)
+    code = fields.Char(string='Mã', size=50, copy=False, readonly=True)
     address = fields.Char(string='Địa chỉ', size=500, copy=False)
     image = fields.Image(string='Ảnh', copy=False)
     website = fields.Char(string='Website', size=200, copy=False)
@@ -55,6 +55,6 @@ class tb_blockhouse(models.Model):
         }
 
     _sql_constraints = [
-        ('name', 'unique(name)', 'Tên khối nhà không được trùng lặp'),
-        ('code', 'unique(code)', 'Mã khối nhà không được trùng lặp')
+        ('name', 'unique(name)', 'Tên dự án không được trùng lặp'),
+        ('code', 'unique(code)', 'Mã dự án không được trùng lặp')
     ]

@@ -12,8 +12,18 @@
               sequence="1"/>
 
     <menuitem id="menu_blockhouse"
-              name="Dự án"
+              name="Ql dự án"
               parent="menu_apartment_project_root"
-              sequence="1"/>
+              sequence="0"/>
+
+<!--    <menuitem id="menu_apartment_utilities"-->
+<!--              name="Tiện ích chung cư"-->
+<!--              parent="menu_apartment_project_root"-->
+<!--              sequence="0"/>-->
+
+    <menuitem id="menu_apartment_pay_bill"
+              name="Cấu hình DM phí và thanh toán"
+              parent="menu_apartment_project_root"
+              sequence="0"/>
 
 </odoo>

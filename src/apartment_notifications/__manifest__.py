@@ -3,14 +3,13 @@
 
 {
     'name': 'Apartment Notifications',
-    'version': '1.0',
+    'version': '1.0.0',
     'category': 'Resident',
     'summary': 'Apartment Notifications features',
     'description': """""",
     # 'depends': ['base', 'mail', 'website_profile'],
     'sequence': -100,
     'data': [
-        'views/menu.xml',
         'views/notification_view.xml',
     ],
     'installable': True,
