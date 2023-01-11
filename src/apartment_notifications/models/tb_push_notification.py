@@ -5,10 +5,9 @@ from odoo import models, fields
 
 class tb_push_notification(models.Model):
     _name = 'tb_push_notification'
-    # _description = 'Quản lý thiết bị'
+    _description = 'Quản lý thông báo gửi đi'
 
     name = fields.Char(string='Tiêu đề', required=True, copy=False)
-    # user_id = fields.Integer(string="Người dùng")
     notification_id = fields.Integer(string="Thông báo")
     content = fields.Text(string='Nội dung', required=True, copy=False, )
     type = fields.Selection([
@@ -20,7 +19,7 @@ class tb_push_notification(models.Model):
         ('SEEN', 'Đã đọc'),
         ('DELETE', 'Đã xóa'),
     ], required=True, default='SENT', tracking=True, string="Trạng thái", )
-    user_id = fields.Many2one(comodel_name='res.users')
+    user_id = fields.Many2one(comodel_name='res.users', string="Người nhận", ondelet="cascade")
 
 
 

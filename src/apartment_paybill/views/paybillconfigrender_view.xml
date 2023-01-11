@@ -49,8 +49,8 @@
             <search>
                 <field name="fee_kind_code" string="Mã loại phí"></field>
                 <field name="fee_kind_name" string="Tên loại phí"></field>
-                <field name="block_house_code" string="Mã khối nhà"></field>
-                <field name="block_house_name" string="Tên khối nhà"></field>
+                <field name="block_house_code" string="Mã dự án"></field>
+                <field name="block_house_name" string="Tên dự án"></field>
                 <field name="building_code" string="Mã Tòa nhà"></field>
                 <field name="building_name" string="Tên tòa nhà"></field>
                 <field name="house_code" string="Mã căn hộ"></field>

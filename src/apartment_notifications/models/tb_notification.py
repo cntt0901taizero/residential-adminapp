@@ -21,18 +21,25 @@ class tb_notification(models.Model):
         ('NEWS', 'Bản tin'),
         ('ACTIVE_BY_ADMIN', 'Thông báo từ quản trị viên'),
     ], required=True, default='ACTIVE_BY_ADMIN', tracking=True, string="Loại thông báo", )
-    state = fields.Selection([
+    is_push = fields.Boolean(string='Đẩy thông báo', default=True)
+    status = fields.Selection([
         ('PENDING', 'Chờ duyệt'),
         ('ACTIVE', 'Đã duyệt'),
         ('REJECT', 'Chưa duyệt'),
     ], required=True, default='PENDING', tracking=True, string="Trạng thái", )
-    # recipient_list = fields.Many2one(comodel_name='res.users', string="Người nhận")
-    # user_ids = fields.One2many('res.users', 'notification_id', string='Users', help="Chọn người nhận")
-    user_ids = fields.Many2many('res.users', string='Chọn người nhận')
+    blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="dự án",
+                                    ondelet="cascade")
+    building_id = fields.Many2one(comodel_name='tb_building', string="Tòa nhà",
+                                  domain="[('blockhouse_id', '=', blockhouse_id)]",
+                                  ondelet="cascade")
+    building_house_id = fields.Many2one(comodel_name='tb_building_house', string="Tòa nhà",
+                                        domain="[('building_id', '=', building_id)]",
+                                        ondelet="cascade")
+    user_ids = fields.Many2many('res.users', string='Người nhận', ondelet="cascade")
 
     def set_status_active(self):
         try:
-            self.write({'state': 'ACTIVE'})
+            self.write({'status': 'ACTIVE'})
             user_id_list = self.user_ids.ids
             for user_id in user_id_list:
                 http.request.env['tb_push_notification'].sudo().create({
@@ -57,14 +64,14 @@ class tb_notification(models.Model):
             print(e)
 
     def set_status_reject(self):
-        self.write({'state': 'REJECT'})
+        self.write({'status': 'REJECT'})
 
     def write(self, values):
-        if 'state' in values and self.env.user.has_group('resident_management.group_management'):
+        if 'status' in values and self.env.user.has_group('resident_management.group_management'):
             raise ValidationError(_("Vui lòng liên hệ ban quản trị để được duyệt bản tin!"))
             return super(tb_news, self).write(values)
-        if 'state' not in values:
-            values['state'] = 'PENDING'
+        if 'status' not in values:
+            values['status'] = 'PENDING'
             return super(tb_notification, self).write(values)
         else:
             return super(tb_notification, self).write(values)

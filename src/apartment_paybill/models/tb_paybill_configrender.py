@@ -11,9 +11,9 @@ class tb_paybill_configrender(models.Model):
     fee_kind_code = fields.Char(string='Mã loại phí', copy=False)
     fee_kind_name = fields.Char(string='Tên loại phí', copy=False)
 
-    block_house_id = fields.Char(string='Id khối nhà', copy=False)
-    block_house_code = fields.Char(string='Mã khối nhà', copy=False)
-    block_house_name = fields.Char(string='Tên khối nhà', copy=False)
+    block_house_id = fields.Char(string='Id dự án', copy=False)
+    block_house_code = fields.Char(string='Mã dự án', copy=False)
+    block_house_name = fields.Char(string='Tên dự án', copy=False)
 
     building_id = fields.Char(string='Id tòa nhà', copy=False)
     building_code = fields.Char(string='Mã tòa nhà', copy=False)
