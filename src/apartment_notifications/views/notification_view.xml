@@ -10,10 +10,10 @@
 
         <field name="arch" type="xml">
             <tree>
-                <field name="name"></field>
-                <field name="content"></field>
-                <field name="type"></field>
-                <field name="status"></field>
+                <field name="name"/>
+                <field name="content"/>
+                <field name="type"/>
+                <field name="status"/>
 
             </tree>
         </field>
@@ -48,7 +48,7 @@
                     </div>
                     <group>
                         <group>
-                            <field name="user_ids" widget="many2many_tags"></field>
+                            <field name="user_ids" widget="many2many_tags"/>
                         </group>
                     </group>
                     <!--                    <group colspan="4">-->
@@ -71,7 +71,7 @@
         <field name="model">tb_notification</field>
         <field name="arch" type="xml">
             <search>
-                <field name="name" string="Tiêu đề"></field>
+                <field name="name" string="Tiêu đề"/>
             </search>
         </field>
     </record>
