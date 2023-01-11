@@ -10,7 +10,6 @@
     # 'depends': ['base', 'mail', 'website_profile'],
     'sequence': -100,
     'data': [
-        'views/menu.xml',
         'views/banner_view.xml',
     ],
     'installable': True,

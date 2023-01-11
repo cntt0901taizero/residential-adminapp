@@ -53,5 +53,11 @@
         </field>
     </record>
 
+    <menuitem id="menu_apartment_banners_root"
+              name="Ảnh sự kiện"
+              action="action_tb_banner"
+              web_icon="apartment_banners,static/description/menu-icon.png"
+              sequence="3"/>
+
 </odoo>
 

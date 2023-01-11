@@ -14,6 +14,7 @@
                 <field name="content"></field>
                 <field name="type"></field>
                 <field name="status"></field>
+
             </tree>
         </field>
     </record>
@@ -39,9 +40,10 @@
                            groups="resident_management.group_administration, resident_management.group_management"/>
                 </header>
                 <sheet>
-                     <div class="oe_title pr-0">
+                    <div class="oe_title pr-0">
                         <h1 class="d-flex flex-row justify-content-between">
-                            <field name="name" class="o_task_name text-truncate" placeholder="Tiêu đề thông báo..." default_focus="1"/>
+                            <field name="name" class="o_task_name text-truncate" placeholder="Tiêu đề thông báo..."
+                                   default_focus="1"/>
                         </h1>
                     </div>
                     <group>
@@ -49,15 +51,16 @@
                             <field name="user_ids" widget="many2many_tags"></field>
                         </group>
                     </group>
-<!--                    <group colspan="4">-->
-<!--                        <field type="html" widget="html" name="content" class="oe_account_terms"-->
-<!--                               placeholder="Nội dung thông báo..." modifiers="{}"/>-->
-<!--                    </group>-->
-                     <notebook>
+                    <!--                    <group colspan="4">-->
+                    <!--                        <field type="html" widget="html" name="content" class="oe_account_terms"-->
+                    <!--                               placeholder="Nội dung thông báo..." modifiers="{}"/>-->
+                    <!--                    </group>-->
+                    <notebook>
                         <page name="description_page" string="Nội dung">
-                            <field name="content" type="html" options="{'collaborative': true}" placeholder="Nội dung thông báo..."/>
+                            <field name="content" type="html" options="{'collaborative': true}"
+                                   placeholder="Nội dung thông báo..."/>
                         </page>
-                     </notebook>
+                    </notebook>
                 </sheet>
             </form>
         </field>
@@ -84,4 +87,10 @@
             <p class="o_view_nocontent_smiling_face">Thêm mới thông báo!</p>
         </field>
     </record>
+
+    <menuitem id="menu_tb_notification"
+              name="Thông báo"
+              action="action_tb_notification"
+              web_icon="apartment_notifications,static/description/menu-icon.png"
+              sequence="5"/>
 </odoo>
