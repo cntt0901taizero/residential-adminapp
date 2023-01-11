@@ -9,10 +9,10 @@
         <field name="model">tb_feekind</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="code"></field>
-                <field name="name"></field>
-                <field name="note"></field>
-                <field name="is_active"></field>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="note"/>
+                <field name="is_active"/>
             </tree>
         </field>
     </record>
@@ -24,11 +24,12 @@
             <form>
                 <sheet>
                     <group>
-                        <field name="code"></field>
-                        <field name="name"></field>
-                        <field name="note"></field>
-                        <field name="is_active"></field>
-                        <field name="blockhouse_id"></field>
+                        <field name="code"/>
+                        <field name="name"/>
+                        <field name="note"/>
+                        <field name="is_active"/>
+                        <field name="blockhouse_id"/>
+                        <field name="building_house_id"/>
                     </group>
                 </sheet>
             </form>
