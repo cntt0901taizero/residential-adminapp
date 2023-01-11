@@ -28,6 +28,7 @@
                         <field name="name"></field>
                         <field name="note"></field>
                         <field name="is_active"></field>
+                        <field name="blockhouse_id"></field>
                     </group>
                 </sheet>
             </form>
@@ -39,8 +40,8 @@
         <field name="model">tb_feekind</field>
         <field name="arch" type="xml">
             <search>
-                <field name="code" string="Mã loại phí"></field>
-                <field name="name" string="Tên loại phí"></field>
+                <field name="code" string="Mã loại phí"/>
+                <field name="name" string="Tên loại phí"/>
             </search>
         </field>
     </record>
@@ -51,6 +52,7 @@
         <field name="res_model">tb_feekind</field>
         <field name="view_mode">tree,form</field>
         <field name="context">{}</field>
+        <field name="limit">10</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Thêm mới</p>
         </field>
@@ -58,8 +60,8 @@
 
     <!-- This Menu Item must have a parent and an action -->
     <menuitem id="menu_tb_feekind"
-              name="Danh mục loại phí"
-              parent="menu_apartment_pay_bill_root"
+              name="Danh mục phí"
+              parent="menu_apartment_pay_bill"
               action="action_tb_feekind"
               sequence="0"/>
 </odoo>
