@@ -9,11 +9,11 @@ class dialog_box_confirm(models.TransientModel):
     content = fields.Text(required=True)
 
 
-    # def action_confirm(self):
-    #     print("111111111111111111111")
-    #     return {
-    #         'type': 'ir.actions.act_window_close',
-    # }
+    def action_confirm(self):
+        print("111111111111111111111")
+        return {
+            'type': 'ir.actions.act_window_close',
+    }
 
 
 
