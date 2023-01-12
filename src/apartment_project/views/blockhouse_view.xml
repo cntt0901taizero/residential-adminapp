@@ -63,8 +63,9 @@
         <field name="model">tb_blockhouse</field>
         <field name="arch" type="xml">
             <search>
-                <filter name="name" string="Tên dự án"/>
-                <filter name="code" string="Mã dự án"/>
+                <filter name="name" string="Tên"/>
+                <filter name="code" string="Mã"/>
+                <filter name="is_active" string="Trạng thái"/>
             </search>
         </field>
     </record>

@@ -1,4 +1,5 @@
 from odoo import models, fields, api
+from odoo.http import request
 from datetime import date
 import random
 
@@ -20,6 +21,14 @@ class tb_blockhouse(models.Model):
 
     def set_status_active(self):
         self.is_active = True
+
+    @api.model
+    def search_read(self, domain=[], fields=None, offset=0, limit=10, order=None):
+        user = request.env.user
+        aa = user.tb_users_blockhouse_res_groups_rel_ids.blockhouse_id.id
+        # domain = [('is_active', '=', True)]
+        res = super(tb_blockhouse, self).search_read(domain, fields, offset, limit, order)
+        return res
 
     @api.model
     def create(self, vals):
