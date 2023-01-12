@@ -27,3 +27,24 @@ class tb_users(models.Model):
                 'default_user_id': self.id,
             },
         }
+
+    def open_edit_form_user(self):
+        # first you need to get the id of your record
+        # you didn't specify what you want to edit exactly
+        # rec_id = self.env.context.get('active_id').exists()
+        # then if you have more than one form view then specify the form id
+        form_id = self.env.ref('base.view_users_form')
+
+        # then open the form
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Cập nhật người dùng',
+            'res_model': 'res.users',
+            'res_id': self.id,
+            'view_type': 'form',
+            'view_mode': 'form',
+            'view_id': form_id.id,
+            'context': {'form_view_initial_mode': 'edit'},
+            # if you want to open the form in edit mode direclty
+            'target': 'current',
+        }

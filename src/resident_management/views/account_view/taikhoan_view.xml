@@ -5,18 +5,20 @@
 -->
 <odoo>
 
-    <!--    <record id="view_users_resident_tree" model="ir.ui.view">-->
-    <!--        <field name="name">res.users.resident.tree.inherit</field>-->
-    <!--        <field name="model">res.users</field>-->
-    <!--        <field name="inherit_id" ref="base.view_users_tree"/>-->
-    <!--        <field name="arch" type="xml">-->
-    <!--            <xpath expr="//field[@name='login_date']" position="after">-->
-    <!--                <field name="display_blockhouse"/>-->
-    <!--                <field name="display_building"/>-->
-    <!--                <field name="display_apartment"/>-->
-    <!--            </xpath>-->
-    <!--        </field>-->
-    <!--    </record>-->
+    <record id="view_users_resident_tree" model="ir.ui.view">
+        <field name="name">res.users.resident.tree.inherit</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='login_date']" position="after">
+                <button name="unlink" class="fa fa-trash-o fa-lg float-right btn btn-danger" title="Xóa"
+                        confirm="Bạn có chắc muốn xóa tài khoản này không?"
+                        aria-label="Xóa" type="object"/>
+                <button name="open_edit_form_user" class="fa fa-pencil fa-lg float-right btn btn-success"
+                        title="Sửa" aria-label="Sửa" type="object"/>
+            </xpath>
+        </field>
+    </record>
 
 
     <record id="view_users_form_simple_modif_inherit" model="ir.ui.view">

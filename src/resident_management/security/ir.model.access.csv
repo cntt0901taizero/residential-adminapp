@@ -25,6 +25,11 @@ access_banner_management, access_banner_management,apartment_banners.model_tb_ba
 access_banner_resident, access_banner_resident,apartment_banners.model_tb_banner,group_resident,1,0,0,0
 access_banner_public,access_banner_public,apartment_banners.model_tb_banner,base.group_public,1,0,0,0
 
+access_dialog_confirm_administration, access_dialog_confirm_administration,model_dialog_box_confirm,group_administration,1,1,1,1
+access_dialog_confirm_management, access_dialog_confirm_management,model_dialog_box_confirm,group_management,1,1,1,1
+access_dialog_confirm_resident, access_dialog_confirm_resident,model_dialog_box_confirm,group_resident,1,0,0,0
+access_dialog_confirm_public,access_dialog_confirm_public,model_dialog_box_confirm,base.group_public,1,0,0,0
+
 access_news_administration,access_news_administration,apartment_news.model_tb_news,group_administration,1,1,0,1
 access_news_management,access_news_management,apartment_news.model_tb_news,group_management,1,1,1,1
 access_news_resident,access_news_resident,apartment_news.model_tb_news,group_resident,1,0,0,0

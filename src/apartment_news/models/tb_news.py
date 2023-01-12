@@ -1,10 +1,10 @@
 import datetime
-
 from odoo import models, fields, api
 from pyfcm import FCMNotification
 
 from odoo.exceptions import ValidationError
 from odoo.tools import GettextAlias
+
 
 _ = GettextAlias()
 push_service = FCMNotification(
@@ -84,4 +84,25 @@ class tb_news(models.Model):
             'context': {'form_view_initial_mode': 'edit'},
             # if you want to open the form in edit mode direclty
             'target': 'current',
+        }
+
+    # @api.multi
+    def confirm_delete_news(self):
+        print("123")
+        content = """Bạn có chắc muốn xóa bản tin này?"""
+        # query = 'delete from dialog_box_confirm'
+        # self.env.sudo().cr.execute(query)
+        value = self.env['dialog.box.confirm'].sudo().create({'content': content})
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Message',
+            'res_model': 'dialog.box.confirm',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {
+                'default_record_id': self.id,
+                'default_model_name': 'tb_news'
+            },
+            'res_id': value.id
         }
