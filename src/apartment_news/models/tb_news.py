@@ -88,21 +88,20 @@ class tb_news(models.Model):
 
     # @api.multi
     def confirm_delete_news(self):
-        print("123")
-        content = """Bạn có chắc muốn xóa bản tin này?"""
-        # query = 'delete from dialog_box_confirm'
-        # self.env.sudo().cr.execute(query)
-        value = self.env['dialog.box.confirm'].sudo().create({'content': content})
+        message = """Bạn có chắc muốn xóa bản tin này?"""
+        value = self.env['dialog.box.confirm'].sudo().create({'message': message})
         return {
             'type': 'ir.actions.act_window',
-            'name': 'Message',
+            'name': 'Xóa bản tin',
             'res_model': 'dialog.box.confirm',
+
             'view_type': 'form',
             'view_mode': 'form',
             'target': 'new',
-            'context': {
-                'default_record_id': self.id,
-                'default_model_name': 'tb_news'
-            },
             'res_id': value.id
         }
+
+    def del_record(self):
+        for record in self:
+            record.unlink()
+            pass

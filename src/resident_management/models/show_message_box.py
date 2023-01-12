@@ -6,14 +6,14 @@ class dialog_box_confirm(models.TransientModel):
     _description = "Show Message"
 
     message = fields.Text(default='Xác nhận')
-    content = fields.Text(required=True)
-
 
     def action_confirm(self):
-        print("111111111111111111111")
-        return {
-            'type': 'ir.actions.act_window_close',
-    }
+        for selected_item in self._context.get('active_ids'):
+            record = self.env[self._context.get('active_model')].browse(selected_item)
+            record.del_record()
+            return {
+                'type': 'ir.actions.act_window_close',
+            }
 
 
 

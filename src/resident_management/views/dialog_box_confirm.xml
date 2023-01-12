@@ -4,9 +4,8 @@
         <field name="name">dialog_box_confirm.form</field>
         <field name="model">dialog.box.confirm</field>
         <field name="arch" type="xml">
-            <form>
-                <field name="message"  readonly="1" widget="html"/>
-                <field name="content"  readonly="1"/>
+            <form string="Xác nhận">
+                <field name="message" readonly="1" widget="html"/>
                 <footer>
                     <button name="action_confirm" type="object" string="Đồng ý" class="oe_highlight"/>
                     <button special="cancel" string="Hủy"/>
