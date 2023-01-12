@@ -2,18 +2,13 @@ from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 
 RELATIONSHIP_TYPES = [
-    ('chuho)', 'Chủ hộ'),
+    ('chuho', 'Chủ hộ'),
     ('ongba', 'Ông bà'),
-    ('bome', 'Bố hoặc mẹ'),
+    ('bome', 'Bố mẹ'),
+    ('vochong', 'Vợ chồng'),
     ('concai', 'Con cái'),
     ('anhchiem', 'Anh chị em'),
-]
-
-USER_GROUP_TYPES = [
-    ('cư dân', 'Cư dân'),
-    ('quanly', 'Ban quản lý'),
-    ('quantri', 'Ban quản trị'),
-    ('admin', 'Admin'),
+    ('nguoithue', 'Người thuê'),
 ]
 
 class tb_users_blockhouse_res_groups_rel(models.Model):
@@ -30,12 +25,9 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
     building_id = fields.Many2one(comodel_name='tb_building', string='Tòa nhà',
                                   domain="[('blockhouse_id', '=', blockhouse_id)]", )
     building_house_id = fields.Many2one(comodel_name='tb_building_house', string='Căn hộ',
-                                        domain="[('building_id', '=', building_id)]", )
+                                        domain="[('building_id', '=', building_id)]")
     owner = fields.Boolean(string='Chủ sở hữu', default=False)
-    relationship_type = fields.Selection(string='Quan hệ với chủ hộ', selection=RELATIONSHIP_TYPES,
-                                         default=RELATIONSHIP_TYPES[0][0])
-    user_group_type = fields.Selection(string='Nhóm quyền', selection=USER_GROUP_TYPES,
-                                       default=USER_GROUP_TYPES[0][0])
+    relationship_type = fields.Selection(string='Quan hệ với chủ hộ', selection=RELATIONSHIP_TYPES)
 
     @api.onchange('blockhouse_id')
     def _on_change_blockhouse_id(self):

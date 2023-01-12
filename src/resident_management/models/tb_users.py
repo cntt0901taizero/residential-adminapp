@@ -18,7 +18,7 @@ class tb_users(models.Model):
     def create_user_blockhouse_groups_rel(self):
         return {
             'type': 'ir.actions.act_window',
-            'name': 'Chọn nhóm quyền',
+            'name': 'Thêm nhóm quyền',
             'res_model': 'tb_users_blockhouse_res_groups_rel',
             'target': 'new',
             'view_id': self.env.ref('resident_management.view_tb_users_blockhouse_res_groups_rel_form').id,
