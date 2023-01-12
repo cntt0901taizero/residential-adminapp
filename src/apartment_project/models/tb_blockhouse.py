@@ -24,8 +24,8 @@ class tb_blockhouse(models.Model):
 
     @api.model
     def search_read(self, domain=[], fields=None, offset=0, limit=10, order=None):
-        user = request.env.user
-        aa = user.tb_users_blockhouse_res_groups_rel_ids.blockhouse_id.id
+        # user = request.env.user
+        # aa = user.tb_users_blockhouse_res_groups_rel_ids.blockhouse_id.id
         # domain = [('is_active', '=', True)]
         res = super(tb_blockhouse, self).search_read(domain, fields, offset, limit, order)
         return res
