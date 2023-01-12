@@ -21,7 +21,7 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
                                )
     selected_group = fields.Char(related='group_id.name')
     user_id = fields.Many2one(comodel_name='res.users', string="Tài khoản")
-    blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string='dự án', )
+    blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string='Dự án', )
     building_id = fields.Many2one(comodel_name='tb_building', string='Tòa nhà',
                                   domain="[('blockhouse_id', '=', blockhouse_id)]", )
     building_house_id = fields.Many2one(comodel_name='tb_building_house', string='Căn hộ',

@@ -26,11 +26,13 @@
                         <field name="selected_group" invisible="1"/>
                         <field name="user_id" readonly="1" force_save="1"/>
                         <field name="group_id" domain="[('category_id.name', '=', '[QLCD] Quản lý cư dân')]"/>
-                        <field name="owner" attrs="{'invisible': [('selected_group','!=', '[CD] Cư dân')]}"/>
                         <field name="blockhouse_id" attrs="{'required': True}"/>
                         <field name="building_id" attrs="{'required': True}"/>
+                        <field name="building_house_id"
+                               attrs="{'invisible': [('selected_group','!=', '[CD] Cư dân')], 'required': [('selected_group','=', '[CD] Cư dân')]}"/>
                         <field name="relationship_type"
-                               attrs="{'invisible': [('selected_group','!=', 'Cư dân')], 'required': [('selected_group','=', 'Cư dân')]}"/>
+                               attrs="{'invisible': [('selected_group','!=', '[CD] Cư dân')], 'required': [('selected_group','=', '[CD] Cư dân')]}"/>
+                        <field name="owner" attrs="{'invisible': [('selected_group','!=', '[CD] Cư dân')]}"/>
                     </group>
                 </sheet>
             </form>
