@@ -9,11 +9,13 @@
                 <field name="name" decoration-bf="1"/>
                 <field name="create_date" widget="date"/>
                 <field name="expired_date" widget="date"/>
+                <field name="visible_tree_edit_button" invisible="1"/>
                 <field name="status" widget="label_selection"/>
                 <button groups="resident_management.group_administration, resident_management.group_management" name="confirm_delete_news" class="fa fa-trash-o fa-lg float-right btn btn-danger"
                         title="Xóa"
                         aria-label="Xóa" type="object"/>
-                <button groups="resident_management.group_administration, resident_management.group_management" name="open_edit_form_news" class="fa fa-pencil fa-lg float-right btn btn-success"
+                <button name="open_edit_form_news" class="fa fa-pencil fa-lg float-right btn btn-success"
+                        attrs="{'invisible':[('visible_tree_edit_button','=',False)]}"
                         title="Sửa" aria-label="Sửa" type="object"/>
             </tree>
         </field>
