@@ -48,3 +48,21 @@ class tb_users(models.Model):
             # if you want to open the form in edit mode direclty
             'target': 'current',
         }
+
+    def confirm_delete_user(self):
+        message = """Bạn có chắc muốn xóa tài khoản này?"""
+        value = self.env['dialog.box.confirm'].sudo().create({'message': message})
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Xóa tài khoản',
+            'res_model': 'dialog.box.confirm',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'target': 'new',
+            'res_id': value.id
+        }
+
+    def del_record(self):
+        for record in self:
+            record.unlink()
+            pass
