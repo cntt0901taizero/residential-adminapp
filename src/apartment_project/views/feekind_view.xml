@@ -26,10 +26,10 @@
                     <group>
                         <field name="code"/>
                         <field name="name"/>
-                        <field name="note"/>
-                        <field name="is_active"/>
                         <field name="blockhouse_id"/>
                         <field name="building_id"/>
+                        <field name="note"/>
+                        <field name="is_active"/>
                     </group>
                 </sheet>
             </form>
