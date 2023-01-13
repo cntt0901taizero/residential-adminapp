@@ -1,5 +1,5 @@
 import datetime
-from odoo import models, fields, api
+from odoo import models, fields, api, exceptions
 from pyfcm import FCMNotification
 
 from odoo.exceptions import ValidationError
@@ -37,12 +37,6 @@ class tb_news(models.Model):
                                   domain="[('blockhouse_id', '=', blockhouse_id)]",
                                   ondelet="cascade")
 
-    visible_tree_edit_button = fields.Boolean(default=lambda self: self.check_access_rights('write'), store=False)
-
-
-    def _check_visible_tree_edit_button(self):
-        groups = self.env.user.groups_id
-
     def set_status_active(self):
         push_service.notify_single_device(
             registration_id=registration_id,
@@ -72,12 +66,11 @@ class tb_news(models.Model):
         print("")
 
     def open_edit_form_news(self):
-        # first you need to get the id of your record
-        # you didn't specify what you want to edit exactly
-        # rec_id = self.env.context.get('active_id').exists()
-        # then if you have more than one form view then specify the form id
         form_id = self.env.ref('apartment_news.view_tb_news_form')
-
+        canwrite = self.check_access_rights('write', raise_exception=False)
+        if not canwrite:
+            raise ValidationError('Bạn không có quyền chỉnh sửa bản tin.')
+        self.check_access_rights('write')
         # then open the form
         return {
             'type': 'ir.actions.act_window',
@@ -94,6 +87,9 @@ class tb_news(models.Model):
 
     # @api.multi
     def confirm_delete_news(self):
+        candelete = self.check_access_rights('unlink', raise_exception=False)
+        if not candelete:
+            raise ValidationError('Bạn không có quyền xóa bản tin.')
         message = """Bạn có chắc muốn xóa bản tin này?"""
         value = self.env['dialog.box.confirm'].sudo().create({'message': message})
         return {

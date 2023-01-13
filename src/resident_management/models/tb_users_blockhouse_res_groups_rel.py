@@ -115,8 +115,8 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
             self.env.cr.execute("""INSERT INTO res_groups_users_rel(uid, gid) VALUES(%s, %s)""", (uid, gid))
 
     def unlink(self):
-        print(self)
-        query = """DELETE FROM res_groups_users_rel WHERE uid = %s and gid = %s"""
-        self.env.cr.execute(query, (self.user_id.id, self.group_id.id))
+        for record in self:
+            query = """DELETE FROM res_groups_users_rel WHERE uid = %s and gid = %s"""
+            self.env.cr.execute(query, (record.user_id.id, record.group_id.id))
         self.env['ir.actions.actions'].clear_caches()
         return super(tb_users_blockhouse_res_groups_rel, self).unlink()
