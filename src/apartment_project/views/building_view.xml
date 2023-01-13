@@ -32,13 +32,11 @@
         <field name="name">tb_building.kanban</field>
         <field name="model">tb_building</field>
         <field name="arch" type="xml">
-            <kanban records_draggable="0" quick_create="true" limit="3">
+            <kanban records_draggable="0" quick_create="true" limit="4">
                 <field name="id"/>
                 <field name="name"/>
                 <field name="code"/>
                 <field name="building_level"/>
-<!--                <field name="floors_above_ground_number"/>-->
-<!--                <field name="floors_below_ground_number"/>-->
                 <field name="website"/>
                 <field name="image"/>
                 <field name="address"/>
@@ -60,13 +58,13 @@
                                     </div>
                                 </div>
                                 <div name="product_lst_price" class="mt-1">
-                                    <span>Xếp hạng:
-                                        <field name="building_level"/>
+                                    <span>Dự án:
+                                        <field name="blockhouse_id"/>
                                     </span>
                                 </div>
                                 <div name="product_lst_price" class="mt-1">
-                                    <span>Thành lập ngày:
-                                        <field name="founding_date" widget="date"/>
+                                    <span>Xếp hạng:
+                                        <field name="building_level"/>
                                     </span>
                                 </div>
                                 <div name="product_lst_price" class="mt-1">
@@ -74,17 +72,6 @@
                                         <field name="website" widget="url"/>
                                     </span>
                                 </div>
-                                <div name="product_lst_price" class="mt-1">
-                                    <span>
-                                        <field name="is_active" widget="boolean_toggle"/>
-                                    </span>
-                                </div>
-<!--                                <div class="o_kanban_record_bottom">-->
-<!--                                    <div class="oe_kanban_bottom_left">-->
-<!--                                        <field name="website" widget="date"/>-->
-<!--                                    </div>-->
-<!--                                    <div class="oe_kanban_bottom_right"></div>-->
-<!--                                </div>-->
                             </div>
                         </div>
                     </t>
@@ -110,8 +97,6 @@
                             <field name="name"/>
                             <field name="code"/>
                             <field name="building_level" widget="selection_badge"/>
-<!--                            <field name="floors_above_ground_number"/>-->
-<!--                            <field name="floors_below_ground_number"/>-->
                             <field name="founding_date" widget="date"/>
                             <field name="blockhouse_id"/>
                             <field name="is_active"/>

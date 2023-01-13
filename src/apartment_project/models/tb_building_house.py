@@ -1,6 +1,11 @@
 from odoo import models, fields, api
 from datetime import date
 import random
+from odoo.http import request
+
+from odoo.addons.resident_management.models.tb_users_blockhouse_res_groups_rel import USER_GROUP_CODE
+str_bql = USER_GROUP_CODE[2][0]
+str_bqt = USER_GROUP_CODE[3][0]
 
 HOUSE_TYPES = [
     ('none', '--'),
@@ -44,6 +49,19 @@ class tb_building_house(models.Model):
 
     def set_status_active(self):
         self.is_active = True
+
+    @api.model
+    def read_group(self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True):
+        user = request.env.user
+        if user.id != 1 and user.id != 2:
+            bh_ids = []
+            for item in user.tb_users_blockhouse_res_groups_rel_ids:
+                if item.group_id.name and (str_bql in item.user_group_code or str_bqt in item.user_group_code):
+                    bh_ids.append(int(item.blockhouse_id.id))
+            domain.append(('blockhouse_id', 'in', bh_ids))
+        res = super(tb_building_house, self).read_group(domain, fields, groupby, offset=offset, limit=limit,
+                                                        orderby=orderby, lazy=lazy)
+        return res
 
     @api.model
     def create(self, vals):
