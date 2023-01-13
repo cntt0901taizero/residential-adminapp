@@ -2,6 +2,7 @@ from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 
 RELATIONSHIP_TYPES = [
+    ('none', '--'),
     ('chuho', 'Chủ hộ'),
     ('ongba', 'Ông bà'),
     ('bome', 'Bố mẹ'),
@@ -10,6 +11,14 @@ RELATIONSHIP_TYPES = [
     ('anhchiem', 'Anh chị em'),
     ('nguoithue', 'Người thuê'),
 ]
+
+USER_GROUP_CODE = [
+    ('none', '--'),
+    ('[CD]', '[CD]'),
+    ('[BQL]', '[BQL]'),
+    ('[BQT]', '[BQT]'),
+]
+
 
 class tb_users_blockhouse_res_groups_rel(models.Model):
     _name = 'tb_users_blockhouse_res_groups_rel'
@@ -27,7 +36,17 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
     building_house_id = fields.Many2one(comodel_name='tb_building_house', string='Căn hộ',
                                         domain="[('building_id', '=', building_id)]")
     owner = fields.Boolean(string='Chủ sở hữu', default=False)
-    relationship_type = fields.Selection(string='Quan hệ với chủ hộ', selection=RELATIONSHIP_TYPES)
+    relationship_type = fields.Selection(string='Quan hệ với chủ hộ', selection=RELATIONSHIP_TYPES,
+                                         default=RELATIONSHIP_TYPES[0][0])
+    user_group_code = fields.Selection(string='Mã nhóm quyền', selection=USER_GROUP_CODE,
+                                       default=USER_GROUP_CODE[0][0])
+
+    @api.onchange('relationship_type')
+    def _on_change_relationship_type(self):
+        if self.relationship_type == RELATIONSHIP_TYPES[1][0]:
+            self.owner = True
+        else:
+            self.owner = False
 
     @api.onchange('blockhouse_id')
     def _on_change_blockhouse_id(self):
@@ -40,6 +59,13 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
 
     @api.onchange('group_id')
     def _on_change_group_id(self):
+        if self.group_id.name:
+            if USER_GROUP_CODE[1][0] in self.group_id.name:
+                self.user_group_code = USER_GROUP_CODE[1][0]
+            elif USER_GROUP_CODE[2][0] in self.group_id.name:
+                self.user_group_code = USER_GROUP_CODE[2][0]
+            elif USER_GROUP_CODE[3][0] in self.group_id.name:
+                self.user_group_code = USER_GROUP_CODE[3][0]
         self.blockhouse_id = None
         self.building_id = None
         self.building_house_id = None

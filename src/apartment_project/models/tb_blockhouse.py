@@ -1,6 +1,7 @@
 from odoo import models, fields, api
 from odoo.http import request
 from datetime import date
+from odoo import SUPERUSER_ID
 import random
 
 
@@ -24,13 +25,17 @@ class tb_blockhouse(models.Model):
 
     @api.model
     def search_read(self, domain=[], fields=None, offset=0, limit=10, order=None):
-        # user = request.env.user
-        # aa = filter(user.tb_users_blockhouse_res_groups_rel_ids)
-        # domain = [('is_active', '=', True)]
+
+        user = request.env.user
+        if user.id == SUPERUSER_ID:
+            bh_ids = []
+            for item in user.tb_users_blockhouse_res_groups_rel_ids:
+                if item.group_id.name and ("[BQL]" in item.group_id.name or "[BQT]" in item.group_id.name):
+                    bh_ids.append(int(item.blockhouse_id.id))
+            domain.append(('id', 'in', bh_ids))
+
         res = super(tb_blockhouse, self).search_read(domain, fields, offset, limit, order)
         return res
-
-    # def filter_group(self):
 
     @api.model
     def create(self, vals):
