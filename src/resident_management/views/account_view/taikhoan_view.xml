@@ -11,9 +11,9 @@
         <field name="inherit_id" ref="base.view_users_tree"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='login_date']" position="after">
-                <button name="confirm_delete_user" class="fa fa-trash-o fa-lg float-right btn btn-danger" title="Xóa"
+                <button groups="resident_management.group_administration, resident_management.group_management" name="confirm_delete_user" class="fa fa-trash-o fa-lg float-right btn btn-danger" title="Xóa"
                         aria-label="Xóa" type="object"/>
-                <button name="open_edit_form_user" class="fa fa-pencil fa-lg float-right btn btn-success"
+                <button groups="resident_management.group_administration, resident_management.group_management" name="open_edit_form_user" class="fa fa-pencil fa-lg float-right btn btn-success"
                         title="Sửa" aria-label="Sửa" type="object"/>
             </xpath>
         </field>
