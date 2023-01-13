@@ -1,6 +1,11 @@
 from odoo import models, fields, api
 from datetime import date
+from odoo.http import request
 import random
+
+from odoo.addons.resident_management.models.tb_users_blockhouse_res_groups_rel import USER_GROUP_CODE
+str_bql = USER_GROUP_CODE[2][0]
+str_bqt = USER_GROUP_CODE[3][0]
 
 BUILDING_LEVEL = [
     ('none', '--'),
@@ -33,6 +38,38 @@ class tb_building(models.Model):
 
     def set_status_active(self):
         self.is_active = True
+
+    @api.model
+    def read_group(self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True):
+        user = request.env.user
+        if user.id != 1 and user.id != 2:
+            bh_ids = []
+            for item in user.tb_users_blockhouse_res_groups_rel_ids:
+                if item.group_id.name and (str_bql in item.user_group_code or str_bqt in item.user_group_code):
+                    bh_ids.append(int(item.blockhouse_id.id))
+            domain.append(('blockhouse_id', 'in', bh_ids))
+        res = super(tb_building, self).read_group(domain, fields, groupby, offset=offset, limit=limit,
+                                                  orderby=orderby, lazy=lazy)
+        return res
+
+    # @api.model
+    # def search_read(self, domain=None, fields=None, offset=0, limit=10, order=None):
+    #
+    #     user = request.env.user
+    #     if user.id != 1 and user.id != 2:
+    #         bh_ids = []
+    #         for item in user.tb_users_blockhouse_res_groups_rel_ids:
+    #             if item.group_id.name and (str_bql in item.user_group_code or str_bqt in item.user_group_code):
+    #                 bh_ids.append(int(item.blockhouse_id.id))
+    #         domain.append(('blockhouse_id', 'in', bh_ids))
+    #
+    #     res = super(tb_building, self).search_read(domain, fields, offset, limit, order)
+    #     return res
+
+    # @api.model
+    # def search(self, args, offset=0, limit=None, order=None, count=False):
+    #     res = self._search(args, offset=offset, limit=limit, order=order, count=count)
+    #     return res if count else self.browse(res)
 
     @api.model
     def create(self, vals):
