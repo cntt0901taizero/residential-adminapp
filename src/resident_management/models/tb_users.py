@@ -1,4 +1,5 @@
 from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 
 
 class tb_users(models.Model):
@@ -33,6 +34,9 @@ class tb_users(models.Model):
         # you didn't specify what you want to edit exactly
         # rec_id = self.env.context.get('active_id').exists()
         # then if you have more than one form view then specify the form id
+        canwrite = self.check_access_rights('write', raise_exception=False)
+        if not canwrite:
+            raise ValidationError('Bạn không có quyền chỉnh sửa thông tin tài khoản.')
         form_id = self.env.ref('base.view_users_form')
 
         # then open the form
@@ -50,6 +54,9 @@ class tb_users(models.Model):
         }
 
     def confirm_delete_user(self):
+        candelete = self.check_access_rights('unlink', raise_exception=False)
+        if not candelete:
+            raise ValidationError('Bạn không có quyền xóa thông tin tài khoản.')
         message = """Bạn có chắc muốn xóa tài khoản này?"""
         value = self.env['dialog.box.confirm'].sudo().create({'message': message})
         return {
