@@ -37,6 +37,12 @@ class tb_news(models.Model):
                                   domain="[('blockhouse_id', '=', blockhouse_id)]",
                                   ondelet="cascade")
 
+    visible_tree_edit_button = fields.Boolean(default=lambda self: self.check_access_rights('write'), store=False)
+
+
+    def _check_visible_tree_edit_button(self):
+        groups = self.env.user.groups_id
+
     def set_status_active(self):
         push_service.notify_single_device(
             registration_id=registration_id,
