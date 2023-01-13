@@ -24,7 +24,7 @@ class tb_blockhouse(models.Model):
         self.is_active = True
 
     @api.model
-    def search_read(self, domain=[], fields=None, offset=0, limit=10, order=None):
+    def search_read(self, domain=None, fields=None, offset=0, limit=10, order=None):
 
         user = request.env.user
         if user.id == SUPERUSER_ID:
