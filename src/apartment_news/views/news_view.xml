@@ -11,7 +11,6 @@
                 <field name="expired_date" widget="date"/>
                 <field name="status" widget="label_selection"/>
                 <button name="confirm_delete_news" class="fa fa-trash-o fa-lg float-right btn btn-danger"
-                        confirm="Bạn có chắc muốn xóa bản tin này?"
                         title="Xóa"
                         aria-label="Xóa" type="object"/>
                 <button name="open_edit_form_news" class="fa fa-pencil fa-lg float-right btn btn-success"
