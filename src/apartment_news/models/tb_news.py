@@ -41,13 +41,9 @@ class tb_news(models.Model):
                                   domain="[('blockhouse_id', '=', blockhouse_id)]",
                                   ondelet="cascade")
 
-    @api.onchange('news_type')
-    def on_change_news_type(self):
-        self.blockhouse_id = None
-        self.building_id = None
 
     @api.onchange('blockhouse_id')
-    def on_change_news_type(self):
+    def on_change_blockhouse_id(self):
         self.building_id = None
 
     def set_status_active(self):
@@ -65,6 +61,8 @@ class tb_news(models.Model):
         self.write({'status': 'DRAFT'})
 
     def write(self, values):
+        if values["news_type"] == 'PROJECT_APARTMENT':
+            values["building_id"] = None
         if 'status' in values and self.env.user.has_group('resident_management.group_management'):
             raise ValidationError(_("Vui lòng liên hệ ban quản trị để được duyệt bản tin!"))
             return super(tb_news, self).write(values)
@@ -75,8 +73,12 @@ class tb_news(models.Model):
             return super(tb_news, self).write(values)
         # here you can do accordingly
 
-    def action_date(self):
-        print("")
+    @api.model
+    def create(self, vals):
+        if vals["news_type"] == 'PROJECT_APARTMENT':
+          vals["building_id"] = None
+        return super(tb_news, self).create(vals)
+
 
     def open_edit_form_news(self):
         form_id = self.env.ref('apartment_news.view_tb_news_form')
