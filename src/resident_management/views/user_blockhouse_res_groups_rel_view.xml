@@ -22,15 +22,16 @@
                 <sheet>
                     <group>
                         <field name="selected_group" invisible="1"/>
-                        <field name="user_id" readonly="1" force_save="1"/>
+                        <field name="user_id" readonly="1" force_save="1" options="{'no_open': True}"/>
                     </group>
                     <group>
-                        <field name="group_id" domain="[('category_id.name', '=', '[QLCD] Quản lý cư dân')]"/>
+                        <field name="group_id" domain="[('category_id.name', '=', '[QLCD] Quản lý cư dân')]"
+                               options="{'no_open': True}"/>
                     </group>
                     <group>
-                        <field name="blockhouse_id" attrs="{'required': True}"/>
-                        <field name="building_id" attrs="{'required': True}"/>
-                        <field name="building_house_id"
+                        <field name="blockhouse_id" attrs="{'required': True}" options="{'no_open': True}"/>
+                        <field name="building_id" attrs="{'required': True}" options="{'no_open': True}"/>
+                        <field name="building_house_id" options="{'no_open': True}"
                                attrs="{'invisible': [('selected_group','!=', '[CD] Cư dân')], 'required': [('selected_group','=', '[CD] Cư dân')]}"/>
                         <field name="relationship_type"
                                attrs="{'invisible': [('selected_group','!=', '[CD] Cư dân')], 'required': [('selected_group','=', '[CD] Cư dân')]}"/>

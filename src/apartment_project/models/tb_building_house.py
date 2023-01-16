@@ -53,14 +53,40 @@ class tb_building_house(models.Model):
     @api.model
     def read_group(self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True):
         user = request.env.user
+        bqt_bh_id = []  # ban quan tri - blockhouse - id
+        bqt_bd_id = []  # ban quan tri - building - id
+        bql_bh_id = []  # ban quan ly - blockhouse - id
+        bql_bd_id = []  # ban quan ly - building - id
         if user.id != 1 and user.id != 2:
-            bh_ids = []
             for item in user.tb_users_blockhouse_res_groups_rel_ids:
-                if item.group_id.name and (str_bql in item.user_group_code or str_bqt in item.user_group_code):
-                    bh_ids.append(int(item.blockhouse_id.id))
-            domain.append(('blockhouse_id', 'in', bh_ids))
+                if item.group_id.name and str_bqt in item.user_group_code:
+                    bqt_bh_id.append(int(item.blockhouse_id.id))
+                    bqt_bd_id.append(int(item.building_id.id))
+                if item.group_id.name and str_bql in item.user_group_code:
+                    bql_bh_id.append(int(item.blockhouse_id.id))
+                    bql_bd_id.append(int(item.building_id.id))
+            domain.append(('building_id', 'in', list(set(bqt_bd_id + bql_bd_id))))
         res = super(tb_building_house, self).read_group(domain, fields, groupby, offset=offset, limit=limit,
                                                         orderby=orderby, lazy=lazy)
+        return res
+
+    @api.model
+    def search_read(self, domain=None, fields=None, offset=0, limit=10, order=None):
+        user = request.env.user
+        bqt_bh_id = []  # ban quan tri - blockhouse - id
+        bqt_bd_id = []  # ban quan tri - building - id
+        bql_bh_id = []  # ban quan ly - blockhouse - id
+        bql_bd_id = []  # ban quan ly - building - id
+        if user.id != 1 and user.id != 2:
+            for item in user.tb_users_blockhouse_res_groups_rel_ids:
+                if item.group_id.name and str_bqt in item.user_group_code:
+                    bqt_bh_id.append(int(item.blockhouse_id.id))
+                    bqt_bd_id.append(int(item.building_id.id))
+                if item.group_id.name and str_bql in item.user_group_code:
+                    bql_bh_id.append(int(item.blockhouse_id.id))
+                    bql_bd_id.append(int(item.building_id.id))
+            domain.append(('building_id', 'in', list(set(bqt_bd_id + bql_bd_id))))
+        res = super(tb_building_house, self).search_read(domain, fields, offset, limit, order)
         return res
 
     @api.model

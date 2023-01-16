@@ -39,6 +39,19 @@ class tb_blockhouse(models.Model):
         return res
 
     @api.model
+    def search_read(self, domain=None, fields=None, offset=0, limit=10, order=None):
+        user = request.env.user
+        if user.id != 1 and user.id != 2:
+            bh_ids = []
+            for item in user.tb_users_blockhouse_res_groups_rel_ids:
+                if item.group_id.name and (str_bql in item.user_group_code or str_bqt in item.user_group_code):
+                    bh_ids.append(int(item.blockhouse_id.id))
+            domain.append(('id', 'in', bh_ids))
+
+        res = super(tb_blockhouse, self).search_read(domain, fields, offset, limit, order)
+        return res
+
+    @api.model
     def create(self, vals):
         today = date.today()
         d = today.strftime('%d%m%y')

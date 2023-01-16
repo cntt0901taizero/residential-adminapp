@@ -37,9 +37,9 @@
                             <field name="name"/>
                             <field name="address"/>
                             <field name="house_type" widget="selection_badge"/>
-                            <field name="building_floors_id" attrs="{'readonly':[('building_floors_id','>',0)]}"/>
-                            <field name="building_id" attrs="{'readonly':[('building_id','>',0)]}"/>
-                            <field name="blockhouse_id" attrs="{'readonly':[('blockhouse_id','>',0)]}"/>
+                            <field name="building_floors_id" attrs="{'readonly':[('building_floors_id','>',0)]}" options="{'no_open': True}"/>
+                            <field name="building_id" attrs="{'readonly':[('building_id','>',0)]}" options="{'no_open': True}"/>
+                            <field name="blockhouse_id" attrs="{'readonly':[('blockhouse_id','>',0)]}" options="{'no_open': True}"/>
                             <field name="is_active"/>
                         </group>
                         <group string="Thông tin chi tiết">
