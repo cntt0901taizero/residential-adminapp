@@ -16,15 +16,13 @@ class tb_apartment_utilities(models.Model):
 
     name = fields.Char(string='Tên', required=True, copy=False)
     image = fields.Image(string='Ảnh', copy=False)
-    description = fields.Text(string='Ghi chú', copy=False, help='')
+    description = fields.Text(string='Mô tả', copy=False, help='')
+    detail_description = fields.Text(string='Mô tả chi tiết', copy=False, help='')
     active_day = fields.Many2many(string='Ngày hoạt động', selection=DAYS_LIST, default=DAYS_LIST[0][0])
     active_time = fields.Char(string='Giờ hoạt động', size=50,  help='9h30p - 21h')
     is_active = fields.Boolean(string='Trạng thái', default=True)
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Dự án",
                                     ondelet="cascade")
-    building_id = fields.Many2one(comodel_name='tb_building', string="Tòa nhà",
-                                  domain="[('blockhouse_id', '=', blockhouse_id)]",
-                                  ondelet="cascade")
 
     def set_status_active(self):
         self.is_active = True

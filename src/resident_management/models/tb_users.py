@@ -1,5 +1,10 @@
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
+from odoo.http import request
+
+from odoo.addons.resident_management.models.tb_users_blockhouse_res_groups_rel import USER_GROUP_CODE
+str_bql = USER_GROUP_CODE[2][0]
+str_bqt = USER_GROUP_CODE[3][0]
 
 
 class tb_users(models.Model):
@@ -10,6 +15,51 @@ class tb_users(models.Model):
     tb_users_blockhouse_res_groups_rel_ids = fields.One2many('tb_users_blockhouse_res_groups_rel', 'user_id')
     # display_building = fields.Char('Tòa nhà', related='tb_users_blockhouse_res_groups_rel_ids.building_id.name')
     # display_apartment = fields.Char('Căn hộ', related='tb_users_blockhouse_res_groups_rel_ids.building_house_id.name')
+
+    @api.model
+    def read_group(self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True):
+        user = request.env.user
+        bqt_bh_id = []  # ban quan tri - blockhouse - id
+        bqt_bd_id = []  # ban quan tri - building - id
+        bql_bh_id = []  # ban quan ly - blockhouse - id
+        bql_bd_id = []  # ban quan ly - building - id
+        if user.id != 1 and user.id != 2:
+            for item in user.tb_users_blockhouse_res_groups_rel_ids:
+                if item.group_id.name and str_bqt in item.user_group_code:
+                    bqt_bh_id.append(int(item.blockhouse_id.id))
+                    bqt_bd_id.append(int(item.building_id.id))
+                if item.group_id.name and str_bql in item.user_group_code:
+                    bql_bh_id.append(int(item.blockhouse_id.id))
+                    bql_bd_id.append(int(item.building_id.id))
+            domain.append(('tb_users_blockhouse_res_groups_rel_ids.blockhouse_id', 'in',
+                           list(set(bqt_bh_id + bql_bh_id))))
+            domain.append(('tb_users_blockhouse_res_groups_rel_ids.building_id', 'in',
+                           list(set(bqt_bd_id + bql_bd_id))))
+        res = super(tb_users, self).read_group(domain, fields, groupby, offset=offset, limit=limit,
+                                               orderby=orderby, lazy=lazy)
+        return res
+
+    @api.model
+    def search_read(self, domain=None, fields=None, offset=0, limit=10, order=None):
+        user = request.env.user
+        bqt_bh_id = []  # ban quan tri - blockhouse - id
+        bqt_bd_id = []  # ban quan tri - building - id
+        bql_bh_id = []  # ban quan ly - blockhouse - id
+        bql_bd_id = []  # ban quan ly - building - id
+        if user.id != 1 and user.id != 2:
+            for item in user.tb_users_blockhouse_res_groups_rel_ids:
+                if item.group_id.name and str_bqt in item.user_group_code:
+                    bqt_bh_id.append(int(item.blockhouse_id.id))
+                    bqt_bd_id.append(int(item.building_id.id))
+                if item.group_id.name and str_bql in item.user_group_code:
+                    bql_bh_id.append(int(item.blockhouse_id.id))
+                    bql_bd_id.append(int(item.building_id.id))
+            domain.append(('tb_users_blockhouse_res_groups_rel_ids.blockhouse_id', 'in',
+                           list(set(bqt_bh_id + bql_bh_id))))
+            domain.append(('tb_users_blockhouse_res_groups_rel_ids.building_id', 'in',
+                           list(set(bqt_bd_id + bql_bd_id))))
+        res = super(tb_users, self).search_read(domain, fields, offset, limit, order)
+        return res
 
     @api.model
     def create(self, vals):
