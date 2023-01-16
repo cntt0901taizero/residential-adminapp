@@ -23,9 +23,6 @@ class tb_apartment_utilities(models.Model):
     is_active = fields.Boolean(string='Trạng thái', default=True)
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Dự án",
                                     ondelet="cascade")
-    building_id = fields.Many2one(comodel_name='tb_building', string="Tòa nhà",
-                                  domain="[('blockhouse_id', '=', blockhouse_id)]",
-                                  ondelet="cascade")
 
     def set_status_active(self):
         self.is_active = True
