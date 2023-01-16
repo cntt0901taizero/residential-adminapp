@@ -31,11 +31,24 @@ class tb_news(models.Model):
         ('ACTIVE', 'Đã đăng'),
         ('REJECT', 'Chưa duyệt'),
     ], required=True, default='DRAFT', tracking=True, string="Trạng thái", )
-    blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="dự án",
+    news_type = fields.Selection([
+        ('PROJECT_APARTMENT', 'Dự án'),
+        ('BUILDING', 'Tòa nhà'),
+    ], required=True, default='PROJECT_APARTMENT', string="Gửi tới")
+    blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Dự án",
                                     ondelet="cascade")
     building_id = fields.Many2one(comodel_name='tb_building', string="Toà nhà",
                                   domain="[('blockhouse_id', '=', blockhouse_id)]",
                                   ondelet="cascade")
+
+    @api.onchange('news_type')
+    def on_change_news_type(self):
+        self.blockhouse_id = None
+        self.building_id = None
+
+    @api.onchange('blockhouse_id')
+    def on_change_news_type(self):
+        self.building_id = None
 
     def set_status_active(self):
         push_service.notify_single_device(
