@@ -18,6 +18,7 @@
         'views/building_floors_view.xml',
         'views/feekind_view.xml',
         'views/paybillconfig_view.xml',
+        'views/apartment_utilities_view.xml',
     ],
     'installable': True,
     'auto_install': False,

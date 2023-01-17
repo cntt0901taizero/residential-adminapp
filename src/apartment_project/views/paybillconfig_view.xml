@@ -45,13 +45,7 @@
         <field name="model">tb_paybill_config</field>
         <field name="arch" type="xml">
             <search>
-                <field name="name"/>
-                <field name="price"/>
-                <field name="is_active"/>
-                <field name="feekind_id"/>
-                <field name="building_house_id"/>
-                <field name="building_id"/>
-                <field name="blockhouse_id"/>
+                <filter name="is_active" string="Trạng thái active" domain="[('is_active', '=', 'True')]"/>
             </search>
         </field>
     </record>

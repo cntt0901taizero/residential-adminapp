@@ -63,9 +63,7 @@
         <field name="model">tb_blockhouse</field>
         <field name="arch" type="xml">
             <search>
-                <filter name="name" string="Tên"/>
-                <filter name="code" string="Mã"/>
-                <filter name="is_active" string="Trạng thái"/>
+                <filter name="is_active" string="Trạng thái active" domain="[('is_active', '=', 'True')]"/>
             </search>
         </field>
     </record>
