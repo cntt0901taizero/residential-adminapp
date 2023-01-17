@@ -38,12 +38,12 @@ class tb_vehicle(models.Model):
         self.is_active = True
 
     def _domain_user_id(self):
-        # return [("active", "=", True)]
         user = request.env.user
         bqt_bh_id = []  # ban quan tri - blockhouse - id
         bqt_bd_id = []  # ban quan tri - building - id
         bql_bh_id = []  # ban quan ly - blockhouse - id
         bql_bd_id = []  # ban quan ly - building - id
+        users_id = []
         if user and user.id != 1 and user.id != 2:
             for item in user.tb_users_blockhouse_res_groups_rel_ids:
                 if item.group_id.name and str_bqt in item.user_group_code:
@@ -53,12 +53,12 @@ class tb_vehicle(models.Model):
                     bql_bh_id.append(int(item.blockhouse_id.id))
                     bql_bd_id.append(int(item.building_id.id))
 
-            user_ids_1 = self.env['tb_users_blockhouse_res_groups_rel'].sudo()\
+            users = self.env['tb_users_blockhouse_res_groups_rel'].sudo()\
                 .search([('building_id', 'in', list(set(bqt_bd_id + bql_bd_id)))])
-            user_ids_2 = self.env['tb_users_blockhouse_res_groups_rel'].sudo()\
-                .search([('blockhouse_id', 'in', list(set(bqt_bh_id + bql_bh_id)))])
 
-            return [("active", "=", True), ("id", "in", list(set(user_ids_1 + user_ids_2)))]
+            for item in users:
+                users_id.append(item.id)
+            return [("active", "=", True), ("id", "in", users_id)]
         else:
             return [("active", "=", True)]
 
@@ -108,7 +108,7 @@ class tb_vehicle(models.Model):
         bqt_bd_id = []  # ban quan tri - building - id
         bql_bh_id = []  # ban quan ly - blockhouse - id
         bql_bd_id = []  # ban quan ly - building - id
-        if user and  user.id != 1 and user.id != 2:
+        if user and user.id != 1 and user.id != 2:
             for item in user.tb_users_blockhouse_res_groups_rel_ids:
                 if item.group_id.name and str_bqt in item.user_group_code:
                     bqt_bh_id.append(int(item.blockhouse_id.id))

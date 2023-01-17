@@ -48,7 +48,7 @@ class tb_apartment_utilities(models.Model):
                 if item.group_id.name and str_bql in item.user_group_code:
                     bql_bh_id.append(int(item.blockhouse_id.id))
                     bql_bd_id.append(int(item.building_id.id))
-            domain.append(('id', 'in', list(set(bqt_bh_id + bql_bh_id))))
+            domain.append(('blockhouse_id', 'in', list(set(bqt_bh_id + bql_bh_id))))
         res = super(tb_apartment_utilities, self).read_group(domain, fields, groupby, offset=offset,
                                                              limit=limit, orderby=orderby, lazy=lazy)
         return res
@@ -68,7 +68,7 @@ class tb_apartment_utilities(models.Model):
                 if item.group_id.name and str_bql in item.user_group_code:
                     bql_bh_id.append(int(item.blockhouse_id.id))
                     bql_bd_id.append(int(item.building_id.id))
-            domain.append(('id', 'in', list(set(bqt_bh_id + bql_bh_id))))
+            domain.append(('blockhouse_id', 'in', list(set(bqt_bh_id + bql_bh_id))))
         res = super(tb_apartment_utilities, self).search_read(domain, fields, offset, limit, order)
         return res
 
