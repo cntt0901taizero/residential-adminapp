@@ -87,7 +87,7 @@
 
     <!-- This Menu Item must have a parent and an action -->
     <menuitem id="menu_tb_building_house"
-              name="Căn hộ"
+              name="Căn hộ / Biệt thự"
               parent="menu_blockhouse"
               action="action_tb_building_house"
               sequence="3"/>

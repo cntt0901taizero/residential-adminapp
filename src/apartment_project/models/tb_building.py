@@ -32,6 +32,8 @@ class tb_building(models.Model):
     is_active = fields.Boolean(string='Trạng thái', default=True)
 
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Dự án", ondelet="cascade")
+    apartment_utilities_ids = fields.Many2many('tb_apartment_utilities', string="Tiện ích chung cư",
+                                               domain="[('blockhouse_id', '=', blockhouse_id)]", ondelet="cascade")
 
     building_floors_ids = fields.One2many(comodel_name='tb_building_floors', inverse_name='building_id', string="Tầng sàn")
     building_house_ids = fields.One2many(comodel_name='tb_building_house', inverse_name='building_id', string="Căn hộ")
