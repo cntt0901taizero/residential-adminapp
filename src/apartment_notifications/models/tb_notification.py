@@ -97,6 +97,8 @@ class tb_notification(models.Model):
             values['building_id'] = None
             values['building_house_id'] = None
             values['blockhouse_id'] = None
+        if 'user_ids' in values and len(values['user_ids'][0][2]) == 0:
+            raise ValidationError('Vui lòng chọn người nhận thông báo')
         return super(tb_notification, self).create(values)
 
 
@@ -114,6 +116,8 @@ class tb_notification(models.Model):
             values['building_id'] = None
             values['building_house_id'] = None
             values['blockhouse_id'] = None
+        if 'user_ids' in values and len(values['user_ids'][0][2]) == 0:
+            raise ValidationError('Vui lòng chọn người nhận thông báo')
         if 'status' in values and self.env.user.has_group('resident_management.group_management'):
             raise ValidationError(_("Vui lòng liên hệ ban quản trị để được duyệt thông báo!"))
         if 'status' not in values:
