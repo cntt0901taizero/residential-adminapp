@@ -11,7 +11,6 @@ message_body = "Hi john, your customized news for today is ready"
 
 
 class tb_notification(models.Model):
-
     _name = 'tb_notification'
     _description = 'Thông báo'
 
@@ -34,15 +33,14 @@ class tb_notification(models.Model):
         ('USER_GROUP', 'Người dùng'),
     ], required=True, default='PROJECT_APARTMENT', string="Gửi tới")
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="dự án",
-                                    ondelet="cascade")
+                                    ondelete="cascade")
     building_id = fields.Many2one(comodel_name='tb_building', string="Tòa nhà",
                                   domain="[('blockhouse_id', '=', blockhouse_id)]",
-                                  ondelet="cascade")
+                                  ondelete="cascade")
     building_house_id = fields.Many2one(comodel_name='tb_building_house', string="Căn hộ",
                                         domain="[('building_id', '=', building_id)]",
-                                        ondelet="cascade")
-    user_ids = fields.Many2many('res.users', string='Người nhận', ondelet="cascade")
-
+                                        ondelete="cascade")
+    user_ids = fields.Many2many('res.users', string='Người nhận', ondelete="cascade")
 
     @api.onchange('blockhouse_id')
     def on_change_blockhouse_id(self):
@@ -55,8 +53,30 @@ class tb_notification(models.Model):
 
     def set_status_active(self):
         try:
+            user_id_list = []
+            if self.receiver == 'PROJECT_APARTMENT':
+                self.env.cr.execute("""SELECT user_id FROM tb_users_blockhouse_res_groups_rel WHERE blockhouse_id=%s""",
+                                    self.blockhouse_id)
+                user_id_list = self.env.cr.fetchone()
+                print(user_id_list)
+            if self.receiver == 'BUILDING':
+                self.env.cr.execute(
+                    """SELECT user_id FROM tb_users_blockhouse_res_groups_rel WHERE blockhouse_id=%s AND building_id=%s""",
+                    (self.blockhouse_id, self.building_id))
+                user_id_list = self.env.cr.fetchone()
+                print(user_id_list)
+            if self.receiver == 'APARTMENT':
+                self.env.cr.execute(
+                    """SELECT user_id FROM tb_users_blockhouse_res_groups_rel WHERE blockhouse_id=%s AND building_id=%s AND building_house_id=%s""",
+                    (self.blockhouse_id, self.building_id, self.building_house_id))
+                user_id_list = self.env.cr.fetchone()
+                print(user_id_list)
+            if self.receiver == 'USER_GROUP':
+                user_id_list = self.user_ids.ids
+                print(user_id_list)
+
+
             self.write({'status': 'ACTIVE'})
-            user_id_list = self.user_ids.ids
             for user_id in user_id_list:
                 http.request.env['tb_push_notification'].sudo().create({
                     'name': self.name,
@@ -79,47 +99,54 @@ class tb_notification(models.Model):
         except Exception as e:
             print(e)
 
+
     def set_status_reject(self):
         self.write({'status': 'REJECT'})
 
+
     @api.model
     def create(self, values):
-        if 'receiver' in values and values['receiver'] == 'PROJECT_APARTMENT':
-            values['building_id'] = None
-            values['building_house_id'] = None
-            values['user_ids'] = None
-        if 'receiver' in values and values['receiver'] == 'BUILDING':
-            values['building_house_id'] = None
-            values['user_ids'] = None
-        if 'receiver' in values and values['receiver'] == 'APARTMENT':
-            values['user_ids'] = None
-        if 'receiver' in values and values['receiver'] == 'USER_GROUP':
-            values['building_id'] = None
-            values['building_house_id'] = None
-            values['blockhouse_id'] = None
-        if 'user_ids' in values and len(values['user_ids'][0][2]) == 0:
-            raise ValidationError('Vui lòng chọn người nhận thông báo')
+        if 'receiver' in values:
+            if values['receiver'] == 'PROJECT_APARTMENT':
+                values['building_id'] = None
+                values['building_house_id'] = None
+                values['user_ids'] = None
+            if values['receiver'] == 'BUILDING':
+                values['building_house_id'] = None
+                values['user_ids'] = None
+            if values['receiver'] == 'APARTMENT':
+                values['user_ids'] = None
+            if values['receiver'] == 'USER_GROUP':
+                values['building_id'] = None
+                values['building_house_id'] = None
+                values['blockhouse_id'] = None
+        if 'user_ids' in values:
+            if len(values['user_ids'][0][2]) == 0:
+                raise ValidationError('Vui lòng chọn người nhận thông báo')
         return super(tb_notification, self).create(values)
 
 
     def write(self, values):
-        if 'receiver' in values and values['receiver'] == 'PROJECT_APARTMENT':
-            values['building_id'] = None
-            values['building_house_id'] = None
-            values['user_ids'] = None
-        if 'receiver' in values and values['receiver'] == 'BUILDING':
-            values['building_house_id'] = None
-            values['user_ids'] = None
-        if 'receiver' in values and values['receiver'] == 'APARTMENT':
-            values['user_ids'] = None
-        if 'receiver' in values and values['receiver'] == 'USER_GROUP':
-            values['building_id'] = None
-            values['building_house_id'] = None
-            values['blockhouse_id'] = None
-        if 'user_ids' in values and len(values['user_ids'][0][2]) == 0:
-            raise ValidationError('Vui lòng chọn người nhận thông báo')
-        if 'status' in values and self.env.user.has_group('resident_management.group_management'):
-            raise ValidationError(_("Vui lòng liên hệ ban quản trị để được duyệt thông báo!"))
+        if 'receiver' in values:
+            if values['receiver'] == 'PROJECT_APARTMENT':
+                values['building_id'] = None
+                values['building_house_id'] = None
+                values['user_ids'] = None
+            if values['receiver'] == 'BUILDING':
+                values['building_house_id'] = None
+                values['user_ids'] = None
+            if values['receiver'] == 'APARTMENT':
+                values['user_ids'] = None
+            if values['receiver'] == 'USER_GROUP':
+                values['building_id'] = None
+                values['building_house_id'] = None
+                values['blockhouse_id'] = None
+        if 'user_ids' in values and values['user_ids'] is not None:
+            if len(values['user_ids'][0][2]) == 0:
+                raise ValidationError('Vui lòng chọn người nhận thông báo')
+        if 'status' in values:
+            if self.env.user.has_group('resident_management.group_management'):
+                raise ValidationError(_("Vui lòng liên hệ ban quản trị để được duyệt thông báo!"))
         if 'status' not in values:
             values['status'] = 'PENDING'
         # here you can do accordingly
