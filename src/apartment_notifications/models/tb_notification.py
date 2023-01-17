@@ -41,10 +41,6 @@ class tb_notification(models.Model):
                                         domain="[('building_id', '=', building_id)]",
                                         ondelete="cascade")
     user_ids = fields.Many2many('res.users', string='Người nhận', ondelete="cascade")
-<<<<<<< HEAD
-=======
-
->>>>>>> f37232dc0ffdee759546e3cf6edb05f532d64507
 
     @api.onchange('blockhouse_id')
     def on_change_blockhouse_id(self):
