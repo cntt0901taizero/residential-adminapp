@@ -52,8 +52,7 @@
         <field name="model">tb_apartment_utilities</field>
         <field name="arch" type="xml">
             <search>
-                <filter name="name" string="Tên"/>
-                <filter name="filter_is_active" string="Trạng thái" domain="[('is_active', '=', 'True')]"/>
+                <filter name="is_active" string="Trạng thái active" domain="[('is_active', '=', 'True')]"/>
                 <group expand="1" string="Group By">
                     <filter name="group_block_house" string="dự án" context="{'group_by': 'blockhouse_id'}"/>
                 </group>

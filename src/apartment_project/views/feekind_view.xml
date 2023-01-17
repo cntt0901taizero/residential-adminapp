@@ -41,8 +41,7 @@
         <field name="model">tb_feekind</field>
         <field name="arch" type="xml">
             <search>
-                <field name="code" string="Mã loại phí"/>
-                <field name="name" string="Tên loại phí"/>
+                <filter name="is_active" string="Trạng thái active" domain="[('is_active', '=', 'True')]"/>
             </search>
         </field>
     </record>

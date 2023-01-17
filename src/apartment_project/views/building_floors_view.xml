@@ -68,7 +68,6 @@
         <field name="model">tb_building_floors</field>
         <field name="arch" type="xml">
             <search>
-                <field name="name" string="Số nhà"/>
             </search>
         </field>
     </record>

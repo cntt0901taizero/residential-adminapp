@@ -61,7 +61,7 @@
         <field name="model">tb_building_house</field>
         <field name="arch" type="xml">
             <search>
-                <filter name="name" string="Số nhà"/>
+                <filter name="is_active" string="Trạng thái active" domain="[('is_active', '=', 'True')]"/>
                 <group expand="1" string="Group By">
                     <filter name="group_block_house" string="dự án" context="{'group_by':'blockhouse_id'}"/>
                     <filter name="group_building" string="Tòa nhà" context="{'group_by':'building_id'}"/>
