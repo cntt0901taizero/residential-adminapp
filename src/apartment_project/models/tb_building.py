@@ -31,9 +31,9 @@ class tb_building(models.Model):
     building_level = fields.Selection(string='Hạng tòa nhà', selection=BUILDING_LEVEL, default=BUILDING_LEVEL[0][0])
     is_active = fields.Boolean(string='Trạng thái', default=True)
 
-    blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Dự án", ondelet="cascade")
+    blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Dự án", ondelete="cascade")
     apartment_utilities_ids = fields.Many2many('tb_apartment_utilities', string="Tiện ích chung cư",
-                                               domain="[('blockhouse_id', '=', blockhouse_id)]", ondelet="cascade")
+                                               domain="[('blockhouse_id', '=', blockhouse_id)]", ondelete="cascade")
 
     building_floors_ids = fields.One2many(comodel_name='tb_building_floors', inverse_name='building_id', string="Tầng sàn")
     building_house_ids = fields.One2many(comodel_name='tb_building_house', inverse_name='building_id', string="Căn hộ")
@@ -48,7 +48,7 @@ class tb_building(models.Model):
         bqt_bd_id = []  # ban quan tri - building - id
         bql_bh_id = []  # ban quan ly - blockhouse - id
         bql_bd_id = []  # ban quan ly - building - id
-        if user.id != 1 and user.id != 2:
+        if user and user.id != 1 and user.id != 2:
             for item in user.tb_users_blockhouse_res_groups_rel_ids:
                 if item.group_id.name and str_bqt in item.user_group_code:
                     bqt_bh_id.append(int(item.blockhouse_id.id))
@@ -68,7 +68,7 @@ class tb_building(models.Model):
         bqt_bd_id = []  # ban quan tri - building - id
         bql_bh_id = []  # ban quan ly - blockhouse - id
         bql_bd_id = []  # ban quan ly - building - id
-        if user.id != 1 and user.id != 2:
+        if user and user.id != 1 and user.id != 2:
             for item in user.tb_users_blockhouse_res_groups_rel_ids:
                 if item.group_id.name and str_bqt in item.user_group_code:
                     bqt_bh_id.append(int(item.blockhouse_id.id))

@@ -39,13 +39,13 @@ class tb_building_house(models.Model):
     is_active = fields.Boolean(string='Trạng thái', default=True)
 
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Dự án",
-                                    ondelet="cascade")
+                                    ondelete="cascade")
     building_id = fields.Many2one(comodel_name='tb_building', string="Tòa nhà",
                                   domain="[('blockhouse_id', '=', blockhouse_id)]",
-                                  ondelet="cascade")
+                                  ondelete="cascade")
     building_floors_id = fields.Many2one(comodel_name='tb_building_floors', string="Tầng sàn",
                                          domain="[('building_id', '=', building_id)]",
-                                         ondelet="cascade")
+                                         ondelete="cascade")
 
     def set_status_active(self):
         self.is_active = True
@@ -57,7 +57,7 @@ class tb_building_house(models.Model):
         bqt_bd_id = []  # ban quan tri - building - id
         bql_bh_id = []  # ban quan ly - blockhouse - id
         bql_bd_id = []  # ban quan ly - building - id
-        if user.id != 1 and user.id != 2:
+        if user and user.id != 1 and user.id != 2:
             for item in user.tb_users_blockhouse_res_groups_rel_ids:
                 if item.group_id.name and str_bqt in item.user_group_code:
                     bqt_bh_id.append(int(item.blockhouse_id.id))
@@ -77,7 +77,7 @@ class tb_building_house(models.Model):
         bqt_bd_id = []  # ban quan tri - building - id
         bql_bh_id = []  # ban quan ly - blockhouse - id
         bql_bd_id = []  # ban quan ly - building - id
-        if user.id != 1 and user.id != 2:
+        if user and user.id != 1 and user.id != 2:
             for item in user.tb_users_blockhouse_res_groups_rel_ids:
                 if item.group_id.name and str_bqt in item.user_group_code:
                     bqt_bh_id.append(int(item.blockhouse_id.id))

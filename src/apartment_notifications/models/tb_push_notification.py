@@ -19,7 +19,7 @@ class tb_push_notification(models.Model):
         ('SEEN', 'Đã đọc'),
         ('DELETE', 'Đã xóa'),
     ], required=True, default='SENT', tracking=True, string="Trạng thái", )
-    user_id = fields.Many2one(comodel_name='res.users', string="Người nhận", ondelet="cascade")
+    user_id = fields.Many2one(comodel_name='res.users', string="Người nhận", ondelete="cascade")
 
 
 

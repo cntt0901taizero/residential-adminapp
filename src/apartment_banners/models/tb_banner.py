@@ -17,7 +17,7 @@ class tb_banner(models.Model):
         ('ACTIVE', 'Đã duyệt'),
         ('REJECT', 'Chưa duyệt'),
     ], required=True, default='PENDING', tracking=True, string="Trạng thái")
-    blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="dự án", ondelet="cascade")
+    blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="dự án", ondelete="cascade")
 
 
 

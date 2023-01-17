@@ -15,15 +15,15 @@ class tb_paybill_config(models.Model):
     name = fields.Char(string='Ghi chú', copy=False)
     price = fields.Char(string='giá phí thanh toán', copy=False)
     is_active = fields.Boolean(string='Trạng thái', default=True)
-    feekind_id = fields.Many2one(comodel_name='tb_feekind', string="Loại phí", ondelet="cascade")
+    feekind_id = fields.Many2one(comodel_name='tb_feekind', string="Loại phí", ondelete="cascade")
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Dự án",
-                                    ondelet="cascade")
+                                    ondelete="cascade")
     building_id = fields.Many2one(comodel_name='tb_building', string="Tòa nhà",
                                   domain="[('blockhouse_id', '=', blockhouse_id)]",
-                                  ondelet="cascade")
+                                  ondelete="cascade")
     building_house_id = fields.Many2one(comodel_name='tb_building_house', string="Căn hộ",
                                         domain="[('building_id', '=', building_id)]",
-                                        ondelet="cascade")
+                                        ondelete="cascade")
 
     def set_status_active(self):
         self.is_active = True
@@ -31,7 +31,7 @@ class tb_paybill_config(models.Model):
     @api.model
     def read_group(self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True):
         user = request.env.user
-        if user.id != 1 and user.id != 2:
+        if user and user.id != 1 and user.id != 2:
             bh_ids = []
             for item in user.tb_users_blockhouse_res_groups_rel_ids:
                 if item.group_id.name and (str_bql in item.user_group_code or str_bqt in item.user_group_code):

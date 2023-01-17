@@ -19,6 +19,7 @@
         'views/feekind_view.xml',
         'views/paybillconfig_view.xml',
         'views/apartment_utilities_view.xml',
+        'views/vehicle_view.xml',
     ],
     'installable': True,
     'auto_install': False,
