@@ -21,9 +21,14 @@
               parent="menu_apartment_project_root"
               sequence="2"/>
 
+    <menuitem id="menu_parking_and_vehicle"
+              name="Quản lý bãi đậu xe và phương tiện"
+              parent="menu_apartment_project_root"
+              sequence="3"/>
+
     <menuitem id="menu_apartment_pay_bill"
               name="Cấu hình DM phí và thanh toán"
               parent="menu_apartment_project_root"
-              sequence="3"/>
+              sequence="4"/>
 
 </odoo>

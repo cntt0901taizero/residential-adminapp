@@ -34,14 +34,14 @@ class tb_notification(models.Model):
         ('USER_GROUP', 'Người dùng'),
     ], required=True, default='PROJECT_APARTMENT', string="Gửi tới")
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="dự án",
-                                    ondelet="cascade")
+                                    ondelete="cascade")
     building_id = fields.Many2one(comodel_name='tb_building', string="Tòa nhà",
                                   domain="[('blockhouse_id', '=', blockhouse_id)]",
-                                  ondelet="cascade")
+                                  ondelete="cascade")
     building_house_id = fields.Many2one(comodel_name='tb_building_house', string="Căn hộ",
                                         domain="[('building_id', '=', building_id)]",
-                                        ondelet="cascade")
-    user_ids = fields.Many2many('res.users', string='Người nhận', ondelet="cascade")
+                                        ondelete="cascade")
+    user_ids = fields.Many2many('res.users', string='Người nhận', ondelete="cascade")
 
 
     @api.onchange('blockhouse_id')

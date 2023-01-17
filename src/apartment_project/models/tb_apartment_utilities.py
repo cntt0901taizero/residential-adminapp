@@ -28,7 +28,7 @@ class tb_apartment_utilities(models.Model):
     # active_time = fields.Char(string='Giờ hoạt động', size=50,  help='9h30p - 21h')
     is_active = fields.Boolean(string='Trạng thái', default=True)
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Dự án",
-                                    ondelet="cascade")
+                                    ondelete="cascade")
 
     def set_status_active(self):
         self.is_active = True
@@ -40,7 +40,7 @@ class tb_apartment_utilities(models.Model):
         bqt_bd_id = []  # ban quan tri - building - id
         bql_bh_id = []  # ban quan ly - blockhouse - id
         bql_bd_id = []  # ban quan ly - building - id
-        if user.id != 1 and user.id != 2:
+        if user and user.id != 1 and user.id != 2:
             for item in user.tb_users_blockhouse_res_groups_rel_ids:
                 if item.group_id.name and str_bqt in item.user_group_code:
                     bqt_bh_id.append(int(item.blockhouse_id.id))
@@ -60,7 +60,7 @@ class tb_apartment_utilities(models.Model):
         bqt_bd_id = []  # ban quan tri - building - id
         bql_bh_id = []  # ban quan ly - blockhouse - id
         bql_bd_id = []  # ban quan ly - building - id
-        if user.id != 1 and user.id != 2:
+        if user and user.id != 1 and user.id != 2:
             for item in user.tb_users_blockhouse_res_groups_rel_ids:
                 if item.group_id.name and str_bqt in item.user_group_code:
                     bqt_bh_id.append(int(item.blockhouse_id.id))

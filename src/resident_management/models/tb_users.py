@@ -12,7 +12,8 @@ class tb_users(models.Model):
 
     phone_number = fields.Char(string='Số điện thoại')
     push_notifications = fields.One2many('tb_push_notification', 'user_id', string='Push Notification', readonly=True)
-    tb_users_blockhouse_res_groups_rel_ids = fields.One2many('tb_users_blockhouse_res_groups_rel', 'user_id')
+    tb_users_blockhouse_res_groups_rel_ids = fields.One2many('tb_users_blockhouse_res_groups_rel', 'user_id',
+                                                             string="Quan hệ phân quyền")
     # display_building = fields.Char('Tòa nhà', related='tb_users_blockhouse_res_groups_rel_ids.building_id.name')
     # display_apartment = fields.Char('Căn hộ', related='tb_users_blockhouse_res_groups_rel_ids.building_house_id.name')
 
@@ -23,7 +24,7 @@ class tb_users(models.Model):
         bqt_bd_id = []  # ban quan tri - building - id
         bql_bh_id = []  # ban quan ly - blockhouse - id
         bql_bd_id = []  # ban quan ly - building - id
-        if user.id != 1 and user.id != 2:
+        if user and user.id != 1 and user.id != 2:
             for item in user.tb_users_blockhouse_res_groups_rel_ids:
                 if item.group_id.name and str_bqt in item.user_group_code:
                     bqt_bh_id.append(int(item.blockhouse_id.id))
@@ -46,7 +47,7 @@ class tb_users(models.Model):
         bqt_bd_id = []  # ban quan tri - building - id
         bql_bh_id = []  # ban quan ly - blockhouse - id
         bql_bd_id = []  # ban quan ly - building - id
-        if user.id != 1 and user.id != 2:
+        if user and user.id != 1 and user.id != 2:
             for item in user.tb_users_blockhouse_res_groups_rel_ids:
                 if item.group_id.name and str_bqt in item.user_group_code:
                     bqt_bh_id.append(int(item.blockhouse_id.id))

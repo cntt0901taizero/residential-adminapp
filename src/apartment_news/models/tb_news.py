@@ -36,10 +36,10 @@ class tb_news(models.Model):
         ('BUILDING', 'Tòa nhà'),
     ], required=True, default='PROJECT_APARTMENT', string="Gửi tới")
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Dự án",
-                                    ondelet="cascade")
+                                    ondelete="cascade")
     building_id = fields.Many2one(comodel_name='tb_building', string="Toà nhà",
                                   domain="[('blockhouse_id', '=', blockhouse_id)]",
-                                  ondelet="cascade")
+                                  ondelete="cascade")
 
 
     @api.onchange('blockhouse_id')

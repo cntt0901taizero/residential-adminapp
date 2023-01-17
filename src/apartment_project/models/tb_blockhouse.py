@@ -29,7 +29,7 @@ class tb_blockhouse(models.Model):
     @api.model
     def read_group(self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True):
         user = request.env.user
-        if user.id != 1 and user.id != 2:
+        if user and user.id != 1 and user.id != 2:
             bh_ids = []
             for item in user.tb_users_blockhouse_res_groups_rel_ids:
                 if item.group_id.name and (str_bql in item.user_group_code or str_bqt in item.user_group_code):
@@ -41,7 +41,7 @@ class tb_blockhouse(models.Model):
     @api.model
     def search_read(self, domain=None, fields=None, offset=0, limit=10, order=None):
         user = request.env.user
-        if user.id != 1 and user.id != 2:
+        if user and user.id != 1 and user.id != 2:
             bh_ids = []
             for item in user.tb_users_blockhouse_res_groups_rel_ids:
                 if item.group_id.name and (str_bql in item.user_group_code or str_bqt in item.user_group_code):
