@@ -100,7 +100,7 @@
                         <strong>Tiêu đề</strong>
                     </xpath>
                     <h1>
-                        <field name="name" class="oe_inline"/>
+                        <field name="name" class="text-truncate"/>
                     </h1>
                     <group>
                         <field name="file" filename="file_name" widget='binary'/>
@@ -116,18 +116,19 @@
                         <group colspan="8">
                             <group>
                                 <field name="blockhouse_id" attrs="{'required': True}"
-                                       options="{'no_quick_create':True,'no_create_edit':True, 'no_open': True}"/>
+                                       options="{'no_quick_create':True,'no_create': True, 'no_edit': True, 'no_open': True}"/>
                             </group>
                             <group>
                                 <field name="building_id"
-                                       attrs="{'invisible':[('news_type','=','PROJECT_APARTMENT')]}"
-                                       options="{'no_quick_create':True,'no_create_edit':True, 'no_open': True}"
+                                       attrs="{'required': True, 'invisible':[('news_type','=','PROJECT_APARTMENT')]}"
+                                       options="{'no_quick_create':True,'no_create': True, 'no_edit': True, 'no_open': True}"
                                 />
                             </group>
                         </group>
                     </group>
                     <group>
                         <field name="content" options="{'collaborative':true}"
+                               widget="html"
                                placeholder="Nhập vào nội dung chi tiết bản tin">
                         </field>
                     </group>
@@ -136,6 +137,7 @@
             </form>
         </field>
     </record>
+
 
     <record id="view_tb_news_search" model="ir.ui.view">
         <field name="name">tb_news.search</field>

@@ -7,7 +7,7 @@
     'category': 'Resident',
     'summary': 'Apartment Notifications features',
     'description': """""",
-    # 'depends': ['base', 'mail', 'website_profile'],
+    'depends': ['base', 'apartment_project'],
     'sequence': -100,
     'data': [
         'views/notification_view.xml',

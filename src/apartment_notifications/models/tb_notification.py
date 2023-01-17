@@ -1,5 +1,5 @@
 from pyfcm import FCMNotification
-from odoo import models, fields, http
+from odoo import models, fields, http, api
 from odoo.exceptions import ValidationError
 from odoo.tools import GettextAlias
 
@@ -27,15 +27,31 @@ class tb_notification(models.Model):
         ('ACTIVE', 'Đã duyệt'),
         ('REJECT', 'Chưa duyệt'),
     ], required=True, default='PENDING', tracking=True, string="Trạng thái", )
+    receiver = fields.Selection([
+        ('PROJECT_APARTMENT', 'Dự án'),
+        ('BUILDING', 'Tòa nhà'),
+        ('APARTMENT', 'Căn hộ'),
+        ('USER_GROUP', 'Người dùng'),
+    ], required=True, default='PROJECT_APARTMENT', string="Gửi tới")
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="dự án",
                                     ondelet="cascade")
     building_id = fields.Many2one(comodel_name='tb_building', string="Tòa nhà",
                                   domain="[('blockhouse_id', '=', blockhouse_id)]",
                                   ondelet="cascade")
-    building_house_id = fields.Many2one(comodel_name='tb_building_house', string="Tòa nhà",
+    building_house_id = fields.Many2one(comodel_name='tb_building_house', string="Căn hộ",
                                         domain="[('building_id', '=', building_id)]",
                                         ondelet="cascade")
     user_ids = fields.Many2many('res.users', string='Người nhận', ondelet="cascade")
+
+
+    @api.onchange('blockhouse_id')
+    def on_change_blockhouse_id(self):
+        self.building_id = None
+        self.building_house_id = None
+
+    @api.onchange('building_id')
+    def on_change_building_id(self):
+        self.building_house_id = None
 
     def set_status_active(self):
         try:
@@ -66,13 +82,41 @@ class tb_notification(models.Model):
     def set_status_reject(self):
         self.write({'status': 'REJECT'})
 
+    @api.model
+    def create(self, values):
+        if 'receiver' in values and values['receiver'] == 'PROJECT_APARTMENT':
+            values['building_id'] = None
+            values['building_house_id'] = None
+            values['user_ids'] = None
+        if 'receiver' in values and values['receiver'] == 'BUILDING':
+            values['building_house_id'] = None
+            values['user_ids'] = None
+        if 'receiver' in values and values['receiver'] == 'APARTMENT':
+            values['user_ids'] = None
+        if 'receiver' in values and values['receiver'] == 'USER_GROUP':
+            values['building_id'] = None
+            values['building_house_id'] = None
+            values['blockhouse_id'] = None
+        return super(tb_notification, self).create(values)
+
+
     def write(self, values):
+        if 'receiver' in values and values['receiver'] == 'PROJECT_APARTMENT':
+            values['building_id'] = None
+            values['building_house_id'] = None
+            values['user_ids'] = None
+        if 'receiver' in values and values['receiver'] == 'BUILDING':
+            values['building_house_id'] = None
+            values['user_ids'] = None
+        if 'receiver' in values and values['receiver'] == 'APARTMENT':
+            values['user_ids'] = None
+        if 'receiver' in values and values['receiver'] == 'USER_GROUP':
+            values['building_id'] = None
+            values['building_house_id'] = None
+            values['blockhouse_id'] = None
         if 'status' in values and self.env.user.has_group('resident_management.group_management'):
-            raise ValidationError(_("Vui lòng liên hệ ban quản trị để được duyệt bản tin!"))
-            return super(tb_news, self).write(values)
+            raise ValidationError(_("Vui lòng liên hệ ban quản trị để được duyệt thông báo!"))
         if 'status' not in values:
             values['status'] = 'PENDING'
-            return super(tb_notification, self).write(values)
-        else:
-            return super(tb_notification, self).write(values)
         # here you can do accordingly
+        return super(tb_notification, self).write(values)

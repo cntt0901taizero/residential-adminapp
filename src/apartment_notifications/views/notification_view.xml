@@ -29,38 +29,60 @@
                             icon="fa-check"
                             class="oe_highlight"
                             status="PENDING"
+                            attrs="{'invisible':[('id','=',False)]}"
                             name="set_status_active" string="Phê duyệt" type="object"
                             groups="resident_management.group_administration"
                     />
                     <button
                             icon="fa-times"
                             name="set_status_reject" string="Từ chối duyệt" type="object" status="PENDING, ACTIVE"
+                            attrs="{'invisible':[('id','=',False)]}"
                             groups="resident_management.group_administration"/>
                     <field name="status" widget="statusbar"
                            groups="resident_management.group_administration, resident_management.group_management"/>
                 </header>
                 <sheet>
                     <div class="oe_title pr-0">
+                        <xpath expr="//form" position="attributes">
+                            <strong>Tiêu đề</strong>
+                        </xpath>
                         <h1 class="d-flex flex-row justify-content-between">
-                            <field name="name" class="o_task_name text-truncate" placeholder="Tiêu đề thông báo..."
+                            <field name="name" class="text-truncate" placeholder="Tiêu đề thông báo..."
                                    default_focus="1"/>
                         </h1>
                     </div>
-                    <group>
-                        <group>
-                            <field name="user_ids" widget="many2many_tags"/>
+                    <group colspan="4">
+                        <field name="receiver" widget="radio" options="{'horizontal': true}"/>
+                    </group>
+                    <group col="12" class="oe_invoice_lines_tab">
+                        <group colspan="4">
+                            <field name="blockhouse_id"
+                                   attrs="{'required' : [('receiver', '=', 'PROJECT_APARTMENT')], 'invisible': [('receiver','=','USER_GROUP')]}"
+                                   options="{'no_quick_create':True,'no_create': True, 'no_edit': True, 'no_open': True}"/>
+                        </group>
+                        <group colspan="4">
+                            <field name="building_id"
+                                   attrs="{'required' : [('receiver', '=', 'BUILDING')], 'invisible': ['|', ('receiver','=','PROJECT_APARTMENT'), ('receiver','=', 'USER_GROUP')]}"
+                                   options="{'no_quick_create':True,'no_create': True, 'no_edit': True, 'no_open': True}"
+                            />
+                        </group>
+                        <group colspan="4">
+                            <field name="building_house_id"
+                                   attrs="{'required' : [('receiver', '=', 'APARTMENT')], 'invisible': ['|', '|', ('receiver','=','PROJECT_APARTMENT'), ('receiver','=', 'BUILDING'), ('receiver','=', 'USER_GROUP')]}"
+                                   options="{'no_quick_create':True,'no_create': True, 'no_edit': True, 'no_open': True}"
+                            />
                         </group>
                     </group>
-                    <!--                    <group colspan="4">-->
-                    <!--                        <field type="html" widget="html" name="content" class="oe_account_terms"-->
-                    <!--                               placeholder="Nội dung thông báo..." modifiers="{}"/>-->
-                    <!--                    </group>-->
-                    <notebook>
-                        <page name="description_page" string="Nội dung">
-                            <field name="content" type="html" options="{'collaborative': true}"
-                                   placeholder="Nội dung thông báo..."/>
-                        </page>
-                    </notebook>
+                    <group attrs="{'invisible': [('receiver','!=','USER_GROUP')]}">
+                        <field attrs="{'required' : [('receiver', '=', 'USER_GROUP')]}" name="user_ids" options="{'no_create': True, 'no_edit': True}"/>
+                    </group>
+
+                    <group>
+                        <field name="content" options="{'collaborative':true}"
+                               widget="html"
+                               placeholder="Nhập vào nội dung thông báo">
+                        </field>
+                    </group>
                 </sheet>
             </form>
         </field>
