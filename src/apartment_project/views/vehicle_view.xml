@@ -9,6 +9,7 @@
         <field name="model">tb_vehicle</field>
         <field name="arch" type="xml">
             <tree string="Bảng quản lý phương tiện" decoration-danger="is_active == False">
+                <field name="image" width="100px" widget="image" class="oe_left oe_avatar" optional="show"/>
                 <field name="name" optional="show"/>
                 <field name="vehicle_type" optional="show"/>
                 <field name="note" optional="show"/>
@@ -26,24 +27,26 @@
         <field name="arch" type="xml">
             <form create="false">
                 <sheet>
-                    <group string="Thông tin cơ bản phương tiện">
-                        <field string="Ảnh thực tế" name="image"
-                               height="400px" widget="image"
-                               class="oe_left oe_avatar"/>
-                        <field name="name"/>
-                        <field name="vehicle_type" widget="selection_badge"/>
-                        <field name="note"/>
-                        <field name="is_active"/>
-                    </group>
-                    <group string="Thông tin sở hữu thuộc">
-                        <field name="blockhouse_id"
-                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
-                        <field name="building_id"
-                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
-                        <field name="building_house_id"
-                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
-                        <field name="user_id" widget="many2one_avatar_user"
-                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                    <group>
+                        <group string="Thông tin chủ sở hữu">
+                            <field name="blockhouse_id"
+                                   options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                            <field name="building_id"
+                                   options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                            <field name="building_house_id"
+                                   options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                            <field name="user_id" widget="many2one_avatar_user"
+                                   options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                        </group>
+                        <group string="Thông tin cơ bản phương tiện">
+                            <field string="Ảnh thực tế" name="image"
+                                   height="400px" widget="image"
+                                   class="oe_left oe_avatar"/>
+                            <field name="name"/>
+                            <field name="vehicle_type" widget="selection_badge"/>
+                            <field name="note"/>
+                            <field name="is_active"/>
+                        </group>
                     </group>
                 </sheet>
             </form>
