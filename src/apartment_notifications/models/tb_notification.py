@@ -84,22 +84,18 @@ class tb_notification(models.Model):
                 self.env.cr.execute("""SELECT user_id FROM tb_users_blockhouse_res_groups_rel WHERE blockhouse_id=%s""",
                                     [blockhouse_id])
                 user_id_list = self.env.cr.fetchall()
-                print(user_id_list)
             if self.receiver == 'BUILDING':
                 self.env.cr.execute(
                     """SELECT user_id FROM tb_users_blockhouse_res_groups_rel WHERE blockhouse_id=%s AND building_id=%s""",
                     (blockhouse_id, building_id))
                 user_id_list = self.env.cr.fetchall()
-                print(user_id_list)
             if self.receiver == 'APARTMENT':
                 self.env.cr.execute(
                     """SELECT user_id FROM tb_users_blockhouse_res_groups_rel WHERE blockhouse_id=%s AND building_id=%s AND building_house_id=%s""",
                     (blockhouse_id, building_id, building_house_id))
                 user_id_list = self.env.cr.fetchall()
-                print(user_id_list)
             if self.receiver == 'USER_GROUP':
                 user_id_list = self.user_ids.ids
-                print(user_id_list)
 
             self.write({'status': 'ACTIVE'})
             for user_id in user_id_list:

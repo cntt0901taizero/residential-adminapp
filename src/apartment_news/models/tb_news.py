@@ -3,9 +3,12 @@ from odoo import models, fields, api, exceptions
 from pyfcm import FCMNotification
 
 from odoo.exceptions import ValidationError
+from odoo.http import request
 from odoo.tools import GettextAlias
+from odoo.addons.resident_management.models.tb_users_blockhouse_res_groups_rel import USER_GROUP_CODE
 
-
+str_bql = USER_GROUP_CODE[2][0]
+str_bqt = USER_GROUP_CODE[3][0]
 _ = GettextAlias()
 push_service = FCMNotification(
     api_key="AAAAz6dhWnM:APA91bE2nkH_zcfTAlAuMkCLfnZ1m2y7zg_YMEmQnYBPkZ6JHpUQpNkYqh8f9vtRckFZX1Pl50aUXCbfni23b81OyMkDEPwnctsj4Sg9-IZx_tpgFVajvZMamtVz7_aZInJaRMtaGk_5")
@@ -36,10 +39,30 @@ class tb_news(models.Model):
         ('BUILDING', 'Tòa nhà'),
     ], required=True, default='PROJECT_APARTMENT', string="Gửi tới")
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Dự án",
+                                    domain=lambda self: self._domain_blockhouse_id(),
                                     ondelete="cascade")
     building_id = fields.Many2one(comodel_name='tb_building', string="Toà nhà",
                                   domain="[('blockhouse_id', '=', blockhouse_id)]",
                                   ondelete="cascade")
+
+    def _domain_blockhouse_id(self):
+        user = request.env.user
+        bqt_bh_id = []  # ban quan tri - blockhouse - id
+        bqt_bd_id = []  # ban quan tri - building - id
+        bql_bh_id = []  # ban quan ly - blockhouse - id
+        bql_bd_id = []  # ban quan ly - building - id
+        if user and user.id != 1 and user.id != 2:
+            for item in user.tb_users_blockhouse_res_groups_rel_ids:
+                if item.group_id.name and str_bqt in item.user_group_code:
+                    bqt_bh_id.append(int(item.blockhouse_id.id))
+                    bqt_bd_id.append(int(item.building_id.id))
+                if item.group_id.name and str_bql in item.user_group_code:
+                    bql_bh_id.append(int(item.blockhouse_id.id))
+                    bql_bd_id.append(int(item.building_id.id))
+            return [("is_active", "=", True), ("id", "in", list(set(bqt_bh_id + bql_bh_id)))]
+        else:
+            return [("is_active", "=", True)]
+
 
 
     @api.onchange('blockhouse_id')
@@ -61,16 +84,16 @@ class tb_news(models.Model):
         self.write({'status': 'DRAFT'})
 
     def write(self, values):
-        if values["news_type"] == 'PROJECT_APARTMENT':
-            values["building_id"] = None
-        if 'status' in values and self.env.user.has_group('resident_management.group_management'):
-            raise ValidationError(_("Vui lòng liên hệ ban quản trị để được duyệt bản tin!"))
-            return super(tb_news, self).write(values)
+        if 'news_type' in values:
+            if values["news_type"] == 'PROJECT_APARTMENT':
+                values["building_id"] = None
+        if 'status' in values:
+            if not self.env.user.has_group('resident_management.group_administration'):
+                raise ValidationError(_("Vui lòng liên hệ ban quản trị để được duyệt bản tin!"))
         if 'status' not in values:
             values['status'] = 'DRAFT'
-            return super(tb_news, self).write(values)
-        else:
-            return super(tb_news, self).write(values)
+        return super(tb_news, self).write(values)
+
         # here you can do accordingly
 
     @api.model
