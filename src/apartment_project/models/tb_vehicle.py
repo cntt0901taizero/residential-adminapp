@@ -11,6 +11,7 @@ VEHICLE_TYPES = [
     ('car', 'Ô tô'),
 ]
 
+
 class tb_vehicle(models.Model):
     _name = 'tb_vehicle'
     _description = 'Phương tiện'
@@ -24,21 +25,20 @@ class tb_vehicle(models.Model):
                                     domain=lambda self: self._domain_blockhouse_id(),
                                     ondelete="cascade")
     building_id = fields.Many2one(comodel_name='tb_building', string="Toà nhà",
-                                  domain="[('blockhouse_id', '=', blockhouse_id)]",
+                                  domain="[('blockhouse_id', '!=', None), ('blockhouse_id', '=', blockhouse_id)]",
                                   ondelete="cascade")
     building_house_id = fields.Many2one(comodel_name='tb_building_house', string="Căn hộ",
-                                        domain="[('building_id', '=', building_id)]",
+                                        domain="[('building_id', '!=', None), ('building_id', '=', building_id)]",
                                         ondelete="cascade")
     user_id = fields.Many2one(comodel_name='res.users', string="Chủ sở hữu",
                               domain=lambda self: self._domain_user_id(),
-                              # domain="[('users_blockhouse_groups_rel_ids.building_id', '=', building_id)]",
                               ondelete="cascade")
 
     def set_status_active(self):
         self.is_active = True
 
+    @api.model
     def _domain_user_id(self):
-        # return [("active", "=", True)]
         user = request.env.user
         bqt_bh_id = []  # ban quan tri - blockhouse - id
         bqt_bd_id = []  # ban quan tri - building - id
@@ -58,10 +58,11 @@ class tb_vehicle(models.Model):
             user_ids_2 = self.env['tb_users_blockhouse_res_groups_rel'].sudo()\
                 .search([('blockhouse_id', 'in', list(set(bqt_bh_id + bql_bh_id)))])
 
-            return [("active", "=", True), ("id", "in", list(set(user_ids_1 + user_ids_2)))]
+            return ["&", ("active", "=", True), ("id", "in", list(set(user_ids_1 + user_ids_2)))]
         else:
             return [("active", "=", True)]
 
+    @api.model
     def _domain_blockhouse_id(self):
         user = request.env.user
         bqt_bh_id = []  # ban quan tri - blockhouse - id
@@ -76,7 +77,7 @@ class tb_vehicle(models.Model):
                 if item.group_id.name and str_bql in item.user_group_code:
                     bql_bh_id.append(int(item.blockhouse_id.id))
                     bql_bd_id.append(int(item.building_id.id))
-            return [("is_active", "=", True), ("id", "in", list(set(bqt_bh_id + bql_bh_id)))]
+            return ["&", ("is_active", "=", True), ("id", "in", list(set(bqt_bh_id + bql_bh_id)))]
         else:
             return [("is_active", "=", True)]
 
@@ -87,7 +88,7 @@ class tb_vehicle(models.Model):
         bqt_bd_id = []  # ban quan tri - building - id
         bql_bh_id = []  # ban quan ly - blockhouse - id
         bql_bd_id = []  # ban quan ly - building - id
-        if user and  user.id != 1 and user.id != 2:
+        if user and user.id != 1 and user.id != 2:
             for item in user.tb_users_blockhouse_res_groups_rel_ids:
                 if item.group_id.name and str_bqt in item.user_group_code:
                     bqt_bh_id.append(int(item.blockhouse_id.id))
@@ -108,7 +109,7 @@ class tb_vehicle(models.Model):
         bqt_bd_id = []  # ban quan tri - building - id
         bql_bh_id = []  # ban quan ly - blockhouse - id
         bql_bd_id = []  # ban quan ly - building - id
-        if user and  user.id != 1 and user.id != 2:
+        if user and user.id != 1 and user.id != 2:
             for item in user.tb_users_blockhouse_res_groups_rel_ids:
                 if item.group_id.name and str_bqt in item.user_group_code:
                     bqt_bh_id.append(int(item.blockhouse_id.id))
