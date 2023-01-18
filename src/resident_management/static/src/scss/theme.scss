@@ -88,11 +88,11 @@ a.btn {
 }
 
 .o_MessagingMenu_counter {
-    background-color: #25753A;
+    background-color: #008B7C;
     color: #fff !important;
 }
 .o_mail_systray_item .o_notification_counter {
-    background: #25753A !important;
+    background: #008B7C !important;
 }
 
 .o_control_panel {
@@ -125,7 +125,7 @@ a.btn {
     max-height:23px;
 }
 .o_searchview .o_searchview_autocomplete li.o_selection_focus {
-        background-color: #25753A;
+        background-color: #008B7C;
         > a {
             color: white !important;
         }
@@ -315,15 +315,15 @@ button[name="action_uninstall"]:focus {
 }
 
 .o_statusbar_status .o_arrow_button.btn-secondary {
-    border: solid 1px #25753A !important;
-    color: #25753A !important;
+    border: solid 1px #008B7C !important;
+    color: #008B7C !important;
     background-color: #fff !important;
 }
 .o_statusbar_status .o_arrow_button.btn-secondary:hover:after {
     border-color: #fff !important;
 }
 .o_statusbar_status .o_arrow_button.btn-primary {
-    border: solid 1px #25753A !important;
+    border: solid 1px #008B7C !important;
     color: #fff !important;
 }
 .o_cp_bottom_right .btn-secondary {
@@ -525,8 +525,8 @@ th.o_list_record_selector {
 
 .custom-control-input:checked ~ .custom-control-label::before {
     color: #ffffff;
-    background-color: #25753A;
-    border-color: #25753A;
+    background-color: #008B7C;
+    border-color: #008B7C;
 }
 .custom-control.custom-checkbox .custom-control-input:not(:checked):not(:indeterminate) ~ .custom-control-label:before {
     background: none;
@@ -727,7 +727,7 @@ i.o_PartnerImStatusIcon_outerBackground.fa.fa-circle.fa-stack-1x {
     color: #fff !important;
 }
 .o_ChatWindowHeader {
-    background-color: #25753A;
+    background-color: #008B7C;
     color: white !important;
 }
 //Chatter mini ends
@@ -858,10 +858,10 @@ select {
 }
 .o_form_view .oe_button_box .btn.oe_stat_button > .o_stat_info .o_stat_value,
 .o_form_view .oe_button_box .btn.oe_stat_button > span .o_stat_value {
-    color: #25753A;
+    color: #008B7C;
 }
 .o_form_view .oe_button_box .oe_stat_button .o_button_icon {
-    color: #25753A;
+    color: #008B7C;
 }
 //form end
 
@@ -1277,7 +1277,7 @@ select, input {
 
 //badges starts
 .badge-primary {
-    background-color: #25753A !important;
+    background-color: #008B7C !important;
 }
 .badge-secondary {
     background-color: #74788d;
@@ -1384,7 +1384,7 @@ div.o_boolean_toggle.custom-control.custom-checkbox > label.custom-control-label
     top: 1px;
 }
 .o_kanban_view.o_kanban_dashboard.o_hr_recruitment_kanban .ribbon span {
-    background-color: #25753A;
+    background-color: #008B7C;
 }
 .o_kanban_view.o_kanban_dashboard.o_hr_recruitment_kanban.o_kanban_ungrouped .o_kanban_record:not(.o_kanban_ghost) {
     height: 197px;
@@ -1409,7 +1409,7 @@ div.o_boolean_toggle.custom-control.custom-checkbox > label.custom-control-label
 
 //progress starts
 .oe_kanban_content .progress .progress-bar {
-    background-color: #25753A;
+    background-color: #008B7C;
 }
 .progress-bar.bg-muted-full {
     background-color: #dee2e6;
@@ -1642,7 +1642,7 @@ div.dropdown-menu.bootstrap-datetimepicker-widget {
     color: $f_color !important;
 }
 .o_content .o_expense_purple {
-    color: #25753A;
+    color: #008B7C;
 }
 .row.o_recruitment_kanban_boxes .custom-checkbox input:checked + label::after {
     display:none
