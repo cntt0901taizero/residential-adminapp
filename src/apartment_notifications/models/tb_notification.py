@@ -2,13 +2,15 @@ from pyfcm import FCMNotification
 from odoo import models, fields, http, api
 from odoo.exceptions import ValidationError
 from odoo.tools import GettextAlias
+from odoo.addons.resident_management.models.tb_users_blockhouse_res_groups_rel import USER_GROUP_CODE
 
 _ = GettextAlias()
 push_service = FCMNotification(
     api_key="AAAAz6dhWnM:APA91bE2nkH_zcfTAlAuMkCLfnZ1m2y7zg_YMEmQnYBPkZ6JHpUQpNkYqh8f9vtRckFZX1Pl50aUXCbfni23b81OyMkDEPwnctsj4Sg9-IZx_tpgFVajvZMamtVz7_aZInJaRMtaGk_5")
 message_title = "Uber update"
 message_body = "Hi john, your customized news for today is ready"
-
+str_bql = USER_GROUP_CODE[2][0]
+str_bqt = USER_GROUP_CODE[3][0]
 
 class tb_notification(models.Model):
     _name = 'tb_notification'
@@ -32,15 +34,36 @@ class tb_notification(models.Model):
         ('APARTMENT', 'Căn hộ'),
         ('USER_GROUP', 'Người dùng'),
     ], required=True, default='PROJECT_APARTMENT', string="Gửi tới")
-    blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="dự án",
+    blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Dự án",
+                                    domain=lambda self: self._domain_blockhouse_id(),
                                     ondelete="cascade")
     building_id = fields.Many2one(comodel_name='tb_building', string="Tòa nhà",
-                                  domain="[('blockhouse_id', '=', blockhouse_id)]",
+                                  domain="['&',('blockhouse_id', '=', blockhouse_id), ('blockhouse_id', '!=', None)]",
                                   ondelete="cascade")
     building_house_id = fields.Many2one(comodel_name='tb_building_house', string="Căn hộ",
-                                        domain="[('building_id', '=', building_id)]",
+                                        domain="['&', '&',('building_id', '=', building_id), ('blockhouse_id', '=', blockhouse_id), ('building_id', '!=', None)]",
                                         ondelete="cascade")
     user_ids = fields.Many2many('res.users', string='Người nhận', ondelete="cascade")
+
+
+    def _domain_blockhouse_id(self):
+        user = http.request.env.user
+        bqt_bh_id = []  # ban quan tri - blockhouse - id
+        bqt_bd_id = []  # ban quan tri - building - id
+        bql_bh_id = []  # ban quan ly - blockhouse - id
+        bql_bd_id = []  # ban quan ly - building - id
+        if user and user.id != 1 and user.id != 2:
+            for item in user.tb_users_blockhouse_res_groups_rel_ids:
+                if item.group_id.name and str_bqt in item.user_group_code:
+                    bqt_bh_id.append(int(item.blockhouse_id.id))
+                    bqt_bd_id.append(int(item.building_id.id))
+                if item.group_id.name and str_bql in item.user_group_code:
+                    bql_bh_id.append(int(item.blockhouse_id.id))
+                    bql_bd_id.append(int(item.building_id.id))
+            return [("is_active", "=", True), ("id", "in", list(set(bqt_bh_id + bql_bh_id)))]
+        else:
+            return [("is_active", "=", True)]
+
 
     @api.onchange('blockhouse_id')
     def on_change_blockhouse_id(self):
@@ -54,27 +77,29 @@ class tb_notification(models.Model):
     def set_status_active(self):
         try:
             user_id_list = []
+            blockhouse_id = self.blockhouse_id.id
+            building_id = self.building_id.id
+            building_house_id = self.building_house_id.id
             if self.receiver == 'PROJECT_APARTMENT':
                 self.env.cr.execute("""SELECT user_id FROM tb_users_blockhouse_res_groups_rel WHERE blockhouse_id=%s""",
-                                    self.blockhouse_id)
-                user_id_list = self.env.cr.fetchone()
+                                    [blockhouse_id])
+                user_id_list = self.env.cr.fetchall()
                 print(user_id_list)
             if self.receiver == 'BUILDING':
                 self.env.cr.execute(
                     """SELECT user_id FROM tb_users_blockhouse_res_groups_rel WHERE blockhouse_id=%s AND building_id=%s""",
-                    (self.blockhouse_id, self.building_id))
-                user_id_list = self.env.cr.fetchone()
+                    (blockhouse_id, building_id))
+                user_id_list = self.env.cr.fetchall()
                 print(user_id_list)
             if self.receiver == 'APARTMENT':
                 self.env.cr.execute(
                     """SELECT user_id FROM tb_users_blockhouse_res_groups_rel WHERE blockhouse_id=%s AND building_id=%s AND building_house_id=%s""",
-                    (self.blockhouse_id, self.building_id, self.building_house_id))
-                user_id_list = self.env.cr.fetchone()
+                    (blockhouse_id, building_id, building_house_id))
+                user_id_list = self.env.cr.fetchall()
                 print(user_id_list)
             if self.receiver == 'USER_GROUP':
                 user_id_list = self.user_ids.ids
                 print(user_id_list)
-
 
             self.write({'status': 'ACTIVE'})
             for user_id in user_id_list:
@@ -145,7 +170,7 @@ class tb_notification(models.Model):
             if len(values['user_ids'][0][2]) == 0:
                 raise ValidationError('Vui lòng chọn người nhận thông báo')
         if 'status' in values:
-            if self.env.user.has_group('resident_management.group_management'):
+            if not self.env.user.has_group('resident_management.group_administration'):
                 raise ValidationError(_("Vui lòng liên hệ ban quản trị để được duyệt thông báo!"))
         if 'status' not in values:
             values['status'] = 'PENDING'
