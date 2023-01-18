@@ -22,7 +22,8 @@ a.btn {
     background: #fff
 }
 .o_main_navbar, .o_searchview_facet_label {
-    background-color: transparent !important;
+//     background-color: transparent !important;
+    background-color: #F78D5C !important;
     color: $f_color !important;
     border:1px !important;
 }
@@ -388,7 +389,8 @@ tr.o_data_row {
     position: sticky;
     top: 0;
     z-index: 999;
-    background-color: #ffffff !important;
+    background-color: #EBEFEB !important;
+//     background-color: #ffffff !important;
 }
 th.o_list_record_selector {
     color: #495057 !important;
