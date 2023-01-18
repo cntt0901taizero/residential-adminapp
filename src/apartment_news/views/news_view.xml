@@ -10,7 +10,8 @@
                 <field name="create_date" widget="date"/>
                 <field name="expired_date" widget="date"/>
                 <field name="status" widget="label_selection"/>
-                <button name="unlink" class="fa fa-trash-o fa-lg float-right btn btn-danger" title="Xóa"
+                <button name="confirm_delete_news" class="fa fa-trash-o fa-lg float-right btn btn-danger"
+                        title="Xóa"
                         aria-label="Xóa" type="object"/>
                 <button name="open_edit_form_news" class="fa fa-pencil fa-lg float-right btn btn-success"
                         title="Sửa" aria-label="Sửa" type="object"/>
@@ -59,10 +60,10 @@
                                         <field name="status" widget="label_selection"/>
                                     </span>
                                 </div>
-<!--                                <div class="o_kanban_record_bottom">-->
-<!--                                    <div class="oe_kanban_bottom_left"></div>-->
-<!--                                    <div class="oe_kanban_bottom_right"></div>-->
-<!--                                </div>-->
+                                <!--                                <div class="o_kanban_record_bottom">-->
+                                <!--                                    <div class="oe_kanban_bottom_left"></div>-->
+                                <!--                                    <div class="oe_kanban_bottom_right"></div>-->
+                                <!--                                </div>-->
                             </div>
                         </div>
                     </t>
@@ -70,7 +71,6 @@
             </kanban>
         </field>
     </record>
-
 
     <record id="view_tb_news_form" model="ir.ui.view">
         <field name="name">tb_news.form</field>
@@ -83,10 +83,12 @@
                             class="oe_highlight"
                             status="DRAFT, REJECT"
                             name="set_status_active" string="Phê duyệt" type="object"
+                            attrs="{'invisible':[('id','=',False)]}"
                             groups="resident_management.group_administration"
                     />
                     <button
                             icon="fa-times"
+                            attrs="{'invisible':[('id','=',False)]}"
                             name="set_status_reject" string="Từ chối duyệt" type="object" status="DRAFT, ACTIVE"
                             groups="resident_management.group_administration"/>
                     <field name="status" widget="statusbar"
@@ -95,20 +97,38 @@
                 <sheet>
                     <field name="image" readonly="0" widget="image" class="oe_right oe_avatar"/>
                     <xpath expr="//form" position="attributes">
-                        <attribute name="name">
-                            <strong>Tiêu đề</strong>
-                        </attribute>
+                        <strong>Tiêu đề</strong>
                     </xpath>
                     <h1>
-                        <field name="name" class="oe_inline"/>
+                        <field name="name" class="text-truncate"/>
                     </h1>
                     <group>
-                        <field name="file_name"/>
                         <field name="file" filename="file_name" widget='binary'/>
+                        <field name="file_name"/>
+                    </group>
+                    <group>
                         <field name="expired_date"/>
+                    </group>
+                    <group col="12" class="oe_invoice_lines_tab">
+                        <group colspan="4">
+                            <field name="news_type" widget="radio"/>
+                        </group>
+                        <group colspan="8">
+                            <group>
+                                <field name="blockhouse_id" attrs="{'required': True}"
+                                       options="{'no_quick_create':True,'no_create': True, 'no_edit': True, 'no_open': True}"/>
+                            </group>
+                            <group>
+                                <field name="building_id"
+                                       attrs="{'required': True, 'invisible':[('news_type','=','PROJECT_APARTMENT')]}"
+                                       options="{'no_quick_create':True,'no_create': True, 'no_edit': True, 'no_open': True}"
+                                />
+                            </group>
+                        </group>
                     </group>
                     <group>
                         <field name="content" options="{'collaborative':true}"
+                               widget="html"
                                placeholder="Nhập vào nội dung chi tiết bản tin">
                         </field>
                     </group>
@@ -118,6 +138,7 @@
         </field>
     </record>
 
+
     <record id="view_tb_news_search" model="ir.ui.view">
         <field name="name">tb_news.search</field>
         <field name="model">tb_news</field>
@@ -126,9 +147,9 @@
                 <filter name="name" string="Tiêu đề"/>
                 <filter name="filter_draft" string="Nháp" domain="[('status', '=', 'DRAFT')]"/>
                 <filter name="filter_active" string="Đã đăng" domain="[('status', '=', 'ACTIVE')]"/>
-                <group expand="1" string="Group By">
-                    <filter name="group_status" string="Trạng thái" context="{'group_by': 'status'}"/>
-                </group>
+                <!--                <group expand="1" string="Group By">-->
+                <!--                    <filter name="group_status" string="Trạng thái" context="{'group_by': 'status'}"/>-->
+                <!--                </group>-->
             </search>
         </field>
     </record>
@@ -138,14 +159,14 @@
         <field name="name">Bản tin</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">tb_news</field>
-        <field name="view_mode">kanban,tree,form</field>
-        <field name="context">{'search_default_group_status':1}</field>
+        <field name="view_mode">tree,form</field>
+        <!--        <field name="context">{'search_default_group_status':1}</field>-->
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Tạo bản ghi đầu tiên của bạn</p>
         </field>
     </record>
 
-     <menuitem id="menu_apartment_news_root"
+    <menuitem id="menu_apartment_news_root"
               name="Bản tin"
               web_icon="apartment_news,static/description/menu-icon.png"
               action="action_tb_news"

@@ -1,6 +1,11 @@
 from odoo import models, fields, api
+from odoo.http import request
 from datetime import date
 import random
+
+from odoo.addons.resident_management.models.tb_users_blockhouse_res_groups_rel import USER_GROUP_CODE
+str_bql = USER_GROUP_CODE[2][0]
+str_bqt = USER_GROUP_CODE[3][0]
 
 
 class tb_blockhouse(models.Model):
@@ -20,6 +25,31 @@ class tb_blockhouse(models.Model):
 
     def set_status_active(self):
         self.is_active = True
+
+    @api.model
+    def read_group(self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True):
+        user = request.env.user
+        if user and user.id != 1 and user.id != 2:
+            bh_ids = []
+            for item in user.tb_users_blockhouse_res_groups_rel_ids:
+                if item.group_id.name and (str_bql in item.user_group_code or str_bqt in item.user_group_code):
+                    bh_ids.append(int(item.blockhouse_id.id))
+            domain.append(('id', 'in', bh_ids))
+        res = super(tb_blockhouse, self).read_group(domain, fields, groupby, offset=offset, limit=limit, orderby=orderby, lazy=lazy)
+        return res
+
+    @api.model
+    def search_read(self, domain=None, fields=None, offset=0, limit=10, order=None):
+        user = request.env.user
+        if user and user.id != 1 and user.id != 2:
+            bh_ids = []
+            for item in user.tb_users_blockhouse_res_groups_rel_ids:
+                if item.group_id.name and (str_bql in item.user_group_code or str_bqt in item.user_group_code):
+                    bh_ids.append(int(item.blockhouse_id.id))
+            domain.append(('id', 'in', bh_ids))
+
+        res = super(tb_blockhouse, self).search_read(domain, fields, offset, limit, order)
+        return res
 
     @api.model
     def create(self, vals):
@@ -48,6 +78,19 @@ class tb_blockhouse(models.Model):
             'res_model': 'tb_building_house',
             'target': 'new',
             'view_id': self.env.ref('apartment_project.view_tb_building_house_form').id,
+            'view_mode': 'form',
+            'context': {
+                'default_blockhouse_id': self.id,
+            },
+        }
+
+    def create_apartment_utilities(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Tạo mới tiện ích',
+            'res_model': 'tb_apartment_utilities',
+            'target': 'new',
+            'view_id': self.env.ref('apartment_project.view_tb_apartment_utilities_form').id,
             'view_mode': 'form',
             'context': {
                 'default_blockhouse_id': self.id,

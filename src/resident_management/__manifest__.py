@@ -11,6 +11,7 @@
         'views/layout.xml',
         'security/resident_security.xml',
         'security/ir.model.access.csv',
+        'views/dialog_box_confirm.xml',
         'views/menu.xml',
         'views/account_view/taikhoan_view.xml',
         'views/user_blockhouse_res_groups_rel_view.xml',

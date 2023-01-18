@@ -1,20 +1,27 @@
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
+from odoo.http import request
 
 RELATIONSHIP_TYPES = [
-    ('chuho)', 'Chủ hộ'),
+    ('none', '--'),
+    ('chuho', 'Chủ hộ'),
     ('ongba', 'Ông bà'),
-    ('bome', 'Bố hoặc mẹ'),
+    ('bome', 'Bố mẹ'),
+    ('vochong', 'Vợ chồng'),
     ('concai', 'Con cái'),
     ('anhchiem', 'Anh chị em'),
+    ('nguoithue', 'Người thuê'),
 ]
 
-USER_GROUP_TYPES = [
-    ('cư dân', 'Cư dân'),
-    ('quanly', 'Ban quản lý'),
-    ('quantri', 'Ban quản trị'),
-    ('admin', 'Admin'),
+USER_GROUP_CODE = [
+    ('none', '--'),
+    ('[CD]', '[CD]'),
+    ('[BQL]', '[BQL]'),
+    ('[BQT]', '[BQT]'),
 ]
+str_bql = USER_GROUP_CODE[2][0]
+str_bqt = USER_GROUP_CODE[3][0]
+
 
 class tb_users_blockhouse_res_groups_rel(models.Model):
     _name = 'tb_users_blockhouse_res_groups_rel'
@@ -25,17 +32,43 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
                                #      self.env['ir.module.category'].search([('name', 'ilike', 'Quản lý cư dân')]).id)]
                                )
     selected_group = fields.Char(related='group_id.name')
-    user_id = fields.Many2one(comodel_name='res.users', string="Tài khoản")
-    blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string='dự án', )
+    user_id = fields.Many2one(comodel_name='res.users', string="Tài khoản", ondelete="cascade")
+    blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string='Dự án', ondelete="cascade", domain=lambda self: self._domain_blockhouse_id(),)
     building_id = fields.Many2one(comodel_name='tb_building', string='Tòa nhà',
-                                  domain="[('blockhouse_id', '=', blockhouse_id)]", )
+                                  domain="['&',('blockhouse_id', '=', blockhouse_id), ('blockhouse_id', '!=', None)]"
+                                  , ondelete="cascade")
     building_house_id = fields.Many2one(comodel_name='tb_building_house', string='Căn hộ',
-                                        domain="[('building_id', '=', building_id)]", )
+                                        domain="['&', '&' ,('building_id', '=', building_id), ('blockhouse_id', '=', blockhouse_id), ('building_id', '!=', None)]", ondelete="cascade")
     owner = fields.Boolean(string='Chủ sở hữu', default=False)
     relationship_type = fields.Selection(string='Quan hệ với chủ hộ', selection=RELATIONSHIP_TYPES,
                                          default=RELATIONSHIP_TYPES[0][0])
-    user_group_type = fields.Selection(string='Nhóm quyền', selection=USER_GROUP_TYPES,
-                                       default=USER_GROUP_TYPES[0][0])
+    user_group_code = fields.Selection(string='Mã nhóm quyền', selection=USER_GROUP_CODE,
+                                       default=USER_GROUP_CODE[0][0])
+
+    def _domain_blockhouse_id(self):
+        user = request.env.user
+        bqt_bh_id = []  # ban quan tri - blockhouse - id
+        bqt_bd_id = []  # ban quan tri - building - id
+        bql_bh_id = []  # ban quan ly - blockhouse - id
+        bql_bd_id = []  # ban quan ly - building - id
+        if user and user.id != 1 and user.id != 2:
+            for item in user.tb_users_blockhouse_res_groups_rel_ids:
+                if item.group_id.name and str_bqt in item.user_group_code:
+                    bqt_bh_id.append(int(item.blockhouse_id.id))
+                    bqt_bd_id.append(int(item.building_id.id))
+                if item.group_id.name and str_bql in item.user_group_code:
+                    bql_bh_id.append(int(item.blockhouse_id.id))
+                    bql_bd_id.append(int(item.building_id.id))
+            return [("is_active", "=", True), ("id", "in", list(set(bqt_bh_id + bql_bh_id)))]
+        else:
+            return [("is_active", "=", True)]
+
+    @api.onchange('relationship_type')
+    def _on_change_relationship_type(self):
+        if self.relationship_type == RELATIONSHIP_TYPES[1][0]:
+            self.owner = True
+        else:
+            self.owner = False
 
     @api.onchange('blockhouse_id')
     def _on_change_blockhouse_id(self):
@@ -48,6 +81,13 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
 
     @api.onchange('group_id')
     def _on_change_group_id(self):
+        if self.group_id.name:
+            if USER_GROUP_CODE[1][0] in self.group_id.name:
+                self.user_group_code = USER_GROUP_CODE[1][0]
+            elif USER_GROUP_CODE[2][0] in self.group_id.name:
+                self.user_group_code = USER_GROUP_CODE[2][0]
+            elif USER_GROUP_CODE[3][0] in self.group_id.name:
+                self.user_group_code = USER_GROUP_CODE[3][0]
         self.blockhouse_id = None
         self.building_id = None
         self.building_house_id = None
@@ -97,8 +137,8 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
             self.env.cr.execute("""INSERT INTO res_groups_users_rel(uid, gid) VALUES(%s, %s)""", (uid, gid))
 
     def unlink(self):
-        print(self)
-        query = """DELETE FROM res_groups_users_rel WHERE uid = %s and gid = %s"""
-        self.env.cr.execute(query, (self.user_id.id, self.group_id.id))
+        for record in self:
+            query = """DELETE FROM res_groups_users_rel WHERE uid = %s and gid = %s"""
+            self.env.cr.execute(query, (record.user_id.id, record.group_id.id))
         self.env['ir.actions.actions'].clear_caches()
         return super(tb_users_blockhouse_res_groups_rel, self).unlink()

@@ -5,18 +5,19 @@
 -->
 <odoo>
 
-    <!--    <record id="view_users_resident_tree" model="ir.ui.view">-->
-    <!--        <field name="name">res.users.resident.tree.inherit</field>-->
-    <!--        <field name="model">res.users</field>-->
-    <!--        <field name="inherit_id" ref="base.view_users_tree"/>-->
-    <!--        <field name="arch" type="xml">-->
-    <!--            <xpath expr="//field[@name='login_date']" position="after">-->
-    <!--                <field name="display_blockhouse"/>-->
-    <!--                <field name="display_building"/>-->
-    <!--                <field name="display_apartment"/>-->
-    <!--            </xpath>-->
-    <!--        </field>-->
-    <!--    </record>-->
+    <record id="view_users_resident_tree" model="ir.ui.view">
+        <field name="name">res.users.resident.tree.inherit</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='login_date']" position="after">
+                <button groups="resident_management.group_administration, resident_management.group_management" name="confirm_delete_user" class="fa fa-trash-o fa-lg float-right btn btn-danger" title="Xóa"
+                        aria-label="Xóa" type="object"/>
+                <button groups="resident_management.group_administration, resident_management.group_management" name="open_edit_form_user" class="fa fa-pencil fa-lg float-right btn btn-success"
+                        title="Sửa" aria-label="Sửa" type="object"/>
+            </xpath>
+        </field>
+    </record>
 
 
     <record id="view_users_form_simple_modif_inherit" model="ir.ui.view">
@@ -35,11 +36,11 @@
         <field name="arch" type="xml">
 
             <div class="oe_title" position="after">
-                <button string=" Chọn nhóm quyền" class="fa fa-plus btn btn-info mb-2"
+                <button string=" Thêm nhóm quyền" class="fa fa-plus btn btn-info mb-2"
                         disabled="True" attrs="{'invisible':[('id','>',0)]}"
                         data-toggle="tooltip"
                         title="Cần lưu thông tin tài khoản trước khi thêm mới nhóm quyền cho tài khoản"/>
-                <button name="create_user_blockhouse_groups_rel" string=" Chọn nhóm quyền"
+                <button name="create_user_blockhouse_groups_rel" string=" Thêm nhóm quyền"
                         class="fa fa-plus btn btn-info mb-2" type="object"
                         attrs="{'invisible':[('id','=',False)]}"/>
                 <field name="tb_users_blockhouse_res_groups_rel_ids" widget="section_and_note_one2many"
@@ -52,7 +53,6 @@
                         <field name="building_house_id"/>
                         <field name="owner"/>
                     </tree>
-
                 </field>
             </div>
 
@@ -99,7 +99,7 @@
     </record>
 
     <record id="menu_tb_taikhoan" model="ir.ui.menu">
-        <field name="name">Tài khoản</field>
+        <field name="name">Tài khoản người dùng</field>
         <field name="action" ref="resident_management.action_tb_taikhoan"/>
         <field name="parent_id" ref="menu_resident_root"/>
         <field name="groups_id"

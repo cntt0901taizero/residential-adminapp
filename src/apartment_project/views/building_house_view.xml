@@ -37,9 +37,9 @@
                             <field name="name"/>
                             <field name="address"/>
                             <field name="house_type" widget="selection_badge"/>
-                            <field name="building_floors_id" attrs="{'readonly':[('building_floors_id','>',0)]}"/>
-                            <field name="building_id" attrs="{'readonly':[('building_id','>',0)]}"/>
-                            <field name="blockhouse_id" attrs="{'readonly':[('blockhouse_id','>',0)]}"/>
+                            <field name="building_floors_id" attrs="{'readonly':[('building_floors_id','>',0)]}" options="{'no_open': True}"/>
+                            <field name="building_id" attrs="{'readonly':[('building_id','>',0)]}" options="{'no_open': True}"/>
+                            <field name="blockhouse_id" attrs="{'readonly':[('blockhouse_id','>',0)]}" options="{'no_open': True}"/>
                             <field name="is_active"/>
                         </group>
                         <group string="Thông tin chi tiết">
@@ -61,7 +61,7 @@
         <field name="model">tb_building_house</field>
         <field name="arch" type="xml">
             <search>
-                <filter name="name" string="Số nhà"/>
+                <filter name="is_active" string="Trạng thái active" domain="[('is_active', '=', 'True')]"/>
                 <group expand="1" string="Group By">
                     <filter name="group_block_house" string="dự án" context="{'group_by':'blockhouse_id'}"/>
                     <filter name="group_building" string="Tòa nhà" context="{'group_by':'building_id'}"/>
@@ -87,7 +87,7 @@
 
     <!-- This Menu Item must have a parent and an action -->
     <menuitem id="menu_tb_building_house"
-              name="Căn hộ"
+              name="Căn hộ / Biệt thự"
               parent="menu_blockhouse"
               action="action_tb_building_house"
               sequence="3"/>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="wizard_message_form" model="ir.ui.view">
+        <field name="name">dialog_box_confirm.form</field>
+        <field name="model">dialog.box.confirm</field>
+        <field name="arch" type="xml">
+            <form string="Xác nhận">
+                <field name="message" readonly="1" widget="html"/>
+                <footer>
+                    <button name="action_confirm" type="object" string="Đồng ý" class="oe_highlight"/>
+                    <button special="cancel" string="Hủy"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="wizard_message_action" model="ir.actions.act_window">
+        <field name="name">Xác nhận</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">dialog.box.confirm</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>
+

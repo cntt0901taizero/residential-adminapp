@@ -32,13 +32,11 @@
         <field name="name">tb_building.kanban</field>
         <field name="model">tb_building</field>
         <field name="arch" type="xml">
-            <kanban records_draggable="0" quick_create="true" limit="3">
+            <kanban records_draggable="0" quick_create="true" limit="4">
                 <field name="id"/>
                 <field name="name"/>
                 <field name="code"/>
                 <field name="building_level"/>
-<!--                <field name="floors_above_ground_number"/>-->
-<!--                <field name="floors_below_ground_number"/>-->
                 <field name="website"/>
                 <field name="image"/>
                 <field name="address"/>
@@ -60,13 +58,13 @@
                                     </div>
                                 </div>
                                 <div name="product_lst_price" class="mt-1">
-                                    <span>Xếp hạng:
-                                        <field name="building_level"/>
+                                    <span>Dự án:
+                                        <field name="blockhouse_id"/>
                                     </span>
                                 </div>
                                 <div name="product_lst_price" class="mt-1">
-                                    <span>Thành lập ngày:
-                                        <field name="founding_date" widget="date"/>
+                                    <span>Xếp hạng:
+                                        <field name="building_level"/>
                                     </span>
                                 </div>
                                 <div name="product_lst_price" class="mt-1">
@@ -74,17 +72,6 @@
                                         <field name="website" widget="url"/>
                                     </span>
                                 </div>
-                                <div name="product_lst_price" class="mt-1">
-                                    <span>
-                                        <field name="is_active" widget="boolean_toggle"/>
-                                    </span>
-                                </div>
-<!--                                <div class="o_kanban_record_bottom">-->
-<!--                                    <div class="oe_kanban_bottom_left">-->
-<!--                                        <field name="website" widget="date"/>-->
-<!--                                    </div>-->
-<!--                                    <div class="oe_kanban_bottom_right"></div>-->
-<!--                                </div>-->
                             </div>
                         </div>
                     </t>
@@ -110,10 +97,9 @@
                             <field name="name"/>
                             <field name="code"/>
                             <field name="building_level" widget="selection_badge"/>
-<!--                            <field name="floors_above_ground_number"/>-->
-<!--                            <field name="floors_below_ground_number"/>-->
                             <field name="founding_date" widget="date"/>
-                            <field name="blockhouse_id"/>
+                            <field name="blockhouse_id"
+                                   options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                             <field name="is_active"/>
                         </group>
                         <group string="Thông tin địa chỉ liên hệ">
@@ -122,6 +108,9 @@
                             <field name="website" widget="CopyClipboardChar" placeholder="e.g. /page"/>
                             <field name="location_link" widget="CopyClipboardChar" placeholder="e.g. /page"/>
                         </group>
+                    </group>
+                    <group string="Danh mục tiện ích của khu / tòa nhà">
+                        <field name="apartment_utilities_ids"  string="Tiện ích" widget="many2many_tags"/>
                     </group>
                     <notebook>
                         <page string="Tầng sàn">
@@ -182,8 +171,7 @@
         <field name="model">tb_building</field>
         <field name="arch" type="xml">
             <search>
-                <filter name="name" string="Tên toà nhà"/>
-                <filter name="filter_is_active" string="Trạng thái" domain="[('is_active', '=', 'True')]"/>
+                <filter name="is_active" string="Trạng thái active" domain="[('is_active', '=', 'True')]"/>
                 <group expand="1" string="Group By">
                     <filter name="group_block_house" string="dự án" context="{'group_by': 'blockhouse_id'}"/>
                 </group>
@@ -205,7 +193,7 @@
 
     <!-- This Menu Item must have a parent and an action -->
     <menuitem id="menu_tb_building"
-              name="Toà nhà"
+              name="Khu / Toà nhà"
               parent="menu_blockhouse"
               action="action_tb_building"
               sequence="1"/>
