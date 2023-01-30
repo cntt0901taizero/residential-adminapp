@@ -7,6 +7,7 @@
             <tree>
                 <field name="image" widget="image" width="100px"/>
                 <field name="name" decoration-bf="1"/>
+                <field name="news_description" decoration-bf="1"/>
                 <field name="create_date" widget="date"/>
                 <field name="expired_date" widget="date"/>
                 <field name="status" widget="label_selection"/>
@@ -125,6 +126,9 @@
                                 />
                             </group>
                         </group>
+                    </group>
+                    <group>
+                        <field name="news_description"/>
                     </group>
                     <group>
                         <field name="content" options="{'collaborative':true}"

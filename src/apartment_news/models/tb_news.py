@@ -25,6 +25,7 @@ class tb_news(models.Model):
     content = fields.Html(string='Nội dung', copy=False, )
     file = fields.Binary(string='Tài liệu', attachment=True, help='Chọn tài liệu tải lên')
     file_name = fields.Char(string='Tên tài liệu')
+    news_description = fields.Char(string="Mô tả")
     image = fields.Image(string="Ảnh bản tin")
     create_date = fields.Date(string="Ngày tạo", default=datetime.datetime.today())
     # active = fields.Boolean(string='Trạng thái', default=True)
