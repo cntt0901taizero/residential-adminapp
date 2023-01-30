@@ -382,7 +382,10 @@ button.fa.fa-external-link.btn.btn-secondary.o_external_button {
     padding: 0.5rem;
 }
 tr.o_data_row {
-    font-size: 15px;
+    font-size: 14px;
+}
+.table-hover tbody tr:hover {
+    background-color: #ecfae6;
 }
 .o_list_view .table-responsive .table thead tr:nth-child(1) th {
     position: sticky;
