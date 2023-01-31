@@ -110,7 +110,6 @@ class tb_building_house(models.Model):
         can_do = self.check_access_rights('write', raise_exception=False)
         if not can_do:
             raise ValidationError('Bạn không có quyền chỉnh sửa thông tin!')
-        form_id = self.env.ref('view_tb_building_house_form')
         return {
             'type': 'ir.actions.act_window',
             'name': 'Sửa căn hộ / biệt thự ' + self.name,
@@ -118,7 +117,7 @@ class tb_building_house(models.Model):
             'res_id': self.id,
             'view_type': 'form',
             'view_mode': 'form',
-            'view_id': form_id,
+            'view_id': self.env.ref('apartment_project.view_tb_building_house_form').id,
             'context': {'form_view_initial_mode': 'edit'},
             'target': 'current',
         }

@@ -8,7 +8,7 @@
         <field name="name">tb_blockhouse.tree</field>
         <field name="model">tb_blockhouse</field>
         <field name="arch" type="xml">
-            <tree string="Bảng dự án" multi_edit="1" decoration-danger="is_active == False">
+            <tree string="Bảng dự án" decoration-danger="is_active == False">
                 <field name="image" widget="image" width="100px" optional="show"/>
                 <field name="name" optional="show" decoration-bf="1"/>
                 <field name="code" optional="show"/>

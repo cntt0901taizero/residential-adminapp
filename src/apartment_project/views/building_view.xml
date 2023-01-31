@@ -125,17 +125,19 @@
                                     class="fa fa-plus btn btn-info mb-2" type="object"
                                     attrs="{'invisible':[('id','=',False)]}"/>
                             <field name="building_floors_ids" widget="searchbar_one2many_list">
-                                <tree string="Bảng tầng sàn" default_order="sort" create="false"
-                                      decoration-danger="is_active == False">
-                                    <field name="sort" widget="handle"/>
-                                    <field name="name"/>
-                                    <field name="floors_type"/>
-                                    <field name="total_house"/>
-                                    <field name="building_id" widget="badge"/>
-                                    <field name="blockhouse_id" widget="badge"/>
-                                    <field name="is_active"/>
-<!--                                    <field name="building_house_ids" widget="one2many" mode="tree,kanban"/>-->
-                                </tree>
+<!--                                <tree string="Bảng tầng sàn" default_order="sort" decoration-danger="is_active == False"-->
+<!--                                    editable="bottom" create="0" delete="1" multi_edit="1">-->
+<!--                                    <field name="sort" widget="handle"/>-->
+<!--                                    <field name="name"/>-->
+<!--                                    <field name="floors_type"/>-->
+<!--                                    <field name="total_house"/>-->
+<!--                                    <field name="building_id"-->
+<!--                                           options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>-->
+<!--                                    <field name="blockhouse_id"-->
+<!--                                           options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>-->
+<!--                                    <field name="is_active"/>-->
+<!--&lt;!&ndash;                                    <field name="building_house_ids" widget="one2many" mode="tree,kanban"/>&ndash;&gt;-->
+<!--                                </tree>-->
                             </field>
                         </page>
                         <page string="Căn hộ">
