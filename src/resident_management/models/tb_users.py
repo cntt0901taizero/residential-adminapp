@@ -80,7 +80,7 @@ class tb_users(models.Model):
             },
         }
 
-    def open_edit_form_user(self):
+    def open_edit_form(self):
         # first you need to get the id of your record
         # you didn't specify what you want to edit exactly
         # rec_id = self.env.context.get('active_id').exists()
@@ -104,7 +104,7 @@ class tb_users(models.Model):
             'target': 'current',
         }
 
-    def confirm_delete_user(self):
+    def confirm_delete(self):
         candelete = self.check_access_rights('unlink', raise_exception=False)
         if not candelete:
             raise ValidationError('Bạn không có quyền xóa thông tin tài khoản.')

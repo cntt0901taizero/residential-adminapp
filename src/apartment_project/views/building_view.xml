@@ -20,6 +20,10 @@
                 <field name="location_link" widget="url" optional="show"/>
                 <field name="blockhouse_id" optional="show"/>
                 <field name="is_active" optional="show"/>
+                <button groups="resident_management.group_administration, resident_management.group_management"
+                        name="open_edit_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
+                <button groups="resident_management.group_administration, resident_management.group_management"
+                        name="confirm_delete" class="btn btn-danger" title="Xóa" type="object" icon="fa-trash-o"/>
                 <groupby name="blockhouse_id">
                     <button name="create_building" string=" Thêm mới khu / tòa nhà"
                             class="fa fa-plus btn btn-info" type="object"/>

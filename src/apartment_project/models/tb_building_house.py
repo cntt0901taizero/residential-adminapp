@@ -2,6 +2,7 @@ from odoo import models, fields, api
 from datetime import date
 import random
 from odoo.http import request
+from odoo.exceptions import ValidationError
 
 from odoo.addons.resident_management.models.tb_users_blockhouse_res_groups_rel import USER_GROUP_CODE
 str_bql = USER_GROUP_CODE[2][0]
@@ -46,6 +47,10 @@ class tb_building_house(models.Model):
     building_floors_id = fields.Many2one(comodel_name='tb_building_floors', string="Tầng sàn",
                                          domain="[('building_id', '=', building_id)]",
                                          ondelete="cascade")
+
+    _sql_constraints = [
+        ('code', 'unique(code)', 'Mã căn hộ không được trùng lặp')
+    ]
 
     def set_status_active(self):
         self.is_active = True
@@ -101,8 +106,44 @@ class tb_building_house(models.Model):
         res = super(tb_building_house, self).default_get(data)
         return res
 
-    _sql_constraints = [
-        ('code', 'unique(code)', 'Mã căn hộ không được trùng lặp')
-    ]
+    def open_edit_form(self):
+        can_do = self.check_access_rights('write', raise_exception=False)
+        if not can_do:
+            raise ValidationError('Bạn không có quyền chỉnh sửa thông tin!')
+        form_id = self.env.ref('view_tb_building_house_form')
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Sửa căn hộ / biệt thự ' + self.name,
+            'res_model': 'res.users',
+            'res_id': self.id,
+            'view_type': 'form',
+            'view_mode': 'form',
+            'view_id': form_id,
+            'context': {'form_view_initial_mode': 'edit'},
+            'target': 'current',
+        }
+
+    def confirm_delete(self):
+        candelete = self.check_access_rights('unlink', raise_exception=False)
+        if not candelete:
+            raise ValidationError('Bạn không có quyền xóa bản ghi này!')
+        message = """Bạn có chắc muốn xóa bản ghi này?"""
+        value = self.env['dialog.box.confirm'].sudo().create({'message': message})
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Xóa bản ghi',
+            'res_model': 'dialog.box.confirm',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'target': 'new',
+            'res_id': value.id
+        }
+
+    def del_record(self):
+        for record in self:
+            record.unlink()
+            pass
+
+
 
 
