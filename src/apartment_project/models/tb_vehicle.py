@@ -1,4 +1,5 @@
 from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 from odoo.http import request
 
 from odoo.addons.resident_management.models.tb_users_blockhouse_res_groups_rel import USER_GROUP_CODE
@@ -121,6 +122,44 @@ class tb_vehicle(models.Model):
             domain.append(('blockhouse_id', 'in', list(set(bqt_bh_id + bql_bh_id))))
         res = super(tb_vehicle, self).search_read(domain, fields, offset, limit, order)
         return res
+
+    def open_edit_form(self):
+        can_do = self.check_access_rights('write', raise_exception=False)
+        if not can_do:
+            raise ValidationError('Bạn không có quyền chỉnh sửa thông tin!')
+        form_id = self.env.ref('view_tb_vehicle_form')
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Sửa phương tiện ' + self.name,
+            'res_model': 'tb_vehicle',
+            'res_id': self.id,
+            'view_type': 'form',
+            'view_mode': 'form',
+            'view_id': form_id,
+            'context': {'form_view_initial_mode': 'edit'},
+            'target': 'current',
+        }
+
+    def confirm_delete(self):
+        candelete = self.check_access_rights('unlink', raise_exception=False)
+        if not candelete:
+            raise ValidationError('Bạn không có quyền xóa bản ghi này!')
+        message = """Bạn có chắc muốn xóa bản ghi này?"""
+        value = self.env['dialog.box.confirm'].sudo().create({'message': message})
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Xóa bản ghi',
+            'res_model': 'dialog.box.confirm',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'target': 'new',
+            'res_id': value.id
+        }
+
+    def del_record(self):
+        for record in self:
+            record.unlink()
+            pass
 
 
 

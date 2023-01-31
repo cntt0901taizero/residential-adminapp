@@ -114,7 +114,7 @@ class tb_building_house(models.Model):
         return {
             'type': 'ir.actions.act_window',
             'name': 'Sửa căn hộ / biệt thự ' + self.name,
-            'res_model': 'res.users',
+            'res_model': 'tb_building_house',
             'res_id': self.id,
             'view_type': 'form',
             'view_mode': 'form',

@@ -12,9 +12,9 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='login_date']" position="after">
                 <button groups="resident_management.group_administration, resident_management.group_management"
-                        name="open_edit_form" class="fa fa-pencil btn btn-success" title="Sửa" type="object"/>
+                        name="open_edit_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
                 <button groups="resident_management.group_administration, resident_management.group_management"
-                        name="confirm_delete" class="fa fa-trash-o btn btn-danger" title="Xóa" type="object"/>
+                        name="confirm_delete" class="btn btn-danger" title="Xóa" type="object" icon="fa-trash-o"/>
             </xpath>
         </field>
     </record>

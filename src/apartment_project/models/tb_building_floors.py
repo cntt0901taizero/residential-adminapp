@@ -61,7 +61,7 @@ class tb_building_floors(models.Model):
         return {
             'type': 'ir.actions.act_window',
             'name': 'Sửa tầng ' + self.name,
-            'res_model': 'res.users',
+            'res_model': 'tb_building_floors',
             'res_id': self.id,
             'view_type': 'form',
             'view_mode': 'form',

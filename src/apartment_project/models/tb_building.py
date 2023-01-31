@@ -150,7 +150,7 @@ class tb_building(models.Model):
         return {
             'type': 'ir.actions.act_window',
             'name': 'Sửa khu / tòa nhà ' + self.name,
-            'res_model': 'res.users',
+            'res_model': 'tb_building',
             'res_id': self.id,
             'view_type': 'form',
             'view_mode': 'form',
