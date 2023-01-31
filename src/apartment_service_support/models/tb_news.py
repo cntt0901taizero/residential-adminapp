@@ -105,7 +105,7 @@ class tb_news(models.Model):
 
 
     def open_edit_form_news(self):
-        form_id = self.env.ref('apartment_news.view_tb_news_form')
+        form_id = self.env.ref('apartment_service_support.view_tb_news_form')
         canwrite = self.check_access_rights('write', raise_exception=False)
         if not canwrite:
             raise ValidationError('Bạn không có quyền chỉnh sửa bản tin.')

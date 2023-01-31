@@ -170,9 +170,9 @@
         </field>
     </record>
 
-    <menuitem id="menu_apartment_news_root"
+    <menuitem id="menu_apartment_news"
+              parent="menu_apartment_service_support"
               name="Bản tin"
-              web_icon="apartment_news,static/description/menu-icon.png"
               action="action_tb_news"
               sequence="4"
     />

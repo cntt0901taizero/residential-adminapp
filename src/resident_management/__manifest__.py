@@ -4,7 +4,7 @@
     'category': 'Resident',
     'summary': 'RESIDENTIAL MANAGEMENT',
     'description': """RESIDENTIAL MANAGEMENT""",
-    'depends': ['base', 'mail', 'apartment_project', 'apartment_notifications', 'apartment_banners', 'apartment_news'],
+    'depends': ['base', 'mail', 'apartment_project','apartment_service_support'],
     'sequence': -100,
     'data': [
         'views/icons.xml',

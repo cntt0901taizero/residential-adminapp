@@ -112,6 +112,6 @@
     <menuitem id="menu_tb_notification"
               name="Thông báo"
               action="action_tb_notification"
-              web_icon="apartment_notifications,static/description/menu-icon.png"
+              parent="menu_apartment_service_support"
               sequence="5"/>
 </odoo>
