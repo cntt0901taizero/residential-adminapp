@@ -43,9 +43,8 @@
                 <button name="create_user_blockhouse_groups_rel" string=" Thêm nhóm quyền"
                         class="fa fa-plus btn btn-info mb-2" type="object"
                         attrs="{'invisible':[('id','=',False)]}"/>
-                <field name="tb_users_blockhouse_res_groups_rel_ids" widget="section_and_note_one2many"
-                       mode="tree,kanban">
-                    <tree string="Quản lý tài khoản" create="false">
+                <field name="tb_users_blockhouse_res_groups_rel_ids" widget="searchbar_one2many_list">
+                    <tree string="Quản lý tài khoản" editable="bottom">
                         <field name="group_id" optional="show"/>
                         <field name="user_id" optional="show"/>
                         <field name="blockhouse_id"/>
