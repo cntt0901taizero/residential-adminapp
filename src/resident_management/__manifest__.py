@@ -4,10 +4,10 @@
     'category': 'Resident',
     'summary': 'RESIDENTIAL MANAGEMENT',
     'description': """RESIDENTIAL MANAGEMENT""",
-    'depends': ['base', 'mail', 'apartment_project','apartment_service_support'],
+    'depends': ['base', 'apartment_project','apartment_service_support'],
     'sequence': -100,
     'data': [
-        'views/icons.xml',
+        # 'views/icons.xml',
         'views/layout.xml',
         'security/resident_security.xml',
         'security/ir.model.access.csv',

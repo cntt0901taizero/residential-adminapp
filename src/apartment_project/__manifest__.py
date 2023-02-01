@@ -7,7 +7,7 @@
     'category': 'Resident',
     'summary': 'Apartment Project Management features',
     'description': """""",
-    # 'depends': ['base', 'mail', 'website_profile'],
+    'depends': ['resident_management',],
     'sequence': -100,
     'data': [
         'views/menu.xml',
@@ -16,10 +16,7 @@
         'views/building_house_view.xml',
         'views/building_floors_view.xml',
         'views/building_floors_view.xml',
-        'views/feekind_view.xml',
-        'views/paybillconfig_view.xml',
-        'views/apartment_utilities_view.xml',
-        'views/vehicle_view.xml',
+
     ],
     'installable': True,
     'auto_install': False,

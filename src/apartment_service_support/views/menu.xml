@@ -4,5 +4,17 @@
               name="Dịch vụ hỗ trợ"
               web_icon="apartment_service_support,static/description/menu-icon.png"
               sequence="2"/>
+    <menuitem id="menu_move_furniture"
+              name="Chuyển đồ"
+              parent="menu_apartment_service_support"
+              sequence="4"/>
+    <menuitem id="menu_resident_help"
+              name="Cẩm nang cư dân"
+              parent="menu_apartment_service_support"
+              sequence="5"/>
+     <menuitem id="menu_regiter_access_card"
+              name="Đăng ký thẻ ra vào"
+              parent="menu_apartment_service_support"
+              sequence="6"/>
 
 </odoo>

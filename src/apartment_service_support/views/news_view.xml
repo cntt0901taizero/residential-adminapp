@@ -172,9 +172,9 @@
 
     <menuitem id="menu_apartment_news"
               parent="menu_apartment_service_support"
-              name="Bản tin"
+              name="Tin tức"
               action="action_tb_news"
-              sequence="4"
+              sequence="1"
     />
 </odoo>
 

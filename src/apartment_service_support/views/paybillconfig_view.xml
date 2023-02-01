@@ -63,9 +63,9 @@
     </record>
 
     <!-- This Menu Item must have a parent and an action -->
-    <menuitem id="menu_tb_paybill_config"
-              name="Cấu hình thanh toán"
-              parent="menu_apartment_pay_bill"
-              action="action_tb_paybill_config"
-              sequence="0"/>
+<!--    <menuitem id="menu_tb_paybill_config"-->
+<!--              name="Cấu hình thanh toán"-->
+<!--              parent="menu_apartment_service_support"-->
+<!--              action="action_tb_paybill_config"-->
+<!--              sequence="0"/>-->
 </odoo>

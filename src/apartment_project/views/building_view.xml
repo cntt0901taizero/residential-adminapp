@@ -181,8 +181,8 @@
 
     <!-- This Menu Item must have a parent and an action -->
     <menuitem id="menu_tb_building"
-              name="Khu / Toà nhà"
-              parent="menu_blockhouse"
+              name="Khai báo tòa nhà"
+              parent="menu_apartment_project_root"
               action="action_tb_building"
               sequence="1"/>
 </odoo>
