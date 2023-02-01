@@ -149,15 +149,27 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
             raise ValidationError('Bạn không có quyền chỉnh sửa thông tin!')
         return {
             'type': 'ir.actions.act_window',
-            'name': 'Sửa ',
+            'name': 'Sửa',
             'res_model': 'tb_users_blockhouse_res_groups_rel',
             'res_id': self.id,
             'view_type': 'form',
             'view_mode': 'form',
-            'view_id': self.env.ref('apartment_project.view_tb_users_blockhouse_res_groups_rel_tree').id,
-            'context': {'form_view_initial_mode': 'edit'},
-            'target': 'current',
+            'view_id': self.env.ref('resident_management.view_tb_users_blockhouse_res_groups_rel_tree').id,
+            'context': {},
+            'target': 'new',
         }
+
+        # return {
+        #     'type': 'ir.actions.act_window',
+        #     'name': 'Tạo mới Căn hộ',
+        #     'res_model': 'tb_building_house',
+        #     'target': 'new',
+        #     'view_id': self.env.ref('apartment_project.view_tb_building_house_form').id,
+        #     'view_mode': 'form',
+        #     'context': {
+        #         'default_blockhouse_id': self.id,
+        #     },
+        # }
 
     def confirm_delete(self):
         candelete = self.check_access_rights('unlink', raise_exception=False)

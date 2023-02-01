@@ -43,18 +43,18 @@
                         class="fa fa-plus btn btn-info mb-2" type="object"
                         attrs="{'invisible':[('id','=',False)]}"/>
                 <field name="tb_users_blockhouse_res_groups_rel_ids" widget="searchbar_one2many_list">
-<!--                    <tree string="Quản lý tài khoản" editable="bottom" create="0" delete="0" multi_edit="1">-->
-<!--                        <field name="group_id" optional="show"/>-->
-<!--                        <field name="user_id" optional="show"/>-->
-<!--                        <field name="blockhouse_id" optional="show"-->
-<!--                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>-->
-<!--                        <field name="building_id" optional="show"-->
-<!--                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>-->
-<!--                        <field name="building_house_id" optional="show"-->
-<!--                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>-->
-<!--                        <field name="owner" optional="show"-->
-<!--                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>-->
-<!--                    </tree>-->
+                    <tree string="Quản lý tài khoản" create="0" delete="1">
+<!--                        multi_edit="1"-->
+                        <field name="group_id" optional="show"
+                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                        <field name="blockhouse_id" optional="show"
+                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                        <field name="building_id" optional="show"
+                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                        <field name="building_house_id" optional="show"
+                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                        <field name="relationship_type" optional="show"/>
+                    </tree>
                 </field>
             </div>
 
