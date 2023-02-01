@@ -124,50 +124,32 @@
                             <button name="create_building_floors" string=" Thêm mới Tầng sàn"
                                     class="fa fa-plus btn btn-info mb-2" type="object"
                                     attrs="{'invisible':[('id','=',False)]}"/>
-                            <field name="building_floors_ids" widget="searchbar_one2many_list">
-<!--                                <tree string="Bảng tầng sàn" default_order="sort" decoration-danger="is_active == False"-->
-<!--                                    editable="bottom" create="0" delete="1" multi_edit="1">-->
-<!--                                    <field name="sort" widget="handle"/>-->
+                            <field name="building_floors_ids" widget="searchbar_one2many_list"/>
+                        </page>
+<!--                        <page string="Căn hộ">-->
+<!--                            <button string=" Thêm mới Căn hộ" class="fa fa-plus btn btn-info mb-2"-->
+<!--                                    disabled="True" attrs="{'invisible':[('id','>',0)]}"-->
+<!--                                    title="Cần lưu tòa nhà trước khi thêm mới căn hộ"/>-->
+<!--                            <button name="create_building_house" string=" Thêm mới Căn hộ"-->
+<!--                                    class="fa fa-plus btn btn-info mb-2" type="object"-->
+<!--                                    attrs="{'invisible':[('id','=',False)]}"/>-->
+<!--                            <field name="building_house_ids" widget="searchbar_one2many_list">-->
+<!--                                <tree string="Bảng căn hộ" default_order="name" create="false"-->
+<!--                                      decoration-danger="is_active == False">-->
 <!--                                    <field name="name"/>-->
-<!--                                    <field name="floors_type"/>-->
-<!--                                    <field name="total_house"/>-->
-<!--                                    <field name="building_id"-->
-<!--                                           options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>-->
-<!--                                    <field name="blockhouse_id"-->
-<!--                                           options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>-->
+<!--                                    <field name="code"/>-->
+<!--                                    <field name="address"/>-->
+<!--                                    <field name="house_type"/>-->
+<!--                                    <field name="building_floors_id" widget="badge"/>-->
+<!--                                    <field name="building_id" widget="badge"/>-->
+<!--                                    <field name="blockhouse_id" widget="badge"/>-->
 <!--                                    <field name="is_active"/>-->
-<!--&lt;!&ndash;                                    <field name="building_house_ids" widget="one2many" mode="tree,kanban"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <button name="create_building_house" type="object"/>&ndash;&gt;-->
 <!--                                </tree>-->
-                            </field>
-                        </page>
-                        <page string="Căn hộ">
-                            <button string=" Thêm mới Căn hộ" class="fa fa-plus btn btn-info mb-2"
-                                    disabled="True" attrs="{'invisible':[('id','>',0)]}"
-                                    title="Cần lưu tòa nhà trước khi thêm mới căn hộ"/>
-                            <button name="create_building_house" string=" Thêm mới Căn hộ"
-                                    class="fa fa-plus btn btn-info mb-2" type="object"
-                                    attrs="{'invisible':[('id','=',False)]}"/>
-                            <field name="building_house_ids" widget="searchbar_one2many_list">
-                                <tree string="Bảng căn hộ" default_order="name" create="false"
-                                      decoration-danger="is_active == False">
-                                    <field name="name"/>
-                                    <field name="code"/>
-                                    <field name="address"/>
-                                    <field name="house_type"/>
-                                    <field name="building_floors_id" widget="badge"/>
-                                    <field name="building_id" widget="badge"/>
-                                    <field name="blockhouse_id" widget="badge"/>
-                                    <field name="is_active"/>
-<!--                                    <button name="create_building_house" type="object"/>-->
-                                </tree>
-                            </field>
-                        </page>
+<!--                            </field>-->
+<!--                        </page>-->
                     </notebook>
                 </sheet>
-<!--                <div class="oe_chatter">-->
-<!--                    <field name="name"/>-->
-<!--                    <field name="code"/>-->
-<!--                </div>-->
             </form>
         </field>
     </record>
