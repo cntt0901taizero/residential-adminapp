@@ -27,18 +27,16 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
     _name = 'tb_users_blockhouse_res_groups_rel'
 
     group_id = fields.Many2one(comodel_name='res.groups', string='Nhóm người dùng',
-                               # domain=lambda self: [
-                               #     ('category_id', '=',
-                               #      self.env['ir.module.category'].search([('name', 'ilike', 'Quản lý cư dân')]).id)]
-                               )
+                               domain="[('category_id.name', '=', '[QLCD] Quản lý cư dân')]")
     selected_group = fields.Char(related='group_id.name')
     user_id = fields.Many2one(comodel_name='res.users', string="Tài khoản", ondelete="cascade")
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string='Dự án', ondelete="cascade", domain=lambda self: self._domain_blockhouse_id(),)
     building_id = fields.Many2one(comodel_name='tb_building', string='Tòa nhà',
-                                  domain="['&',('blockhouse_id', '=', blockhouse_id), ('blockhouse_id', '!=', None)]"
-                                  , ondelete="cascade")
+                                  domain="['&',('blockhouse_id', '=', blockhouse_id), ('blockhouse_id', '!=', None)]",
+                                  ondelete="cascade")
     building_house_id = fields.Many2one(comodel_name='tb_building_house', string='Căn hộ',
-                                        domain="['&', '&' ,('building_id', '=', building_id), ('blockhouse_id', '=', blockhouse_id), ('building_id', '!=', None)]", ondelete="cascade")
+                                        domain="['&', '&' ,('building_id', '=', building_id), ('blockhouse_id', '=', blockhouse_id), ('building_id', '!=', None)]",
+                                        ondelete="cascade")
     owner = fields.Boolean(string='Chủ sở hữu', default=False)
     relationship_type = fields.Selection(string='Quan hệ với chủ hộ', selection=RELATIONSHIP_TYPES,
                                          default=RELATIONSHIP_TYPES[0][0])
@@ -154,22 +152,10 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
             'res_id': self.id,
             'view_type': 'form',
             'view_mode': 'form',
-            'view_id': self.env.ref('resident_management.view_tb_users_blockhouse_res_groups_rel_tree').id,
-            'context': {},
-            'target': 'new',
+            'view_id': self.env.ref('resident_management.view_tb_users_blockhouse_res_groups_rel_form').id,
+            'context': {'form_view_initial_mode': 'edit'},
+            'target': 'current',
         }
-
-        # return {
-        #     'type': 'ir.actions.act_window',
-        #     'name': 'Tạo mới Căn hộ',
-        #     'res_model': 'tb_building_house',
-        #     'target': 'new',
-        #     'view_id': self.env.ref('apartment_project.view_tb_building_house_form').id,
-        #     'view_mode': 'form',
-        #     'context': {
-        #         'default_blockhouse_id': self.id,
-        #     },
-        # }
 
     def confirm_delete(self):
         candelete = self.check_access_rights('unlink', raise_exception=False)
