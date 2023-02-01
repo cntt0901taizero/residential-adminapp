@@ -30,7 +30,8 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
                                domain="[('category_id.name', '=', '[QLCD] Quản lý cư dân')]")
     selected_group = fields.Char(related='group_id.name')
     user_id = fields.Many2one(comodel_name='res.users', string="Tài khoản", ondelete="cascade")
-    blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string='Dự án', ondelete="cascade", domain=lambda self: self._domain_blockhouse_id(),)
+    blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string='Dự án', ondelete="cascade")
+                                    # domain=lambda self: self._domain_blockhouse_id())
     building_id = fields.Many2one(comodel_name='tb_building', string='Tòa nhà',
                                   domain="['&',('blockhouse_id', '=', blockhouse_id), ('blockhouse_id', '!=', None)]",
                                   ondelete="cascade")
@@ -43,23 +44,23 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
     user_group_code = fields.Selection(string='Mã nhóm quyền', selection=USER_GROUP_CODE,
                                        default=USER_GROUP_CODE[0][0])
 
-    def _domain_blockhouse_id(self):
-        user = request.env.user
-        bqt_bh_id = []  # ban quan tri - blockhouse - id
-        bqt_bd_id = []  # ban quan tri - building - id
-        bql_bh_id = []  # ban quan ly - blockhouse - id
-        bql_bd_id = []  # ban quan ly - building - id
-        if user and user.id != 1 and user.id != 2:
-            for item in user.tb_users_blockhouse_res_groups_rel_ids:
-                if item.group_id.name and str_bqt in item.user_group_code:
-                    bqt_bh_id.append(int(item.blockhouse_id.id))
-                    bqt_bd_id.append(int(item.building_id.id))
-                if item.group_id.name and str_bql in item.user_group_code:
-                    bql_bh_id.append(int(item.blockhouse_id.id))
-                    bql_bd_id.append(int(item.building_id.id))
-            return [("is_active", "=", True), ("id", "in", list(set(bqt_bh_id + bql_bh_id)))]
-        else:
-            return [("is_active", "=", True)]
+    # def _domain_blockhouse_id(self):
+    #     user = request.env.user
+    #     bqt_bh_id = []  # ban quan tri - blockhouse - id
+    #     bqt_bd_id = []  # ban quan tri - building - id
+    #     bql_bh_id = []  # ban quan ly - blockhouse - id
+    #     bql_bd_id = []  # ban quan ly - building - id
+    #     if user and user.id != 1 and user.id != 2:
+    #         for item in user.tb_users_blockhouse_res_groups_rel_ids:
+    #             if item.group_id.name and str_bqt in item.user_group_code:
+    #                 bqt_bh_id.append(int(item.blockhouse_id.id))
+    #                 bqt_bd_id.append(int(item.building_id.id))
+    #             if item.group_id.name and str_bql in item.user_group_code:
+    #                 bql_bh_id.append(int(item.blockhouse_id.id))
+    #                 bql_bd_id.append(int(item.building_id.id))
+    #         return [("is_active", "=", True), ("id", "in", list(set(bqt_bh_id + bql_bh_id)))]
+    #     else:
+    #         return [("is_active", "=", True)]
 
     @api.onchange('relationship_type')
     def _on_change_relationship_type(self):
