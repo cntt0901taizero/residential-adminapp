@@ -28,18 +28,18 @@
 }
 
 .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-primary.disabled {
-    color: #2196f3;
+    color: #fff;
     background-color: #f5f6fa;
-    border-left: 3px solid #2196f3;
+//     border-left: 3px solid #2196f3;
 }
 
 .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-primary.disabled:after, .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-primary.disabled:before {
-    border-left-color: #2196f3;
+    border-left-color: #077346;
 }
 
 .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button:not(:first-child):before,
 .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-primary.disabled:after {
-    border-left-color: #f5f6fa;
+    border-left-color: #077346;
 }
 
 .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button:not(.disabled):hover, .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button:not(.disabled):active, .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button:not(.disabled):focus {

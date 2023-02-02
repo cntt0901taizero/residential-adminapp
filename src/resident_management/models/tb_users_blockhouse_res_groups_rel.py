@@ -45,6 +45,8 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
     user_group_code = fields.Selection(string='Mã nhóm quyền', selection=USER_GROUP_CODE,
                                        default=USER_GROUP_CODE[0][0])
 
+
+
     def _domain_blockhouse_id(self):
         user = request.env.user
         bqt_bh_id = []  # ban quan tri - blockhouse - id

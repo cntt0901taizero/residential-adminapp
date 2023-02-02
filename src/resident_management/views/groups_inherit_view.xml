@@ -52,9 +52,9 @@
     </record>
 
     <record id="menu_tb_groups_inherit" model="ir.ui.menu">
-        <field name="name">Nhóm người dùng</field>
+        <field name="name">Tạo nhóm phân quyền</field>
         <field name="action" ref="resident_management.action_tb_groups_inherit"/>
-        <field name="parent_id" ref="menu_resident_root"/>
+        <field name="parent_id" ref="menu_account_admin"/>
         <field name="groups_id" eval="[(4, ref('base.group_system')), (4, ref('base.group_erp_manager'))]"/>
     </record>
 
