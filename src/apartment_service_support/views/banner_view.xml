@@ -22,7 +22,7 @@
                     <group>
                         <field name="name"/>
                         <field name="banner_description" options="{'collaborative':true}"
-                               placeholder="Nhập mô tả banner">
+                               placeholder="Nhập mô tả quảng cáo">
                         </field>
                         <field name="image" readonly="0" widget="image" options='{"preview_image": "image_256"}'/>
                     </group>
@@ -44,7 +44,7 @@
 
 
     <record id="action_tb_banner" model="ir.actions.act_window">
-        <field name="name">Banner</field>
+        <field name="name">Quảng cáo</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">tb_banner</field>
         <field name="view_mode">tree,form</field>

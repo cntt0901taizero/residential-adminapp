@@ -76,7 +76,7 @@
     </record>
 
     <record id="action_tb_building_house" model="ir.actions.act_window">
-        <field name="name">Quản lý căn hộ / biệt thự</field>
+        <field name="name">Quản lý căn hộ</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">tb_building_house</field>
         <field name="view_mode">tree,form</field>
