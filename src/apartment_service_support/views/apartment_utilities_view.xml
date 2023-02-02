@@ -78,27 +78,53 @@
 
     <menuitem id="menu_utilities"
               name="Tiện ích cư dân"
-              action="action_tb_apartment_utilities"
               parent="menu_apartment_service_support"
               sequence="4"/>
+    <menuitem id="menu_create_utilities"
+              name="Tạo tiện ích"
+              action="action_tb_apartment_utilities"
+              parent="menu_utilities"
+              sequence="1"/>
+    <menuitem id="menu_approve_utilities"
+              name="Phê duyệt tiện ích"
+              action="action_tb_apartment_utilities"
+              parent="menu_utilities"
+              sequence="2"/>
 
     <menuitem id="menu_move_furniture"
               name="Chuyển đồ"
-              action="action_tb_apartment_utilities"
               parent="menu_apartment_service_support"
               sequence="5"/>
+    <menuitem id="menu_move_furniture_list"
+              name="Danh sách yêu cầu"
+              action="action_tb_apartment_utilities"
+              parent="menu_move_furniture"
+              sequence="1"/>
 
     <menuitem id="menu_resident_handbook"
               name="Cẩm nang cư dân"
-              action="action_tb_apartment_utilities"
               parent="menu_apartment_service_support"
               sequence="6"/>
+    <menuitem id="menu_create_resident_handbook"
+              name="Tạo cẩm nang cư dân"
+              action="action_tb_apartment_utilities"
+              parent="menu_resident_handbook"
+              sequence="1"/>
+    <menuitem id="menu_approve_resident_handbook"
+              name="Phê duyệt cẩm nang cư dân"
+              action="action_tb_apartment_utilities"
+              parent="menu_resident_handbook"
+              sequence="2"/>
 
     <menuitem id="menu_access_card_registration"
               name="Đăng ký thẻ ra vào"
-              action="action_tb_apartment_utilities"
               parent="menu_apartment_service_support"
               sequence="7"/>
+    <menuitem id="menu_access_card_registration_list"
+              name="Danh sách đăng ký"
+              action="action_tb_apartment_utilities"
+              parent="menu_access_card_registration"
+              sequence="1"/>
 
 
 </odoo>

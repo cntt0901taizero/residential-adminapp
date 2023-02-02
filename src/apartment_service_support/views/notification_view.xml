@@ -112,6 +112,17 @@
     <menuitem id="menu_notification"
               name="Thông báo"
               parent="menu_apartment_service_support"
+              sequence="3"/>
+
+    <menuitem id="menu_create_notification"
+              name="Tạo thông báo"
+              parent="menu_notification"
+              action="action_tb_notification"
+              sequence="3"/>
+
+    <menuitem id="menu_approve_notification"
+              name="Phê duyệt thông báo"
+              parent="menu_notification"
               action="action_tb_notification"
               sequence="3"/>
 
