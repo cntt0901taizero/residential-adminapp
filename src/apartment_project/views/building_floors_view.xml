@@ -91,10 +91,10 @@
         </field>
     </record>
 
-<!--    &lt;!&ndash; This Menu Item must have a parent and an action &ndash;&gt;-->
-<!--    <menuitem id="menu_tb_building_floors"-->
-<!--              name="Tầng sàn"-->
-<!--              parent="menu_blockhouse"-->
-<!--              action="action_tb_building_floors"-->
-<!--              sequence="3"/>-->
+     <menuitem id="menu_building_floors"
+              name="Khai báo Tầng"
+              parent="menu_apartment_project_root"
+              action="action_tb_building_floors"
+              sequence="3"/>
+
 </odoo>

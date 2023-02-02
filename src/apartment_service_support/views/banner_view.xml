@@ -53,11 +53,11 @@
         </field>
     </record>
 
-    <menuitem id="menu_apartment_banners"
+    <menuitem id="menu_banners"
+              name="Quảng cáo"
               parent="menu_apartment_service_support"
-              name="Ảnh sự kiện"
               action="action_tb_banner"
-              sequence="3"/>
+              sequence="1"/>
 
 </odoo>
 

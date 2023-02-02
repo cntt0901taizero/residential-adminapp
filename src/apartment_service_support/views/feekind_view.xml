@@ -59,9 +59,9 @@
     </record>
 
     <!-- This Menu Item must have a parent and an action -->
-    <menuitem id="menu_tb_feekind"
-              name="Danh mục phí"
-              parent="menu_apartment_pay_bill"
-              action="action_tb_feekind"
-              sequence="0"/>
+<!--    <menuitem id="menu_tb_feekind"-->
+<!--              name="Danh mục phí"-->
+<!--              parent="menu_apartment_pay_bill"-->
+<!--              action="action_tb_feekind"-->
+<!--              sequence="0"/>-->
 </odoo>

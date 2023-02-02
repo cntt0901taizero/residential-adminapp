@@ -154,7 +154,7 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
             'res_id': self.id,
             'view_type': 'form',
             'view_mode': 'form',
-            'view_id': self.env.ref('apartment_project.view_tb_users_blockhouse_res_groups_rel_tree').id,
+            'view_id': self.env.ref('resident_management.view_tb_users_blockhouse_res_groups_rel_tree').id,
             'context': {'form_view_initial_mode': 'edit'},
             'target': 'current',
         }

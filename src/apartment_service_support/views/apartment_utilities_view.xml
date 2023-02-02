@@ -76,10 +76,29 @@
         </field>
     </record>
 
-    <!-- This Menu Item must have a parent and an action -->
-    <menuitem id="menu_tb_apartment_utilities"
-              name="Tiện ích chung cư"
-              parent="menu_apartment_utilities_and_service"
+    <menuitem id="menu_utilities"
+              name="Tiện ích cư dân"
               action="action_tb_apartment_utilities"
-              sequence="1"/>
+              parent="menu_apartment_service_support"
+              sequence="4"/>
+
+    <menuitem id="menu_move_furniture"
+              name="Chuyển đồ"
+              action="action_tb_apartment_utilities"
+              parent="menu_apartment_service_support"
+              sequence="5"/>
+
+    <menuitem id="menu_resident_handbook"
+              name="Cẩm nang cư dân"
+              action="action_tb_apartment_utilities"
+              parent="menu_apartment_service_support"
+              sequence="6"/>
+
+    <menuitem id="menu_access_card_registration"
+              name="Đăng ký thẻ ra vào"
+              action="action_tb_apartment_utilities"
+              parent="menu_apartment_service_support"
+              sequence="7"/>
+
+
 </odoo>

@@ -80,10 +80,10 @@
         </field>
     </record>
 
-    <!-- This Menu Item must have a parent and an action -->
-    <menuitem id="menu_tb_vehicle"
-              name="Phương tiện"
-              parent="menu_parking_and_vehicle"
+     <menuitem id="menu_vehicle_card_registration"
+              name="Đăng ký thẻ xe"
               action="action_tb_vehicle"
-              sequence="1"/>
+              parent="menu_apartment_service_support"
+              sequence="8"/>
+
 </odoo>

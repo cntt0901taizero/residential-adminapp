@@ -82,10 +82,10 @@
         </field>
     </record>
 
-    <!-- This Menu Item must have a parent and an action -->
-    <menuitem id="menu_tb_blockhouse"
-              name="Dự án"
-              parent="menu_blockhouse"
+    <menuitem id="menu_blockhouse"
+              name="Khai báo Dự án"
+              parent="menu_apartment_project_root"
               action="action_tb_blockhouse"
-              sequence="0"/>
+              sequence="1"/>
+
 </odoo>

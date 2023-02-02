@@ -89,10 +89,16 @@
         </field>
     </record>
 
-    <!-- This Menu Item must have a parent and an action -->
-    <menuitem id="menu_tb_building_house"
-              name="Căn hộ / Biệt thự"
-              parent="menu_blockhouse"
+    <menuitem id="menu_building_house"
+              name="Khai báo Căn hộ"
+              parent="menu_apartment_project_root"
               action="action_tb_building_house"
-              sequence="3"/>
+              sequence="4"/>
+
+     <menuitem id="menu_building_house_information"
+              name="Khai báo Thông tin căn hộ"
+              parent="menu_apartment_project_root"
+              action="action_tb_building_house"
+              sequence="5"/>
+
 </odoo>

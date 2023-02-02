@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
     <menuitem id="menu_apartment_service_support"
               name="Dịch vụ hỗ trợ"
               web_icon="apartment_service_support,static/description/menu-icon.png"
-              sequence="2"/>
+              sequence="3"/>
 
 </odoo>

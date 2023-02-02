@@ -4,7 +4,7 @@
     'category': 'Resident',
     'summary': 'RESIDENTIAL MANAGEMENT',
     'description': """RESIDENTIAL MANAGEMENT""",
-    'depends': ['base', 'mail', 'apartment_project','apartment_service_support'],
+    'depends': ['base', 'mail'],
     'sequence': -100,
     'data': [
         'views/icons.xml',
@@ -24,17 +24,6 @@
             'resident_management/static/src/scss/login.scss',
         ],
         'web.assets_backend': [
-            # 'resident_management/static/src/css/style.css',
-            # 'resident_management/static/src/scss/theme_accent.scss',
-            # 'resident_management/static/src/scss/navigation_bar.scss',
-            # 'resident_management/static/src/scss/datetimepicker.scss',
-            # 'resident_management/static/src/scss/theme.scss',
-            # 'resident_management/static/src/scss/sidebar.scss',
-            #
-            # 'resident_management/static/src/js/fields/colors.js',
-            # 'resident_management/static/src/js/chrome/sidebar_menu.js',
-
-
             'resident_management/static/src/scss/variable.scss',
             'resident_management/static/src/scss/global.scss',
             'resident_management/static/src/scss/menu.scss',

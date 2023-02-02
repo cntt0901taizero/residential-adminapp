@@ -9,26 +9,11 @@
     <menuitem id="menu_apartment_project_root"
               name="Quản lý dự án"
               web_icon="apartment_project,static/description/menu-icon.png"
-              sequence="1"/>
-
-    <menuitem id="menu_blockhouse"
-              name="Ql dự án"
-              parent="menu_apartment_project_root"
-              sequence="1"/>
-
-    <menuitem id="menu_apartment_utilities_and_service"
-              name="Dịch vụ và tiện ích"
-              parent="menu_apartment_project_root"
               sequence="2"/>
 
-    <menuitem id="menu_parking_and_vehicle"
-              name="Bãi đậu xe và phương tiện"
-              parent="menu_apartment_project_root"
-              sequence="3"/>
 
-    <menuitem id="menu_apartment_pay_bill"
-              name="Danh mục phí và cấu hình thanh toán"
-              parent="menu_apartment_project_root"
-              sequence="4"/>
+
+
+
 
 </odoo>
