@@ -82,8 +82,8 @@
 
     <!-- This Menu Item must have a parent and an action -->
     <menuitem id="menu_tb_vehicle"
-              name="Đăng ký thẻ xe"
-              parent="menu_apartment_service_support"
+              name="Phương tiện"
+              parent="menu_parking_and_vehicle"
               action="action_tb_vehicle"
-              sequence="7"/>
+              sequence="1"/>
 </odoo>

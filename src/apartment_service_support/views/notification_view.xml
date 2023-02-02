@@ -113,5 +113,5 @@
               name="Thông báo"
               action="action_tb_notification"
               parent="menu_apartment_service_support"
-              sequence="2"/>
+              sequence="5"/>
 </odoo>

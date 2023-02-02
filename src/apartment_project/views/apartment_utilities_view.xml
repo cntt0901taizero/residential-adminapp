@@ -78,8 +78,8 @@
 
     <!-- This Menu Item must have a parent and an action -->
     <menuitem id="menu_tb_apartment_utilities"
-              name="Tiện ích cư dân"
-              parent="menu_apartment_service_support"
+              name="Tiện ích chung cư"
+              parent="menu_apartment_utilities_and_service"
               action="action_tb_apartment_utilities"
-              sequence="3"/>
+              sequence="1"/>
 </odoo>

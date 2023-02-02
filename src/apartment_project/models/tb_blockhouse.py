@@ -96,7 +96,7 @@ class tb_blockhouse(models.Model):
             'name': 'Tạo mới tiện ích',
             'res_model': 'tb_apartment_utilities',
             'target': 'new',
-            'view_id': self.env.ref('apartment_service_support.view_tb_apartment_utilities_form').id,
+            'view_id': self.env.ref('apartment_project.view_tb_apartment_utilities_form').id,
             'view_mode': 'form',
             'context': {
                 'default_blockhouse_id': self.id,

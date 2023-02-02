@@ -55,9 +55,9 @@
 
     <menuitem id="menu_apartment_banners"
               parent="menu_apartment_service_support"
-              name="Quảng cáo"
+              name="Ảnh sự kiện"
               action="action_tb_banner"
-              sequence="0"/>
+              sequence="3"/>
 
 </odoo>
 

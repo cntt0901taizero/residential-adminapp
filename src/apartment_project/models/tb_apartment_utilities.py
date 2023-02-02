@@ -84,7 +84,7 @@ class tb_apartment_utilities(models.Model):
             'res_id': self.id,
             'view_type': 'form',
             'view_mode': 'form',
-            'view_id': self.env.ref('apartment_service_support.view_tb_apartment_utilities_form').id,
+            'view_id': self.env.ref('apartment_project.view_tb_apartment_utilities_form').id,
             'context': {'form_view_initial_mode': 'edit'},
             'target': 'current',
         }
