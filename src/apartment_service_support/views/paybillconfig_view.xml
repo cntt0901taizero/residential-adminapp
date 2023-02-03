@@ -9,7 +9,7 @@
         <field name="model">tb_paybill_config</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="name"/>
+                <field name="description"/>
                 <field name="price"/>
                 <field name="is_active"/>
                 <field name="feekind_id"/>
@@ -28,7 +28,7 @@
                 <sheet>
                     <group>
                         <field name="feekind_id"/>
-                        <field name="name"/>
+                        <field name="description"/>
                         <field name="price"/>
                         <field name="blockhouse_id"/>
                         <field name="building_id"/>
