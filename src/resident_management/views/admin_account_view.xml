@@ -4,21 +4,7 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 <odoo>
-    <record id="view_users_resident_tree" model="ir.ui.view">
-        <field name="name">res.users.resident.tree.inherit</field>
-        <field name="model">res.users</field>
-        <field name="inherit_id" ref="base.view_users_tree"/>
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='login_date']" position="after">
-                <button groups="resident_management.group_administration, resident_management.group_management"
-                        name="open_edit_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
-                <button groups="resident_management.group_administration, resident_management.group_management"
-                        name="confirm_delete" class="btn btn-danger" title="Xóa" type="object" icon="fa-trash-o"/>
-            </xpath>
-        </field>
-    </record>
-
-    <record id="view_users_form_inherit" model="ir.ui.view">
+    <record id="view_admin_users_form_inherit" model="ir.ui.view">
         <field name="name">res.users.resident.form.inherit</field>
         <field name="model">res.users</field>
         <field name="arch" type="xml">
@@ -49,16 +35,30 @@
                     <button name="create_user_blockhouse_groups_rel" string=" Thêm nhóm quyền"
                             class="fa fa-plus btn btn-info mb-2" type="object"
                             attrs="{'invisible':[('id','=',False)]}"/>
-                    <field name="tb_users_blockhouse_res_groups_rel_ids" widget="searchbar_one2many_list">
 
+                    <field name="tb_users_blockhouse_res_groups_rel_ids" widget="one2many" mode="tree">
+                        <tree string="Quản lý tài khoản" editable="bottom" create="0" delete="0" multi_edit="1">
+                            <field name="blockhouse_id" optional="show"
+                                   options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                            <field name="building_id" optional="show"
+                                   options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+
+                            <field name="group_id" optional="show"/>
+                            <button groups="resident_management.group_administration, resident_management.group_management"
+                                    name="open_edit_form" class="btn btn-light" title="Sửa" type="object"
+                                    icon="fa-pencil"/>
+                            <button groups="resident_management.group_administration, resident_management.group_management"
+                                    name="confirm_delete" class="btn btn-danger" title="Xóa" type="object"
+                                    icon="fa-trash-o"/>
+                        </tree>
                     </field>
                 </sheet>
             </form>
         </field>
     </record>
 
-    <record id="view_resident_users_search" model="ir.ui.view">
-        <field name="name">resident_users.search</field>
+    <record id="view_admin_users_search" model="ir.ui.view">
+        <field name="name">admin_user.search</field>
         <field name="model">res.users</field>
         <field name="inherit_id" ref="base.view_users_search"/>
         <field name="arch" type="xml">
@@ -67,8 +67,6 @@
                        filter_domain="[('tb_users_blockhouse_res_groups_rel_ids.blockhouse_id','ilike', self)]"/>
                 <field string="Tên tòa nhà" name="tb_users_blockhouse_res_groups_rel_ids"
                        filter_domain="[('tb_users_blockhouse_res_groups_rel_ids.building_id','ilike', self)]"/>
-                <field string="Tên căn hộ" name="tb_users_blockhouse_res_groups_rel_ids"
-                       filter_domain="[('tb_users_blockhouse_res_groups_rel_ids.building_house_id','ilike', self)]"/>
             </field>
         </field>
     </record>
@@ -80,28 +78,11 @@
         <field name="view_mode">tree,form</field>
         <field name="view_ids" eval="[(5, 0, 0),
                 (0, 0, {'view_mode': 'tree', 'view_id': ref('base.view_users_tree')}),
-                (0, 0, {'view_mode': 'form', 'view_id': ref('view_users_form_inherit')})]"
+                (0, 0, {'view_mode': 'form', 'view_id': ref('view_admin_users_form_inherit')})]"
         />
         <field name="domain">[('user_type', '=', 'ADMIN')]</field>
         <field name="limit">10</field>
         <field name="context">{'default_user_type': 'ADMIN'}</field>
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">Thêm mới tài khoản!</p>
-        </field>
-    </record>
-
-    <record id="action_account_resident" model="ir.actions.act_window">
-        <field name="name">Tài khoản cư dân</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">res.users</field>
-        <field name="view_mode">tree,form</field>
-        <field name="view_ids" eval="[(5, 0, 0),
-                (0, 0, {'view_mode': 'tree', 'view_id': ref('base.view_users_tree')}),
-                (0, 0, {'view_mode': 'form', 'view_id': ref('view_users_form_inherit')})]"
-        />
-        <field name="domain">[('user_type', '=', 'RESIDENT')]</field>
-        <field name="limit">10</field>
-        <field name="context">{'default_user_type': 'RESIDENT'}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Thêm mới tài khoản!</p>
         </field>
@@ -121,26 +102,6 @@
         <field name="action" ref="action_account_admin"/>
         <field name="parent_id" ref="menu_account_admin"/>
         <field name="sequence">1</field>
-    </record>
-
-    <record id="menu_account_resident" model="ir.ui.menu">
-        <field name="name">Tài khoản cư dân</field>
-        <field name="parent_id" ref="menu_resident_root"/>
-        <field name="sequence">2</field>
-    </record>
-
-    <record id="menu_create_account_resident" model="ir.ui.menu">
-        <field name="name">Thêm tài khoản cư dân</field>
-        <field name="action" ref="action_account_resident"/>
-        <field name="parent_id" ref="menu_account_resident"/>
-        <field name="sequence">1</field>
-    </record>
-
-    <record id="menu_approve_account_resident" model="ir.ui.menu">
-        <field name="name">Phê duyệt tài khoản</field>
-        <field name="action" ref="action_account_resident"/>
-        <field name="parent_id" ref="menu_account_resident"/>
-        <field name="sequence">2</field>
     </record>
 
 
