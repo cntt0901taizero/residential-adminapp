@@ -14,11 +14,18 @@ class tb_users(models.Model):
     push_notifications = fields.One2many('tb_push_notification', 'user_id', string='Push Notification', readonly=True)
     tb_users_blockhouse_res_groups_rel_ids = fields.One2many('tb_users_blockhouse_res_groups_rel', 'user_id',
                                                              string="Quan hệ phân quyền")
-    # user_admin = fields.Boolean(string='Tài khoản quản trị', default=False)
-    user_admin = fields.Selection([
+    citizen_identification = fields.Char(string='CMND/CCCD')
+    date_of_birth = fields.Date(string='Ngày sinh', copy=False)
+    gender = fields.Selection([
+        ('Male', 'Nam'),
+        ('Female', 'Nữ'),
+        ('Other', 'Khác'),
+    ], default='Male', string="Giới tính", )
+    user_type = fields.Selection([
         ('ADMIN', 'Quản trị'),
         ('RESIDENT', 'Cư dân'),
-    ], default='ADMIN', string="Loại tài khoản", )
+        ('OTHER', 'Other'),
+    ], default='OTHER', string="Loại tài khoản", )
     # display_building = fields.Char('Tòa nhà', related='tb_users_blockhouse_res_groups_rel_ids.building_id.name')
     # display_apartment = fields.Char('Căn hộ', related='tb_users_blockhouse_res_groups_rel_ids.building_house_id.name')
 
