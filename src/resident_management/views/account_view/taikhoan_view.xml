@@ -27,8 +27,6 @@
                 </header>
                 <sheet>
                     <field name="id" invisible="1"/>
-                    <field name="active_partner" required="0" readonly="1" invisible="1"/>
-
                     <field name="avatar_128" invisible="1"/>
                     <field name="user_type" invisible="1"/>
                     <field name="image_1920" widget='image' class="oe_avatar"
@@ -43,10 +41,6 @@
                         <h2>
                             <field name="login" placeholder="e.g. email@yourcompany.com"/>
                         </h2>
-                        <group>
-                            <field name="partner_id" readonly="1" required="0" groups="base.group_no_one"
-                                   attrs="{'invisible': [('id', '=', False)]}"/>
-                        </group>
                     </div>
                     <button string=" Thêm nhóm quyền" class="fa fa-plus btn btn-info mb-2"
                             disabled="True" attrs="{'invisible':[('id','>',0)]}"
