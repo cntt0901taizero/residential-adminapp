@@ -27,37 +27,22 @@
                 </header>
                 <sheet>
                     <field name="id" invisible="1"/>
-                    <div class="oe_button_box" name="button_box">
-                        <button name="action_show_groups" type="object" groups="base.group_no_one"
-                                class="oe_stat_button" icon="fa-users">
-                            <field string="Groups" name="groups_count" widget="statinfo"/>
-                        </button>
-                        <button name="action_show_accesses" type="object" groups="base.group_no_one"
-                                class="oe_stat_button" icon="fa-list">
-                            <field string="Access Rights" name="accesses_count" widget="statinfo"/>
-                        </button>
-                        <button name="action_show_rules" type="object" groups="base.group_no_one" class="oe_stat_button"
-                                icon="fa-list-ul">
-                            <field string="Record Rules" name="rules_count" widget="statinfo"/>
-                        </button>
-                    </div>
-                    <!--                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger"-->
-                    <!--                            attrs="{'invisible': [('active', '=', True)]}"/>-->
                     <field name="active_partner" required="0" readonly="1" invisible="1"/>
 
                     <field name="avatar_128" invisible="1"/>
+                    <field name="user_admin" invisible="1"/>
                     <field name="image_1920" widget='image' class="oe_avatar"
                            options='{"preview_image": "avatar_128"}'/>
                     <div class="oe_title">
-                        <label for="name"/>
-                        <h1>
-                            <field name="name" placeholder="e.g. John Doe" required="1"/>
-                        </h1>
-                        <field name="email" invisible="1"/>
-                        <label for="login" string="Email Address"/>
+                        <label for="login" string="Username"/>
                         <h2>
                             <field name="login" placeholder="e.g. email@yourcompany.com"/>
                         </h2>
+                        <label for="name" string="Họ và tên"/>
+                        <h1>
+                            <field name="name" placeholder="e.g. John Doe" required="1"/>
+                        </h1>
+
                     </div>
                     <button string=" Thêm nhóm quyền" class="fa fa-plus btn btn-info mb-2"
                             disabled="True" attrs="{'invisible':[('id','>',0)]}"
@@ -99,11 +84,9 @@
                 (0, 0, {'view_mode': 'tree', 'view_id': ref('base.view_users_tree')}),
                 (0, 0, {'view_mode': 'form', 'view_id': ref('view_users_form_inherit')})]"
         />
-        <field name="domain">['|',('tb_users_blockhouse_res_groups_rel_ids.group_id.name', 'like', '[BQL]%'),
-            ('tb_users_blockhouse_res_groups_rel_ids.group_id.name', 'like', '[BQT]%')]
-        </field>
+        <field name="domain">[('user_admin', '=', 'ADMIN')]</field>
         <field name="limit">10</field>
-        <field name="context">{}</field>
+        <field name="context">{'default_user_admin': 'ADMIN'}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Thêm mới tài khoản!</p>
         </field>
@@ -118,9 +101,9 @@
                 (0, 0, {'view_mode': 'tree', 'view_id': ref('base.view_users_tree')}),
                 (0, 0, {'view_mode': 'form', 'view_id': ref('view_users_form_inherit')})]"
         />
-        <field name="domain">[('tb_users_blockhouse_res_groups_rel_ids.group_id.name', 'like', '[CD]%')]</field>
+        <field name="domain">[('user_admin', '=', 'RESIDENT')]</field>
         <field name="limit">10</field>
-        <field name="context">{}</field>
+        <field name="context">{'default_user_admin': 'RESIDENT'}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Thêm mới tài khoản!</p>
         </field>
