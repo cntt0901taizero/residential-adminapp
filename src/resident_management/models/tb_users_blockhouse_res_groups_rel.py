@@ -35,7 +35,7 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
     user_id = fields.Many2one(comodel_name='res.users', string="Tài khoản", ondelete="cascade")
     job_title = fields.Char(string='Chức danh')
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string='Dự án', ondelete="cascade",
-                                    domain=lambda self: self._domain_blockhouse_id(), )
+                                    domain=lambda self: self._domain_blockhouse_id())
     building_id = fields.Many2one(comodel_name='tb_building', string='Tòa nhà',
                                   domain="['&',('blockhouse_id', '=', blockhouse_id), ('blockhouse_id', '!=', None)]"
                                   , ondelete="cascade")
