@@ -4,7 +4,6 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 <odoo>
-
     <record id="view_users_resident_tree" model="ir.ui.view">
         <field name="name">res.users.resident.tree.inherit</field>
         <field name="model">res.users</field>
@@ -19,50 +18,59 @@
         </field>
     </record>
 
-    <record id="view_users_form_simple_modif_inherit" model="ir.ui.view">
-        <field name="name">res.users.preferences.form</field>
-        <field name="model">res.users</field>
-        <field name="inherit_id" ref="base.view_users_form_simple_modif"/>
-        <field name="arch" type="xml">
-            <field name="image_1920" position="replace">
-            </field>
-        </field>
-    </record>
     <record id="view_users_form_inherit" model="ir.ui.view">
-        <field name="name">res.users.form</field>
+        <field name="name">res.users.resident.form.inherit</field>
         <field name="model">res.users</field>
-        <field name="inherit_id" ref="base.view_users_form"/>
         <field name="arch" type="xml">
-            <div class="oe_title" position="after">
-                <button string=" Thêm nhóm quyền" class="fa fa-plus btn btn-info mb-2"
-                        disabled="True" attrs="{'invisible':[('id','>',0)]}"
-                        data-toggle="tooltip"
-                        title="Cần lưu thông tin tài khoản trước khi thêm mới nhóm quyền cho tài khoản"/>
-                <button name="create_user_blockhouse_groups_rel" string=" Thêm nhóm quyền"
-                        class="fa fa-plus btn btn-info mb-2" type="object"
-                        attrs="{'invisible':[('id','=',False)]}"/>
-                <field name="tb_users_blockhouse_res_groups_rel_ids" widget="searchbar_one2many_list">
-                    <!--                    <tree string="Quản lý tài khoản" editable="bottom" create="0" delete="0" multi_edit="1">-->
-                    <!--                        <field name="group_id" optional="show"/>-->
-                    <!--                        <field name="user_id" optional="show"/>-->
-                    <!--                        <field name="blockhouse_id" optional="show"-->
-                    <!--                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>-->
-                    <!--                        <field name="building_id" optional="show"-->
-                    <!--                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>-->
-                    <!--                        <field name="building_house_id" optional="show"-->
-                    <!--                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>-->
-                    <!--                        <field name="owner" optional="show"-->
-                    <!--                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>-->
-                    <!--                    </tree>-->
-                </field>
-            </div>
+            <form string="Users">
+                <header>
+                </header>
+                <sheet>
+                    <field name="id" invisible="1"/>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_show_groups" type="object" groups="base.group_no_one"
+                                class="oe_stat_button" icon="fa-users">
+                            <field string="Groups" name="groups_count" widget="statinfo"/>
+                        </button>
+                        <button name="action_show_accesses" type="object" groups="base.group_no_one"
+                                class="oe_stat_button" icon="fa-list">
+                            <field string="Access Rights" name="accesses_count" widget="statinfo"/>
+                        </button>
+                        <button name="action_show_rules" type="object" groups="base.group_no_one" class="oe_stat_button"
+                                icon="fa-list-ul">
+                            <field string="Record Rules" name="rules_count" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <!--                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger"-->
+                    <!--                            attrs="{'invisible': [('active', '=', True)]}"/>-->
+                    <field name="active_partner" required="0" readonly="1" invisible="1"/>
 
-            <page name="access_rights" position="replace"/>
-            <!--            <page name="preferences" position="replace"/>-->
-            <!--            <notebook position="replace"/>-->
-            <!--             <notebook position="replace">-->
-            <!--                        -->
-            <!--                </notebook>-->
+                    <field name="avatar_128" invisible="1"/>
+                    <field name="image_1920" widget='image' class="oe_avatar"
+                           options='{"preview_image": "avatar_128"}'/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="e.g. John Doe" required="1"/>
+                        </h1>
+                        <field name="email" invisible="1"/>
+                        <label for="login" string="Email Address"/>
+                        <h2>
+                            <field name="login" placeholder="e.g. email@yourcompany.com"/>
+                        </h2>
+                    </div>
+                    <button string=" Thêm nhóm quyền" class="fa fa-plus btn btn-info mb-2"
+                            disabled="True" attrs="{'invisible':[('id','>',0)]}"
+                            data-toggle="tooltip"
+                            title="Cần lưu thông tin tài khoản trước khi thêm mới nhóm quyền cho tài khoản"/>
+                    <button name="create_user_blockhouse_groups_rel" string=" Thêm nhóm quyền"
+                            class="fa fa-plus btn btn-info mb-2" type="object"
+                            attrs="{'invisible':[('id','=',False)]}"/>
+                    <field name="tb_users_blockhouse_res_groups_rel_ids" widget="searchbar_one2many_list">
+
+                    </field>
+                </sheet>
+            </form>
         </field>
     </record>
 
@@ -87,12 +95,13 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">res.users</field>
         <field name="view_mode">tree,form</field>
-        <!--        (0, 0, {'view_mode': 'form', 'view_id': ref('view_users_form_inherit')})]-->
         <field name="view_ids" eval="[(5, 0, 0),
                 (0, 0, {'view_mode': 'tree', 'view_id': ref('base.view_users_tree')}),
                 (0, 0, {'view_mode': 'form', 'view_id': ref('view_users_form_inherit')})]"
         />
-        <field name="domain">['|',('tb_users_blockhouse_res_groups_rel_ids.group_id.name', 'like', '[BQL]%'), ('tb_users_blockhouse_res_groups_rel_ids.group_id.name', 'like', '[BQT]%')]</field>
+        <field name="domain">['|',('tb_users_blockhouse_res_groups_rel_ids.group_id.name', 'like', '[BQL]%'),
+            ('tb_users_blockhouse_res_groups_rel_ids.group_id.name', 'like', '[BQT]%')]
+        </field>
         <field name="limit">10</field>
         <field name="context">{}</field>
         <field name="help" type="html">
@@ -105,7 +114,6 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">res.users</field>
         <field name="view_mode">tree,form</field>
-        <!--        (0, 0, {'view_mode': 'form', 'view_id': ref('view_users_form_inherit')})]-->
         <field name="view_ids" eval="[(5, 0, 0),
                 (0, 0, {'view_mode': 'tree', 'view_id': ref('base.view_users_tree')}),
                 (0, 0, {'view_mode': 'form', 'view_id': ref('view_users_form_inherit')})]"
@@ -122,29 +130,36 @@
         <field name="name">Tài khoản quản trị</field>
         <field name="parent_id" ref="menu_resident_root"/>
         <field name="sequence">1</field>
-        <field name="groups_id"
-               eval="[(4, ref('resident_management.group_administration')), (4, ref('resident_management.group_management')), (4, ref('base.group_system')), (4, ref('base.group_erp_manager'))]"
-        />
+        <!--        <field name="groups_id"-->
+        <!--               eval="[(4, ref('resident_management.group_administration')), (4, ref('resident_management.group_management')), (4, ref('base.group_system')), (4, ref('base.group_erp_manager'))]"-->
+        <!--        />-->
     </record>
 
-     <record id="menu_create_account_admin" model="ir.ui.menu">
+    <record id="menu_create_account_admin" model="ir.ui.menu">
         <field name="name">Tạo tài khoản quản trị</field>
         <field name="action" ref="action_account_admin"/>
         <field name="parent_id" ref="menu_account_admin"/>
         <field name="sequence">1</field>
-        <field name="groups_id"
-               eval="[(4, ref('resident_management.group_administration')), (4, ref('resident_management.group_management')), (4, ref('base.group_system')), (4, ref('base.group_erp_manager'))]"
-        />
     </record>
 
     <record id="menu_account_resident" model="ir.ui.menu">
         <field name="name">Tài khoản cư dân</field>
-        <field name="action" ref="action_account_resident"/>
         <field name="parent_id" ref="menu_resident_root"/>
         <field name="sequence">2</field>
-        <field name="groups_id"
-               eval="[(4, ref('resident_management.group_administration')), (4, ref('resident_management.group_management')), (4, ref('base.group_system')), (4, ref('base.group_erp_manager'))]"
-        />
+    </record>
+
+    <record id="menu_create_account_resident" model="ir.ui.menu">
+        <field name="name">Thêm tài khoản cư dân</field>
+        <field name="action" ref="action_account_resident"/>
+        <field name="parent_id" ref="menu_account_resident"/>
+        <field name="sequence">1</field>
+    </record>
+
+    <record id="menu_approve_account_resident" model="ir.ui.menu">
+        <field name="name">Phê duyệt tài khoản</field>
+        <field name="action" ref="action_account_resident"/>
+        <field name="parent_id" ref="menu_account_resident"/>
+        <field name="sequence">2</field>
     </record>
 
 

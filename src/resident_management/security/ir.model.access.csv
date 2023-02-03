@@ -2,7 +2,7 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 
 access_res_users_administration,access_res_users_administration,base.model_res_users,group_administration,1,1,1,1
 access_res_users_management,access_res_users_management,base.model_res_users,group_management,1,1,1,1
-access_res_users_resident,access_res_users_group_cudan,base.model_res_users,group_resident,0,1,0,0
+access_res_users_resident,access_res_users_group_cudan,base.model_res_users,group_resident,0,0,0,0
 
 access_change_password_wizard_administration,access_change_password_wizard_administration,base.model_change_password_wizard,group_administration,1,1,1,0
 access_change_password_wizard_management,access_change_password_wizard_management,base.model_change_password_wizard,group_management,1,1,1,0
