@@ -8,7 +8,7 @@
         <field name="name">tb_blockhouse.tree</field>
         <field name="model">tb_blockhouse</field>
         <field name="arch" type="xml">
-            <tree string="Bảng dự án" multi_edit="1" decoration-danger="is_active == False">
+            <tree string="Bảng dự án" decoration-danger="is_active == False">
                 <field name="image" widget="image" width="100px" optional="show"/>
                 <field name="name" optional="show" decoration-bf="1"/>
                 <field name="code" optional="show"/>
@@ -19,8 +19,6 @@
                         <field name="name"/>
                         <field name="code"/>
                         <field name="building_level"/>
-<!--                        <field name="floors_above_ground_number"/>-->
-<!--                        <field name="floors_below_ground_number"/>-->
                         <field name="website"/>
                         <field name="image"/>
                         <field name="address"/>
@@ -28,6 +26,10 @@
                     </tree>
                 </field>
                 <field name="is_active"/>
+                <button groups="resident_management.group_administration, resident_management.group_management"
+                        name="open_edit_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
+                <button groups="resident_management.group_administration, resident_management.group_management"
+                        name="confirm_delete" class="btn btn-danger" title="Xóa" type="object" icon="fa-trash-o"/>
             </tree>
         </field>
     </record>
@@ -45,7 +47,6 @@
                         <field name="name"/>
                         <field name="code"/>
                         <field name="is_active"/>
-<!--                        widget="boolean_toggle"-->
                     </group>
                     <group string="Thông tin địa chỉ liên hệ">
                         <field name="address" widget="text"/>
@@ -81,10 +82,10 @@
         </field>
     </record>
 
-    <!-- This Menu Item must have a parent and an action -->
-    <menuitem id="menu_tb_blockhouse"
-              name="Dự án"
-              parent="menu_blockhouse"
+    <menuitem id="menu_blockhouse"
+              name="Khai báo Dự án"
+              parent="menu_apartment_project_root"
               action="action_tb_blockhouse"
-              sequence="0"/>
+              sequence="1"/>
+
 </odoo>

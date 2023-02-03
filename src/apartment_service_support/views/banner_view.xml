@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_tb_banner_tree" model="ir.ui.view">
+        <field name="name">tb_banner.tree</field>
+        <field name="model">tb_banner</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="image" widget="image" width="100px"/>
+                <field name="name" decoration-bf="1"/>
+                <field name="create_date" widget="date"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="view_tb_banner_form" model="ir.ui.view">
+        <field name="name">tb_banner.form</field>
+        <field name="model">tb_banner</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="banner_description" options="{'collaborative':true}"
+                               placeholder="Nhập mô tả quảng cáo">
+                        </field>
+                        <field name="image" readonly="0" widget="image" options='{"preview_image": "image_256"}'/>
+                    </group>
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+    <record id="view_tb_banner_search" model="ir.ui.view">
+        <field name="name">tb_banner.search</field>
+        <field name="model">tb_banner</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter name="name" string="Tên banner"/>
+            </search>
+        </field>
+    </record>
+
+
+    <record id="action_tb_banner" model="ir.actions.act_window">
+        <field name="name">Quảng cáo</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">tb_banner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Tạo bản ghi đầu tiên của bạn</p>
+        </field>
+    </record>
+
+    <menuitem id="menu_banners"
+              name="Quảng cáo"
+              parent="menu_apartment_service_support"
+              sequence="1"/>
+
+    <menuitem id="menu_create_banners"
+              name="Tạo quảng cáo"
+              parent="menu_banners"
+              action="action_tb_banner"
+              sequence="1"/>
+
+    <menuitem id="menu_approve_banners"
+              name="Phê duyệt quảng cáo"
+              parent="menu_banners"
+              action="action_tb_banner"
+              sequence="2"/>
+
+</odoo>
+

@@ -17,6 +17,10 @@
                 <field name="building_id" widget="badge" optional="show"/>
                 <field name="blockhouse_id" widget="badge" optional="show"/>
                 <field name="is_active" optional="show"/>
+                <button groups="resident_management.group_administration, resident_management.group_management"
+                        name="open_edit_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
+                <button groups="resident_management.group_administration, resident_management.group_management"
+                        name="confirm_delete" class="btn btn-danger" title="Xóa" type="object" icon="fa-trash-o"/>
                 <groupby name="building_floors_id">
                     <button name="create_building_house" string=" Thêm mới căn hộ / biệt thự"
                             class="fa fa-plus btn btn-info" type="object"/>
@@ -72,7 +76,7 @@
     </record>
 
     <record id="action_tb_building_house" model="ir.actions.act_window">
-        <field name="name">Quản lý căn hộ / biệt thự</field>
+        <field name="name">Quản lý căn hộ</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">tb_building_house</field>
         <field name="view_mode">tree,form</field>
@@ -85,10 +89,16 @@
         </field>
     </record>
 
-    <!-- This Menu Item must have a parent and an action -->
-    <menuitem id="menu_tb_building_house"
-              name="Căn hộ / Biệt thự"
-              parent="menu_blockhouse"
+    <menuitem id="menu_building_house"
+              name="Khai báo Căn hộ"
+              parent="menu_apartment_project_root"
               action="action_tb_building_house"
-              sequence="3"/>
+              sequence="4"/>
+
+     <menuitem id="menu_building_house_information"
+              name="Khai báo Thông tin căn hộ"
+              parent="menu_apartment_project_root"
+              action="action_tb_building_house"
+              sequence="5"/>
+
 </odoo>

@@ -14,6 +14,18 @@ class tb_users(models.Model):
     push_notifications = fields.One2many('tb_push_notification', 'user_id', string='Push Notification', readonly=True)
     tb_users_blockhouse_res_groups_rel_ids = fields.One2many('tb_users_blockhouse_res_groups_rel', 'user_id',
                                                              string="Quan hệ phân quyền")
+    citizen_identification = fields.Char(string='CMND/CCCD')
+    date_of_birth = fields.Date(string='Ngày sinh', copy=False)
+    gender = fields.Selection([
+        ('Male', 'Nam'),
+        ('Female', 'Nữ'),
+        ('Other', 'Khác'),
+    ], default='Male', string="Giới tính", )
+    user_type = fields.Selection([
+        ('ADMIN', 'Quản trị'),
+        ('RESIDENT', 'Cư dân'),
+        ('OTHER', 'Other'),
+    ], default='OTHER', string="Loại tài khoản", )
     # display_building = fields.Char('Tòa nhà', related='tb_users_blockhouse_res_groups_rel_ids.building_id.name')
     # display_apartment = fields.Char('Căn hộ', related='tb_users_blockhouse_res_groups_rel_ids.building_house_id.name')
 
@@ -80,7 +92,7 @@ class tb_users(models.Model):
             },
         }
 
-    def open_edit_form_user(self):
+    def open_edit_form(self):
         # first you need to get the id of your record
         # you didn't specify what you want to edit exactly
         # rec_id = self.env.context.get('active_id').exists()
@@ -104,7 +116,7 @@ class tb_users(models.Model):
             'target': 'current',
         }
 
-    def confirm_delete_user(self):
+    def confirm_delete(self):
         candelete = self.check_access_rights('unlink', raise_exception=False)
         if not candelete:
             raise ValidationError('Bạn không có quyền xóa thông tin tài khoản.')

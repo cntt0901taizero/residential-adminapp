@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_tb_news_tree" model="ir.ui.view">
+        <field name="name">tb_news.tree</field>
+        <field name="model">tb_news</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="image" widget="image" width="100px"/>
+                <field name="name" decoration-bf="1"/>
+                <field name="news_description" decoration-bf="1"/>
+                <field name="create_date" widget="date"/>
+                <field name="expired_date" widget="date"/>
+                <field name="status" widget="label_selection"/>
+                <button name="confirm_delete_news" class="fa fa-trash-o fa-lg float-right btn btn-danger"
+                        title="Xóa"
+                        aria-label="Xóa" type="object"/>
+                <button name="open_edit_form_news" class="fa fa-pencil fa-lg float-right btn btn-success"
+                        title="Sửa" aria-label="Sửa" type="object"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_tb_news_kanban" model="ir.ui.view">
+        <field name="name">tb_news.kanban</field>
+        <field name="model">tb_news</field>
+        <field name="arch" type="xml">
+            <kanban records_draggable="0" quick_create="false">
+                <field name="id"/>
+                <field name="name"/>
+                <field name="create_date"/>
+                <field name="expired_date"/>
+                <field name="image"/>
+                <field name="status"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_card oe_kanban_global_click">
+                            <div class="o_kanban_image">
+                                <img t-att-src="kanban_image('tb_news', 'image', record.id.raw_value)"
+                                     alt="Bản tin" class="o_image_64_contain"/>
+                            </div>
+                            <div class="oe_kanban_details">
+                                <div class="o_kanban_record_top mb-0">
+                                    <div class="o_kanban_record_headings">
+                                        <strong class="o_kanban_record_title">
+                                            <t t-esc="record.name.value"/>
+                                        </strong>
+                                    </div>
+                                </div>
+                                <div name="product_lst_price" class="mt-1">
+                                    <span>Ngày tạo:
+                                        <field name="create_date" widget="date"/>
+                                    </span>
+                                </div>
+                                <div name="product_lst_price" class="mt-1">
+                                    <span>Ngày hết hạn:
+                                        <field name="expired_date" widget="date"/>
+                                    </span>
+                                </div>
+                                <div name="product_lst_price" class="mt-1">
+                                    <span>
+                                        <field name="status" widget="label_selection"/>
+                                    </span>
+                                </div>
+                                <!--                                <div class="o_kanban_record_bottom">-->
+                                <!--                                    <div class="oe_kanban_bottom_left"></div>-->
+                                <!--                                    <div class="oe_kanban_bottom_right"></div>-->
+                                <!--                                </div>-->
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_tb_news_form" model="ir.ui.view">
+        <field name="name">tb_news.form</field>
+        <field name="model">tb_news</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                            icon="fa-check"
+                            class="oe_highlight"
+                            status="DRAFT, REJECT"
+                            name="set_status_active" string="Phê duyệt" type="object"
+                            attrs="{'invisible':[('id','=',False)]}"
+                            groups="resident_management.group_administration"
+                    />
+                    <button
+                            icon="fa-times"
+                            attrs="{'invisible':[('id','=',False)]}"
+                            name="set_status_reject" string="Từ chối duyệt" type="object" status="DRAFT, ACTIVE"
+                            groups="resident_management.group_administration"/>
+                    <field name="status" widget="statusbar"
+                           groups="resident_management.group_administration, resident_management.group_management"/>
+                </header>
+                <sheet>
+                    <field name="image" readonly="0" widget="image" class="oe_right oe_avatar"/>
+                    <xpath expr="//form" position="attributes">
+                        <strong>Tiêu đề</strong>
+                    </xpath>
+                    <h1>
+                        <field name="name" class="text-truncate"/>
+                    </h1>
+                    <group>
+                        <field name="file" filename="file_name" widget='binary'/>
+                        <field name="file_name"/>
+                    </group>
+                    <group>
+                        <field name="expired_date"/>
+                    </group>
+                    <group col="12" class="oe_invoice_lines_tab">
+                        <group colspan="4">
+                            <field name="news_type" widget="radio"/>
+                        </group>
+                        <group colspan="8">
+                            <group>
+                                <field name="blockhouse_id" attrs="{'required': True}"
+                                       options="{'no_quick_create':True,'no_create': True, 'no_edit': True, 'no_open': True}"/>
+                            </group>
+                            <group>
+                                <field name="building_id"
+                                       attrs="{'required': True, 'invisible':[('news_type','=','PROJECT_APARTMENT')]}"
+                                       options="{'no_quick_create':True,'no_create': True, 'no_edit': True, 'no_open': True}"
+                                />
+                            </group>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="news_description"/>
+                    </group>
+                    <group>
+                        <field name="content" options="{'collaborative':true}"
+                               widget="html"
+                               placeholder="Nhập vào nội dung chi tiết bản tin">
+                        </field>
+                    </group>
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+
+    <record id="view_tb_news_search" model="ir.ui.view">
+        <field name="name">tb_news.search</field>
+        <field name="model">tb_news</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter name="name" string="Tiêu đề"/>
+                <filter name="filter_draft" string="Nháp" domain="[('status', '=', 'DRAFT')]"/>
+                <filter name="filter_active" string="Đã đăng" domain="[('status', '=', 'ACTIVE')]"/>
+                <!--                <group expand="1" string="Group By">-->
+                <!--                    <filter name="group_status" string="Trạng thái" context="{'group_by': 'status'}"/>-->
+                <!--                </group>-->
+            </search>
+        </field>
+    </record>
+
+
+    <record id="action_tb_news" model="ir.actions.act_window">
+        <field name="name">Bản tin</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">tb_news</field>
+        <field name="view_mode">tree,form</field>
+        <!--        <field name="context">{'search_default_group_status':1}</field>-->
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Tạo bản ghi đầu tiên của bạn</p>
+        </field>
+    </record>
+
+     <menuitem id="menu_news"
+              name="Tin tức"
+              parent="menu_apartment_service_support"
+              sequence="2"/>
+
+    <menuitem id="menu_create_news"
+              name="Tạo tin tức"
+              parent="menu_news"
+              action="action_tb_news"
+              sequence="1"/>
+
+    <menuitem id="menu_approve_news"
+              name="Phê duyệt tin tức"
+              parent="menu_news"
+              action="action_tb_news"
+              sequence="2"/>
+</odoo>
+

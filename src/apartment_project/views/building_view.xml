@@ -20,6 +20,10 @@
                 <field name="location_link" widget="url" optional="show"/>
                 <field name="blockhouse_id" optional="show"/>
                 <field name="is_active" optional="show"/>
+                <button groups="resident_management.group_administration, resident_management.group_management"
+                        name="open_edit_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
+                <button groups="resident_management.group_administration, resident_management.group_management"
+                        name="confirm_delete" class="btn btn-danger" title="Xóa" type="object" icon="fa-trash-o"/>
                 <groupby name="blockhouse_id">
                     <button name="create_building" string=" Thêm mới khu / tòa nhà"
                             class="fa fa-plus btn btn-info" type="object"/>
@@ -121,17 +125,19 @@
                                     class="fa fa-plus btn btn-info mb-2" type="object"
                                     attrs="{'invisible':[('id','=',False)]}"/>
                             <field name="building_floors_ids" widget="searchbar_one2many_list">
-                                <tree string="Bảng tầng sàn" default_order="sort" create="false"
-                                      decoration-danger="is_active == False">
-                                    <field name="sort" widget="handle"/>
-                                    <field name="name"/>
-                                    <field name="floors_type"/>
-                                    <field name="total_house"/>
-                                    <field name="building_id" widget="badge"/>
-                                    <field name="blockhouse_id" widget="badge"/>
-                                    <field name="is_active"/>
-<!--                                    <field name="building_house_ids" widget="one2many" mode="tree,kanban"/>-->
-                                </tree>
+<!--                                <tree string="Bảng tầng sàn" default_order="sort" decoration-danger="is_active == False"-->
+<!--                                    editable="bottom" create="0" delete="1" multi_edit="1">-->
+<!--                                    <field name="sort" widget="handle"/>-->
+<!--                                    <field name="name"/>-->
+<!--                                    <field name="floors_type"/>-->
+<!--                                    <field name="total_house"/>-->
+<!--                                    <field name="building_id"-->
+<!--                                           options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>-->
+<!--                                    <field name="blockhouse_id"-->
+<!--                                           options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>-->
+<!--                                    <field name="is_active"/>-->
+<!--&lt;!&ndash;                                    <field name="building_house_ids" widget="one2many" mode="tree,kanban"/>&ndash;&gt;-->
+<!--                                </tree>-->
                             </field>
                         </page>
                         <page string="Căn hộ">
@@ -191,10 +197,9 @@
         </field>
     </record>
 
-    <!-- This Menu Item must have a parent and an action -->
-    <menuitem id="menu_tb_building"
-              name="Khu / Toà nhà"
-              parent="menu_blockhouse"
+    <menuitem id="menu_building"
+              name="Khai báo Tòa nhà"
+              parent="menu_apartment_project_root"
               action="action_tb_building"
-              sequence="1"/>
+              sequence="2"/>
 </odoo>
