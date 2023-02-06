@@ -11,6 +11,8 @@
                        options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                 <field name="building_id" optional="show"
                        options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                <field name="building_floors_id" optional="show"
+                       options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                 <field name="building_house_id" optional="show"
                        options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                 <field name="owner" optional="show"
