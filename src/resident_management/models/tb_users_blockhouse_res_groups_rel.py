@@ -34,19 +34,19 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
     selected_group = fields.Char(related='group_id.name')
     user_id = fields.Many2one(comodel_name='res.users', string="Tài khoản", ondelete="cascade")
     job_title = fields.Char(string='Chức danh')
-    blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string='Dự án', ondelete="cascade", domain=lambda self: self._domain_blockhouse_id(),)
+    blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string='Dự án', ondelete="cascade",
+                                    domain=lambda self: self._domain_blockhouse_id())
     building_id = fields.Many2one(comodel_name='tb_building', string='Tòa nhà',
                                   domain="['&',('blockhouse_id', '=', blockhouse_id), ('blockhouse_id', '!=', None)]"
                                   , ondelete="cascade")
     building_house_id = fields.Many2one(comodel_name='tb_building_house', string='Căn hộ',
-                                        domain="['&', '&' ,('building_id', '=', building_id), ('blockhouse_id', '=', blockhouse_id), ('building_id', '!=', None)]", ondelete="cascade")
+                                        domain="['&', '&' ,('building_id', '=', building_id), ('blockhouse_id', '=', blockhouse_id), ('building_id', '!=', None)]",
+                                        ondelete="cascade")
     owner = fields.Boolean(string='Chủ sở hữu', default=False)
     relationship_type = fields.Selection(string='Quan hệ với chủ hộ', selection=RELATIONSHIP_TYPES,
                                          default=RELATIONSHIP_TYPES[0][0])
     user_group_code = fields.Selection(string='Mã nhóm quyền', selection=USER_GROUP_CODE,
                                        default=USER_GROUP_CODE[0][0])
-
-
 
     def _domain_blockhouse_id(self):
         user = request.env.user

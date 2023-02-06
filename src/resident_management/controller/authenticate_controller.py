@@ -23,6 +23,7 @@ class AuthenticateController(http.Controller):
             #     return common_response(403, 'User is deactived', [])
 
             uid = request.session.authenticate(request.session.db, request.params['login'], request.params['password'])
+            # aaa = uid.cookies.get('session_id')
             request.params['login_success'] = True
             session_info = request.env['ir.http'].session_info()
             user = request.env.user

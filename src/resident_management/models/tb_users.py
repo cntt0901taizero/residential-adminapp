@@ -80,12 +80,17 @@ class tb_users(models.Model):
         return super(tb_users, self).create(vals)
 
     def create_user_blockhouse_groups_rel(self):
+        view_id = ''
+        if self.user_type != 'RESIDENT':
+            view_id = self.env.ref('resident_management.view_tb_users_blockhouse_res_groups_rel_form').id
+        else:
+            view_id = self.env.ref('resident_management.view_tb_users_blockhouse_res_groups_rel_form_resident').id
         return {
             'type': 'ir.actions.act_window',
             'name': 'Thêm nhóm quyền',
             'res_model': 'tb_users_blockhouse_res_groups_rel',
             'target': 'new',
-            'view_id': self.env.ref('resident_management.view_tb_users_blockhouse_res_groups_rel_form').id,
+            'view_id': view_id,
             'view_mode': 'form',
             'context': {
                 'default_user_id': self.id,
