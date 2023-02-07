@@ -110,10 +110,21 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
 
     @api.model
     def create(self, value):
-        uid = value["user_id"]
-        gid = value["group_id"]
-        blockhouse_id = value["blockhouse_id"]
-        building_id = value["building_id"]
+        uid = None
+        gid = None
+        blockhouse_id = None
+        building_id = None
+        building_house_id = None
+        if 'user_id' in value:
+            uid = value["user_id"]
+        if 'group_id' in value:
+            gid = value["group_id"]
+        else:
+            gid = self.env['res.groups'].search([('name', 'like', '%[CD]%')]).id
+        if 'blockhouse_id' in value:
+            blockhouse_id = value["blockhouse_id"]
+        if 'building_id' in value:
+            building_id = value["building_id"]
         if 'owner' in value:
             owner = value['owner']
         if "building_house_id" not in value:
