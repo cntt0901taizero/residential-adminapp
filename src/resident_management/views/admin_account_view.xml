@@ -92,15 +92,13 @@
         <field name="name">Tài khoản quản trị</field>
         <field name="parent_id" ref="menu_resident_root"/>
         <field name="sequence">1</field>
-        <!--        <field name="groups_id"-->
-        <!--               eval="[(4, ref('resident_management.group_administration')), (4, ref('resident_management.group_management')), (4, ref('base.group_system')), (4, ref('base.group_erp_manager'))]"-->
-        <!--        />-->
     </record>
 
     <record id="menu_create_account_admin" model="ir.ui.menu">
         <field name="name">Tạo tài khoản quản trị</field>
         <field name="action" ref="action_account_admin"/>
         <field name="parent_id" ref="menu_account_admin"/>
+        <field name="groups_id" eval="[(4, ref('base.group_system')), (4, ref('base.group_erp_manager'))]"/>
         <field name="sequence">1</field>
     </record>
 
