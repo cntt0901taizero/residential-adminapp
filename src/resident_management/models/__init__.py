@@ -10,6 +10,10 @@ from . import tb_notification
 from . import tb_push_notification
 from . import tb_fcm_token
 from . import tb_banner
+from . import tb_access_card
+from . import tb_complain
+from . import tb_register_delivery
+from . import tb_resident_handbook
 
 from . import tb_blockhouse
 from . import tb_building
