@@ -81,20 +81,25 @@ class tb_users(models.Model):
 
     def create_user_blockhouse_groups_rel(self):
         view_id = ''
+        name = ''
+        context = {
+            'default_user_id': self.id,
+        }
         if self.user_type != 'RESIDENT':
+            name = 'Chọn nhóm quyền quản trị'
             view_id = self.env.ref('resident_management.view_tb_users_blockhouse_res_groups_rel_form').id
         else:
+            name = 'Chọn căn hộ cư dân'
+            context['default_group_id'] = self.env['res.groups'].search([('name', 'like', '%[CD]%')]).id
             view_id = self.env.ref('resident_management.view_tb_users_blockhouse_res_groups_rel_form_resident').id
         return {
             'type': 'ir.actions.act_window',
-            'name': 'Thêm nhóm quyền',
+            'name': name,
             'res_model': 'tb_users_blockhouse_res_groups_rel',
             'target': 'new',
             'view_id': view_id,
             'view_mode': 'form',
-            'context': {
-                'default_user_id': self.id,
-            },
+            'context': context,
         }
 
     def open_edit_form(self):
