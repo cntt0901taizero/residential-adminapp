@@ -17,16 +17,22 @@
                     <field name="user_type" invisible="1"/>
                     <field name="image_1920" widget='image' class="oe_avatar"
                            options='{"preview_image": "avatar_128"}'/>
-                    <div class="oe_title">
-                        <label for="name"/>
-                        <h1>
-                            <field name="name" placeholder="e.g. John Doe" required="1"/>
-                        </h1>
-                        <field name="email" invisible="1"/>
-                        <label for="login" string="Email Address"/>
-                        <h2>
-                            <field name="login" placeholder="e.g. email@yourcompany.com"/>
-                        </h2>
+                    <div class="d-flex oe_title">
+                        <div class="row container">
+                            <div class="col-6">
+                                <label for="name"/>
+                                <h2>
+                                    <field name="name" placeholder="e.g. John Doe" required="1"/>
+                                </h2>
+                            </div>
+                            <div class="col-6">
+                                <field name="email" invisible="1"/>
+                                <label for="login" string="Email Address"/>
+                                <h2>
+                                    <field name="login" placeholder="e.g. email@yourcompany.com"/>
+                                </h2>
+                            </div>
+                        </div>
                     </div>
                     <button string=" Thêm nhóm quyền" class="fa fa-plus btn btn-info mb-2"
                             disabled="True" attrs="{'invisible':[('id','>',0)]}"
@@ -42,8 +48,11 @@
                                    options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                             <field name="building_id" optional="show"
                                    options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                            <field name="building_floors_id"
+                                   options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                             <field name="building_house_id" optional="show"
                                    options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+
                             <field name="owner" optional="show"
                                    options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                             <field name="group_id" optional="show"/>
