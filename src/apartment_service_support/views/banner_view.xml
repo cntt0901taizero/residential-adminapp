@@ -56,19 +56,8 @@
     <menuitem id="menu_banners"
               name="Quảng cáo"
               parent="menu_apartment_service_support"
-              sequence="1"/>
-
-    <menuitem id="menu_create_banners"
-              name="Tạo quảng cáo"
-              parent="menu_banners"
               action="action_tb_banner"
               sequence="1"/>
-
-    <menuitem id="menu_approve_banners"
-              name="Phê duyệt quảng cáo"
-              parent="menu_banners"
-              action="action_tb_banner"
-              sequence="2"/>
 
 </odoo>
 

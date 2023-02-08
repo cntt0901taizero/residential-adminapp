@@ -173,17 +173,6 @@
      <menuitem id="menu_news"
               name="Tin tức"
               parent="menu_apartment_service_support"
-              sequence="2"/>
-
-    <menuitem id="menu_create_news"
-              name="Tạo tin tức"
-              parent="menu_news"
-              action="action_tb_news"
-              sequence="1"/>
-
-    <menuitem id="menu_approve_news"
-              name="Phê duyệt tin tức"
-              parent="menu_news"
               action="action_tb_news"
               sequence="2"/>
 </odoo>

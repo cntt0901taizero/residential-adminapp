@@ -14,7 +14,7 @@ class tb_access_card(models.Model):
 
     name = fields.Char(string='Họ và tên', copy=False)
     code = fields.Char(string='Mã', copy=False)
-    shipping_method = fields.Selection(string='Quan hệ', selection=RELATIONSHIP_TYPES,
+    relationship_type = fields.Selection(string='Quan hệ', selection=RELATIONSHIP_TYPES,
                                        default=RELATIONSHIP_TYPES[0][0])
     status = fields.Boolean(string='Trạng thái', default=True)
 

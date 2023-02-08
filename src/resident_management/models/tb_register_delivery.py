@@ -107,7 +107,7 @@ class tb_register_delivery(models.Model):
             domain.append(('building_id', 'in', list(set(bqt_bd_id + bql_bd_id))))
             domain.append(('blockhouse_id', 'in', list(set(bqt_bh_id + bql_bh_id))))
         res = super(tb_register_delivery, self).read_group(domain, fields, groupby, offset=offset, limit=limit,
-                                                 orderby=orderby, lazy=lazy)
+                                                           orderby=orderby, lazy=lazy)
         return res
 
     @api.model
