@@ -10,7 +10,6 @@
         <field name="arch" type="xml">
             <tree string="Bảng cẩm nang cư dân">
                 <field name="name" optional="show"/>
-                <field name="image" optional="show"/>
                 <field name="description" optional="show"/>
                 <field name="detail_description" optional="show"/>
                 <field name="is_active" optional="show"/>
@@ -29,9 +28,6 @@
             <form create="false">
                 <sheet>
                     <group>
-                        <field string="Ảnh" name="image"
-                               height="400px" widget="image"
-                               class="oe_left oe_avatar"/>
                         <field name="name"/>
                         <field name="description"/>
                         <field name="detail_description"/>

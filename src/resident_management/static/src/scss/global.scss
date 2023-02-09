@@ -82,6 +82,7 @@ button.btn {
     border: none;
     box-shadow: none!important;
     outline: none!important;
+    margin: 2px!important
 }
 
 button.btn.btn-primary {
@@ -95,7 +96,7 @@ button.btn.btn-primary:hover, button.btn.btn-primary:active, button.btn.btn-prim
 }
 
 button.btn.btn-secondary {
-    border-color: #fff;
+    border-color: #E8E8E8;
 }
 
 button.btn.btn-fill-light, button.btn.btn-light {

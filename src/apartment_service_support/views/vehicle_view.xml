@@ -8,14 +8,14 @@
         <field name="name">tb_vehicle.tree</field>
         <field name="model">tb_vehicle</field>
         <field name="arch" type="xml">
-            <tree string="Bảng quản lý phương tiện" decoration-danger="is_active == False">
+            <tree string="Bảng quản lý phương tiện">
                 <field name="name" optional="show"/>
                 <field name="vehicle_type" optional="show"/>
                 <field name="note" optional="show"/>
                 <field name="blockhouse_id" optional="show"/>
                 <field name="building_id" optional="show"/>
                 <field name="building_house_id" optional="show"/>
-                <field name="is_active" optional="show"/>
+                <field name="status" optional="show"/>
                 <button groups="resident_management.group_administration, resident_management.group_management"
                         name="open_edit_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
                 <button groups="resident_management.group_administration, resident_management.group_management"
@@ -37,7 +37,7 @@
                         <field name="name"/>
                         <field name="vehicle_type" widget="selection_badge"/>
                         <field name="note"/>
-                        <field name="is_active"/>
+                        <field name="status"/>
                     </group>
                     <group string="Thông tin sở hữu thuộc">
                         <field name="blockhouse_id"
@@ -60,9 +60,8 @@
         <field name="model">tb_vehicle</field>
         <field name="arch" type="xml">
             <search>
-                <filter name="is_active" string="Trạng thái active" domain="[('is_active', '=', 'True')]"/>
                 <group expand="1" string="Group By">
-                    <filter name="group_block_house" string="dự án" context="{'group_by': 'blockhouse_id'}"/>
+                    <filter name="group_block_house" string="Dự án" context="{'group_by': 'blockhouse_id'}"/>
                 </group>
             </search>
         </field>
@@ -80,10 +79,10 @@
         </field>
     </record>
 
-     <menuitem id="menu_vehicle_card_registration"
-              name="Đăng ký phương tiện"
-              action="action_tb_vehicle"
-              parent="menu_apartment_service_support"
-              sequence="8"/>
+    <menuitem id="menu_vehicle_card_registration"
+          name="Đăng ký phương tiện"
+          action="action_tb_vehicle"
+          parent="menu_apartment_service_support"
+          sequence="8"/>
 
 </odoo>

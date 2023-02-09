@@ -3,6 +3,7 @@ from odoo.exceptions import ValidationError
 from odoo.http import request
 
 from odoo.addons.resident_management.models.tb_users_blockhouse_res_groups_rel import USER_GROUP_CODE, RELATIONSHIP_TYPES
+from odoo.addons.resident_management.enum import STATUS_TYPES
 
 str_bql = USER_GROUP_CODE[2][0]
 str_bqt = USER_GROUP_CODE[3][0]
@@ -13,10 +14,9 @@ class tb_access_card(models.Model):
     _description = 'Thẻ ra vào'
 
     name = fields.Char(string='Họ và tên', copy=False)
-    code = fields.Char(string='Mã', copy=False)
     relationship_type = fields.Selection(string='Quan hệ', selection=RELATIONSHIP_TYPES,
-                                       default=RELATIONSHIP_TYPES[0][0])
-    status = fields.Boolean(string='Trạng thái', default=True)
+                                         default=RELATIONSHIP_TYPES[0][0])
+    status = fields.Selection(string='Trạng thái', selection=STATUS_TYPES, default=STATUS_TYPES[0][0])
 
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Dự án",
                                     domain=lambda self: self._domain_blockhouse_id(),

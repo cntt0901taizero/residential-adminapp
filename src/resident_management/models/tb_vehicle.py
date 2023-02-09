@@ -3,14 +3,10 @@ from odoo.exceptions import ValidationError
 from odoo.http import request
 
 from odoo.addons.resident_management.models.tb_users_blockhouse_res_groups_rel import USER_GROUP_CODE
+from odoo.addons.resident_management.enum import STATUS_TYPES, VEHICLE_TYPES
+
 str_bql = USER_GROUP_CODE[2][0]
 str_bqt = USER_GROUP_CODE[3][0]
-
-VEHICLE_TYPES = [
-    ('bicycle', 'Xe đạp'),
-    ('motorbike', 'Xe máy'),
-    ('car', 'Ô tô'),
-]
 
 
 class tb_vehicle(models.Model):
@@ -21,7 +17,7 @@ class tb_vehicle(models.Model):
     image = fields.Image(string='Ảnh', copy=False)
     vehicle_type = fields.Selection(string='Loại xe', selection=VEHICLE_TYPES, default=VEHICLE_TYPES[0][0])
     note = fields.Text(string='Ghi chú', copy=False, help='Loại xe - màu xe - ...')
-    is_active = fields.Boolean(string='Trạng thái', default=True)
+    status = fields.Selection(string='Trạng thái', selection=STATUS_TYPES, default=STATUS_TYPES[0][0])
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Dự án",
                                     domain=lambda self: self._domain_blockhouse_id(),
                                     ondelete="cascade")
@@ -35,31 +31,13 @@ class tb_vehicle(models.Model):
                               domain=lambda self: self._domain_user_id(),
                               ondelete="cascade")
 
-    def set_status_active(self):
-        self.is_active = True
-
     @api.model
     def _domain_user_id(self):
         user = request.env.user
-        bqt_bh_id = []  # ban quan tri - blockhouse - id
-        bqt_bd_id = []  # ban quan tri - building - id
-        bql_bh_id = []  # ban quan ly - blockhouse - id
-        bql_bd_id = []  # ban quan ly - building - id
         if user and user.id != 1 and user.id != 2:
-            for item in user.tb_users_blockhouse_res_groups_rel_ids:
-                if item.group_id.name and str_bqt in item.user_group_code:
-                    bqt_bh_id.append(int(item.blockhouse_id.id))
-                    bqt_bd_id.append(int(item.building_id.id))
-                if item.group_id.name and str_bql in item.user_group_code:
-                    bql_bh_id.append(int(item.blockhouse_id.id))
-                    bql_bd_id.append(int(item.building_id.id))
-
-            user_ids_1 = self.env['tb_users_blockhouse_res_groups_rel'].sudo()\
-                .search([('building_id', 'in', list(set(bqt_bd_id + bql_bd_id)))])
-            user_ids_2 = self.env['tb_users_blockhouse_res_groups_rel'].sudo()\
-                .search([('blockhouse_id', 'in', list(set(bqt_bh_id + bql_bh_id)))])
-
-            return ["&", ("active", "=", True), ("id", "in", list(set(user_ids_1 + user_ids_2)))]
+            user_ids = self.env['tb_users_blockhouse_res_groups_rel'].sudo() \
+                .search([('building_id', 'in', self.building_house_id)])
+            return ["&", ("active", "=", True), ("id", "in", user_ids)]
         else:
             return [("active", "=", True)]
 

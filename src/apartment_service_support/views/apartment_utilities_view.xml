@@ -8,7 +8,7 @@
         <field name="name">tb_apartment_utilities.tree</field>
         <field name="model">tb_apartment_utilities</field>
         <field name="arch" type="xml">
-            <tree string="Bảng quản lý tiện ích chung cư" decoration-danger="is_active == False">
+            <tree string="Bảng quản lý tiện ích chung cư">
                 <field name="image" width="100px" widget="image" class="oe_left oe_avatar" optional="show"/>
                 <field name="name" optional="show"/>
                 <field name="description" optional="show"/>
@@ -16,7 +16,8 @@
 <!--                <field name="active_time" widget="date" optional="show"/>-->
                 <field name="is_active" optional="show"/>
                 <field name="blockhouse_id" optional="show"/>
-                <button groups="resident_management.group_administration, resident_management.group_management" name="open_edit_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
+                <button groups="resident_management.group_administration, resident_management.group_management"
+                        name="open_edit_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
                 <button groups="resident_management.group_administration, resident_management.group_management"
                         name="confirm_delete" class="btn btn-danger" title="Xóa" type="object" icon="fa-trash-o"/>
                 <groupby name="blockhouse_id">
