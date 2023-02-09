@@ -17,6 +17,7 @@ DAYS_LIST = [
     ('cn', 'Chủ nhật'),
 ]
 
+
 class tb_apartment_utilities(models.Model):
     _name = 'tb_apartment_utilities'
     _description = 'Tiện ích chung cư'
