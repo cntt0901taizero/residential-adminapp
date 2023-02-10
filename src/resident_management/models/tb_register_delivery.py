@@ -3,6 +3,8 @@ from odoo.exceptions import ValidationError
 from odoo.http import request
 
 from odoo.addons.resident_management.models.tb_users_blockhouse_res_groups_rel import USER_GROUP_CODE
+from odoo.addons.resident_management.enum import STATUS_TYPES, VEHICLE_TYPES
+
 str_bql = USER_GROUP_CODE[2][0]
 str_bqt = USER_GROUP_CODE[3][0]
 
@@ -30,7 +32,7 @@ class tb_register_delivery(models.Model):
     time_end = fields.Datetime(string='Thời gian kết thúc', copy=False)
     freight_detail = fields.Text(string='Chi tiết vận chuyển', copy=False)
     use_freight_elevator = fields.Boolean(string='Sử dụng thang hàng', default=True, copy=False)
-    status = fields.Boolean(string='Trạng thái', default=True)
+    status = fields.Selection(string='Trạng thái', selection=STATUS_TYPES, default=STATUS_TYPES[0][0])
 
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Dự án",
                                     domain=lambda self: self._domain_blockhouse_id(),

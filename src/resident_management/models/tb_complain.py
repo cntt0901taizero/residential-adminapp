@@ -3,6 +3,8 @@ from odoo.exceptions import ValidationError
 from odoo.http import request
 
 from odoo.addons.resident_management.models.tb_users_blockhouse_res_groups_rel import USER_GROUP_CODE
+from odoo.addons.resident_management.enum import STATUS_TYPES, VEHICLE_TYPES
+
 str_bql = USER_GROUP_CODE[2][0]
 str_bqt = USER_GROUP_CODE[3][0]
 
@@ -16,7 +18,7 @@ class tb_complain(models.Model):
     image = fields.Image(string="Ảnh")
     file = fields.Binary(string='Tài liệu', attachment=True, help='Chọn tài liệu tải lên')
     status_description = fields.Html(string='Ghi chú trạng thái', copy=False)
-    status = fields.Boolean(string='Trạng thái', default=True)
+    status = fields.Selection(string='Trạng thái', selection=STATUS_TYPES, default=STATUS_TYPES[0][0])
 
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Dự án",
                                     domain=lambda self: self._domain_blockhouse_id(),
