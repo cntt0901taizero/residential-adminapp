@@ -4,6 +4,7 @@ from odoo.http import request
 import random
 
 from odoo.addons.resident_management.models.tb_users_blockhouse_res_groups_rel import USER_GROUP_CODE
+from odoo.addons.resident_management.enum import STATUS_TYPES
 str_bql = USER_GROUP_CODE[2][0]
 str_bqt = USER_GROUP_CODE[3][0]
 
@@ -28,7 +29,8 @@ class tb_apartment_utilities(models.Model):
     detail_description = fields.Html(string='Mô tả chi tiết', copy=False, help='')
     # active_days = fields.Selection(string='Ngày hoạt động', selection=DAYS_LIST)
     # active_time = fields.Char(string='Giờ hoạt động', size=50,  help='9h30p - 21h')
-    is_active = fields.Boolean(string='Trạng thái', default=True)
+    is_active = fields.Boolean(string='Trạng thái hoạt động', default=True)
+    status = fields.Selection(string='Trạng thái phê duyệt', selection=STATUS_TYPES, default=STATUS_TYPES[0][0])
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Dự án",
                                     ondelete="cascade")
 
