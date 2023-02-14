@@ -3,6 +3,7 @@ from odoo.exceptions import ValidationError
 from odoo.http import request
 
 from odoo.addons.resident_management.models.tb_users_blockhouse_res_groups_rel import USER_GROUP_CODE
+
 str_bql = USER_GROUP_CODE[2][0]
 str_bqt = USER_GROUP_CODE[3][0]
 
@@ -26,8 +27,22 @@ class tb_users(models.Model):
         ('RESIDENT', 'Cư dân'),
         ('OTHER', 'Other'),
     ], default='OTHER', string="Loại tài khoản", )
+
     # display_building = fields.Char('Tòa nhà', related='tb_users_blockhouse_res_groups_rel_ids.building_id.name')
     # display_apartment = fields.Char('Căn hộ', related='tb_users_blockhouse_res_groups_rel_ids.building_house_id.name')
+
+    @api.model
+    def check_perm_create(self, permission_name):
+        check = False
+        user = request.env.user
+        for item in user.tb_users_blockhouse_res_groups_rel_ids:
+            gid = item.group_id.id
+            group = request.env["res.groups"].sudo().search([('id', '=', gid)], limit=1)
+            if group[permission_name]:
+                check = True
+                break
+        return check
+
 
     @api.model
     def read_group(self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True):
@@ -80,6 +95,7 @@ class tb_users(models.Model):
         return super(tb_users, self).create(vals)
 
     def create_user_blockhouse_groups_rel(self):
+
         view_id = ''
         name = ''
         context = {

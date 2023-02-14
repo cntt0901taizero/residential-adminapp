@@ -4,47 +4,61 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 <odoo>
-    <!--    <record id="view_users_form_inherit" model="ir.ui.view">-->
-    <!--        <field name="name">res.users.form</field>-->
-    <!--        <field name="model">res.users</field>-->
-    <!--        <field name="inherit_id" ref="base.view_users_form"/>-->
-    <!--        <field name="arch" type="xml">-->
+    <record id="view_group_form_inherit" model="ir.ui.view">
+        <field name="name">res.groups.form.inherit</field>
+        <field name="model">res.groups</field>
+        <field name="arch" type="xml">
+            <form string="Users">
+                <header>
+                </header>
+                <sheet>
+                    <field name="name"/>
+                    <field name="comment"/>
+                    <field name="category_id"/>
+                    <notebook>
+                        <page string="Quản lý tài khoản">
+                            <h4>Tài khoản quản trị</h4>
+                            <group col="4">
+                                <field name="perm_create_admin_user"/>
+                                <field name="perm_delete_admin_user"/>
+                                <field name="perm_write_admin_user"/>
+                                <field name="perm_read_admin_user"/>
+                                <field name="perm_change_password_admin_user"/>
+                            </group>
+                            <h4>Tài khoản cư dân</h4>
+                            <group col="4">
+                                <field name="perm_create_resident_user"/>
+                                <field name="perm_delete_resident_user"/>
+                                <field name="perm_write_resident_user"/>
+                                <field name="perm_read_resident_user"/>
+                                <field name="perm_change_password_resident_user"/>
+                            </group>
+                        </page>
+                        <page string="Quản lý dự án">
 
-    <!--            <div class="oe_title" position="after">-->
-    <!--                <button string=" Chọn nhóm quyền" class="fa fa-plus btn btn-info mb-2"-->
-    <!--                                    disabled="True" attrs="{'invisible':[('id','>',0)]}"-->
-    <!--                                    data-toggle="tooltip" title="Cần lưu thông tin tài khoản trước khi thêm mới nhóm quyền cho tài khoản"/>-->
-    <!--                            <button name="create_user_blockhouse_groups_rel" string=" Chọn nhóm quyền"-->
-    <!--                                    class="fa fa-plus btn btn-info mb-2" type="object"-->
-    <!--                                    attrs="{'invisible':[('id','=',False)]}"/>-->
-    <!--                <field name="tb_users_blockhouse_res_groups_rel_ids" widget="section_and_note_one2many"-->
-    <!--                       mode="tree,kanban">-->
-    <!--                    <tree string="Quản lý tài khoản" create="false">-->
-    <!--                        <field name="group_id" optional="show"/>-->
-    <!--                        <field name="user_id" optional="show"/>-->
-    <!--                        <field name="blockhouse_id"/>-->
-    <!--                        <field name="building_id"/>-->
-    <!--                        <field name="building_house_id"/>-->
-    <!--                        <field name="owner"/>-->
-    <!--                    </tree>-->
+                        </page>
+                         <page string="Dịch vụ hỗ trợ">
 
-    <!--                </field>-->
-    <!--            </div>-->
+                        </page>
+                         <page string="Cấu hình hệ thống">
 
-    <!--            <page name="access_rights" position="replace"/>-->
-    <!--&lt;!&ndash;            <page name="preferences" position="replace"/>&ndash;&gt;-->
-    <!--&lt;!&ndash;            <notebook position="replace"/>&ndash;&gt;-->
-    <!--&lt;!&ndash;             <notebook position="replace">&ndash;&gt;-->
-    <!--&lt;!&ndash;                        &ndash;&gt;-->
-    <!--&lt;!&ndash;                </notebook>&ndash;&gt;-->
-    <!--        </field>-->
-    <!--    </record>-->
+                        </page>
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
 
     <record id="action_tb_groups_inherit" model="ir.actions.act_window">
         <field name="name">Nhóm người dùng</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">res.groups</field>
         <field name="view_mode">tree,form</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree'}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('view_group_form_inherit')})]"
+        />
         <field name="domain">[('category_id.name', '=', '[QLCD] Quản lý cư dân')]</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Thêm mới nhóm người dùng!</p>
