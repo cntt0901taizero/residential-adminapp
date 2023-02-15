@@ -40,7 +40,7 @@ html .o_web_client > .o_action_manager > .o_action > .o_content {
     display: none;
 }
 
-.o_web_client a {
+.o_web_client > a {
     color: #666666;
 }
 
@@ -77,12 +77,17 @@ html .o_web_client > .o_action_manager > .o_action > .o_content {
 }
 
 button.btn {
-    font-size: 12px!important;
-    padding: 6px 12px!important;
+    font-size: 12px !important;
+//     padding: 6px 12px !important;
     border: none;
-    box-shadow: none!important;
-    outline: none!important;
-    margin: 2px!important
+    box-shadow: none !important;
+    outline: none !important;
+//     margin: 2px !important
+}
+
+.btn {
+    padding: 6px 12px !important;
+    margin: 0 2px !important;
 }
 
 button.btn.btn-primary {
@@ -96,7 +101,11 @@ button.btn.btn-primary:hover, button.btn.btn-primary:active, button.btn.btn-prim
 }
 
 button.btn.btn-secondary {
-    border-color: #E8E8E8;
+//     border-color: #E8E8E8;
+}
+
+btn-fill-secondary, .btn-secondary {
+    background-color: #b8b8b8 !important;
 }
 
 button.btn.btn-fill-light, button.btn.btn-light {
@@ -117,5 +126,5 @@ button.btn.btn-fill-light, button.btn.btn-light {
 }
 
 .table-hover tbody tr:hover {
-    background-color: #ecfae6 !important;
+    background-color: #e8f8e2 !important;
 }

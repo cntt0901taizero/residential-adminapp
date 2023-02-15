@@ -570,6 +570,7 @@
         padding-right: 6rem;
         word-break: break-word;
         .o_clipboard_button {
+            margin: 0 !important;
             @include o-position-absolute($top: 0, $right: 0);
             &.o_btn_text_copy {
                 position: absolute;
@@ -577,7 +578,7 @@
                 right: 0;
             }
             &.o_btn_char_copy {
-                padding-top: 2px;
+                padding-top: 0 !important;
                 height: 100%;
             }
         }

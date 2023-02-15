@@ -255,7 +255,8 @@ a.o_menu_brand div:first-child{
     padding-right: 32px;
 }
 
-.o_main_navbar > div.o_menu_systray > div:not(:first-child) {
+//:not(:first-child)
+.o_main_navbar > div.o_menu_systray > div {
     border-left: 1px solid #c1c1c1;
     height: 30px;
     margin-top: 15px;
@@ -282,7 +283,7 @@ a.o_menu_brand div:first-child{
 
 // responsive
 .burger-menu {
-    transform: rotate(90deg);
+//     transform: rotate(90deg);
     margin-left: 16px;
     margin-top: 16px;
     cursor: pointer;

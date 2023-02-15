@@ -35,10 +35,8 @@
         <field name="arch" type="xml">
             <form create="false">
                 <sheet>
-                    <group>
-                        <field name="image" string="Ảnh đại diện" height="400px" widget="image" class="oe_left oe_avatar"/>
-                    </group>
                     <group string="Thông tin cơ bản">
+                        <field name="image" string="Ảnh đại diện" height="400px" widget="image" class="oe_left oe_avatar"/>
                         <field name="name"/>
                         <field name="code"/>
                         <field name="is_active"/>
