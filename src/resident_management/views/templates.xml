@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<odoo>
-    <templates xml:space="preserve">
-        <t t-extend="Login">
-            <!-- Override the login form to add a custom field -->
-            <t t-jquery=".field-login" t-operation="after">
-                <div class="form-group">
-                    Taisdaskdjklasjdlasj
-                </div>
-            </t>
+<templates xml:space="preserve">
+
+    <t t-extend="LoginPhoneEmail">
+        <!-- Override the login form to add a custom field -->
+        <t t-jquery=".field-login" t-operation="after">
+            <div class="form-group field-login">
+                <label for="login">Email / Số điện thoại</label>
+                <input type="text" placeholder="Email/Số điện thoại" name="login" t-att-value="login" id="login"
+                       t-attf-class="form-control #{'form-control-sm' if form_small else ''}" required="required"
+                       autofocus="autofocus" autocapitalize="off"/>
+            </div>
         </t>
-    </templates>
-</odoo>
+    </t>
+
+<!--    <t t-name="base_import.ImportRecords" owl="1">-->
+<!--        <DropdownItem class="o_import_menu dropdown-item" t-on-click="importRecords">-->
+<!--            Import records-->
+<!--        </DropdownItem>-->
+<!--    </t>-->
+
+</templates>
 
 <!--<?xml version="1.0" encoding="utf-8"?>-->
 <!--<odoo>-->
