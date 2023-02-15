@@ -9,6 +9,7 @@
         <field name="model">tb_building</field>
         <field name="arch" type="xml">
             <tree string="Bảng quản lý tòa nhà" decoration-danger="is_active == False">
+                <field name="row_number" string="STT" optional="show"/>
                 <field name="image" width="100px" widget="image" class="oe_left oe_avatar" optional="show"/>
                 <field name="name" optional="show"/>
                 <field name="code" optional="show"/>
@@ -108,7 +109,7 @@
                         </group>
                         <group string="Thông tin địa chỉ liên hệ">
                             <field name="address" widget="text"/>
-                            <field name="phone" widget="phone" placeholder="e.g. +1 415 555 0100"/>
+                            <field name="phone" widget="phone" placeholder=""/>
                             <field name="website" widget="CopyClipboardChar" placeholder="e.g. /page"/>
                             <field name="location_link" widget="CopyClipboardChar" placeholder="e.g. /page"/>
                         </group>

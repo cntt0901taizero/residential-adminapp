@@ -13,8 +13,10 @@ class tb_blockhouse(models.Model):
     _name = 'tb_blockhouse'
     _description = 'Dự án'
 
+    row_number = fields.Integer(string='Row Number', compute='_compute_row_number', store=False)
     name = fields.Char(string='Tên dự án', size=200, required=True, copy=False)
     code = fields.Char(string='Mã', size=50, copy=False, readonly=True)
+    investor_name = fields.Char(string='Chủ đầu tư', size=500, copy=False)
     address = fields.Char(string='Địa chỉ', size=500, copy=False)
     image = fields.Image(string='Ảnh', copy=False)
     website = fields.Char(string='Website', size=200, copy=False)
@@ -22,12 +24,17 @@ class tb_blockhouse(models.Model):
     location_link = fields.Char(string='Link vị trí', size=500, copy=False)
     is_active = fields.Boolean(string='Trạng thái', default=True)
 
-    building_ids = fields.One2many(comodel_name='tb_building', inverse_name='blockhouse_id', string="Tòa nhà")
+    building_ids = fields.One2many(comodel_name='tb_building', inverse_name='blockhouse_id', string="Khu / Tòa nhà")
 
     _sql_constraints = [
         ('name', 'unique(name)', 'Tên dự án không được trùng lặp'),
         ('code', 'unique(code)', 'Mã dự án không được trùng lặp')
     ]
+
+    @api.depends('create_date')
+    def _compute_row_number(self):
+        for record in self:
+            record.row_number = self.search([], order='create_date').ids.index(record.id) + 1
 
     def set_status_active(self):
         self.is_active = True

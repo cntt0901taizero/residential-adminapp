@@ -10,6 +10,7 @@
         <field name="arch" type="xml">
             <tree default_order="sort" decoration-danger="is_active == False"
                   delete="0" multi_edit="1">
+                <field name="row_number" string="STT" optional="show"/>
                 <field name="sort" widget="handle" optional="show"/>
                 <field name="name" optional="show"/>
                 <field name="floors_type" optional="show"/>

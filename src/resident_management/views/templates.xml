@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <templates xml:space="preserve">
+        <t t-extend="Login">
+            <!-- Override the login form to add a custom field -->
+            <t t-jquery=".field-login" t-operation="after">
+                <div class="form-group">
+                    Taisdaskdjklasjdlasj
+                </div>
+            </t>
+        </t>
+    </templates>
+</odoo>
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<odoo>-->
+<!--    <template id="auth_signup.login_email_phone" inherit_id="web.login" name="inherit_login">-->
+<!--        <xpath expr="//div[hasclass('field-login')]" position="replace">-->
+<!--            <div class="form-group field-login">-->
+<!--                <label for="login">Email / Số điện thoại</label>-->
+<!--                <input type="text" placeholder="Email/Số điện thoại" name="login" t-att-value="login" id="login"-->
+<!--                       t-attf-class="form-control #{'form-control-sm' if form_small else ''}" required="required"-->
+<!--                       autofocus="autofocus" autocapitalize="off"/>-->
+<!--            </div>-->
+<!--        </xpath>-->
+<!--    </template>-->
+<!--</odoo>-->
+
+
+
