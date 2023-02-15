@@ -3,7 +3,7 @@
 
     <menuitem id="menu_apartment_service_support"
               name="Dịch vụ hỗ trợ"
-              web_icon="apartment_service_support,static/description/menu-icon.png"
+              web_icon="resident_management,static/description/menu-icon/notification.png"
               sequence="3"/>
 
 </odoo>

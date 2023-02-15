@@ -8,7 +8,7 @@
 
     <menuitem id="menu_apartment_project_root"
               name="Quản lý dự án"
-              web_icon="apartment_project,static/description/menu-icon.png"
+              web_icon="resident_management,static/description/menu-icon/building.png"
               sequence="2"/>
 
 
