@@ -12,7 +12,7 @@
                 <field name="row_number" string="STT" optional="show"/>
                 <field name="image" widget="image" width="100px" optional="show"/>
                 <field name="name" optional="show" decoration-bf="1"/>
-                <field name="code" optional="show"/>
+                <field name="code" optional="show" decoration-bf="1"/>
                 <field name="address" optional="show"/>
                 <field name="website" widget="url" optional="show"/>
 <!--                <field name="building_ids">-->

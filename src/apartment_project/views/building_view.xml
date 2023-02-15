@@ -11,8 +11,8 @@
             <tree string="Bảng quản lý tòa nhà" decoration-danger="is_active == False">
                 <field name="row_number" string="STT" optional="show"/>
                 <field name="image" width="100px" widget="image" class="oe_left oe_avatar" optional="show"/>
-                <field name="name" optional="show"/>
-                <field name="code" optional="show"/>
+                <field name="name" optional="show" decoration-bf="1"/>
+                <field name="code" optional="show" decoration-bf="1"/>
                 <field name="building_level" optional="show"/>
 <!--                <field name="founding_date" widget="date" optional="show"/>-->
                 <field name="website" widget="url" optional="show"/>
@@ -199,7 +199,7 @@
         <field name="name">Quản lý khu / toà nhà</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">tb_building</field>
-        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_mode">tree,kanban,form</field>
         <field name="context">{'search_default_group_block_house':1}</field>
         <field name="limit">10</field>
         <field name="help" type="html">

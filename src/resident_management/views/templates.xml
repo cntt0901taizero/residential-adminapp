@@ -1,17 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
+
 <templates xml:space="preserve">
 
-    <t t-extend="LoginPhoneEmail">
-        <!-- Override the login form to add a custom field -->
-        <t t-jquery=".field-login" t-operation="after">
-            <div class="form-group field-login">
-                <label for="login">Email / Số điện thoại</label>
-                <input type="text" placeholder="Email/Số điện thoại" name="login" t-att-value="login" id="login"
-                       t-attf-class="form-control #{'form-control-sm' if form_small else ''}" required="required"
-                       autofocus="autofocus" autocapitalize="off"/>
-            </div>
-        </t>
-    </t>
+<!--    <t t-extend="Login">-->
+<!--        &lt;!&ndash; Override the login form to add a custom field &ndash;&gt;-->
+<!--&lt;!&ndash;        <t t-jquery="field-login" t-operation="after">&ndash;&gt;-->
+<!--&lt;!&ndash;            taiiiiii&ndash;&gt;-->
+<!--&lt;!&ndash;            lklk&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <div class="form-group field-login">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                <label for="login">Email / Số điện thoại</label>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                <input type="text" placeholder="Email/Số điện thoại" name="login" t-att-value="login" id="login"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                       t-attf-class="form-control #{'form-control-sm' if form_small else ''}" required="required"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                       autofocus="autofocus" autocapitalize="off"/>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;        </t>&ndash;&gt;-->
+<!--    </t>-->
 
 <!--    <t t-name="base_import.ImportRecords" owl="1">-->
 <!--        <DropdownItem class="o_import_menu dropdown-item" t-on-click="importRecords">-->

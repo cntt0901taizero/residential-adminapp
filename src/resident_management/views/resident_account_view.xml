@@ -104,21 +104,21 @@
 
 
     <record id="menu_account_resident" model="ir.ui.menu">
-        <field name="name">Tài khoản cư dân</field>
+        <field name="name">Nhóm tài khoản cư dân</field>
         <field name="parent_id" ref="menu_resident_root"/>
         <field name="groups_id" eval="[(4, ref('base.group_system')), (4, ref('base.group_erp_manager')), (4, ref('resident_management.group_management')), (4, ref('resident_management.group_administration'))]"/>
         <field name="sequence">2</field>
     </record>
 
     <record id="menu_create_account_resident" model="ir.ui.menu">
-        <field name="name">Thêm tài khoản cư dân</field>
+        <field name="name">Tài khoản cư dân</field>
         <field name="action" ref="action_account_resident"/>
         <field name="parent_id" ref="menu_account_resident"/>
         <field name="sequence">1</field>
     </record>
 
     <record id="menu_approve_account_resident" model="ir.ui.menu">
-        <field name="name">Phê duyệt tài khoản</field>
+        <field name="name">Phê duyệt tài khoản cư dân</field>
         <field name="action" ref="action_account_resident"/>
         <field name="parent_id" ref="menu_account_resident"/>
         <field name="sequence">2</field>

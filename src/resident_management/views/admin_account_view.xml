@@ -84,18 +84,18 @@
         <field name="limit">10</field>
         <field name="context">{'default_user_type': 'ADMIN'}</field>
         <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">Thêm mới tài khoản!</p>
+            <p class="o_view_nocontent_smiling_face">Thêm mới!</p>
         </field>
     </record>
 
     <record id="menu_account_admin" model="ir.ui.menu">
-        <field name="name">Tài khoản quản trị</field>
+        <field name="name">Nhóm tài khoản quản trị</field>
         <field name="parent_id" ref="menu_resident_root"/>
         <field name="sequence">1</field>
     </record>
 
     <record id="menu_create_account_admin" model="ir.ui.menu">
-        <field name="name">Tạo tài khoản quản trị</field>
+        <field name="name">Tài khoản quản trị</field>
         <field name="action" ref="action_account_admin"/>
         <field name="parent_id" ref="menu_account_admin"/>
         <field name="groups_id" eval="[(4, ref('base.group_system')), (4, ref('base.group_erp_manager'))]"/>
