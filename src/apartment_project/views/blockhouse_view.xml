@@ -15,11 +15,11 @@
                 <field name="code" optional="show" decoration-bf="1"/>
                 <field name="address" optional="show"/>
                 <field name="website" widget="url" optional="show"/>
-                <field name="building_ids" widget="one2many" mode="tree">
-                    <tree string="Khu / Tòa nhà">
-                        <field name="name"/>
-                    </tree>
-                </field>
+<!--                <field name="building_ids" widget="one2many" mode="tree">-->
+<!--                    <tree string="Khu / Tòa nhà">-->
+<!--                        <field name="name"/>-->
+<!--                    </tree>-->
+<!--                </field>-->
                 <field name="is_active"/>
                 <button groups="resident_management.group_administration, resident_management.group_management"
                         name="open_edit_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
