@@ -15,7 +15,7 @@
                             <img src="/resident_management/static/src/img/ab_logo.png" class="img img-fluid logo-img"/>
                         </div>
                         <div t-foreach="menuService.getApps()" t-as="app">
-                            <t t-if="!app.invisible">
+                            <t t-if="app and !app.invisible">
                                 <a t-if="app.children.length" role="menuitem"
                                    t-attf-class="dropdown-item o_app d-flex align-items-center apps_menuitem_link first_level collapsed {{menuService.getCurrentApp() === app ? 'active' : ''}}"
                                    t-att-href="getMenuItemHref(app)"
@@ -58,7 +58,7 @@
                                          t-as="child_id">
                                         <t t-set="child" t-value="menuService.getMenuAsTree(child_id)"/>
                                         <li
-                                                t-if="!child.invisible"
+                                                t-if="child and !child.invisible"
                                                 t-attf-class="{{menuService.getMenuAsTree(child_id).active ? 'active' : ''}}"
                                         >
                                             <a t-if="child.children.length" role="menuitem"
@@ -94,7 +94,7 @@
                                                      <t t-set="second_child"
                                                        t-value="menuService.getMenuAsTree(second_child_id)"/>
                                                     <li
-                                                            t-if="!second_child.invisible"
+                                                            t-if="second_child and !second_child.invisible"
                                                         t-attf-class="{{menuService.getMenuAsTree(second_child_id).active ? 'active' : ''}}"
                                                     >
 
@@ -132,7 +132,7 @@
                                                                 <t t-set="third_child"
                                                                 t-value="menuService.getMenuAsTree(third_child_id)"/>
                                                                 <li
-                                                                    t-if="!third_child.invisible"
+                                                                    t-if="third_child and !third_child.invisible"
                                                                     t-attf-class="{{menuService.getMenuAsTree(third_child_id).active ? 'active' : ''}}"
                                                                 >
 
@@ -170,10 +170,13 @@
                                                 </div>
 
                                             </ul>
-                                    </li>
+
+                                        </li>
                                     </div>
                                 </ul>
+
                             </t>
+
                         </div>
                     </div>
                 </li>

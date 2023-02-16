@@ -9,13 +9,16 @@ patch(NavBar.prototype, "resident_management.NavBarMenu", {
         this._super(...arguments);
         this.menuService.getMenuAsTree = (menuID) => {
             const menu = this.menuService.getMenu(menuID);
-            if($.bbq.getState(true).menu_id === menuID){
-                menu.active = true;
+            if(menu){
+                if($.bbq.getState(true).menu_id === menuID){
+                    menu.active = true;
+                }
+                if (!menu.childrenTree) {
+                    menu.childrenTree = menu.children.map((mid) => this.menuService.getMenuAsTree(mid));
+                }
+                return menu;
             }
-            if (!menu.childrenTree) {
-                menu.childrenTree = menu.children.map((mid) => this.menuService.getMenuAsTree(mid));
-            }
-            return menu;
+
         }
     },
 
