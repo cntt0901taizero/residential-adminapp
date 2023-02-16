@@ -1,5 +1,5 @@
 from odoo import models, fields, api
-from odoo.exceptions import ValidationError
+from odoo.exceptions import ValidationError, AccessDenied
 from odoo.http import request
 
 from odoo.addons.resident_management.models.tb_users_blockhouse_res_groups_rel import USER_GROUP_CODE
@@ -10,24 +10,21 @@ str_bqt = USER_GROUP_CODE[3][0]
 class tb_users(models.Model):
     _inherit = 'res.users'
 
-    phone_number = fields.Char(string='Số điện thoại')
+    citizen_identification = fields.Char(string='CMND / CCCD')
+    date_of_birth = fields.Date(string='Ngày sinh', copy=False)
+    gender = fields.Selection([
+        ('Male', 'Nam'), ('Female', 'Nữ'), ('Other', 'Khác'),
+    ], default='Male', string="Giới tính", )
+    user_type = fields.Selection([
+        ('ADMIN', 'Quản trị'), ('RESIDENT', 'Cư dân'), ('OTHER', 'Other'),
+    ], default='OTHER', string="Loại tài khoản", )
     push_notifications = fields.One2many('tb_push_notification', 'user_id', string='Push Notification', readonly=True)
     tb_users_blockhouse_res_groups_rel_ids = fields.One2many('tb_users_blockhouse_res_groups_rel', 'user_id',
                                                              string="Quan hệ phân quyền")
-    citizen_identification = fields.Char(string='CMND/CCCD')
-    date_of_birth = fields.Date(string='Ngày sinh', copy=False)
-    gender = fields.Selection([
-        ('Male', 'Nam'),
-        ('Female', 'Nữ'),
-        ('Other', 'Khác'),
-    ], default='Male', string="Giới tính", )
-    user_type = fields.Selection([
-        ('ADMIN', 'Quản trị'),
-        ('RESIDENT', 'Cư dân'),
-        ('OTHER', 'Other'),
-    ], default='OTHER', string="Loại tài khoản", )
-    # display_building = fields.Char('Tòa nhà', related='tb_users_blockhouse_res_groups_rel_ids.building_id.name')
-    # display_apartment = fields.Char('Căn hộ', related='tb_users_blockhouse_res_groups_rel_ids.building_house_id.name')
+
+    _sql_constraints = [
+        ('citizen_identification', 'unique(citizen_identification)', 'Số định danh cá nhân không được trùng lặp')
+    ]
 
     @api.model
     def read_group(self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True):

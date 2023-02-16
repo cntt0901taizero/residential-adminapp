@@ -13,19 +13,21 @@ class AuthenticateController(http.Controller):
     @http.route('/api/authenticate/login', method=['POST'], auth='public', type='json', cors='*', csrf=False)
     def login(self, **kwargs):
         uid = None
-        session_info = None
         ensure_db()
         request.params['login_success'] = False
+        login = request.params['login']
+        password = request.params['password']
 
         try:
-            # user_check1 = request.env['res.users'].sudo().search([('login', '=', request.params['login'])])
-            # if user_check1 is not None and user_check1.active is not True:
-            #     return common_response(403, 'User is deactived', [])
+            user_check = request.env['res.users'].sudo()\
+                .search([('partner_id.phone', '=', login), ('password', '=', password)])
+            if user_check and user_check.login:
+                login = user_check.login
 
-            uid = request.session.authenticate(request.session.db, request.params['login'], request.params['password'])
-            # aaa = uid.cookies.get('session_id')
+            uid = request.session.authenticate(request.session.db, login, password)
             request.params['login_success'] = True
-            session_info = request.env['ir.http'].session_info()
+            # aaa = uid.cookies.get('session_id')
+            # session_info = request.env['ir.http'].session_info()
             user = request.env.user
             base_url = request.env['ir.config_parameter'].sudo().get_param('web.base.url')
             image_url = base_url + '/web/image?' + 'model=res.users&id=' + str(
