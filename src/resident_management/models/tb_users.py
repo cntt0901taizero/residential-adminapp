@@ -35,12 +35,15 @@ class tb_users(models.Model):
     def check_perm_create(self, permission_name):
         check = False
         user = request.env.user
-        for item in user.tb_users_blockhouse_res_groups_rel_ids:
-            gid = item.group_id.id
-            group = request.env["res.groups"].sudo().search([('id', '=', gid)], limit=1)
-            if group[permission_name]:
-                check = True
-                break
+        if user and (user.id == 1 or user.id == 2):
+            check = True
+        else:
+            for item in user.tb_users_blockhouse_res_groups_rel_ids:
+                gid = item.group_id.id
+                group = request.env["res.groups"].sudo().search([('id', '=', gid)], limit=1)
+                if group[permission_name]:
+                    check = True
+                    break
         return check
 
 
@@ -91,6 +94,7 @@ class tb_users(models.Model):
 
     @api.model
     def create(self, vals):
+
         vals["password"] = "1"
         return super(tb_users, self).create(vals)
 

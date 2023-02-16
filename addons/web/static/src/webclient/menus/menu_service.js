@@ -5,6 +5,7 @@ import { registry } from "../../core/registry";
 import { session } from "@web/session";
 
 const loadMenusUrl = `/web/webclient/load_menus`;
+var rpc = require('web.rpc');
 
 function makeFetchLoadMenus() {
     const cacheHashes = session.cache_hashes;
@@ -69,18 +70,40 @@ function makeMenus(env, menusData, fetchLoadMenus) {
         async reload() {
             if (fetchLoadMenus) {
                 menusData = await fetchLoadMenus(true);
+
                 env.bus.trigger("MENUS:APP-CHANGED");
             }
         },
     };
 }
 
+const defineMenuWithPerm = {
+    "resident_management.menu_account_admin" : "perm_read_admin_user",
+    "resident_management.menu_account_resident" : "perm_read_resident_user",
+    "resident_management.menu_account_resident" : "perm_read_resident_user",
+}
 export const menuService = {
     dependencies: ["action", "router"],
     async start(env) {
         const fetchLoadMenus = makeFetchLoadMenus();
         const menusData = await fetchLoadMenus();
-        return makeMenus(env, menusData, fetchLoadMenus);
+        console.log(menusData);
+        var newMenusData = {}
+        Object.keys(menusData).forEach(async menuId => {
+           var checkMyMenu = Object.keys(defineMenuWithPerm).includes(menusData[menuId].xmlid)
+           if(checkMyMenu){
+               var check_perm = await rpc.query({
+                                model: 'res.users',
+                                method: 'check_perm_create',
+                                args: [defineMenuWithPerm[menusData[menuId].xmlid]],
+                            })
+               console.log(check_perm + "44444")
+               console.log(menusData[menuId].name + "------------" + defineMenuWithPerm[menusData[menuId].xmlid])
+               menusData[menuId].invisible = !check_perm
+           }
+            newMenusData[menuId]=menusData[menuId]
+        })
+        return makeMenus(env, newMenusData, fetchLoadMenus);
     },
 };
 

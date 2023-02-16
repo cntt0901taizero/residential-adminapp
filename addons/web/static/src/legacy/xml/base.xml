@@ -233,7 +233,13 @@
 </t>
 
 <t t-name="web.DropdownMenu" owl="1">
+<!--    <t t-debug="pdb"/>-->
     <div class="btn-group dropdown" t-att-class="{ show: state.open }">
+<!--        <button type="button"-->
+<!--                        t-on-click="items.filter(k=> k.key == 'action-Delete')[0].callback()"-->
+<!--                        class="btn btn-secondary o_form_button_delete" title="Delete record">-->
+<!--            Delete-->
+<!--        </button>-->
         <button type="button"
             class="dropdown-toggle btn btn-secondary o-no-caret"
             t-attf-class="{{ icon || displayCaret || displayChevron ? 'd-flex align-items-center ' : ''}} {{ displayCaret || displayChevron ? 'pr-1 ' : ''}}"
@@ -257,6 +263,7 @@
                 <li t-if="currentGroup !== null and currentGroup !== item.groupNumber" class="dropdown-divider" role="separator"/>
                 <t t-if="item.Component" t-component="item.Component" t-props="item.props"/>
                 <DropdownMenuItem t-else="" t-props="item"/>
+<!--                <a t-esc="item.description"/>-->
                 <t t-set="currentGroup" t-value="item.groupNumber"/>
             </t>
         </ul>

@@ -35,12 +35,27 @@
                             </group>
                         </page>
                         <page string="Quản lý dự án">
+                            <h4>Khai báo Dự án</h4>
+                            <group col="4">
+                                <field name="perm_create_admin_user"/>
+                                <field name="perm_delete_admin_user"/>
+                                <field name="perm_write_admin_user"/>
+                                <field name="perm_read_admin_user"/>
+                                <field name="perm_change_password_admin_user"/>
+                            </group>
+                            <h4>Khai báo Tòa nhà</h4>
+                            <group col="4">
+                                <field name="perm_create_resident_user"/>
+                                <field name="perm_delete_resident_user"/>
+                                <field name="perm_write_resident_user"/>
+                                <field name="perm_read_resident_user"/>
+                                <field name="perm_change_password_resident_user"/>
+                            </group>
+                        </page>
+                        <page string="Dịch vụ hỗ trợ">
 
                         </page>
-                         <page string="Dịch vụ hỗ trợ">
-
-                        </page>
-                         <page string="Cấu hình hệ thống">
+                        <page string="Cấu hình hệ thống">
 
                         </page>
                     </notebook>
@@ -69,7 +84,6 @@
         <field name="name">Tạo nhóm phân quyền</field>
         <field name="action" ref="resident_management.action_tb_groups_inherit"/>
         <field name="parent_id" ref="menu_account_admin"/>
-        <field name="groups_id" eval="[(4, ref('base.group_system')), (4, ref('base.group_erp_manager'))]"/>
     </record>
 
 </odoo>
