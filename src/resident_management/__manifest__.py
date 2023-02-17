@@ -17,6 +17,7 @@
         'views/resident_account_view.xml',
         'views/user_blockhouse_res_groups_rel_view.xml',
         'views/groups_inherit_view.xml',
+        # 'views/templates.xml',
     ],
     'application': True,
     'license': 'AGPL-3',

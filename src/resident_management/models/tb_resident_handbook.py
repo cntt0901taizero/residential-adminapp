@@ -11,8 +11,8 @@ class tb_resident_handbook(models.Model):
     _name = 'tb_resident_handbook'
     _description = 'Cẩm nang cư dân'
 
-    name = fields.Char(string='Chủ đề', copy=False)
-    image = fields.Image(string='Ảnh', copy=False)
+    name = fields.Char(string='Chủ đề', required=True, copy=False)
+    # image = fields.Image(string='Ảnh', copy=False)
     description = fields.Char(string='Tiêu đề', copy=False)
     detail_description = fields.Html(string='Mô tả', copy=False)
     is_active = fields.Boolean(string='Trạng thái', default=True)

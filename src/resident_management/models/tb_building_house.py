@@ -25,6 +25,7 @@ class tb_building_house(models.Model):
     _name = 'tb_building_house'
     _description = 'Căn hộ'
 
+    row_number = fields.Integer(string='Row Number', compute='_compute_row_number', store=False)
     name = fields.Char(string='Số nhà', size=50, copy=False)
     code = fields.Char(string='Mã', size=50, copy=False, readonly=True)
     address = fields.Char(string='Địa chỉ', size=200, copy=False)
@@ -51,6 +52,11 @@ class tb_building_house(models.Model):
     _sql_constraints = [
         ('code', 'unique(code)', 'Mã căn hộ không được trùng lặp')
     ]
+
+    @api.depends('create_date')
+    def _compute_row_number(self):
+        for record in self:
+            record.row_number = self.search([], order='create_date').ids.index(record.id) + 1
 
     def set_status_active(self):
         self.is_active = True

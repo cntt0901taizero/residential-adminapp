@@ -19,6 +19,7 @@ class tb_building(models.Model):
     _name = 'tb_building'
     _description = 'Toà nhà'
 
+    row_number = fields.Integer(string='Row Number', compute='_compute_row_number', store=False)
     name = fields.Char(string='Tên toà nhà', size=200, required=True, copy=False)
     code = fields.Char(string='Mã', size=50, copy=False, readonly=True)
     founding_date = fields.Date(string='Ngày thành lập', copy=False)
@@ -42,6 +43,20 @@ class tb_building(models.Model):
     _sql_constraints = [
         ('code', 'unique(code)', 'Mã tòa nhà không được trùng lặp')
     ]
+
+    # def open_parent_record(self):
+    #     return {
+    #         'type': 'ir.actions.act_window',
+    #         'res_model': 'parent.model',
+    #         'res_id': self.parent_id.id,
+    #         'view_mode': 'form',
+    #         'target': 'current',
+    #     }
+
+    @api.depends('create_date')
+    def _compute_row_number(self):
+        for record in self:
+            record.row_number = self.search([], order='create_date').ids.index(record.id) + 1
 
     def set_status_active(self):
         self.is_active = True

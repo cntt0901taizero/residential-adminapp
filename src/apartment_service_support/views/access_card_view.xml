@@ -10,7 +10,6 @@
         <field name="arch" type="xml">
             <tree string="Bảng quản lý thẻ ra vào">
                 <field name="name" optional="show"/>
-                <field name="code" optional="show"/>
                 <field name="user_id" optional="show"/>
                 <field name="blockhouse_id" optional="show"/>
                 <field name="building_id" optional="show"/>
@@ -31,16 +30,17 @@
         <field name="arch" type="xml">
             <form create="false">
                 <sheet>
-                    <group>
-                        <field name="name"/>
-                        <field name="code"/>
-                        <field name="user_id"
-                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                    <group string="Thông tin nơi đăng ký">
                         <field name="blockhouse_id"
                                options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                         <field name="building_id"
                                options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                         <field name="building_house_id"
+                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                    </group>
+                    <group string="Thông tin thẻ">
+                        <field name="name"/>
+                        <field name="user_id"
                                options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                         <field name="relationship_type"/>
                         <field name="status"/>

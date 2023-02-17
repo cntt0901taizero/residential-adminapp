@@ -15,6 +15,7 @@ class tb_building_floors(models.Model):
     _name = 'tb_building_floors'
     _description = 'Tầng sàn'
 
+    row_number = fields.Integer(string='Row Number', compute='_compute_row_number', store=False)
     name = fields.Char(string='Tên tầng sàn', size=100, required=True, copy=False)
     sort = fields.Integer(string='Thứ tự', copy=False)
     total_house = fields.Integer(string='Tổng căn hộ', copy=False)
@@ -29,6 +30,11 @@ class tb_building_floors(models.Model):
 
     building_house_ids = fields.One2many(comodel_name='tb_building_house', string="Căn hộ",
                                          inverse_name='building_floors_id')
+
+    @api.depends('create_date')
+    def _compute_row_number(self):
+        for record in self:
+            record.row_number = self.search([], order='create_date').ids.index(record.id) + 1
 
     def set_status_active(self):
         self.is_active = True

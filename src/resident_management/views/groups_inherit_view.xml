@@ -147,7 +147,7 @@
     </record>
 
     <record id="menu_tb_groups_inherit" model="ir.ui.menu">
-        <field name="name">Tạo nhóm phân quyền</field>
+        <field name="name">Nhóm quyền</field>
         <field name="action" ref="resident_management.action_tb_groups_inherit"/>
         <field name="parent_id" ref="menu_account_admin"/>
     </record>

@@ -13,7 +13,7 @@ _ = GettextAlias()
 
 
 class Users_Controller(http.Controller):
-    @http.route('/api/users/user-info', methods=['GET'], auth='user', type='json', cors='*', csrf=False)
+    @http.route('/api/users/user_info', methods=['GET'], auth='user', type='json', cors='*', csrf=False)
     def user_info(self, *args, **kwargs):
         try:
             user = request.env.user

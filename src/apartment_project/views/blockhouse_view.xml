@@ -9,22 +9,17 @@
         <field name="model">tb_blockhouse</field>
         <field name="arch" type="xml">
             <tree string="Bảng dự án" decoration-danger="is_active == False">
+                <field name="row_number" string="STT" optional="show"/>
                 <field name="image" widget="image" width="100px" optional="show"/>
                 <field name="name" optional="show" decoration-bf="1"/>
-                <field name="code" optional="show"/>
+                <field name="code" optional="show" decoration-bf="1"/>
                 <field name="address" optional="show"/>
                 <field name="website" widget="url" optional="show"/>
-                <field name="building_ids" invisible="1">
-                    <tree>
-                        <field name="name"/>
-                        <field name="code"/>
-                        <field name="building_level"/>
-                        <field name="website"/>
-                        <field name="image"/>
-                        <field name="address"/>
-                        <field name="location_link"/>
-                    </tree>
-                </field>
+<!--                <field name="building_ids" widget="one2many" mode="tree">-->
+<!--                    <tree string="Khu / Tòa nhà">-->
+<!--                        <field name="name"/>-->
+<!--                    </tree>-->
+<!--                </field>-->
                 <field name="is_active"/>
                 <button groups="resident_management.group_administration, resident_management.group_management"
                         name="open_edit_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
@@ -40,17 +35,15 @@
         <field name="arch" type="xml">
             <form create="false">
                 <sheet>
-                    <group>
-                        <field name="image" string="Ảnh đại diện" height="400px" widget="image" class="oe_left oe_avatar"/>
-                    </group>
                     <group string="Thông tin cơ bản">
+                        <field name="image" string="Ảnh đại diện" height="400px" widget="image" class="oe_left oe_avatar"/>
                         <field name="name"/>
                         <field name="code"/>
                         <field name="is_active"/>
                     </group>
                     <group string="Thông tin địa chỉ liên hệ">
                         <field name="address" widget="text"/>
-                        <field name="phone" widget="phone" placeholder="e.g. +1 415 555 0100"/>
+                        <field name="phone" widget="phone" placeholder=""/>
                         <field name="website" widget="CopyClipboardChar" placeholder="e.g. /page"/>
                         <field name="location_link" widget="CopyClipboardChar" placeholder="e.g. /page"/>
                     </group>

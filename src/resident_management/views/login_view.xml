@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<templates id="web_login_custom" inherit_id="web.login">
-    <xpath expr="//div@class='form-group field-login']" position="replace">
-        <label for="login">Email/Số điện thoại</label>
-        <input type="text" placeholder="Email/Số điện thoại" name="login" t-att-value="login" id="login"
-               t-attf-class="form-control #{'form-control-sm' if form_small else ''}" required="required"
-               autofocus="autofocus" autocapitalize="off"/>
-    </xpath>
-</templates>
