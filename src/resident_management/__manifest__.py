@@ -36,7 +36,8 @@
             'resident_management/static/src/scss/pivot.scss',
             'resident_management/static/src/scss/activity.scss',
             'resident_management/static/src/js/sidebar.js',
-            'resident_management/static/src/js/permission_admin_user.js',
+            'resident_management/static/src/js/button_admin_user.js',
+            'resident_management/static/src/js/button_resident_user.js',
         ],
         'web.assets_qweb': [
             # 'resident_management/static/src/xml/styles.xml',

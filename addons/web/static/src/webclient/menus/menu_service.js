@@ -81,15 +81,26 @@ const defineMenuWithPerm = {
     "resident_management.menu_account_admin" : "perm_read_admin_user",
     "resident_management.menu_account_resident" : "perm_read_resident_user",
     "resident_management.menu_approve_account_resident" : "perm_approve_resident_user",
+
     "apartment_project.menu_blockhouse" : "perm_read_block_house",
     "apartment_project.menu_building" : "perm_read_building",
     "apartment_project.menu_building_floors" : "perm_read_floor",
     "apartment_project.menu_building_house" : "perm_read_apartment",
 
-    "apartment_service_support.menu_banners" : "perm_read_advertisement",
-    "apartment_service_support.menu_notification" : "perm_read_notification",
-    "apartment_service_support.menu_news" : "perm_read_news",
-    "apartment_service_support.menu_utilities" : "perm_read_utilities"
+    "apartment_service_support.menu_banners_root" : "perm_read_advertisement",
+    "apartment_service_support.menu_banners_approve" : "perm_approve_advertisement",
+
+    "apartment_service_support.menu_notification_root" : "perm_read_notification",
+    "apartment_service_support.menu_notification_approve" : "perm_approve_notification",
+
+    "apartment_service_support.menu_news_root" : "perm_read_news",
+    "apartment_service_support.menu_news_approve" : "perm_approve_news",
+
+    "apartment_service_support.menu_utilities_root" : "perm_read_utilities",
+    "apartment_service_support.menu_utilities_approve" : "perm_approve_utilities",
+
+    "apartment_service_support.menu_resident_handbook_root" : "perm_read_handbook",
+    "apartment_service_support.menu_resident_handbook_approve" : "perm_approve_handbook",
 }
 export const menuService = {
     dependencies: ["action", "router"],

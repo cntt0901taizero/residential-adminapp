@@ -1,4 +1,4 @@
-odoo.define('resident_management.button_create_admin_user', async function (require) {
+odoo.define('resident_management.button_admin_user', async function (require) {
     "use strict";
     var core = require('web.core');
     var _t = core._t;
@@ -55,14 +55,8 @@ odoo.define('resident_management.button_create_admin_user', async function (requ
                 if(perm_create_admin_user) this.$buttons.find('.btn.btn-secondary.o_form_button_create').show();
                 else this.$buttons.find('.btn.btn-secondary.o_form_button_create').hide();
 
-                if(perm_delete_admin_user) this.$buttons.find('.btn.btn-secondary.o_form_button_create').show();
-                else this.$buttons.find('.btn.btn-secondary.o_form_button_create').hide();
-
                 if(perm_write_admin_user) this.$buttons.find('.btn.btn-primary.o_form_button_edit').show();
                 else this.$buttons.find('.btn.btn-primary.o_form_button_edit').hide();
-
-//                if(perm_create_admin_user) this.$buttons.find('.btn.btn-secondary.o_form_button_delete').hide();
-//                else this.$buttons.find('.btn.btn-secondary.o_form_button_delete').hide();
 
             }
        },
@@ -70,8 +64,6 @@ odoo.define('resident_management.button_create_admin_user', async function (requ
             if (!this.hasActionMenus || this.mode === 'edit') {
                 return null;
             }
-            console.log("perm_change_password_admin_user")
-            console.log(perm_change_password_admin_user)
             const props = this._super(...arguments);
             const activeField = this.model.getActiveField(state);
             const otherActionItems = [];

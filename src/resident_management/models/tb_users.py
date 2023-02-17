@@ -108,6 +108,7 @@ class tb_users(models.Model):
         vals["password"] = "1"
         return super(tb_users, self).create(vals)
 
+
     def create_user_blockhouse_groups_rel(self):
 
         view_id = ''

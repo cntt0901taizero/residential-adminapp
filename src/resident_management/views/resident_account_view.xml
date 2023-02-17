@@ -4,13 +4,26 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 <odoo>
+
+    <record id="view_resident_users_tree" model="ir.ui.view">
+        <field name="name">res.resident.users.tree</field>
+        <field name="model">res.users</field>
+        <field name="arch" type="xml">
+            <tree string="Users" js_class="tree_action_resident_user">
+                <field name="name"/>
+                <field name="login"/>
+                <field name="lang"/>
+                <field name="login_date"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </tree>
+        </field>
+    </record>
+
     <record id="view_resident_users_form_inherit" model="ir.ui.view">
         <field name="name">res.users.resident.form.inherit</field>
         <field name="model">res.users</field>
         <field name="arch" type="xml">
-            <form string="Users">
-<!--                <header>-->
-<!--                </header>-->
+            <form string="Users" js-class="form_action_resident_user">
                 <sheet>
                     <group string="Thông tin cư dân">
                         <field name="id" invisible="1"/>
@@ -84,7 +97,7 @@
         <field name="res_model">res.users</field>
         <field name="view_mode">tree,form</field>
         <field name="view_ids" eval="[(5, 0, 0),
-                (0, 0, {'view_mode': 'tree', 'view_id': ref('base.view_users_tree')}),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('view_resident_users_tree')}),
                 (0, 0, {'view_mode': 'form', 'view_id': ref('view_resident_users_form_inherit')})]"
         />
         <field name="domain">[('user_type', '=', 'RESIDENT')]</field>
