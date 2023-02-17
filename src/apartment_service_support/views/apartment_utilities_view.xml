@@ -76,10 +76,19 @@
         </field>
     </record>
 
-    <menuitem id="menu_utilities"
+    <menuitem id="menu_utilities_root"
               name="Tiện ích cư dân"
               parent="menu_apartment_service_support"
-              action="action_tb_apartment_utilities"
               sequence="4"/>
+    <menuitem id="menu_utilities_list"
+              name="Danh sách tiện ích"
+              parent="menu_utilities_root"
+              action="action_tb_apartment_utilities"
+              sequence="1"/>
+    <menuitem id="menu_utilities_approve"
+              name="Phê duyệt tiện ích"
+              parent="menu_utilities_root"
+              action="action_tb_apartment_utilities"
+              sequence="2"/>
 
 </odoo>

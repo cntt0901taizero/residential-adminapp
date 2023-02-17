@@ -3,6 +3,7 @@ from odoo.exceptions import ValidationError, AccessDenied
 from odoo.http import request
 
 from odoo.addons.resident_management.models.tb_users_blockhouse_res_groups_rel import USER_GROUP_CODE
+
 str_bql = USER_GROUP_CODE[2][0]
 str_bqt = USER_GROUP_CODE[3][0]
 
@@ -25,6 +26,22 @@ class tb_users(models.Model):
     _sql_constraints = [
         ('citizen_identification', 'unique(citizen_identification)', 'Số định danh cá nhân không được trùng lặp')
     ]
+
+    @api.model
+    def check_perm_create(self, permission_name):
+        check = False
+        user = request.env.user
+        if user and (user.id == 1 or user.id == 2):
+            check = True
+        else:
+            for item in user.tb_users_blockhouse_res_groups_rel_ids:
+                gid = item.group_id.id
+                group = request.env["res.groups"].sudo().search([('id', '=', gid)], limit=1)
+                if group[permission_name]:
+                    check = True
+                    break
+        return check
+
 
     @api.model
     def read_group(self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True):

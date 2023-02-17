@@ -5,6 +5,7 @@ import { registry } from "../../core/registry";
 import { session } from "@web/session";
 
 const loadMenusUrl = `/web/webclient/load_menus`;
+var rpc = require('web.rpc');
 
 function makeFetchLoadMenus() {
     const cacheHashes = session.cache_hashes;
@@ -69,18 +70,59 @@ function makeMenus(env, menusData, fetchLoadMenus) {
         async reload() {
             if (fetchLoadMenus) {
                 menusData = await fetchLoadMenus(true);
+
                 env.bus.trigger("MENUS:APP-CHANGED");
             }
         },
     };
 }
 
+const defineMenuWithPerm = {
+    "resident_management.menu_account_admin" : "perm_read_admin_user",
+    "resident_management.menu_account_resident" : "perm_read_resident_user",
+    "resident_management.menu_approve_account_resident" : "perm_approve_resident_user",
+
+    "apartment_project.menu_blockhouse" : "perm_read_block_house",
+    "apartment_project.menu_building" : "perm_read_building",
+    "apartment_project.menu_building_floors" : "perm_read_floor",
+    "apartment_project.menu_building_house" : "perm_read_apartment",
+
+    "apartment_service_support.menu_banners_root" : "perm_read_advertisement",
+    "apartment_service_support.menu_banners_approve" : "perm_approve_advertisement",
+
+    "apartment_service_support.menu_notification_root" : "perm_read_notification",
+    "apartment_service_support.menu_notification_approve" : "perm_approve_notification",
+
+    "apartment_service_support.menu_news_root" : "perm_read_news",
+    "apartment_service_support.menu_news_approve" : "perm_approve_news",
+
+    "apartment_service_support.menu_utilities_root" : "perm_read_utilities",
+    "apartment_service_support.menu_utilities_approve" : "perm_approve_utilities",
+
+    "apartment_service_support.menu_resident_handbook_root" : "perm_read_handbook",
+    "apartment_service_support.menu_resident_handbook_approve" : "perm_approve_handbook",
+}
 export const menuService = {
     dependencies: ["action", "router"],
     async start(env) {
         const fetchLoadMenus = makeFetchLoadMenus();
         const menusData = await fetchLoadMenus();
-        return makeMenus(env, menusData, fetchLoadMenus);
+        console.log(menusData);
+        var newMenusData = {}
+        Object.keys(menusData).forEach(async menuId => {
+           var checkMyMenu = Object.keys(defineMenuWithPerm).includes(menusData[menuId].xmlid)
+           if(checkMyMenu){
+               var check_perm = await rpc.query({
+                                model: 'res.users',
+                                method: 'check_perm_create',
+                                args: [defineMenuWithPerm[menusData[menuId].xmlid]],
+                            })
+               console.log(menusData[menuId].name + "------------" + defineMenuWithPerm[menusData[menuId].xmlid] + "----" + check_perm)
+               menusData[menuId].invisible = !check_perm
+           }
+            newMenusData[menuId]=menusData[menuId]
+        })
+        return makeMenus(env, newMenusData, fetchLoadMenus);
     },
 };
 

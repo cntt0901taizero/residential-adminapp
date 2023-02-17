@@ -4,11 +4,25 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 <odoo>
-    <record id="view_admin_users_form_inherit" model="ir.ui.view">
-        <field name="name">res.users.resident.form.inherit</field>
+    <record id="view_admin_users_tree" model="ir.ui.view">
+        <field name="name">res.admin.users.tree</field>
         <field name="model">res.users</field>
         <field name="arch" type="xml">
-            <form string="Users">
+            <tree string="Users" js_class="tree_action_admin_user">
+                <field name="name"/>
+                <field name="login"/>
+                <field name="lang"/>
+                <field name="login_date"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_admin_users_form_inherit" model="ir.ui.view">
+        <field name="name">res.users.admin.form.inherit</field>
+        <field name="model">res.users</field>
+        <field name="arch" type="xml">
+            <form string="Users" js_class="form_action_admin_user">
                 <sheet>
                     <field name="id" invisible="1"/>
                     <div class="row">
@@ -97,7 +111,7 @@
         <field name="res_model">res.users</field>
         <field name="view_mode">tree,form</field>
         <field name="view_ids" eval="[(5, 0, 0),
-                (0, 0, {'view_mode': 'tree', 'view_id': ref('base.view_users_tree')}),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('view_admin_users_tree')}),
                 (0, 0, {'view_mode': 'form', 'view_id': ref('view_admin_users_form_inherit')})]"
         />
         <field name="domain">[('user_type', '=', 'ADMIN')]</field>
@@ -118,7 +132,7 @@
         <field name="name">Tài khoản quản trị</field>
         <field name="action" ref="action_account_admin"/>
         <field name="parent_id" ref="menu_account_admin"/>
-        <field name="groups_id" eval="[(4, ref('base.group_system')), (4, ref('base.group_erp_manager'))]"/>
+<!--        <field name="groups_id" eval="[(4, ref('base.group_system')), (4, ref('base.group_erp_manager'))]"/>-->
         <field name="sequence">1</field>
     </record>
 
