@@ -108,6 +108,10 @@ button.btn.btn-secondary {
     border-color: #b8b8b8;
 }
 
+.btn-primary {
+    color: #fff !important;
+}
+
 btn-fill-secondary, .btn-secondary {
     background-color: #b8b8b8 !important;
 }
@@ -125,8 +129,7 @@ button.btn.btn-fill-light, button.btn.btn-light {
     position: sticky;
     top: 0;
     z-index: 999;
-    background-color: #EBEFEB !important;
-//     background-color: #ffffff !important;
+    background-color: #E8E8E8 !important;
 }
 
 .table-hover tbody tr:hover {

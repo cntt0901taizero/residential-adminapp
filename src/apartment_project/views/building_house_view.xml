@@ -24,7 +24,7 @@
                         name="confirm_delete" class="btn btn-danger" title="Xóa" type="object" icon="fa-trash-o"/>
                 <groupby name="building_floors_id">
                     <button name="create_building_house" string=" Thêm mới căn hộ / biệt thự"
-                            class="fa fa-plus btn btn-info" type="object"/>
+                            class="fa fa-plus btn btn-primary" type="object"/>
                 </groupby>
             </tree>
         </field>

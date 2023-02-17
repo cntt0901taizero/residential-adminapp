@@ -9,12 +9,30 @@
         <field name="model">res.groups</field>
         <field name="arch" type="xml">
             <form string="Users">
-                <header>
-                </header>
+                <!--                <header>-->
+                <!--                </header>-->
                 <sheet>
-                    <field name="name"/>
-                    <field name="comment"/>
-                    <field name="category_id"/>
+                    <field name="id" invisible="1"/>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <group>
+                                <field name="category_id"
+                                       options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                            </group>
+                        </div>
+                        <div class="col-md-4">
+                            <group>
+                                <field name="name"
+                                       options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                            </group>
+                        </div>
+                        <div class="col-md-4" attrs="{'invisible': [('id','>', 0)]}">
+                            <group>
+                                <field name="comment"/>
+                            </group>
+                        </div>
+                    </div>
+
                     <notebook>
                         <page string="Quản lý tài khoản">
                             <h5>Tài khoản quản trị</h5>

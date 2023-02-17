@@ -57,15 +57,20 @@
                                 <field name="phone"/>
                             </group>
                         </div>
+                        <div class="col-md-12">
+                            <group>
+                                <field name="active"/>
+                            </group>
+                        </div>
                     </div>
                     <notebook attrs="{'invisible': [('id','=', False)]}">
                         <page string="Nhóm quyền dự án">
-                            <button string=" Thêm nhóm quyền" class="fa fa-plus btn btn-info mb-2"
+                            <button string=" Thêm nhóm quyền" class="fa fa-plus btn btn-primary mb-2"
                                     disabled="True" attrs="{'invisible':[('id','>',0)]}"
                                     data-toggle="tooltip"
                                     title="Cần lưu thông tin tài khoản trước khi thêm mới nhóm quyền cho tài khoản"/>
                             <button name="create_user_blockhouse_groups_rel" string=" Thêm nhóm quyền"
-                                    class="fa fa-plus btn btn-info mb-2" type="object"
+                                    class="fa fa-plus btn btn-primary mb-2" type="object"
                                     attrs="{'invisible':[('id','=',False)]}"/>
 
                             <field name="tb_users_blockhouse_res_groups_rel_ids" widget="one2many" mode="tree">
