@@ -80,7 +80,16 @@ function makeMenus(env, menusData, fetchLoadMenus) {
 const defineMenuWithPerm = {
     "resident_management.menu_account_admin" : "perm_read_admin_user",
     "resident_management.menu_account_resident" : "perm_read_resident_user",
-    "resident_management.menu_account_resident" : "perm_read_resident_user",
+    "resident_management.menu_approve_account_resident" : "perm_approve_resident_user",
+    "apartment_project.menu_blockhouse" : "perm_read_block_house",
+    "apartment_project.menu_building" : "perm_read_building",
+    "apartment_project.menu_building_floors" : "perm_read_floor",
+    "apartment_project.menu_building_house" : "perm_read_apartment",
+
+    "apartment_service_support.menu_banners" : "perm_read_advertisement",
+    "apartment_service_support.menu_notification" : "perm_read_notification",
+    "apartment_service_support.menu_news" : "perm_read_news",
+    "apartment_service_support.menu_utilities" : "perm_read_utilities"
 }
 export const menuService = {
     dependencies: ["action", "router"],
@@ -97,8 +106,7 @@ export const menuService = {
                                 method: 'check_perm_create',
                                 args: [defineMenuWithPerm[menusData[menuId].xmlid]],
                             })
-               console.log(check_perm + "44444")
-               console.log(menusData[menuId].name + "------------" + defineMenuWithPerm[menusData[menuId].xmlid])
+               console.log(menusData[menuId].name + "------------" + defineMenuWithPerm[menusData[menuId].xmlid] + "----" + check_perm)
                menusData[menuId].invisible = !check_perm
            }
             newMenusData[menuId]=menusData[menuId]
