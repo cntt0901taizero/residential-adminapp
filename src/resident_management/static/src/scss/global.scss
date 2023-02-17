@@ -90,6 +90,14 @@ button.btn {
     margin: 0 2px 4px 2px !important;
 }
 
+.o_btn_char_copy {
+    padding: 0 10px !important;
+}
+
+.btn > span {
+    font-family: 'Roboto'
+}
+
 .alert {
     margin-bottom: 4px !important;
 }
@@ -133,5 +141,5 @@ button.btn.btn-fill-light, button.btn.btn-light {
 }
 
 .table-hover tbody tr:hover {
-    background-color: #e8f8e2 !important;
+    background-color: #ECFAE6 !important;
 }
