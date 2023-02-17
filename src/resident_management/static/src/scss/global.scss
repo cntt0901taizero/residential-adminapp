@@ -87,7 +87,11 @@ button.btn {
 
 .btn {
     padding: 6px 12px !important;
-    margin: 0 2px !important;
+    margin: 0 2px 4px 2px !important;
+}
+
+.alert {
+    margin-bottom: 4px !important;
 }
 
 button.btn.btn-primary {

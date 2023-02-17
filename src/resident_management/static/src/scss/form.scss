@@ -140,16 +140,21 @@
 }
 
 .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
-    color: #001e95;
+    color: #19181f;
     font-weight: 600;
-    border-color: transparent;
-    border: none;
-    border-bottom: 2px solid #001e95 !important;
+    background-color: #b9e8c1;
+    border-bottom: 2px solid #2f965f !important;
 }
 
 .nav-tabs .nav-item .nav-link {
     padding: 1rem 1.5rem;
     font-size: 11px;
+}
+
+.nav-tabs .nav-link {
+    color: #19181f;
+    background-color: #f2f2f2;
+    border-bottom: 2px solid #f2f2f2 !important;
 }
 
 .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {

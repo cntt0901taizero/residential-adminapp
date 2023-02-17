@@ -12,19 +12,56 @@
 <!--                <header>-->
 <!--                </header>-->
                 <sheet>
-                    <group string="Thông tin cư dân">
-                        <field name="id" invisible="1"/>
-                        <field name="image_1920" widget='image' class="oe_left oe_avatar"
-                               options='{"preview_image": "avatar_128"}'/>
-                        <field name="login" string="Tên đăng nhập"/>
-                        <field name="name" string="Họ tên cư dân"/>
-                        <field name="citizen_identification"/>
-                        <field name="date_of_birth"/>
-                        <field name="gender"/>
-                        <field name="email"/>
-                        <field name="phone"/>
-                    </group>
-                    <notebook>
+                    <field name="id" invisible="1"/>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <group>
+                                <field name="image_1920" widget='image' class="oe_left oe_avatar"
+                                       options='{"preview_image": "avatar_128"}'/>
+                            </group>
+                        </div>
+                        <div class="col-md-4">
+                            <group>
+                                <field name="login" string="Tên đăng nhập"/>
+                            </group>
+                        </div>
+                        <div class="col-md-4" attrs="{'invisible': [('id','>', 0)]}">
+                            <group>
+                                <field name="password" string="Mật khẩu"/>
+                            </group>
+                        </div>
+                        <div class="col-md-4">
+                            <group>
+                                <field name="name" string="Họ tên"/>
+                            </group>
+                        </div>
+                        <div class="col-md-4">
+                            <group>
+                                <field name="gender"/>
+                            </group>
+                        </div>
+                        <div class="col-md-4">
+                            <group>
+                                <field name="citizen_identification"/>
+                            </group>
+                        </div>
+                        <div class="col-md-4">
+                            <group>
+                                <field name="date_of_birth"/>
+                            </group>
+                        </div>
+                        <div class="col-md-4">
+                            <group>
+                                <field name="email"/>
+                            </group>
+                        </div>
+                        <div class="col-md-4">
+                            <group>
+                                <field name="phone"/>
+                            </group>
+                        </div>
+                    </div>
+                    <notebook attrs="{'invisible': [('id','=', False)]}">
                         <page string="Nhóm quyền dự án">
                             <button string=" Thêm nhóm quyền" class="fa fa-plus btn btn-info mb-2"
                                     disabled="True" attrs="{'invisible':[('id','>',0)]}"
