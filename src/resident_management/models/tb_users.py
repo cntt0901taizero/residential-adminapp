@@ -104,9 +104,11 @@ class tb_users(models.Model):
 
     @api.model
     def create(self, vals):
-
-        vals["password"] = "1"
-        return super(tb_users, self).create(vals)
+        can_do = self.check_permission('perm_create_resident_user', raise_exception=False)
+        if can_do:
+            vals["password"] = "1"
+            return super(tb_users, self).create(vals)
+        raise ValidationError('Bạn không có quyền tạo tài khoản cư dân.')
 
     def create_user_blockhouse_groups_rel(self):
 

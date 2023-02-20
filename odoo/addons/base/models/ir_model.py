@@ -1738,6 +1738,27 @@ class IrModelAccess(models.Model):
         """ % access_mode, [model_name])
         return [('%s/%s' % x) if x[0] else x[1] for x in self._cr.fetchall()]
 
+    @api.model
+    @tools.ormcache_context('self.env.uid', 'self.env.su', 'permission_name', 'raise_exception', keys=('lang',))
+    def check_permission(self, permission_name, raise_exception=True):
+        if self.env.su:
+            # User root have all accesses
+            return True
+        query = f"SELECT MAX(CASE WHEN rg.{permission_name} THEN 1 ELSE 0 END) " \
+                f"FROM res_users as u " \
+                f"JOIN res_groups_users_rel rgur on u.id = rgur.uid " \
+                f"JOIN res_groups rg on rgur.gid = rg.id " \
+                f"WHERE u.id = {self._uid} and rg.{permission_name} = true"
+        self._cr.execute(query)
+        r = self._cr.fetchone()[0]
+
+        if not r and raise_exception:
+            raise AccessError("You can't do this")
+        return bool(r)
+
+    __cache_clearing_methods = set()
+
+
     # The context parameter is useful when the method translates error messages.
     # But as the method raises an exception in that case,  the key 'lang' might
     # not be really necessary as a cache key, unless the `ormcache_context`
