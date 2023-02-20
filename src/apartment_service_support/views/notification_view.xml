@@ -9,7 +9,7 @@
         <field name="model">tb_notification</field>
 
         <field name="arch" type="xml">
-            <tree>
+            <tree js_class="tree_action_notifications">
                 <field name="name"/>
                 <field name="content"/>
                 <field name="type"/>
@@ -23,7 +23,7 @@
         <field name="name">tb_notification.form</field>
         <field name="model">tb_notification</field>
         <field name="arch" type="xml">
-            <form>
+            <form js_class="form_action_notifications">
                 <header>
                     <button
                             icon="fa-check"

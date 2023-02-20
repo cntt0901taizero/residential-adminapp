@@ -42,7 +42,7 @@ class tb_users(models.Model):
     ]
 
     @api.model
-    def check_perm_create(self, permission_name):
+    def check_perm_user(self, permission_name):
         check = False
         user = request.env.user
         if user and (user.id == 1 or user.id == 2):
