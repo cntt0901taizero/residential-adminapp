@@ -3537,6 +3537,10 @@ Fields:
         """
         return self.env['ir.model.access'].check(self._name, operation, raise_exception)
 
+    @api.model
+    def check_permission(self, permission_name, raise_exception=True):
+        return self.env['ir.model.access'].check_permission(permission_name, raise_exception)
+
     def check_access_rule(self, operation):
         """ Verifies that the operation given by ``operation`` is allowed for
             the current user according to ir.rules.

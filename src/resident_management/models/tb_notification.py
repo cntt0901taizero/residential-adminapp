@@ -141,9 +141,9 @@ class tb_notification(models.Model):
                 values['building_id'] = None
                 values['building_house_id'] = None
                 values['blockhouse_id'] = None
-        if 'user_ids' in values:
-            if len(values['user_ids'][0][2]) == 0:
-                raise ValidationError('Vui lòng chọn người nhận thông báo')
+        # if 'user_ids' in values:
+        #     if len(values['user_ids'][0][2]) == 0:
+        #         raise ValidationError('Vui lòng chọn người nhận thông báo')
         return super(tb_notification, self).create(values)
 
 

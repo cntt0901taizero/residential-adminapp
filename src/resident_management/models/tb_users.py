@@ -28,7 +28,7 @@ class tb_users(models.Model):
     ]
 
     @api.model
-    def check_perm_create(self, permission_name):
+    def check_perm_user(self, permission_name):
         check = False
         user = request.env.user
         if user and (user.id == 1 or user.id == 2):
@@ -89,8 +89,10 @@ class tb_users(models.Model):
 
     @api.model
     def create(self, vals):
-        # vals["password"] = "1"
-        return super(tb_users, self).create(vals)
+        can_do = self.check_permission('perm_create_resident_user', raise_exception=False)
+        if can_do:
+            return super(tb_users, self).create(vals)
+        raise ValidationError('Bạn không có quyền tạo tài khoản cư dân.')
 
     def create_user_blockhouse_groups_rel(self):
         view_id = ''

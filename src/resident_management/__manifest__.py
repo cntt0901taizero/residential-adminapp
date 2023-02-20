@@ -38,6 +38,8 @@
             'resident_management/static/src/js/sidebar.js',
             'resident_management/static/src/js/button_admin_user.js',
             'resident_management/static/src/js/button_resident_user.js',
+            'resident_management/static/src/js/button_news.js',
+            'resident_management/static/src/js/button_notifications.js',
         ],
         'web.assets_qweb': [
             # 'resident_management/static/src/xml/styles.xml',

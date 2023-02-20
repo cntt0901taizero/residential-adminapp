@@ -1,4 +1,4 @@
-odoo.define('resident_management.button_resident_user', async function (require) {
+odoo.define('resident_management.button_resident_user', function (require) {
     "use strict";
     var core = require('web.core');
     var _t = core._t;
@@ -9,42 +9,43 @@ odoo.define('resident_management.button_resident_user', async function (require)
     var FormView = require('web.FormView');
     var model_name = 'res.users'
     var viewRegistry = require('web.view_registry');
-    var perm_create_resident_user = await rpc.query({
+    var perm_create = rpc.query({
                                 model: 'res.users',
-                                method: 'check_perm_create',
+                                method: 'check_perm_user',
                                 args: ["perm_create_resident_user"],
                             });
-    var perm_delete_resident_user = await rpc.query({
+    var perm_delete = rpc.query({
                                 model: 'res.users',
-                                method: 'check_perm_create',
+                                method: 'check_perm_user',
                                 args: ["perm_delete_resident_user"],
                             });
-    var perm_write_resident_user = await rpc.query({
+    var perm_write = rpc.query({
                                 model: 'res.users',
-                                method : 'check_perm_create',
+                                method : 'check_perm_user',
                                 args: ["perm_write_resident_user"],
                             });
-    var perm_change_password_resident_user = await rpc.query({
+    var perm_change_password = rpc.query({
                                 model: 'res.users',
-                                method : 'check_perm_create',
-                                args: ["perm_change_password_resident_user"],
-                            });
-    var TreeButton = ListController.extend({
-       renderButtons: async function($node) {
-            this._super.apply(this, arguments);
-            if(this.$buttons && perm_create_resident_user) {
-                this.$buttons.find('.btn.btn-primary.o_list_button_add').show();
-            }
-            else{
-                this.$buttons.find('.btn.btn-primary.o_list_button_add').hide();
-            }
+                                method : 'check_perm_user',
+                                args: ["perm_change_password_resident_user"],})
 
-       }
+    var TreeButton = ListController.extend({
+       updateButtons: async function() {
+            this._super.apply(this, arguments);
+            Promise.all([perm_create])
+            .then(perm=>{
+                 if(this.$buttons && perm[0]) {
+                            this.$buttons.find('.btn.btn-primary.o_list_button_add').show();
+                 }
+                 else{
+                        this.$buttons.find('.btn.btn-primary.o_list_button_add').hide();
+                 }
+            })
+        },
     });
     var AdminUserListView = ListView.extend({
        config: _.extend({}, ListView.prototype.config, {
            Controller: TreeButton,
-
        }),
     });
     viewRegistry.add('tree_action_resident_user', AdminUserListView);
@@ -52,13 +53,15 @@ odoo.define('resident_management.button_resident_user', async function (require)
     var FormActionController = FormController.extend({
         renderButtons: async function($node) {
             this._super.apply(this, arguments);
+            console.log('/./././')
             if(this.$buttons){
-                if(perm_create_resident_user) this.$buttons.find('.btn.btn-secondary.o_form_button_create').show();
-                else this.$buttons.find('.btn.btn-secondary.o_form_button_create').hide();
-
-                if(perm_write_resident_user) this.$buttons.find('.btn.btn-primary.o_form_button_edit').show();
-                else this.$buttons.find('.btn.btn-primary.o_form_button_edit').hide();
-
+                Promise.all([perm_create, perm_write])
+                .then(perm=>{
+                      if(perm[0]) this.$buttons.find('.btn.btn-secondary.o_form_button_create').show();
+                      else this.$buttons.find('.btn.btn-secondary.o_form_button_create').hide();
+                      if(perm[1]) this.$buttons.find('.btn.btn-primary.o_form_button_edit').show();
+                      else this.$buttons.find('.btn.btn-primary.o_form_button_edit').hide();
+                })
             }
        },
        _getActionMenuItems: function (state) {
@@ -91,21 +94,24 @@ odoo.define('resident_management.button_resident_user', async function (require)
                     callback: () => this._onDuplicateRecord(this),
                 });
             }
-            if (this.activeActions.delete && perm_delete_resident_user) {
-                otherActionItems.push({
-                    description: _t("Delete"),
-                    callback: () => this._onDeleteRecord(this),
-                });
-            }
-            if (!perm_change_password_resident_user && this.toolbarActions.action) {
-               var newActions = this.toolbarActions.action.filter(k=> k.id != 70)
-               this.toolbarActions = newActions
-            }
+            Promise.all([perm_delete, perm_change_password])
+                .then(perm=>{
+                       if (this.activeActions.delete && perm[0]) {
+                            otherActionItems.push({
+                                description: _t("Delete"),
+                                callback: () => this._onDeleteRecord(this),
+                            });
+                        }
+                        if (!perm[1] && this.toolbarActions.action) {
+                           var newActions = this.toolbarActions.action.filter(k=> k.id != 70)
+                           this.toolbarActions = newActions
+                        }
+                })
+
             return Object.assign(props, {
                 items: Object.assign(this.toolbarActions, { other: otherActionItems }),
             });
        },
-
     });
 
     var FormActionView = FormView.extend({
@@ -115,7 +121,6 @@ odoo.define('resident_management.button_resident_user', async function (require)
     });
 
     viewRegistry.add('form_action_resident_user', FormActionView);
-
 });
 
 

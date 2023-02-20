@@ -114,7 +114,7 @@ export const menuService = {
            if(checkMyMenu){
                var check_perm = await rpc.query({
                                 model: 'res.users',
-                                method: 'check_perm_create',
+                                method: 'check_perm_user',
                                 args: [defineMenuWithPerm[menusData[menuId].xmlid]],
                             })
                console.log(menusData[menuId].name + "------------" + defineMenuWithPerm[menusData[menuId].xmlid] + "----" + check_perm)

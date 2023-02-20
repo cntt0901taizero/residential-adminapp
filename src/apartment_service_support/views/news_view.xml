@@ -4,7 +4,7 @@
         <field name="name">tb_news.tree</field>
         <field name="model">tb_news</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree js_class="tree_action_news">
                 <field name="image" widget="image" width="100px"/>
                 <field name="name" decoration-bf="1"/>
                 <field name="news_description" decoration-bf="1"/>
@@ -77,7 +77,7 @@
         <field name="name">tb_news.form</field>
         <field name="model">tb_news</field>
         <field name="arch" type="xml">
-            <form>
+            <form js_class="form_action_news">
                 <header>
                     <button icon="fa-check" class="oe_highlight"
                             status="DRAFT, REJECT"
