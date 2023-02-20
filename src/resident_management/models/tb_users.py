@@ -89,10 +89,15 @@ class tb_users(models.Model):
 
     @api.model
     def create(self, vals):
-        can_do = self.check_permission('perm_create_resident_user', raise_exception=False)
+        per_name = 'perm_create_resident_user'
+        error_messenger = 'Bạn không có quyền tạo tài khoản cư dân.'
+        if self._context['default_user_type'] == 'ADMIN':
+            per_name = 'perm_create_admin_user'
+            error_messenger = 'Bạn không có quyền tạo tài khoản quản trị.'
+        can_do = self.check_permission(per_name, raise_exception=False)
         if can_do:
             return super(tb_users, self).create(vals)
-        raise ValidationError('Bạn không có quyền tạo tài khoản cư dân.')
+        raise ValidationError(error_messenger)
 
     def create_user_blockhouse_groups_rel(self):
         view_id = ''
