@@ -53,7 +53,6 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
     user_group_code = fields.Selection(string='Mã nhóm quyền', selection=USER_GROUP_CODE,
                                        default=USER_GROUP_CODE[0][0])
 
-
     def _domain_blockhouse_id(self):
         user = request.env.user
         bqt_bh_id = []  # ban quan tri - blockhouse - id
@@ -157,9 +156,7 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
         return super(tb_users_blockhouse_res_groups_rel, self).create(value)
 
     def _insert_record_res_groups_users_rel(self, uid, gid, *args, **kwargs):
-        self.env.cr.execute("""SELECT count(*) FROM res_groups_users_rel
-                                               WHERE uid=%s AND gid=%s""",
-                            (uid, gid))
+        self.env.cr.execute("""SELECT count(*) FROM res_groups_users_rel WHERE uid=%s AND gid=%s""", (uid, gid))
         total = self.env.cr.fetchone()[0]
         if total == 0:
             self.env.cr.execute("""INSERT INTO res_groups_users_rel(uid, gid) VALUES(%s, %s)""", (uid, gid))
@@ -175,16 +172,27 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
         can_do = self.check_access_rights('write', raise_exception=False)
         if not can_do:
             raise ValidationError('Bạn không có quyền chỉnh sửa thông tin!')
+
+        view_id = ''
+        name = ''
+        context = {
+            'default_user_id': self.id,
+        }
+        if self.user_id.user_type != 'RESIDENT':
+            name = 'Phân quyền quản lý quản trị'
+            view_id = self.env.ref('resident_management.view_tb_users_blockhouse_res_groups_rel_form').id
+        else:
+            name = 'Phân quyền căn hộ cư dân'
+            context['default_group_id'] = self.env['res.groups'].search([('name', 'like', '%[CD]%')]).id
+            view_id = self.env.ref('resident_management.view_tb_users_blockhouse_res_groups_rel_form_resident').id
         return {
             'type': 'ir.actions.act_window',
-            'name': 'Sửa ',
+            'name': name,
             'res_model': 'tb_users_blockhouse_res_groups_rel',
-            'res_id': self.id,
-            'view_type': 'form',
+            'target': 'new',
+            'view_id': view_id,
             'view_mode': 'form',
-            'view_id': self.env.ref('resident_management.view_tb_users_blockhouse_res_groups_rel_tree').id,
-            'context': {'form_view_initial_mode': 'edit'},
-            'target': 'current',
+            'context': context,
         }
 
     def confirm_delete(self):

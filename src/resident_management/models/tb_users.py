@@ -42,7 +42,6 @@ class tb_users(models.Model):
                     break
         return check
 
-
     @api.model
     def read_group(self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True):
         user = request.env.user
@@ -100,10 +99,10 @@ class tb_users(models.Model):
             'default_user_id': self.id,
         }
         if self.user_type != 'RESIDENT':
-            name = 'Chọn nhóm quyền quản trị'
+            name = 'Phân quyền quản lý quản trị'
             view_id = self.env.ref('resident_management.view_tb_users_blockhouse_res_groups_rel_form').id
         else:
-            name = 'Chọn căn hộ cư dân'
+            name = 'Phân quyền căn hộ cư dân'
             context['default_group_id'] = self.env['res.groups'].search([('name', 'like', '%[CD]%')]).id
             view_id = self.env.ref('resident_management.view_tb_users_blockhouse_res_groups_rel_form_resident').id
         return {

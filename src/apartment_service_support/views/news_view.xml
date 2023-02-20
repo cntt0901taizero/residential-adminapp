@@ -79,21 +79,18 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button
-                            icon="fa-check"
-                            class="oe_highlight"
+                    <button icon="fa-check" class="oe_highlight"
                             status="DRAFT, REJECT"
                             name="set_status_active" string="Phê duyệt" type="object"
                             attrs="{'invisible':[('id','=',False)]}"
-                            groups="resident_management.group_administration"
+                            groups="resident_management.group_administration, base.group_erp_manager"
                     />
-                    <button
-                            icon="fa-times"
+                    <button icon="fa-times"
                             attrs="{'invisible':[('id','=',False)]}"
                             name="set_status_reject" string="Từ chối duyệt" type="object" status="DRAFT, ACTIVE"
-                            groups="resident_management.group_administration"/>
+                            groups="resident_management.group_administration, base.group_erp_manager"/>
                     <field name="status" widget="statusbar"
-                           groups="resident_management.group_administration, resident_management.group_management"/>
+                           groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"/>
                 </header>
                 <sheet>
                     <field name="image" readonly="0" widget="image" class="oe_right oe_avatar"/>

@@ -34,22 +34,22 @@
                         </div>
                         <div class="col-md-4">
                             <group>
-                                <field name="login" string="Tên đăng nhập"/>
+                                <field name="login" required="1" string="Tên đăng nhập *"/>
                             </group>
                         </div>
                         <div class="col-md-4" attrs="{'invisible': [('id','>', 0)]}">
                             <group>
-                                <field name="password" string="Mật khẩu"/>
+                                <field name="password" attrs="{'required': [('id','=', False)]}" string="Mật khẩu *"/>
                             </group>
                         </div>
                         <div class="col-md-4">
                             <group>
-                                <field name="name" string="Họ tên"/>
+                                <field name="name" required="1" string="Họ tên *"/>
                             </group>
                         </div>
                         <div class="col-md-4">
                             <group>
-                                <field name="email"/>
+                                <field name="email" required="1" string="Email *"/>
                             </group>
                         </div>
                         <div class="col-md-4">
@@ -79,12 +79,13 @@
                                            options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                                     <field name="building_id" optional="show"
                                            options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
-                                    <field name="group_id" optional="show"/>
+                                    <field name="group_id" optional="show"
+                                           options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
 
-                                    <button groups="resident_management.group_administration, resident_management.group_management"
+                                    <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                                             name="open_edit_form" class="btn btn-light" title="Sửa" type="object"
                                             icon="fa-pencil"/>
-                                    <button groups="resident_management.group_administration, resident_management.group_management"
+                                    <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                                             name="confirm_delete" class="btn btn-danger" title="Xóa" type="object"
                                             icon="fa-trash-o"/>
                                 </tree>
