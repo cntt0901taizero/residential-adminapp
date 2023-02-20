@@ -4,13 +4,23 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 <odoo>
+    <record id="view_group_tree_inherit" model="ir.ui.view">
+        <field name="name">res.groups.form.inherit</field>
+        <field name="model">res.groups</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="full_name"/>
+                <button name="open_edit_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
+                <button name="confirm_delete" class="btn btn-danger" title="Xóa" type="object" icon="fa-trash-o"/>
+            </tree>
+        </field>
+    </record>
+
     <record id="view_group_form_inherit" model="ir.ui.view">
         <field name="name">res.groups.form.inherit</field>
         <field name="model">res.groups</field>
         <field name="arch" type="xml">
             <form string="Users">
-                <!--                <header>-->
-                <!--                </header>-->
                 <sheet>
                     <field name="id" invisible="1"/>
                     <div class="row">
@@ -32,7 +42,6 @@
                             </group>
                         </div>
                     </div>
-
                     <notebook>
                         <page string="Quản lý tài khoản">
                             <h5>Tài khoản quản trị</h5>
@@ -143,7 +152,6 @@
 
                         </page>
                     </notebook>
-
                 </sheet>
             </form>
         </field>
