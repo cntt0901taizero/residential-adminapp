@@ -16,13 +16,13 @@
 <!--                <field name="active_time" widget="date" optional="show"/>-->
                 <field name="is_active" optional="show"/>
                 <field name="blockhouse_id" optional="show"/>
-                <button groups="resident_management.group_administration, resident_management.group_management"
+                <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                         name="open_edit_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
-                <button groups="resident_management.group_administration, resident_management.group_management"
+                <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                         name="confirm_delete" class="btn btn-danger" title="Xóa" type="object" icon="fa-trash-o"/>
                 <groupby name="blockhouse_id">
                     <button name="create_apartment_utilities" string=" Thêm tiện ích"
-                            class="fa fa-plus btn btn-info" type="object"/>
+                            class="fa fa-plus btn btn-primary" type="object"/>
                 </groupby>
             </tree>
         </field>

@@ -87,7 +87,19 @@ button.btn {
 
 .btn {
     padding: 6px 12px !important;
-    margin: 0 2px !important;
+    margin: 0 2px 4px 2px !important;
+}
+
+.o_btn_char_copy {
+    padding: 0 10px !important;
+}
+
+.btn > span {
+    font-family: 'Roboto'
+}
+
+.alert {
+    margin-bottom: 4px !important;
 }
 
 button.btn.btn-primary {
@@ -102,6 +114,10 @@ button.btn.btn-primary:hover, button.btn.btn-primary:active, button.btn.btn-prim
 
 button.btn.btn-secondary {
     border-color: #b8b8b8;
+}
+
+.btn-primary {
+    color: #fff !important;
 }
 
 btn-fill-secondary, .btn-secondary {
@@ -121,10 +137,9 @@ button.btn.btn-fill-light, button.btn.btn-light {
     position: sticky;
     top: 0;
     z-index: 999;
-    background-color: #EBEFEB !important;
-//     background-color: #ffffff !important;
+    background-color: #E8E8E8 !important;
 }
 
 .table-hover tbody tr:hover {
-    background-color: #e8f8e2 !important;
+    background-color: #ECFAE6 !important;
 }

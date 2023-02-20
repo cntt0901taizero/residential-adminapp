@@ -21,13 +21,13 @@
 <!--                <field name="location_link" widget="url" optional="show"/>-->
                 <field name="blockhouse_id" optional="show"/>
                 <field name="is_active" optional="show"/>
-                <button groups="resident_management.group_administration, resident_management.group_management"
+                <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                         name="open_edit_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
-                <button groups="resident_management.group_administration, resident_management.group_management"
+                <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                         name="confirm_delete" class="btn btn-danger" title="Xóa" type="object" icon="fa-trash-o"/>
                 <groupby name="blockhouse_id">
                     <button name="create_building" string=" Thêm mới khu / tòa nhà"
-                            class="fa fa-plus btn btn-info" type="object"/>
+                            class="fa fa-plus btn btn-primary" type="object"/>
                 </groupby>
             </tree>
         </field>
@@ -119,11 +119,11 @@
                     </group>
                     <notebook>
                         <page string="Tầng sàn">
-                            <button string=" Thêm mới Tầng sàn" class="fa fa-plus btn btn-info mb-2"
+                            <button string=" Thêm mới Tầng sàn" class="fa fa-plus btn btn-primary mb-2"
                                     disabled="True" attrs="{'invisible':[('id','>',0)]}"
                                     data-toggle="tooltip" title="Cần lưu tòa nhà trước khi thêm mới tầng sàn"/>
                             <button name="create_building_floors" string=" Thêm mới Tầng sàn"
-                                    class="fa fa-plus btn btn-info mb-2" type="object"
+                                    class="fa fa-plus btn btn-primary mb-2" type="object"
                                     attrs="{'invisible':[('id','=',False)]}"/>
                             <field name="building_floors_ids" widget="searchbar_one2many_list">
                                 <tree string="Bảng tầng sàn" decoration-danger="is_active == False"
@@ -137,19 +137,19 @@
                                     <field name="blockhouse_id" optional="show"
                                            options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                                     <field name="is_active" widget="boolean_toggle" optional="show"/>
-                                    <button groups="resident_management.group_administration, resident_management.group_management"
+                                    <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                                             name="open_edit_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
-                                    <button groups="resident_management.group_administration, resident_management.group_management"
+                                    <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                                             name="confirm_delete" class="btn btn-danger" title="Xóa" type="object" icon="fa-trash-o"/>
                                 </tree>
                             </field>
                         </page>
                         <page string="Căn hộ">
-                            <button string=" Thêm mới Căn hộ" class="fa fa-plus btn btn-info mb-2"
+                            <button string=" Thêm mới Căn hộ" class="fa fa-plus btn btn-primary mb-2"
                                     disabled="True" attrs="{'invisible':[('id','>',0)]}"
                                     title="Cần lưu tòa nhà trước khi thêm mới căn hộ"/>
                             <button name="create_building_house" string=" Thêm mới Căn hộ"
-                                    class="fa fa-plus btn btn-info mb-2" type="object"
+                                    class="fa fa-plus btn btn-primary mb-2" type="object"
                                     attrs="{'invisible':[('id','=',False)]}"/>
                             <field name="building_house_ids" widget="searchbar_one2many_list">
                                 <tree string="Bảng căn hộ" decoration-danger="is_active == False"
@@ -165,9 +165,9 @@
                                     <field name="blockhouse_id" widget="badge" optional="show"
                                            options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                                     <field name="is_active" widget="boolean_toggle" optional="show"/>
-                                    <button groups="resident_management.group_administration, resident_management.group_management"
+                                    <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                                             name="open_edit_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
-                                    <button groups="resident_management.group_administration, resident_management.group_management"
+                                    <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                                             name="confirm_delete" class="btn btn-danger" title="Xóa" type="object" icon="fa-trash-o"/>
                                 </tree>
                             </field>

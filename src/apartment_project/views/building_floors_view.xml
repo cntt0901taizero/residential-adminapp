@@ -20,9 +20,9 @@
                 <field name="blockhouse_id" optional="show"
                        options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                 <field name="is_active" optional="show"/>
-                <button groups="resident_management.group_administration, resident_management.group_management"
+                <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                         name="open_edit_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
-                <button groups="resident_management.group_administration, resident_management.group_management"
+                <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                         name="confirm_delete" class="btn btn-danger" title="Xóa" type="object" icon="fa-trash-o"/>
 <!--                widget="boolean_toggle"-->
             </tree>
@@ -47,11 +47,11 @@
                     </group>
                     <notebook>
                         <page string="Căn hộ">
-                            <button string=" Thêm mới Căn hộ" class="fa fa-plus btn btn-info mb-2"
+                            <button string=" Thêm mới Căn hộ" class="fa fa-plus btn btn-primary mb-2"
                                     disabled="True" attrs="{'invisible':[('id','>',0)]}"
                                     title="Cần lưu tầng sàn trước khi thêm mới căn hộ"/>
                             <button name="create_building_house" string=" Thêm mới Căn hộ"
-                                    class="fa fa-plus btn btn-info mb-2" type="object"
+                                    class="fa fa-plus btn btn-primary mb-2" type="object"
                                     attrs="{'invisible':[('id','=',False)]}"/>
                             <field name="building_house_ids" widget="one2many" mode="tree,kanban"
                                    decoration-danger="is_active == False">

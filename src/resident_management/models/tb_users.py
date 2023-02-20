@@ -22,21 +22,7 @@ class tb_users(models.Model):
     push_notifications = fields.One2many('tb_push_notification', 'user_id', string='Push Notification', readonly=True)
     tb_users_blockhouse_res_groups_rel_ids = fields.One2many('tb_users_blockhouse_res_groups_rel', 'user_id',
                                                              string="Quan hệ phân quyền")
-    citizen_identification = fields.Char(string='CMND/CCCD')
-    date_of_birth = fields.Date(string='Ngày sinh', copy=False)
-    gender = fields.Selection([
-        ('Male', 'Nam'),
-        ('Female', 'Nữ'),
-        ('Other', 'Khác'),
-    ], default='Male', string="Giới tính", )
-    user_type = fields.Selection([
-        ('ADMIN', 'Quản trị'),
-        ('RESIDENT', 'Cư dân'),
-        ('OTHER', 'Other'),
-    ], default='OTHER', string="Loại tài khoản", )
 
-    # display_building = fields.Char('Tòa nhà', related='tb_users_blockhouse_res_groups_rel_ids.building_id.name')
-    # display_apartment = fields.Char('Căn hộ', related='tb_users_blockhouse_res_groups_rel_ids.building_house_id.name')
     _sql_constraints = [
         ('citizen_identification', 'unique(citizen_identification)', 'Số định danh cá nhân không được trùng lặp')
     ]
@@ -55,7 +41,6 @@ class tb_users(models.Model):
                     check = True
                     break
         return check
-
 
     @api.model
     def read_group(self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True):
@@ -104,23 +89,20 @@ class tb_users(models.Model):
 
     @api.model
     def create(self, vals):
-
-        vals["password"] = "1"
+        # vals["password"] = "1"
         return super(tb_users, self).create(vals)
 
-
     def create_user_blockhouse_groups_rel(self):
-
         view_id = ''
         name = ''
         context = {
             'default_user_id': self.id,
         }
         if self.user_type != 'RESIDENT':
-            name = 'Chọn nhóm quyền quản trị'
+            name = 'Phân quyền quản lý quản trị'
             view_id = self.env.ref('resident_management.view_tb_users_blockhouse_res_groups_rel_form').id
         else:
-            name = 'Chọn căn hộ cư dân'
+            name = 'Phân quyền căn hộ cư dân'
             context['default_group_id'] = self.env['res.groups'].search([('name', 'like', '%[CD]%')]).id
             view_id = self.env.ref('resident_management.view_tb_users_blockhouse_res_groups_rel_form_resident').id
         return {

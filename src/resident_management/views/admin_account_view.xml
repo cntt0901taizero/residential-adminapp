@@ -23,25 +23,54 @@
         <field name="model">res.users</field>
         <field name="arch" type="xml">
             <form string="Users" js_class="form_action_admin_user">
-
                 <sheet>
-                    <group string="Thông tin người dùng">
-                        <field name="id" invisible="1"/>
-                        <field name="image_1920" widget='image' class="oe_left oe_avatar"
-                               options='{"preview_image": "avatar_128"}'/>
-                        <field name="login" string="Tên đăng nhập"/>
-                        <field name="name" string="Họ tên"/>
-                        <field name="email"/>
-                        <field name="phone"/>
-                    </group>
-                    <notebook>
+                    <field name="id" invisible="1"/>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <group>
+                                <field name="image_1920" widget='image' class="oe_left oe_avatar"
+                                       options='{"preview_image": "avatar_128"}'/>
+                            </group>
+                        </div>
+                        <div class="col-md-4">
+                            <group>
+                                <field name="login" required="1" string="Tên đăng nhập *"/>
+                            </group>
+                        </div>
+                        <div class="col-md-4" attrs="{'invisible': [('id','>', 0)]}">
+                            <group>
+                                <field name="password" attrs="{'required': [('id','=', False)]}" string="Mật khẩu *"/>
+                            </group>
+                        </div>
+                        <div class="col-md-4">
+                            <group>
+                                <field name="name" required="1" string="Họ tên *"/>
+                            </group>
+                        </div>
+                        <div class="col-md-4">
+                            <group>
+                                <field name="email" required="1" string="Email *"/>
+                            </group>
+                        </div>
+                        <div class="col-md-4">
+                            <group>
+                                <field name="phone"/>
+                            </group>
+                        </div>
+                        <div class="col-md-12">
+                            <group>
+                                <field name="active"/>
+                            </group>
+                        </div>
+                    </div>
+                    <notebook attrs="{'invisible': [('id','=', False)]}">
                         <page string="Nhóm quyền dự án">
-                            <button string=" Thêm nhóm quyền" class="fa fa-plus btn btn-info mb-2"
+                            <button string=" Thêm nhóm quyền" class="fa fa-plus btn btn-primary mb-2"
                                     disabled="True" attrs="{'invisible':[('id','>',0)]}"
                                     data-toggle="tooltip"
                                     title="Cần lưu thông tin tài khoản trước khi thêm mới nhóm quyền cho tài khoản"/>
                             <button name="create_user_blockhouse_groups_rel" string=" Thêm nhóm quyền"
-                                    class="fa fa-plus btn btn-info mb-2" type="object"
+                                    class="fa fa-plus btn btn-primary mb-2" type="object"
                                     attrs="{'invisible':[('id','=',False)]}"/>
 
                             <field name="tb_users_blockhouse_res_groups_rel_ids" widget="one2many" mode="tree">
@@ -50,19 +79,19 @@
                                            options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                                     <field name="building_id" optional="show"
                                            options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
-                                    <field name="group_id" optional="show"/>
+                                    <field name="group_id" optional="show"
+                                           options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
 
-                                    <button groups="resident_management.group_administration, resident_management.group_management"
+                                    <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                                             name="open_edit_form" class="btn btn-light" title="Sửa" type="object"
                                             icon="fa-pencil"/>
-                                    <button groups="resident_management.group_administration, resident_management.group_management"
+                                    <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                                             name="confirm_delete" class="btn btn-danger" title="Xóa" type="object"
                                             icon="fa-trash-o"/>
                                 </tree>
                             </field>
                         </page>
                     </notebook>
-
                 </sheet>
             </form>
         </field>
@@ -105,14 +134,13 @@
         <field name="sequence">1</field>
     </record>
 
-
     <record id="menu_create_account_admin" model="ir.ui.menu">
         <field name="name">Tài khoản quản trị</field>
         <field name="action" ref="action_account_admin"/>
         <field name="parent_id" ref="menu_account_admin"/>
+<!--        <field name="groups_id" eval="[(4, ref('base.group_system')), (4, ref('base.group_erp_manager'))]"/>-->
         <field name="sequence">1</field>
     </record>
-
 
 
 </odoo>

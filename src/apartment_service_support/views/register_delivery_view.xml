@@ -19,9 +19,9 @@
                 <field name="blockhouse_id" optional="show"/>
                 <field name="building_id" optional="show"/>
                 <field name="building_house_id" optional="show"/>
-                <button groups="resident_management.group_administration, resident_management.group_management"
+                <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                         name="open_edit_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
-                <button groups="resident_management.group_administration, resident_management.group_management"
+                <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                         name="confirm_delete" class="btn btn-danger" title="Xóa" type="object" icon="fa-trash-o"/>
             </tree>
         </field>
