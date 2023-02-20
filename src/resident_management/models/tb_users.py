@@ -115,20 +115,34 @@ class tb_users(models.Model):
             'context': context,
         }
 
-    def open_edit_form(self):
-        # first you need to get the id of your record
-        # you didn't specify what you want to edit exactly
-        # rec_id = self.env.context.get('active_id').exists()
-        # then if you have more than one form view then specify the form id
+    def open_edit_admin_form(self):
         canwrite = self.check_access_rights('write', raise_exception=False)
         if not canwrite:
             raise ValidationError('Bạn không có quyền chỉnh sửa thông tin tài khoản.')
-        form_id = self.env.ref('base.view_users_form')
+        form_id = self.env.ref('resident_management.view_resident_users_form_inherit')
 
-        # then open the form
         return {
             'type': 'ir.actions.act_window',
-            'name': 'Cập nhật người dùng',
+            'name': 'Cập nhật người dùng quản lý quản trị',
+            'res_model': 'res.users',
+            'res_id': self.id,
+            'view_type': 'form',
+            'view_mode': 'form',
+            'view_id': form_id.id,
+            'context': {'form_view_initial_mode': 'edit'},
+            # if you want to open the form in edit mode direclty
+            'target': 'current',
+        }
+
+    def open_edit_resident_form(self):
+        canwrite = self.check_access_rights('write', raise_exception=False)
+        if not canwrite:
+            raise ValidationError('Bạn không có quyền chỉnh sửa thông tin tài khoản.')
+        form_id = self.env.ref('resident_management.view_admin_users_form_inherit')
+
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Cập nhật người dùng cư dân',
             'res_model': 'res.users',
             'res_id': self.id,
             'view_type': 'form',
