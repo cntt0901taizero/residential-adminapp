@@ -37,7 +37,7 @@
                 <sheet>
                     <group>
                         <field name="id" invisible="1"/>
-                        <field name="name"/>
+                        <field name="name" string="Tên tầng *"/>
                         <field name="sort"/>
                         <field name="floors_type" widget="selection_badge"/>
 <!--                        <field name="total_house"/>-->

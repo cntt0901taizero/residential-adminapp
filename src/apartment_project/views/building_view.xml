@@ -99,8 +99,8 @@
                     <group>
                         <field name="id" invisible="1"/>
                         <group string="Thông tin cơ bản">
+                            <field name="name" string="Tên khu / tòa nhà *"/>
                             <field name="code"/>
-                            <field name="name"/>
                             <field name="building_level" widget="selection_badge"/>
                             <field name="founding_date" widget="date"/>
                             <field name="blockhouse_id"

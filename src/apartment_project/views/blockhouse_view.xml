@@ -38,8 +38,8 @@
                         <group string="Thông tin cơ bản">
                             <field name="image" string="Ảnh đại diện" height="400px"
                                    widget="image" class="oe_left oe_avatar"/>
+                            <field name="name" string="Tên dự án *"/>
                             <field name="code"/>
-                            <field name="name"/>
                             <field name="investor_name" widget="text"/>
                             <field name="is_active"/>
                         </group>

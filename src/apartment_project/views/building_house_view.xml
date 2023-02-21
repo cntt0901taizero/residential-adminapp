@@ -38,8 +38,8 @@
                 <sheet>
                     <group>
                         <group string="Thông tin cơ bản">
+                            <field name="name" string="Số nhà *"/>
                             <field name="code"/>
-                            <field name="name"/>
                             <field name="address"/>
                             <field name="house_type" widget="selection_badge"/>
                             <field name="building_floors_id" attrs="{'readonly':[('building_floors_id','>',0)]}" options="{'no_open': True}"/>
