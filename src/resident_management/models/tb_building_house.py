@@ -25,7 +25,7 @@ class tb_building_house(models.Model):
     _name = 'tb_building_house'
     _description = 'Căn hộ'
 
-    row_number = fields.Integer(string='Row Number', compute='_compute_row_number', store=False)
+    row_number = fields.Integer(string='STT', compute='_compute_row_number', store=False)
     name = fields.Char(string='Số nhà', size=50, required=False, copy=False)
     code = fields.Char(string='Mã', size=50, copy=False, readonly=True)
     address = fields.Char(string='Địa chỉ', size=200, copy=False)

@@ -8,12 +8,15 @@
         <field name="name">res.admin.users.tree</field>
         <field name="model">res.users</field>
         <field name="arch" type="xml">
-            <tree string="Users" js_class="tree_action_admin_user">
-                <field name="name"/>
-                <field name="login"/>
+            <tree string="Users" js_class="tree_action_admin_user" edit="false">
+                <field name="row_number" string="STT" optional="show"/>
+                <field name="name" string="Họ tên"/>
+                <field name="login" string="Tên đăng nhập"/>
+                <field name="email"/>
                 <field name="lang"/>
                 <field name="login_date"/>
-                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="create_date"/>
+<!--                <field name="company_id" groups="base.group_multi_company"/>-->
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                         name="open_edit_admin_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
@@ -26,7 +29,7 @@
         <field name="name">res.users.admin.form.inherit</field>
         <field name="model">res.users</field>
         <field name="arch" type="xml">
-            <form string="Users" js_class="form_action_admin_user">
+            <form string="Users" js_class="form_action_admin_user" edit="false">
                 <sheet>
                     <field name="id" invisible="1"/>
                     <div class="row">
@@ -78,7 +81,8 @@
                                     attrs="{'invisible':[('id','=',False)]}"/>
 
                             <field name="tb_users_blockhouse_res_groups_rel_ids" widget="one2many" mode="tree">
-                                <tree string="Quản lý tài khoản" editable="bottom" create="0" delete="0" multi_edit="1">
+                                <tree string="Quản lý tài khoản" editable="bottom"
+                                      create="0" delete="0" multi_edit="1">
                                     <field name="blockhouse_id" optional="show"
                                            options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                                     <field name="building_id" optional="show"

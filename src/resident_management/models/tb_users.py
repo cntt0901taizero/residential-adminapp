@@ -11,6 +11,7 @@ str_bqt = USER_GROUP_CODE[3][0]
 class tb_users(models.Model):
     _inherit = 'res.users'
 
+    row_number = fields.Integer(string='STT', compute='_compute_row_number', store=False)
     citizen_identification = fields.Char(string='CMND / CCCD')
     date_of_birth = fields.Date(string='Ngày sinh', copy=False)
     gender = fields.Selection([
@@ -26,6 +27,13 @@ class tb_users(models.Model):
     _sql_constraints = [
         ('citizen_identification', 'unique(citizen_identification)', 'Số định danh cá nhân không được trùng lặp')
     ]
+
+    @api.depends('create_date')
+    def _compute_row_number(self):
+        type_user = self._context['default_user_type']
+        for record in self:
+            record.row_number = self.search([('user_type', '=', type_user)], order='create_date')\
+                                    .ids.index(record.id) + 1
 
     @api.model
     def check_perm_user(self, permission_name):

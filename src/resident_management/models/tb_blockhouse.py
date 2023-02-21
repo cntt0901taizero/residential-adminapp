@@ -13,7 +13,7 @@ class tb_blockhouse(models.Model):
     _name = 'tb_blockhouse'
     _description = 'Dự án'
 
-    row_number = fields.Integer(string='Row Number', compute='_compute_row_number', store=False)
+    row_number = fields.Integer(string='STT', compute='_compute_row_number', store=False)
     name = fields.Char(string='Tên dự án', size=200, required=True, copy=False)
     code = fields.Char(string='Mã', size=50, copy=False, readonly=True)
     investor_name = fields.Char(string='Chủ đầu tư', size=500, copy=False)

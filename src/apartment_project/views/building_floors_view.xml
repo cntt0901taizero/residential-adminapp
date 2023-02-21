@@ -14,7 +14,7 @@
                 <field name="sort" widget="handle" optional="show"/>
                 <field name="name" optional="show" decoration-bf="1"/>
                 <field name="floors_type" optional="show"/>
-                <field name="total_house" optional="show"/>
+<!--                <field name="total_house" optional="show"/>-->
                 <field name="building_id" optional="show"
                        options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                 <field name="blockhouse_id" optional="show"
@@ -40,7 +40,7 @@
                         <field name="name"/>
                         <field name="sort"/>
                         <field name="floors_type" widget="selection_badge"/>
-                        <field name="total_house"/>
+<!--                        <field name="total_house"/>-->
                         <field name="blockhouse_id" attrs="{'readonly':[('blockhouse_id','>',0)]}" options="{'no_open': True}"/>
                         <field name="building_id" attrs="{'readonly':[('building_id','>',0)]}" options="{'no_open': True}"/>
                         <field name="is_active"/>

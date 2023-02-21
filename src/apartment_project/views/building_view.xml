@@ -131,7 +131,7 @@
                                     <field name="sort" widget="handle" optional="show"/>
                                     <field name="name" optional="show"/>
                                     <field name="floors_type" optional="show"/>
-                                    <field name="total_house" optional="show"/>
+<!--                                    <field name="total_house" optional="show"/>-->
                                     <field name="building_id" optional="show"
                                            options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                                     <field name="blockhouse_id" optional="show"

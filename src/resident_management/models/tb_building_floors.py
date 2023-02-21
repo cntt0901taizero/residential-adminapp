@@ -15,7 +15,7 @@ class tb_building_floors(models.Model):
     _name = 'tb_building_floors'
     _description = 'Tầng sàn'
 
-    row_number = fields.Integer(string='Row Number', compute='_compute_row_number', store=False)
+    row_number = fields.Integer(string='STT', compute='_compute_row_number', store=False)
     name = fields.Char(string='Tên tầng sàn', size=100, required=True, copy=False)
     sort = fields.Integer(string='Thứ tự', copy=False)
     total_house = fields.Integer(string='Tổng căn hộ', copy=False)

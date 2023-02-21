@@ -95,7 +95,11 @@ button.btn {
 }
 
 .btn > span {
-    font-family: 'Roboto'
+    font-family: 'Roboto';
+}
+
+.btn .fa {
+    font-family: 'FontAwesome' !important;
 }
 
 .alert {

@@ -25,6 +25,7 @@ access_banner_management, access_banner_management,model_tb_banner,group_managem
 access_banner_resident, access_banner_resident,model_tb_banner,group_resident,1,1,1,1
 access_banner_public,access_banner_public,model_tb_banner,base.group_public,1,1,1,1
 
+access_dialog_confirm_erp_manager,access_dialog_confirm_erp_manager,model_dialog_box_confirm,base.group_erp_manager,1,1,1,1
 access_dialog_confirm_administration, access_dialog_confirm_administration,model_dialog_box_confirm,group_administration,1,1,1,1
 access_dialog_confirm_management, access_dialog_confirm_management,model_dialog_box_confirm,group_management,1,1,1,1
 access_dialog_confirm_resident, access_dialog_confirm_resident,model_dialog_box_confirm,group_resident,1,1,1,1
