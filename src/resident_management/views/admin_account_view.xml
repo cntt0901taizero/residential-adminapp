@@ -17,7 +17,7 @@
                 <field name="login_date"/>
                 <field name="create_date"/>
 <!--                <field name="company_id" groups="base.group_multi_company"/>-->
-                <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
+                <button t-if="_check_test1()" groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                         name="open_edit_admin_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                         name="confirm_delete" class="btn btn-danger" title="Xóa" type="object" icon="fa-trash-o"/>

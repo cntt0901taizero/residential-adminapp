@@ -28,6 +28,10 @@ class tb_users(models.Model):
         ('citizen_identification', 'unique(citizen_identification)', 'Số định danh cá nhân không được trùng lặp')
     ]
 
+    @api.model
+    def _check_test1(self):
+        return True;
+
     @api.depends('create_date')
     def _compute_row_number(self):
         type_user = self._context['default_user_type']
