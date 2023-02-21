@@ -14,9 +14,9 @@
                 <field name="code" optional="show" decoration-bf="1"/>
                 <field name="address" optional="show"/>
                 <field name="house_type" optional="show"/>
-                <field name="building_floors_id" widget="badge" optional="show"/>
-                <field name="building_id" widget="badge" optional="show"/>
                 <field name="blockhouse_id" widget="badge" optional="show"/>
+                <field name="building_id" widget="badge" optional="show"/>
+                <field name="building_floors_id" widget="badge" optional="show"/>
                 <field name="is_active" optional="show"/>
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                         name="open_edit_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>

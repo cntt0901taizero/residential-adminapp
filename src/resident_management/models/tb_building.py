@@ -31,7 +31,7 @@ class tb_building(models.Model):
     # floors_above_ground_number = fields.Integer(string='Số tầng nổi', copy=False)
     # floors_below_ground_number = fields.Integer(string='Số tầng hầm', copy=False)
     building_level = fields.Selection(string='Hạng tòa nhà', selection=BUILDING_LEVEL, default=BUILDING_LEVEL[0][0])
-    is_active = fields.Boolean(string='Trạng thái', default=True)
+    is_active = fields.Boolean(string='Có hiệu lực', default=True)
 
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Dự án", ondelete="cascade")
     apartment_utilities_ids = fields.Many2many('tb_apartment_utilities', string="Tiện ích chung cư",
