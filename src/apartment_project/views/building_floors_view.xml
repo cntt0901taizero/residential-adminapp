@@ -9,7 +9,7 @@
         <field name="model">tb_building_floors</field>
         <field name="arch" type="xml">
             <tree default_order="sort" decoration-danger="is_active == False"
-                  delete="0" multi_edit="1">
+                  delete="0" multi_edit="1" edit="0">
                 <field name="row_number" string="STT" optional="show"/>
                 <field name="sort" widget="handle" optional="show"/>
                 <field name="name" optional="show" decoration-bf="1"/>
@@ -55,7 +55,7 @@
                                     attrs="{'invisible':[('id','=',False)]}"/>
                             <field name="building_house_ids" widget="one2many" mode="tree,kanban"
                                    decoration-danger="is_active == False">
-                                <tree string="Bảng căn hộ" default_order="name" create="false">
+                                <tree string="Bảng căn hộ" default_order="name" create="false" edit="0">
                                     <field name="name"/>
                                     <field name="code"/>
                                     <field name="address"/>

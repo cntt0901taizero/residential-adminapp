@@ -8,7 +8,7 @@
         <field name="name">tb_building_house.tree</field>
         <field name="model">tb_building_house</field>
         <field name="arch" type="xml">
-            <tree string="Bảng căn hộ" decoration-danger="is_active == False">
+            <tree string="Bảng căn hộ" decoration-danger="is_active == False" edit="0">
                 <field name="row_number" string="STT" optional="show"/>
                 <field name="name" optional="show" decoration-bf="1"/>
                 <field name="code" optional="show" decoration-bf="1"/>

@@ -8,7 +8,7 @@
         <field name="name">res.groups.form.inherit</field>
         <field name="model">res.groups</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree edit="0">
                 <field name="full_name"/>
                 <button name="open_edit_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
                 <button name="confirm_delete" class="btn btn-danger" title="Xóa" type="object" icon="fa-trash-o"/>
