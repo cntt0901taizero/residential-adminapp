@@ -11,6 +11,7 @@
     'data': [
         'views/menu.xml',
         'views/news_view.xml',
+        'views/news_approve_view.xml',
         'views/notification_view.xml',
         'views/banner_view.xml',
         'views/feekind_view.xml',

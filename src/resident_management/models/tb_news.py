@@ -31,9 +31,9 @@ class tb_news(models.Model):
     # active = fields.Boolean(string='Trạng thái', default=True)
     expired_date = fields.Date(string="Ngày hết hạn", default=datetime.datetime.today())
     status = fields.Selection([
-        ('DRAFT', 'Nháp'),
+        ('DRAFT', 'Chờ duyệt'),
         ('ACTIVE', 'Đã đăng'),
-        ('REJECT', 'Chưa duyệt'),
+        ('REJECT', 'Từ chối duyệt'),
     ], required=True, default='DRAFT', tracking=True, string="Trạng thái", )
     news_type = fields.Selection([
         ('PROJECT_APARTMENT', 'Dự án'),
@@ -45,6 +45,8 @@ class tb_news(models.Model):
     building_id = fields.Many2one(comodel_name='tb_building', string="Toà nhà",
                                   domain="[('blockhouse_id', '=', blockhouse_id)]",
                                   ondelete="cascade")
+
+    perm_approve = fields.Boolean(string='Phê duyệt', compute='_compute_perm_approve')
 
     def _domain_blockhouse_id(self):
         user = request.env.user

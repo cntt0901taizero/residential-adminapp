@@ -102,27 +102,72 @@ const defineMenuWithPerm = {
     "apartment_service_support.menu_resident_handbook_root" : "perm_read_handbook",
     "apartment_service_support.menu_resident_handbook_approve" : "perm_approve_handbook",
 }
+const get_perm =  (perm) => rpc.query({
+         model: 'res.users',
+         method: 'check_perm_user',
+         args: [perm],
+    })
 export const menuService = {
     dependencies: ["action", "router"],
     async start(env) {
         const fetchLoadMenus = makeFetchLoadMenus();
         const menusData = await fetchLoadMenus();
-        console.log(menusData);
-        var newMenusData = {}
-        Object.keys(menusData).forEach(async menuId => {
-           var checkMyMenu = Object.keys(defineMenuWithPerm).includes(menusData[menuId].xmlid)
+
+        let newMenusData = {}
+//        const requests = Object.keys(defineMenuWithPerm).map(menuId=> {
+//            var currentMenu = Object.keys(menusData).filter(menuKey=> menusData[menuKey].xmlid == menuId)
+//            if(currentMenu && currentMenu.length > 0) {
+//                var id = parseInt(currentMenu[0])
+//                return get_perm(menusData[id].xmlid)
+//            }
+//        })
+//        Promise.all(requests)
+//        .then(result=>{
+//            result.forEach(res=>{
+//            })
+//            if(result != undefined){
+//               Object.keys(defineMenuWithPerm).forEach(menuId=>{
+//                    var currentMenu = Object.keys(menusData).filter(menuKey=> menusData[menuKey].xmlid == menuId)
+//                    if(currentMenu && currentMenu.length>0){
+//                         var id = parseInt(currentMenu[0])
+//                        menusData[id].invisible = !result
+//                    }
+//               })
+//               Object.keys(menusData).forEach(menuId=>{
+//                    if(menusData[menuId].children && menusData[menuId].children.length>0){
+//                        var count_visible = 0
+//                        var currentMenu = menusData[menuId]
+//                        currentMenu.children.forEach(id=>{
+//                            var a = newMenusData[id]
+//                            if(menusData[id] && menusData[id].invisible) count_visible = count_visible + 1
+//                        })
+//                        if(count_visible == currentMenu.children.length) menusData[menuId].invisible = true
+//                    }
+//                })
+//            }
+//        })
+        for (const menuId of Object.keys(menusData)){
+           let checkMyMenu = Object.keys(defineMenuWithPerm).includes(menusData[menuId].xmlid)
            if(checkMyMenu){
-               var check_perm = await rpc.query({
-                                model: 'res.users',
-                                method: 'check_perm_user',
-                                args: [defineMenuWithPerm[menusData[menuId].xmlid]],
-                            })
+               let check_perm = await get_perm(defineMenuWithPerm[menusData[menuId].xmlid])
                console.log(menusData[menuId].name + "------------" + defineMenuWithPerm[menusData[menuId].xmlid] + "----" + check_perm)
                menusData[menuId].invisible = !check_perm
            }
-            newMenusData[menuId]=menusData[menuId]
-        })
-        return makeMenus(env, newMenusData, fetchLoadMenus);
+           newMenusData[menuId]=menusData[menuId]
+        }
+//        Object.keys(newMenusData).forEach(menuId=>{
+//                if(newMenusData[menuId].children && newMenusData[menuId].children.length>0){
+//                    var count_visible = 0
+//                    var currentMenu = newMenusData[menuId]
+//                    currentMenu.children.forEach(id=>{
+//                        var a = newMenusData[id]
+//                        if(newMenusData[id] && newMenusData[id].invisible) count_visible = count_visible + 1
+//                    })
+//                    if(count_visible == currentMenu.children.length) newMenusData[menuId].invisible = true
+//                }
+//        })
+
+        return makeMenus(env, menusData, fetchLoadMenus);
     },
 };
 
