@@ -15,12 +15,12 @@ class tb_building_floors(models.Model):
     _name = 'tb_building_floors'
     _description = 'Tầng sàn'
 
-    row_number = fields.Integer(string='Row Number', compute='_compute_row_number', store=False)
+    row_number = fields.Integer(string='STT', compute='_compute_row_number', store=False)
     name = fields.Char(string='Tên tầng sàn', size=100, required=True, copy=False)
     sort = fields.Integer(string='Thứ tự', copy=False)
     total_house = fields.Integer(string='Tổng căn hộ', copy=False)
     floors_type = fields.Selection(string='Loại tầng', selection=FLOORS_TYPES, default=FLOORS_TYPES[0][0])
-    is_active = fields.Boolean(string='Trạng thái', default=True)
+    is_active = fields.Boolean(string='Có hiệu lực', default=True)
 
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Dự án",
                                     ondelete="cascade")

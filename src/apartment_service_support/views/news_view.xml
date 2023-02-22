@@ -7,8 +7,8 @@
             <tree js_class="tree_action_news">
                 <field name="name" decoration-bf="1"/>
                 <field name="news_description" decoration-bf="1"/>
-                <field name="create_date" widget="date"/>
-                <field name="expired_date" widget="date"/>
+                <field name="create_date"/>
+                <field name="expired_date"/>
                 <field name="status" widget="label_selection"/>
                 <button name="confirm_delete_news" class="fa fa-trash-o fa-lg float-right btn btn-danger"
                         title="Xóa"

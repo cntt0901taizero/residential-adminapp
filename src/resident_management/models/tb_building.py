@@ -19,7 +19,7 @@ class tb_building(models.Model):
     _name = 'tb_building'
     _description = 'Toà nhà'
 
-    row_number = fields.Integer(string='Row Number', compute='_compute_row_number', store=False)
+    row_number = fields.Integer(string='STT', compute='_compute_row_number', store=False)
     name = fields.Char(string='Tên toà nhà', size=200, required=True, copy=False)
     code = fields.Char(string='Mã', size=50, copy=False, readonly=True)
     founding_date = fields.Date(string='Ngày thành lập', copy=False)
@@ -31,7 +31,7 @@ class tb_building(models.Model):
     # floors_above_ground_number = fields.Integer(string='Số tầng nổi', copy=False)
     # floors_below_ground_number = fields.Integer(string='Số tầng hầm', copy=False)
     building_level = fields.Selection(string='Hạng tòa nhà', selection=BUILDING_LEVEL, default=BUILDING_LEVEL[0][0])
-    is_active = fields.Boolean(string='Trạng thái', default=True)
+    is_active = fields.Boolean(string='Có hiệu lực', default=True)
 
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Dự án", ondelete="cascade")
     apartment_utilities_ids = fields.Many2many('tb_apartment_utilities', string="Tiện ích chung cư",

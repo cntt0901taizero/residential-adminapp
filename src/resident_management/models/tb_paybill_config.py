@@ -14,7 +14,7 @@ class tb_paybill_config(models.Model):
 
     description = fields.Char(string='Ghi chú', copy=False)
     price = fields.Char(string='giá phí thanh toán', copy=False)
-    is_active = fields.Boolean(string='Trạng thái', default=True)
+    is_active = fields.Boolean(string='Có hiệu lực', default=True)
     feekind_id = fields.Many2one(comodel_name='tb_feekind', string="Loại phí", ondelete="cascade")
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Dự án",
                                     ondelete="cascade")

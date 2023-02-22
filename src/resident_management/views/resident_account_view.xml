@@ -9,12 +9,17 @@
         <field name="name">res.resident.users.tree</field>
         <field name="model">res.users</field>
         <field name="arch" type="xml">
-            <tree string="Users" js_class="tree_action_resident_user">
-                <field name="name"/>
-                <field name="login"/>
+            <tree string="Users" js_class="tree_action_resident_user" edit="0">
+                <field name="row_number" string="STT" optional="show"/>
+                <field name="name" string="Họ tên"/>
+                <field name="login" string="Tên đăng nhập"/>
+                <field name="email"/>
+                <field name="phone"/>
+                <field name="citizen_identification"/>
                 <field name="lang"/>
                 <field name="login_date"/>
-                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="create_date"/>
+<!--                <field name="company_id" groups="base.group_multi_company"/>-->
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                         name="open_edit_resident_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
@@ -95,7 +100,9 @@
                                     class="fa fa-plus btn btn-primary mb-2" type="object"
                                     attrs="{'invisible':[('id','=',False)]}"/>
                             <field name="tb_users_blockhouse_res_groups_rel_ids" widget="one2many" mode="tree">
-                                <tree string="Quản lý tài khoản" editable="bottom" create="0" delete="0" multi_edit="1">
+                                <tree string="Quản lý tài khoản" editable="bottom" create="0" edit="0" delete="0" multi_edit="1">
+                                    <field name="group_id" optional="show"
+                                           options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                                     <field name="blockhouse_id" optional="show"
                                            options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                                     <field name="building_id" optional="show"
@@ -104,11 +111,8 @@
                                            options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                                     <field name="building_house_id" optional="show"
                                            options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                                    <field name="relationship_type" optional="show"/>
 
-                                    <field name="owner" optional="show"
-                                           options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
-                                    <field name="group_id" optional="show"
-                                           options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                                     <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                                             name="open_edit_form" class="btn btn-light" title="Sửa" type="object"
                                             icon="fa-pencil"/>

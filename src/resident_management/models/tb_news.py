@@ -28,7 +28,7 @@ class tb_news(models.Model):
     news_description = fields.Char(string="Mô tả")
     image = fields.Image(string="Ảnh bản tin")
     create_date = fields.Date(string="Ngày tạo", default=datetime.datetime.today())
-    # active = fields.Boolean(string='Trạng thái', default=True)
+    # active = fields.Boolean(string='Có hiệu lực', default=True)
     expired_date = fields.Date(string="Ngày hết hạn", default=datetime.datetime.today())
     status = fields.Selection([
         ('DRAFT', 'Chờ duyệt'),

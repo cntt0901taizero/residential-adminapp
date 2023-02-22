@@ -29,7 +29,7 @@ class tb_apartment_utilities(models.Model):
     detail_description = fields.Html(string='Mô tả chi tiết', copy=False, help='')
     # active_days = fields.Selection(string='Ngày hoạt động', selection=DAYS_LIST)
     # active_time = fields.Char(string='Giờ hoạt động', size=50,  help='9h30p - 21h')
-    is_active = fields.Boolean(string='Trạng thái hoạt động', default=True)
+    is_active = fields.Boolean(string='Có hiệu lực', default=True)
     status = fields.Selection(string='Trạng thái phê duyệt', selection=STATUS_TYPES, default=STATUS_TYPES[0][0])
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Dự án",
                                     ondelete="cascade")

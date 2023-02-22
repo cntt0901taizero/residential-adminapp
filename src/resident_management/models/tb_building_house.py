@@ -25,8 +25,8 @@ class tb_building_house(models.Model):
     _name = 'tb_building_house'
     _description = 'Căn hộ'
 
-    row_number = fields.Integer(string='Row Number', compute='_compute_row_number', store=False)
-    name = fields.Char(string='Số nhà', size=50, copy=False)
+    row_number = fields.Integer(string='STT', compute='_compute_row_number', store=False)
+    name = fields.Char(string='Số nhà', size=50, required=False, copy=False)
     code = fields.Char(string='Mã', size=50, copy=False, readonly=True)
     address = fields.Char(string='Địa chỉ', size=200, copy=False)
     house_type = fields.Selection(string='Loại hình căn hộ', selection=HOUSE_TYPES, default=HOUSE_TYPES[0][0])
@@ -38,7 +38,7 @@ class tb_building_house(models.Model):
     fee_base = fields.Float(string='Phí cơ bản (vnđ)', copy=False)
     detailed_description = fields.Text(string='Mô tả chi tiết', copy=False)
 
-    is_active = fields.Boolean(string='Trạng thái', default=True)
+    is_active = fields.Boolean(string='Có hiệu lực', default=True)
 
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Dự án",
                                     ondelete="cascade")

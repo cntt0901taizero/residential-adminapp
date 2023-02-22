@@ -15,7 +15,7 @@ class tb_resident_handbook(models.Model):
     # image = fields.Image(string='Ảnh', copy=False)
     description = fields.Char(string='Tiêu đề', copy=False)
     detail_description = fields.Html(string='Mô tả', copy=False)
-    is_active = fields.Boolean(string='Trạng thái', default=True)
+    is_active = fields.Boolean(string='Có hiệu lực', default=True)
 
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Dự án",
                                     ondelete="cascade")

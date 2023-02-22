@@ -8,7 +8,7 @@
         <field name="name">tb_blockhouse.tree</field>
         <field name="model">tb_blockhouse</field>
         <field name="arch" type="xml">
-            <tree string="Bảng dự án" decoration-danger="is_active == False">
+            <tree string="Bảng dự án" decoration-danger="is_active == False" edit="0">
                 <field name="row_number" string="STT" optional="show"/>
                 <field name="image" widget="image" width="100px" optional="show"/>
                 <field name="name" optional="show" decoration-bf="1"/>
@@ -34,19 +34,21 @@
         <field name="arch" type="xml">
             <form create="false">
                 <sheet>
-                    <group string="Thông tin cơ bản">
-                        <field name="image" string="Ảnh đại diện" height="400px"
-                               widget="image" class="oe_left oe_avatar"/>
-                        <field name="name"/>
-                        <field name="code"/>
-                        <field name="investor_name" widget="text"/>
-                        <field name="is_active"/>
-                    </group>
-                    <group string="Thông tin địa chỉ liên hệ">
-                        <field name="phone" widget="phone" placeholder=""/>
-                        <field name="website" widget="CopyClipboardChar" placeholder=""/>
-                        <field name="address" widget="text"/>
-                        <field name="location_link" widget="CopyClipboardChar" placeholder=""/>
+                    <group>
+                        <group string="Thông tin cơ bản">
+                            <field name="image" string="Ảnh đại diện" height="400px"
+                                   widget="image" class="oe_left oe_avatar"/>
+                            <field name="name" string="Tên dự án *"/>
+                            <field name="code"/>
+                            <field name="investor_name" widget="text"/>
+                            <field name="is_active"/>
+                        </group>
+                        <group string="Thông tin địa chỉ liên hệ">
+                            <field name="phone" widget="phone" placeholder=""/>
+                            <field name="website" widget="CopyClipboardChar" placeholder=""/>
+                            <field name="location_link" widget="CopyClipboardChar" placeholder=""/>
+                            <field name="address" widget="text"/>
+                        </group>
                     </group>
                 </sheet>
             </form>

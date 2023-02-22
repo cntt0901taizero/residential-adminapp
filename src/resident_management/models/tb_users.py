@@ -11,6 +11,7 @@ str_bqt = USER_GROUP_CODE[3][0]
 class tb_users(models.Model):
     _inherit = 'res.users'
 
+    row_number = fields.Integer(string='STT', compute='_compute_row_number', store=False)
     citizen_identification = fields.Char(string='CMND / CCCD')
     date_of_birth = fields.Date(string='Ngày sinh', copy=False)
     gender = fields.Selection([
@@ -26,6 +27,17 @@ class tb_users(models.Model):
     _sql_constraints = [
         ('citizen_identification', 'unique(citizen_identification)', 'Số định danh cá nhân không được trùng lặp')
     ]
+
+    # @api.model
+    # def _check_test1(self):
+    #     return True;
+
+    @api.depends('create_date')
+    def _compute_row_number(self):
+        type_user = self._context['default_user_type']
+        for record in self:
+            record.row_number = self.search([('user_type', '=', type_user)], order='create_date')\
+                                    .ids.index(record.id) + 1
 
     @api.model
     def check_perm_user(self, permission_name):
@@ -89,10 +101,15 @@ class tb_users(models.Model):
 
     @api.model
     def create(self, vals):
-        can_do = self.check_permission('perm_create_resident_user', raise_exception=False)
+        per_name = 'perm_create_resident_user'
+        error_messenger = 'Bạn không có quyền tạo tài khoản cư dân.'
+        if self._context['default_user_type'] == 'ADMIN':
+            per_name = 'perm_create_admin_user'
+            error_messenger = 'Bạn không có quyền tạo tài khoản quản trị.'
+        can_do = self.check_permission(per_name, raise_exception=False)
         if can_do:
             return super(tb_users, self).create(vals)
-        raise ValidationError('Bạn không có quyền tạo tài khoản cư dân.')
+        raise ValidationError(error_messenger)
 
     def create_user_blockhouse_groups_rel(self):
         view_id = ''

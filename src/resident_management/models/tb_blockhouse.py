@@ -13,7 +13,7 @@ class tb_blockhouse(models.Model):
     _name = 'tb_blockhouse'
     _description = 'Dự án'
 
-    row_number = fields.Integer(string='Row Number', compute='_compute_row_number', store=False)
+    row_number = fields.Integer(string='STT', compute='_compute_row_number', store=False)
     name = fields.Char(string='Tên dự án', size=200, required=True, copy=False)
     code = fields.Char(string='Mã', size=50, copy=False, readonly=True)
     investor_name = fields.Char(string='Chủ đầu tư', size=500, copy=False)
@@ -22,7 +22,7 @@ class tb_blockhouse(models.Model):
     website = fields.Char(string='Website', size=200, copy=False)
     phone = fields.Char(string='Điện thoại', size=50, copy=False)
     location_link = fields.Char(string='Link vị trí', size=500, copy=False)
-    is_active = fields.Boolean(string='Trạng thái', default=True)
+    is_active = fields.Boolean(string='Có hiệu lực', default=True)
 
     building_ids = fields.One2many(comodel_name='tb_building', inverse_name='blockhouse_id', string="Khu / Tòa nhà")
 

@@ -9,12 +9,12 @@
         <field name="model">tb_building_floors</field>
         <field name="arch" type="xml">
             <tree default_order="sort" decoration-danger="is_active == False"
-                  delete="0" multi_edit="1">
+                  delete="0" multi_edit="1" edit="0">
                 <field name="row_number" string="STT" optional="show"/>
                 <field name="sort" widget="handle" optional="show"/>
                 <field name="name" optional="show" decoration-bf="1"/>
                 <field name="floors_type" optional="show"/>
-                <field name="total_house" optional="show"/>
+<!--                <field name="total_house" optional="show"/>-->
                 <field name="building_id" optional="show"
                        options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                 <field name="blockhouse_id" optional="show"
@@ -37,12 +37,12 @@
                 <sheet>
                     <group>
                         <field name="id" invisible="1"/>
-                        <field name="name"/>
+                        <field name="name" string="Tên tầng *"/>
                         <field name="sort"/>
                         <field name="floors_type" widget="selection_badge"/>
-                        <field name="total_house"/>
-                        <field name="building_id" attrs="{'readonly':[('building_id','>',0)]}" options="{'no_open': True}"/>
+<!--                        <field name="total_house"/>-->
                         <field name="blockhouse_id" attrs="{'readonly':[('blockhouse_id','>',0)]}" options="{'no_open': True}"/>
+                        <field name="building_id" attrs="{'readonly':[('building_id','>',0)]}" options="{'no_open': True}"/>
                         <field name="is_active"/>
                     </group>
                     <notebook>
@@ -55,7 +55,7 @@
                                     attrs="{'invisible':[('id','=',False)]}"/>
                             <field name="building_house_ids" widget="one2many" mode="tree,kanban"
                                    decoration-danger="is_active == False">
-                                <tree string="Bảng căn hộ" default_order="name" create="false">
+                                <tree string="Bảng căn hộ" default_order="name" create="false" edit="0">
                                     <field name="name"/>
                                     <field name="code"/>
                                     <field name="address"/>
