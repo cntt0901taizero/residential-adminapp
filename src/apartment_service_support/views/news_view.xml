@@ -82,7 +82,7 @@
                            groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"/>
                 </header>
                  <sheet>
-                    <group class="col-md-12 oe_invoice_lines_tab">
+                    <group class="row">
                         <group class="col-md-6">
                             <field name="name" class="text-truncate"/>
                         </group>
