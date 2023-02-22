@@ -1,15 +1,41 @@
 .o_form_view .o_form_statusbar {
     border-bottom: 1px solid #cccccc;
-    padding: 16px;
     position: sticky;
     top: 0;
     z-index: 100;
 }
 
-.o_form_view .o_form_statusbar > .o_statusbar_buttons > .btn {
-    margin: 0 5px;
-}
 
+.o_statusbar_status .o_arrow_button.btn-secondary {
+    border: solid 1px #cccccc !important;
+    background-color: #fff !important;
+}
+.o_statusbar_status .o_arrow_button.btn-secondary:hover:after {
+    border-color: #fff !important;
+}
+.o_statusbar_status .o_arrow_button.btn-primary {
+    border: solid 1px #008B7C !important;
+    color: #fff !important;
+}
+.o_statusbar_status.o_field_widget.o_readonly_modifier .btn {
+    margin-right: 0 !important;
+}
+.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button:not(:first-child):before,
+.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button:not(:first-child):after {
+        border-top: 16px solid transparent !important;
+        border-bottom: 16px solid transparent !important;
+}
+.o_statusbar_status.o_field_widget.o_readonly_modifier {
+        width: 100%;
+        justify-content: flex-end;
+        margin-top: 5px;
+}
+.o_form_view .o_form_statusbar > .o_statusbar_buttons > .btn {
+        margin: 1px 0px 4px 0;
+}
+.o_form_statusbar .o_statusbar_buttons .btn {
+        margin-right: 5px !important;
+}
 .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button {
     min-height: 33px;
     font-size: 11px!important;
@@ -20,35 +46,19 @@
     border-width: 0 0 0;
     border-radius: 0;
     transition: all 0.1s ease 0s;
-    margin-right: 16px;
+    margin: 0px !important;
 }
 
-.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button:last-child {
-    border-left: none;
+.o_form_statusbar .o_statusbar_buttons .btn {
+    margin-right: 15px !important;
 }
-
-.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-primary.disabled {
-    color: #fff;
-    background-color: #f5f6fa;
-//     border-left: 3px solid #2196f3;
+.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button:not(:first-child):before, .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button:not(:first-child):after {
+    border-top: 16px solid transparent !important;
+    border-bottom: 16px solid transparent !important;
 }
-
-.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-primary.disabled:after, .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-primary.disabled:before {
-    border-left-color: #077346;
-}
-
-.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button:not(:first-child):before,
-.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-primary.disabled:after {
-    border-left-color: #077346;
-}
-
-.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button:not(.disabled):hover, .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button:not(.disabled):active, .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button:not(.disabled):focus {
-    color: #2196f3;
-    background-color: transparent;
-}
-
-.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button:not(.disabled):hover:after, .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button:not(.disabled):active:after, .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button:not(.disabled):focus:after {
-    border-left-color: #fff;
+.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button:not(:first-child):before {
+    right: -11px;
+    border-left-color: #cccccc;
 }
 
 .o_form_view .oe_button_box {
@@ -81,7 +91,7 @@
     max-width: 100%;
     margin: 20px;
     border: none;
-    border-radius: 12px;
+    border-radius: 8px;
     box-shadow: none;
 }
 

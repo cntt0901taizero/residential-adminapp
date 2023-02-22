@@ -6,15 +6,15 @@
         <field name="arch" type="xml">
             <tree create="0" edit="0">
                 <field name="create_uid" string="Người tạo"/>
-                <field name="name" decoration-bf="1"/>
-                <field name="news_description" decoration-bf="1"/>
-                <field name="create_date" widget="date" class="oe_inline"/>
-                <field name="status" widget="label_selection"/>
-                <!--                <button name="confirm_delete_news" class="fa fa-trash-o fa-lg float-right btn btn-danger"-->
-                <!--                        title="Xóa"-->
-                <!--                        aria-label="Xóa" type="object"/>-->
-                <!--                <button name="open_edit_form_news" class="fa fa-pencil fa-lg float-right btn btn-success"-->
-                <!--                        title="Sửa" aria-label="Sửa" type="object"/>-->
+                <field name="name" />
+                <field name="news_description"/>
+                <field name="create_date" class="oe_inline"/>
+                <field name="status" widget="label_selection" options="{'classes': {'DRAFT': 'info', 'ACTIVE': 'success', 'REJECT':'warning'}}"/>
+                <button name="open_edit_form_news" class="fa fa-pencil fa-lg btn btn-light"
+                        title="Sửa" aria-label="Sửa" type="object"/>
+                <button name="confirm_delete_news" class="fa fa-trash-o fa-lg btn btn-danger"
+                        title="Xóa"
+                        aria-label="Xóa" type="object"/>
             </tree>
         </field>
     </record>
@@ -26,53 +26,71 @@
             <form create="0" js_class="form_action_news">
                 <header>
                     <button icon="fa-check" class="oe_highlight"
-                            status="DRAFT, REJECT"
                             name="set_status_active" string="Phê duyệt" type="object"
-                            attrs="{'invisible':[('id','=',False)]}"
+                            attrs="{'invisible':[('status','=','ACTIVE')]}"
                     />
                     <button icon="fa-times"
                             attrs="{'invisible':[('id','=',False)]}"
                             name="set_status_reject" string="Từ chối duyệt" type="object" status="DRAFT, ACTIVE"/>
-                    <field name="status" widget="statusbar" />
+                    <field name="status" widget="statusbar"/>
                 </header>
                 <sheet>
-                    <group class="row">
-                        <group class="col-md-6">
-                            <field name="name" class="text-truncate"/>
-                        </group>
-                        <group class="col-md-6">
-                            <field name="image" string="Ảnh" readonly="0" widget="image" class="oe_left oe_avatar"/>
-                        </group>
-                        <group class="col-md-6">
-                            <field name="news_description"/>
-                        </group>
-                        <group class="col-md-6">
-                            <field name="file" filename="file_name" widget='binary'/>
-                        </group>
-                        <group class="col-md-6">
-                            <field name="file_name"/>
-                        </group>
-                        <group class="col-md-4">
-                            <field name="news_type" widget="radio"/>
-                        </group>
-                        <group class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <group>
+                                <field name="name" class="text-truncate"/>
+                            </group>
+                        </div>
+                        <div class="col-md-6">
+                            <group>
+                                <field name="image" string="Ảnh" readonly="0" widget="image" class="oe_left oe_avatar"/>
+                            </group>
+                        </div>
+                        <div class="col-md-6">
+                            <group>
+                                <field name="news_description"/>
+                            </group>
+                        </div>
+                        <div class="col-md-6">
+                            <group>
+                                <field name="file" filename="file_name" widget='binary'/>
+                            </group>
+                        </div>
+                        <div class="col-md-6">
+                            <group>
+                                <field name="file_name"/>
+                            </group>
+                        </div>
+                        <div class="col-md-4">
+                            <group>
+                                <field name="news_type" widget="radio"/>
+                            </group>
+                        </div>
+                        <div class="col-md-6">
+                            <group>
                                 <field name="blockhouse_id" attrs="{'required': True}"
                                        options="{'no_quick_create':True,'no_create': True, 'no_edit': True, 'no_open': True}"/>
 
-                        </group>
-                        <group class="col-md-6">
-                            <field name="building_id"
+                            </group>
+                        </div>
+                        <div class="col-md-6">
+                            <group>
+                                <field name="building_id"
                                        attrs="{'required': [('news_type','!=','PROJECT_APARTMENT')], 'invisible':[('news_type','=','PROJECT_APARTMENT')]}"
                                        options="{'no_quick_create':True,'no_create': True, 'no_edit': True, 'no_open': True}"
                                 />
-                        </group>
-                        <group class="w-100">
-                            <field name="content" options="{'collaborative':true}"
-                                   widget="html"
-                                   placeholder="Nhập vào nội dung chi tiết bản tin">
-                            </field>
-                        </group>
-                    </group>
+                            </group>
+                        </div>
+                        <div class="col-md-12">
+                            <group>
+                                <field name="content" options="{'collaborative':true}"
+                                       widget="html"
+                                       placeholder="Nhập vào nội dung chi tiết bản tin">
+                                </field>
+                            </group>
+                        </div>
+
+                    </div>
 
                 </sheet>
 

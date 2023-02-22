@@ -90,9 +90,6 @@ class tb_news(models.Model):
         if 'news_type' in values:
             if values["news_type"] == 'PROJECT_APARTMENT':
                 values["building_id"] = None
-        if 'status' in values:
-            if not self.env.user.has_group('resident_management.group_administration'):
-                raise ValidationError(_("Vui lòng liên hệ ban quản trị để được duyệt bản tin!"))
         if 'status' not in values:
             values['status'] = 'DRAFT'
         return super(tb_news, self).write(values)
