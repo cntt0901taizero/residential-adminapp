@@ -37,11 +37,11 @@
                 </header>
                 <sheet>
                     <group class="col-md-12 oe_invoice_lines_tab">
-                        <group class="col-md-12">
-                            <field name="image" string="Ảnh" readonly="0" widget="image" class="oe_left oe_avatar"/>
-                        </group>
                         <group class="col-md-6">
                             <field name="name" class="text-truncate"/>
+                        </group>
+                        <group class="col-md-6">
+                            <field name="image" string="Ảnh" readonly="0" widget="image" class="oe_left oe_avatar"/>
                         </group>
                         <group class="col-md-6">
                             <field name="news_description"/>
@@ -62,11 +62,11 @@
                         </group>
                         <group class="col-md-6">
                             <field name="building_id"
-                                       attrs="{'required': True, 'invisible':[('news_type','=','PROJECT_APARTMENT')]}"
+                                       attrs="{'required': [('news_type','!=','PROJECT_APARTMENT')], 'invisible':[('news_type','=','PROJECT_APARTMENT')]}"
                                        options="{'no_quick_create':True,'no_create': True, 'no_edit': True, 'no_open': True}"
                                 />
                         </group>
-                        <group class="col-md-12">
+                        <group class="w-100">
                             <field name="content" options="{'collaborative':true}"
                                    widget="html"
                                    placeholder="Nhập vào nội dung chi tiết bản tin">
