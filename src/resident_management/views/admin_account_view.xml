@@ -9,7 +9,7 @@
         <field name="model">res.users</field>
         <field name="arch" type="xml">
             <tree string="Users" js_class="tree_action_admin_user" edit="0">
-<!--                <field name="row_number" string="STT" optional="show"/>-->
+                <field name="row_number" string="STT" optional="show"/>
                 <field name="name" string="HỌ TÊN"/>
                 <field name="login" string="TÊN ĐĂNG NHẬP"/>
                 <field name="email" string="EMAIL"/>
@@ -117,7 +117,7 @@
     </record>
 
     <record id="action_account_admin" model="ir.actions.act_window">
-        <field name="name">Tài khoản quản trị</field>
+        <field name="name">TÀI KHOẢN QUẢN TRỊ</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">res.users</field>
         <field name="view_mode">tree,form</field>
@@ -147,13 +147,5 @@
         <field name="sequence">1</field>
     </record>
 
-<!--    <t t-name="web.admin_account" owl="1">-->
-<!--        <div t-if="_check_test1()">-->
-<!--            <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"-->
-<!--                    name="open_edit_admin_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>-->
-<!--            <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"-->
-<!--                    name="confirm_delete" class="btn btn-danger" title="Xóa" type="object" icon="fa-trash-o"/>-->
-<!--        </div>-->
-<!--    </t>-->
 </odoo>
 

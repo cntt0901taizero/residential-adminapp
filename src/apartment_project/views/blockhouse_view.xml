@@ -67,7 +67,7 @@
     </record>
 
     <record id="action_tb_blockhouse" model="ir.actions.act_window">
-        <field name="name">Quản lý dự án / dự án</field>
+        <field name="name">QUẢN LÝ DỰ ÁN</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">tb_blockhouse</field>
         <field name="view_mode">tree,form</field>

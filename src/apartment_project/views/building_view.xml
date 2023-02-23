@@ -134,7 +134,7 @@
                                            options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                                     <field name="blockhouse_id" optional="show"
                                            options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
-                                    <field name="is_active" widget="boolean_toggle" optional="show"/>
+                                    <field name="is_active" optional="show"/>
                                     <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                                             name="open_edit_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
                                     <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
@@ -162,7 +162,7 @@
                                            options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                                     <field name="blockhouse_id" widget="badge" optional="show"
                                            options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
-                                    <field name="is_active" widget="boolean_toggle" optional="show"/>
+                                    <field name="is_active" optional="show"/>
                                     <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                                             name="open_edit_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
                                     <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
@@ -194,7 +194,7 @@
     </record>
 
     <record id="action_tb_building" model="ir.actions.act_window">
-        <field name="name">Quản lý khu / toà nhà</field>
+        <field name="name">QUẢN LÝ KHU / TÒA NHÀ</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">tb_building</field>
         <field name="view_mode">tree,kanban,form</field>

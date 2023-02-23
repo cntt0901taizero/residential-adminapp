@@ -86,7 +86,7 @@
     </record>
 
     <record id="action_tb_building_floors" model="ir.actions.act_window">
-        <field name="name">Quản lý tầng</field>
+        <field name="name">QUẢN LÝ TẦNG</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">tb_building_floors</field>
         <field name="view_mode">tree,form</field>

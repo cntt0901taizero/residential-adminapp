@@ -31,8 +31,10 @@ class tb_users(models.Model):
     @api.depends('create_date')
     def _compute_row_number(self):
         type_user = self._context['default_user_type']
+        index_row = 0
         for record in self:
-            record.row_number = self.search([('user_type', '=', type_user)], order='create_date').ids.index(record.id) + 1
+            index_row += 1
+            record.row_number = index_row
 
     @api.model
     def check_perm_user(self, permission_name):

@@ -10,7 +10,7 @@
         <field name="model">res.users</field>
         <field name="arch" type="xml">
             <tree string="Users" js_class="tree_action_resident_user" edit="0">
-<!--                <field name="row_number" string="STT" optional="show"/>-->
+                <field name="row_number" string="STT" optional="show"/>
                 <field name="name" string="HỌ TÊN"/>
                 <field name="login" string="TÊN ĐĂNG NHẬP"/>
                 <field name="email" string="EMAIL"/>
@@ -146,7 +146,7 @@
     </record>
 
     <record id="action_account_resident" model="ir.actions.act_window">
-        <field name="name">Tài khoản cư dân</field>
+        <field name="name">TÀI KHOẢN CƯ DÂN</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">res.users</field>
         <field name="view_mode">tree,form</field>

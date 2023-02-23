@@ -33,8 +33,10 @@ class tb_building_floors(models.Model):
 
     @api.depends('create_date')
     def _compute_row_number(self):
+        index_row = 0
         for record in self:
-            record.row_number = self.search([], order='create_date').ids.index(record.id) + 1
+            index_row += 1
+            record.row_number = index_row
 
     def set_status_active(self):
         self.is_active = True
