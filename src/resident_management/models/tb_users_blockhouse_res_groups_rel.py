@@ -174,7 +174,7 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
         view_id = ''
         name = ''
         context = {
-            'default_user_id': self.id,
+            'default_user_id': self.user_id.id,
         }
         if self.user_id.user_type != 'RESIDENT':
             name = 'Phân quyền quản lý quản trị'
