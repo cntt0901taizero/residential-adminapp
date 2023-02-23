@@ -27,10 +27,10 @@
                 <header>
                     <button icon="fa-check" class="oe_highlight"
                             name="set_status_active" string="Phê duyệt" type="object"
-                            attrs="{'invisible':[('status','=','ACTIVE')]}"
+                            attrs="{'invisible':[('status','!=','DRAFT')]}"
                     />
                     <button icon="fa-times"
-                            attrs="{'invisible':[('id','=',False)]}"
+                            attrs="{'invisible':[('status','!=','DRAFT')]}"
                             name="set_status_reject" string="Từ chối duyệt" type="object" status="DRAFT, ACTIVE"/>
                     <field name="status" widget="statusbar"/>
                 </header>

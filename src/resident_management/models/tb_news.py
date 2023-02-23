@@ -31,9 +31,9 @@ class tb_news(models.Model):
     # active = fields.Boolean(string='Có hiệu lực', default=True)
     expired_date = fields.Date(string="Ngày hết hạn", default=datetime.datetime.today())
     status = fields.Selection([
-        ('DRAFT', 'Chờ duyệt'),
-        ('ACTIVE', 'Đã đăng'),
+        ('DRAFT', 'Chờ phê duyệt'),
         ('REJECT', 'Từ chối duyệt'),
+        ('ACTIVE', 'Đã đăng'),
     ], required=True, default='DRAFT', tracking=True, string="Trạng thái", )
     news_type = fields.Selection([
         ('PROJECT_APARTMENT', 'Dự án'),
