@@ -666,18 +666,20 @@
 <t t-name="ListView.buttons">
     <div class="o_list_buttons d-flex" role="toolbar" aria-label="Main actions">
         <button type="button" class="btn btn-primary o_list_button_save" title="Save record" accesskey="s">
-            Save
+            <i class="fa fa-save"></i> Save
         </button>
         <button type="button" class="btn btn-secondary o_list_button_discard" title="Discard record" accesskey="j">
-            Discard
+            <i class="fa fa-delete"></i> Discard
         </button>
         <t t-if="widget.is_action_enabled('create')">
             <button type="button" class="btn btn-primary o_list_button_add" title="Create record" accesskey="c">
-                Create
+                <i class="fa fa-plus"></i> Create
             </button>
         </t>
         <t t-if="widget.is_action_enabled('export_xlsx') and widget.isExportEnable">
-            <button type="button" class="btn btn-secondary fa fa-download o_list_export_xlsx" title="Export All" aria-label="Export All"/>
+            <button type="button" class="btn btn-secondary o_list_export_xlsx" title="Export All" aria-label="Export All">
+                <i class="fa fa-download"></i> Export All
+            </button>
         </t>
     </div>
 </t>
