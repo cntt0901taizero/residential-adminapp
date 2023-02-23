@@ -669,7 +669,7 @@
             <i class="fa fa-save"></i> Save
         </button>
         <button type="button" class="btn btn-secondary o_list_button_discard" title="Discard record" accesskey="j">
-            <i class="fa fa-delete"></i> Discard
+            <i class="fa fa-window-close"></i> Discard
         </button>
         <t t-if="widget.is_action_enabled('create')">
             <button type="button" class="btn btn-primary o_list_button_add" title="Create record" accesskey="c">
@@ -731,21 +731,21 @@
     <div class="o_form_buttons_view" role="toolbar" aria-label="Main actions">
         <button t-if="widget.is_action_enabled('edit')" type="button"
                 class="btn btn-primary o_form_button_edit" title="Edit record" accesskey="a">
-            Edit
+            <i class="fa fa-pencil"></i> Edit
         </button>
         <button t-if="widget.is_action_enabled('create')" type="button"
                 class="btn btn-secondary o_form_button_create" title="Create record" accesskey="c">
-            Create
+            <i class="fa fa-plus"></i> Create
         </button>
     </div>
     <div class="o_form_buttons_edit" role="toolbar" aria-label="Main actions">
         <button type="button"
                 class="btn btn-primary o_form_button_save" title="Save record" accesskey="s">
-            Save
+            <i class="fa fa-save"></i> Save
         </button>
         <button type="button"
                 class="btn btn-secondary o_form_button_cancel" title="Discard record" accesskey="j">
-            Discard
+            <i class="fa fa-window-close"></i> Discard
         </button>
     </div>
 </t>
