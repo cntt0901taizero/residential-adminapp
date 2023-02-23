@@ -6,45 +6,24 @@
 <t t-name="web.Legacy.ControlPanel" owl="1">
     <div class="o_control_panel" data-command-category="actions">
 <!--        <div class="row">-->
-<!--            <div class="col-12" style="padding:0">-->
-<!--                <ol t-if="props.withBreadcrumbs" class="breadcrumb" role="navigation">-->
-<!--                        <li t-foreach="props.breadcrumbs" t-as="bc" t-key="bc.controllerID"-->
-<!--                            class="breadcrumb-item"-->
-<!--                            t-att-class="{ o_back_button: bc_index === props.breadcrumbs.length - 1 }"-->
-<!--                            t-att-accesskey="bc_last and 'b'"-->
-<!--                            t-on-click.prevent="trigger('breadcrumb-clicked', { controllerID: bc.controllerID })"-->
-<!--                            title="Previous menu"-->
-<!--                            >-->
-<!--                            <a t-if="bc.title" href="#" t-esc="bc.title"/>-->
-<!--                            <em t-else="" class="text-warning">Unnamed</em>-->
-<!--                        </li>-->
-<!--                        <li class="breadcrumb-item active">-->
-<!--                            <span t-attf-class="{{props.breadcrumbs.length ? 'text-muted' : 'text-900' }}" t-if="props.title" t-esc="props.title"/>-->
-<!--                            <em t-else="" class="text-warning">Unnamed</em>-->
-<!--                        </li>-->
-<!--                    </ol>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="row">-->
-<!--            <div class="col-12" style="padding:0">-->
-<!--                <div class="o_cp_searchview"-->
-<!--                        role="search"-->
-<!--                        t-ref="searchView"-->
-<!--                        >-->
-<!--                        <div t-if="props.withSearchBar" class="o_searchview" role="search" aria-autocomplete="list" >-->
-<!--                            <i class="o_searchview_icon fa fa-search"-->
-<!--                                title="Search..."-->
-<!--                                role="img"-->
-<!--                                aria-label="Search..."-->
-<!--                            />-->
-<!--                            <SearchBar t-if="props.withSearchBar" fields="fields"/>-->
-<!--                        </div>-->
+<!--            <div class="col-md-6">-->
+<!--                <div class="col-md-12">-->
+<!--                    <div class="o_cp_searchview"-->
+<!--                    role="search"-->
+<!--                    t-ref="searchView"-->
+<!--                    >-->
+<!--                    <div t-if="props.withSearchBar" class="o_searchview" role="search" aria-autocomplete="list" >-->
+<!--                        <i class="o_searchview_icon fa fa-search"-->
+<!--                            title="Search..."-->
+<!--                            role="img"-->
+<!--                            aria-label="Search..."-->
+<!--                        />-->
+<!--                        <SearchBar t-if="props.withSearchBar" fields="fields"/>-->
 <!--                    </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="row">-->
-<!--            <div class="col-12" style="padding:0">-->
-<!--                <div class="btn-group o_search_options position-static"-->
+<!--                </div>-->
+<!--                </div>-->
+<!--                <div class="col-md-12">-->
+<!--                    <div class="btn-group o_search_options position-static"-->
 <!--                    role="search"-->
 <!--                    t-ref="searchViewButtons"-->
 <!--                    >-->
@@ -65,6 +44,33 @@
 <!--                        />-->
 <!--                    </t>-->
 <!--                </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-md-6">-->
+<!--                <div class="o_cp_buttons" role="toolbar" aria-label="Control panel buttons" t-ref="buttons">-->
+<!--                    <t t-slot="buttons"/>-->
+<!--                </div>-->
+<!--                <ActionMenus t-if="props.actionMenus and props.actionMenus.items"-->
+<!--                    t-props="props.actionMenus"-->
+<!--                />-->
+<!--            </div>-->
+<!--            <div class="col-md-12">-->
+<!--                <ol t-if="props.withBreadcrumbs" class="breadcrumb" role="navigation">-->
+<!--                    <li t-foreach="props.breadcrumbs" t-as="bc" t-key="bc.controllerID"-->
+<!--                        class="breadcrumb-item"-->
+<!--                        t-att-class="{ o_back_button: bc_index === props.breadcrumbs.length - 1 }"-->
+<!--                        t-att-accesskey="bc_last and 'b'"-->
+<!--                        t-on-click.prevent="trigger('breadcrumb-clicked', { controllerID: bc.controllerID })"-->
+<!--                        title="Previous menu"-->
+<!--                        >-->
+<!--                        <a t-if="bc.title" href="#" t-esc="bc.title"/>-->
+<!--                        <em t-else="" class="text-warning">Unnamed</em>-->
+<!--                    </li>-->
+<!--                    <li class="breadcrumb-item active">-->
+<!--                        <span t-attf-class="{{props.breadcrumbs.length ? 'text-muted' : 'text-900' }}" t-if="props.title" t-esc="props.title"/>-->
+<!--                        <em t-else="" class="text-warning">Unnamed</em>-->
+<!--                    </li>-->
+<!--                </ol>-->
 <!--                <div class="o_cp_pager" role="search" t-ref="pager">-->
 <!--                    <Pager t-if="props.pager and props.pager.limit" t-props="props.pager"/>-->
 <!--                </div>-->
@@ -75,16 +81,7 @@
 <!--                </nav>-->
 <!--            </div>-->
 <!--        </div>-->
-<!--        <div class="row">-->
-<!--            <div class="col-12" style="padding:0">-->
-<!--                <div class="o_cp_buttons" role="toolbar" aria-label="Control panel buttons" t-ref="buttons">-->
-<!--                    <t t-slot="buttons"/>-->
-<!--                </div>-->
-<!--                <ActionMenus t-if="props.actionMenus and props.actionMenus.items"-->
-<!--                        t-props="props.actionMenus"-->
-<!--                    />-->
-<!--            </div>-->
-<!--        </div>-->
+
 
         <div class="o_cp_top">
             <div class="o_cp_top_left">

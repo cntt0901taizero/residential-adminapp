@@ -9,18 +9,18 @@
         <field name="model">res.users</field>
         <field name="arch" type="xml">
             <tree string="Users" js_class="tree_action_admin_user" edit="0">
-                <field name="row_number" string="STT" optional="show"/>
-                <field name="name" string="Họ tên"/>
-                <field name="login" string="Tên đăng nhập"/>
-                <field name="email"/>
-                <field name="lang"/>
-                <field name="login_date"/>
-                <field name="create_date"/>
+<!--                <field name="row_number" string="STT" optional="show"/>-->
+                <field name="name" string="HỌ TÊN"/>
+                <field name="login" string="TÊN ĐĂNG NHẬP"/>
+                <field name="email" string="EMAIL"/>
+                <field name="lang" string="NGÔN NGỮ"/>
+                <field name="login_date" string="NGÀY ĐĂNG NHẬP"/>
+                <field name="create_date" string="NGÀY TẠO"/>
 <!--                <field name="company_id" groups="base.group_multi_company"/>-->
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                         name="open_edit_admin_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
-                        name="confirm_delete" class="btn btn-danger" title="Xóa" type="object" icon="fa-trash-o"/>
+                        name="confirm_admin_delete" class="btn btn-danger" title="Xóa" type="object" icon="fa-trash-o"/>
             </tree>
         </field>
     </record>
@@ -147,5 +147,13 @@
         <field name="sequence">1</field>
     </record>
 
-
+<!--    <t t-name="web.admin_account" owl="1">-->
+<!--        <div t-if="_check_test1()">-->
+<!--            <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"-->
+<!--                    name="open_edit_admin_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>-->
+<!--            <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"-->
+<!--                    name="confirm_delete" class="btn btn-danger" title="Xóa" type="object" icon="fa-trash-o"/>-->
+<!--        </div>-->
+<!--    </t>-->
 </odoo>
+

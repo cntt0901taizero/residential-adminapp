@@ -9,7 +9,7 @@
         <field name="model">res.groups</field>
         <field name="arch" type="xml">
             <tree edit="0">
-                <field name="full_name"/>
+                <field name="full_name" string="TÊN NHÓM QUYỀN"/>
                 <button name="open_edit_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
                 <button name="confirm_delete" class="btn btn-danger" title="Xóa" type="object" icon="fa-trash-o"/>
             </tree>

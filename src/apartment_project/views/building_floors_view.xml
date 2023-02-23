@@ -11,15 +11,15 @@
             <tree default_order="sort" decoration-danger="is_active == False"
                   delete="0" multi_edit="1" edit="0">
                 <field name="row_number" string="STT" optional="show"/>
-                <field name="sort" widget="handle" optional="show"/>
-                <field name="name" optional="show" decoration-bf="1"/>
-                <field name="floors_type" optional="show"/>
+                <field name="sort" string="THỨ TỰ" widget="handle" optional="show"/>
+                <field name="name" string="TÊN TẦNG" optional="show" decoration-bf="1"/>
+                <field name="floors_type" string="KIỂU TẦNG" optional="show"/>
 <!--                <field name="total_house" optional="show"/>-->
-                <field name="building_id" optional="show"
+                <field name="building_id" string="TÒA NHÀ" optional="show"
                        options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
-                <field name="blockhouse_id" optional="show"
+                <field name="blockhouse_id" string="DỰ ÁN" optional="show"
                        options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
-                <field name="is_active" optional="show"/>
+                <field name="is_active" string="TRẠNG THÁI" optional="show"/>
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                         name="open_edit_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"

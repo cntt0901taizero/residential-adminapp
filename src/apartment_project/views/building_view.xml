@@ -8,19 +8,17 @@
         <field name="name">tb_building.tree</field>
         <field name="model">tb_building</field>
         <field name="arch" type="xml">
-            <tree string="Bảng quản lý tòa nhà" decoration-danger="is_active == False" edit="0">
+            <tree string="Bảng quản lý tòa nhà" decoration-danger="is_active == False" edit="0"
+                  expand="context.get('expand', True)">
                 <field name="row_number" string="STT" optional="show"/>
-                <field name="image" width="100px" widget="image" class="oe_left oe_avatar" optional="show"/>
-                <field name="name" optional="show" decoration-bf="1"/>
-                <field name="code" optional="show" decoration-bf="1"/>
-                <field name="building_level" optional="show"/>
-<!--                <field name="founding_date" widget="date" optional="show"/>-->
-                <field name="website" widget="url" optional="show"/>
-<!--                <field name="phone" optional="show"/>-->
-                <field name="address" optional="show"/>
-<!--                <field name="location_link" widget="url" optional="show"/>-->
-                <field name="blockhouse_id" optional="show"/>
-                <field name="is_active" optional="show"/>
+                <field name="image" string="ẢNH" width="100px" widget="image" class="oe_left oe_avatar" optional="show"/>
+                <field name="name" string="TÊN TÒA/KHU" optional="show" decoration-bf="1"/>
+                <field name="code" string="MÃ" optional="show" decoration-bf="1"/>
+                <field name="building_level" string="HẠNG" optional="show"/>
+                <field name="website" string="WEBSITE" widget="url" optional="show"/>
+                <field name="address" string="ĐỊA CHỈ" optional="show"/>
+                <field name="blockhouse_id" string="DỰ ÁN" optional="show"/>
+                <field name="is_active" string="TRẠNG THÁI" optional="show"/>
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                         name="open_edit_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"

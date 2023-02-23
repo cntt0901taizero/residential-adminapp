@@ -102,10 +102,15 @@ class tb_building_house(models.Model):
 
     @api.model
     def create(self, vals):
-        today = date.today()
-        d = today.strftime('%d%m%y')
-        vals["code"] = 'BDH' + str(d) + str(random.randint(1000, 9999))
-        return super(tb_building_house, self).create(vals)
+        per_name = 'perm_create_apartment'
+        error_messenger = 'Bạn chưa được phân quyền này!'
+        can_do = self.check_permission(per_name, raise_exception=False)
+        if can_do:
+            today = date.today()
+            d = today.strftime('%d%m%y')
+            vals["code"] = 'BDH' + str(d) + str(random.randint(1000, 9999))
+            return super(tb_building_house, self).create(vals)
+        raise ValidationError(error_messenger)
 
     @api.model
     def default_get(self, data):
@@ -113,36 +118,40 @@ class tb_building_house(models.Model):
         return res
 
     def open_edit_form(self):
-        can_do = self.check_access_rights('write', raise_exception=False)
-        if not can_do:
-            raise ValidationError('Bạn không có quyền chỉnh sửa thông tin!')
-        return {
-            'type': 'ir.actions.act_window',
-            'name': 'Sửa căn hộ / biệt thự ' + self.name,
-            'res_model': 'tb_building_house',
-            'res_id': self.id,
-            'view_type': 'form',
-            'view_mode': 'form',
-            'view_id': self.env.ref('apartment_project.view_tb_building_house_form').id,
-            'context': {'form_view_initial_mode': 'edit'},
-            'target': 'current',
-        }
+        per_name = 'perm_write_apartment'
+        error_messenger = 'Bạn chưa được phân quyền này!'
+        can_do = self.check_permission(per_name, raise_exception=False)
+        if can_do:
+            return {
+                'type': 'ir.actions.act_window',
+                'name': 'Sửa căn hộ / biệt thự ' + self.name,
+                'res_model': 'tb_building_house',
+                'res_id': self.id,
+                'view_type': 'form',
+                'view_mode': 'form',
+                'view_id': self.env.ref('apartment_project.view_tb_building_house_form').id,
+                'context': {'form_view_initial_mode': 'edit'},
+                'target': 'current',
+            }
+        raise ValidationError(error_messenger)
 
     def confirm_delete(self):
-        candelete = self.check_access_rights('unlink', raise_exception=False)
-        if not candelete:
-            raise ValidationError('Bạn không có quyền xóa bản ghi này!')
-        message = """Bạn có chắc muốn xóa bản ghi này?"""
-        value = self.env['dialog.box.confirm'].sudo().create({'message': message})
-        return {
-            'type': 'ir.actions.act_window',
-            'name': 'Xóa bản ghi',
-            'res_model': 'dialog.box.confirm',
-            'view_type': 'form',
-            'view_mode': 'form',
-            'target': 'new',
-            'res_id': value.id
-        }
+        per_name = 'perm_delete_apartment'
+        error_messenger = 'Bạn chưa được phân quyền này!'
+        can_do = self.check_permission(per_name, raise_exception=False)
+        if can_do:
+            message = """Bạn có chắc muốn xóa bản ghi này?"""
+            value = self.env['dialog.box.confirm'].sudo().create({'message': message})
+            return {
+                'type': 'ir.actions.act_window',
+                'name': 'Xóa bản ghi',
+                'res_model': 'dialog.box.confirm',
+                'view_type': 'form',
+                'view_mode': 'form',
+                'target': 'new',
+                'res_id': value.id
+            }
+        raise ValidationError(error_messenger)
 
     def del_record(self):
         for record in self:

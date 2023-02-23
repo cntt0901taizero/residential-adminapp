@@ -28,16 +28,11 @@ class tb_users(models.Model):
         ('citizen_identification', 'unique(citizen_identification)', 'Số định danh cá nhân không được trùng lặp')
     ]
 
-    # @api.model
-    # def _check_test1(self):
-    #     return True;
-
     @api.depends('create_date')
     def _compute_row_number(self):
         type_user = self._context['default_user_type']
         for record in self:
-            record.row_number = self.search([('user_type', '=', type_user)], order='create_date')\
-                                    .ids.index(record.id) + 1
+            record.row_number = self.search([('user_type', '=', type_user)], order='create_date').ids.index(record.id) + 1
 
     @api.model
     def check_perm_user(self, permission_name):
@@ -135,58 +130,80 @@ class tb_users(models.Model):
         }
 
     def open_edit_admin_form(self):
-        canwrite = self.check_access_rights('write', raise_exception=False)
-        if not canwrite:
-            raise ValidationError('Bạn không có quyền chỉnh sửa thông tin tài khoản.')
-        form_id = self.env.ref('resident_management.view_resident_users_form_inherit')
-
-        return {
-            'type': 'ir.actions.act_window',
-            'name': 'Cập nhật người dùng quản lý quản trị',
-            'res_model': 'res.users',
-            'res_id': self.id,
-            'view_type': 'form',
-            'view_mode': 'form',
-            'view_id': form_id.id,
-            'context': {'form_view_initial_mode': 'edit'},
-            # if you want to open the form in edit mode direclty
-            'target': 'current',
-        }
+        per_name = 'perm_write_admin_user'
+        error_messenger = 'Bạn chưa được phân quyền này!'
+        can_do = self.check_permission(per_name, raise_exception=False)
+        if can_do:
+            form_id = self.env.ref('resident_management.view_admin_users_form_inherit')
+            return {
+                'type': 'ir.actions.act_window',
+                'name': 'Cập nhật người dùng quản lý quản trị',
+                'res_model': 'res.users',
+                'res_id': self.id,
+                'view_type': 'form',
+                'view_mode': 'form',
+                'view_id': form_id.id,
+                'context': {'form_view_initial_mode': 'edit'},
+                # if you want to open the form in edit mode direclty
+                'target': 'current',
+            }
+        raise ValidationError(error_messenger)
 
     def open_edit_resident_form(self):
-        canwrite = self.check_access_rights('write', raise_exception=False)
-        if not canwrite:
-            raise ValidationError('Bạn không có quyền chỉnh sửa thông tin tài khoản.')
-        form_id = self.env.ref('resident_management.view_admin_users_form_inherit')
+        per_name = 'perm_write_resident_user'
+        error_messenger = 'Bạn chưa được phân quyền này!'
+        can_do = self.check_permission(per_name, raise_exception=False)
+        if can_do:
+            form_id = self.env.ref('resident_management.view_resident_users_form_inherit')
+            return {
+                'type': 'ir.actions.act_window',
+                'name': 'Cập nhật người dùng cư dân',
+                'res_model': 'res.users',
+                'res_id': self.id,
+                'view_type': 'form',
+                'view_mode': 'form',
+                'view_id': form_id.id,
+                'context': {'form_view_initial_mode': 'edit'},
+                # if you want to open the form in edit mode direclty
+                'target': 'current',
+            }
+        raise ValidationError(error_messenger)
 
-        return {
-            'type': 'ir.actions.act_window',
-            'name': 'Cập nhật người dùng cư dân',
-            'res_model': 'res.users',
-            'res_id': self.id,
-            'view_type': 'form',
-            'view_mode': 'form',
-            'view_id': form_id.id,
-            'context': {'form_view_initial_mode': 'edit'},
-            # if you want to open the form in edit mode direclty
-            'target': 'current',
-        }
+    def confirm_admin_delete(self):
+        per_name = 'perm_delete_admin_user'
+        error_messenger = 'Bạn chưa được phân quyền này!'
+        can_do = self.check_permission(per_name, raise_exception=False)
+        if can_do:
+            message = """Bạn có chắc muốn xóa tài khoản này?"""
+            value = self.env['dialog.box.confirm'].sudo().create({'message': message})
+            return {
+                'type': 'ir.actions.act_window',
+                'name': 'Xóa tài khoản',
+                'res_model': 'dialog.box.confirm',
+                'view_type': 'form',
+                'view_mode': 'form',
+                'target': 'new',
+                'res_id': value.id
+            }
+        raise ValidationError(error_messenger)
 
-    def confirm_delete(self):
-        candelete = self.check_access_rights('unlink', raise_exception=False)
-        if not candelete:
-            raise ValidationError('Bạn không có quyền xóa thông tin tài khoản.')
-        message = """Bạn có chắc muốn xóa tài khoản này?"""
-        value = self.env['dialog.box.confirm'].sudo().create({'message': message})
-        return {
-            'type': 'ir.actions.act_window',
-            'name': 'Xóa tài khoản',
-            'res_model': 'dialog.box.confirm',
-            'view_type': 'form',
-            'view_mode': 'form',
-            'target': 'new',
-            'res_id': value.id
-        }
+    def confirm_resident_delete(self):
+        per_name = 'perm_delete_resident_user'
+        error_messenger = 'Bạn chưa được phân quyền này!'
+        can_do = self.check_permission(per_name, raise_exception=False)
+        if can_do:
+            message = """Bạn có chắc muốn xóa tài khoản này?"""
+            value = self.env['dialog.box.confirm'].sudo().create({'message': message})
+            return {
+                'type': 'ir.actions.act_window',
+                'name': 'Xóa tài khoản',
+                'res_model': 'dialog.box.confirm',
+                'view_type': 'form',
+                'view_mode': 'form',
+                'target': 'new',
+                'res_id': value.id
+            }
+        raise ValidationError(error_messenger)
 
     def del_record(self):
         for record in self:
