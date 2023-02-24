@@ -12,12 +12,14 @@ message_body = "Hi john, your customized news for today is ready"
 str_bql = USER_GROUP_CODE[2][0]
 str_bqt = USER_GROUP_CODE[3][0]
 
+
 class tb_notification(models.Model):
     _name = 'tb_notification'
     _description = 'Thông báo'
 
     name = fields.Char(string='Tiêu đề', required=True, copy=False, )
     content = fields.Html(string='Nội dung', copy=False, required=True, )
+    image = fields.Image(string="Ảnh", required=True)
     type = fields.Selection([
         ('NEWS', 'Bản tin'),
         ('ACTIVE_BY_ADMIN', 'Thông báo từ quản trị viên'),
@@ -25,8 +27,8 @@ class tb_notification(models.Model):
     is_push = fields.Boolean(string='Đẩy thông báo', default=True)
     status = fields.Selection([
         ('PENDING', 'Chờ duyệt'),
-        ('ACTIVE', 'Đã duyệt'),
         ('REJECT', 'Chưa duyệt'),
+        ('ACTIVE', 'Đã đăng'),
     ], required=True, default='PENDING', tracking=True, string="Trạng thái", )
     receiver = fields.Selection([
         ('PROJECT_APARTMENT', 'Dự án'),
@@ -45,7 +47,6 @@ class tb_notification(models.Model):
                                         ondelete="cascade")
     user_ids = fields.Many2many('res.users', string='Người nhận', ondelete="cascade")
 
-
     def _domain_blockhouse_id(self):
         user = http.request.env.user
         bqt_bh_id = []  # ban quan tri - blockhouse - id
@@ -63,7 +64,6 @@ class tb_notification(models.Model):
             return [("is_active", "=", True), ("id", "in", list(set(bqt_bh_id + bql_bh_id)))]
         else:
             return [("is_active", "=", True)]
-
 
     @api.onchange('blockhouse_id')
     def on_change_blockhouse_id(self):
@@ -120,10 +120,8 @@ class tb_notification(models.Model):
         except Exception as e:
             print(e)
 
-
     def set_status_reject(self):
         self.write({'status': 'REJECT'})
-
 
     @api.model
     def create(self, values):
@@ -145,7 +143,6 @@ class tb_notification(models.Model):
         #     if len(values['user_ids'][0][2]) == 0:
         #         raise ValidationError('Vui lòng chọn người nhận thông báo')
         return super(tb_notification, self).create(values)
-
 
     def write(self, values):
         if 'receiver' in values:
@@ -172,3 +169,46 @@ class tb_notification(models.Model):
             values['status'] = 'PENDING'
         # here you can do accordingly
         return super(tb_notification, self).write(values)
+
+
+    def open_edit_form(self):
+        form_id = self.env.ref('apartment_service_support.view_tb_notification_form')
+        per_name = 'perm_write_notification'
+        error_messenger = 'Bạn không có quyền chỉnh sửa thông báo.'
+        can_do = self.check_permission(per_name, raise_exception=False)
+        if not can_do:
+            raise ValidationError(error_messenger)
+        self.check_access_rights('write')
+        # then open the form
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Cập nhật thông báo',
+            'res_model': 'tb_notification',
+            'res_id': self.id,
+            'view_type': 'form',
+            'view_mode': 'form',
+            'view_id': form_id.id,
+            'context': {'form_view_initial_mode': 'edit'},
+            # if you want to open the form in edit mode direclty
+            'target': 'current',
+        }
+
+
+    def confirm_delete(self):
+        per_name = 'perm_delete_notification'
+        error_messenger = 'Bạn không có quyền xóa thông báo.'
+        can_do = self.check_permission(per_name, raise_exception=False)
+        if not can_do:
+            raise ValidationError(error_messenger)
+        message = """Bạn có chắc muốn xóa bản tin này?"""
+        value = self.env['dialog.box.confirm'].sudo().create({'message': message})
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Xóa thông báo',
+            'res_model': 'dialog.box.confirm',
+
+            'view_type': 'form',
+            'view_mode': 'form',
+            'target': 'new',
+            'res_id': value.id
+        }
