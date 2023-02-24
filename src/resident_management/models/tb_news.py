@@ -87,10 +87,14 @@ class tb_news(models.Model):
         self.write({'status': 'DRAFT'})
 
     def write(self, values):
+        per_name = 'perm_approve_news'
+        can_do = self.check_permission(per_name, raise_exception=False)
         if 'news_type' in values:
             if values["news_type"] == 'PROJECT_APARTMENT':
                 values["building_id"] = None
-        if 'status' not in values:
+        if can_do:
+            values['status'] = 'ACTIVE'
+        else:
             values['status'] = 'DRAFT'
         return super(tb_news, self).write(values)
 
@@ -105,9 +109,11 @@ class tb_news(models.Model):
 
     def open_edit_form_news(self):
         form_id = self.env.ref('apartment_service_support.view_tb_news_form')
-        canwrite = self.check_access_rights('write', raise_exception=False)
-        if not canwrite:
-            raise ValidationError('Bạn không có quyền chỉnh sửa bản tin.')
+        per_name = 'perm_write_news'
+        error_messenger = 'Bạn không có quyền chỉnh sửa bản tin.'
+        can_do = self.check_permission(per_name, raise_exception=False)
+        if not can_do:
+            raise ValidationError(error_messenger)
         self.check_access_rights('write')
         # then open the form
         return {
@@ -125,9 +131,11 @@ class tb_news(models.Model):
 
     # @api.multi
     def confirm_delete_news(self):
-        candelete = self.check_access_rights('unlink', raise_exception=False)
-        if not candelete:
-            raise ValidationError('Bạn không có quyền xóa bản tin.')
+        per_name = 'perm_delete_news'
+        error_messenger = 'Bạn không có quyền xóa bản tin.'
+        can_do = self.check_permission(per_name, raise_exception=False)
+        if not can_do:
+            raise ValidationError(error_messenger)
         message = """Bạn có chắc muốn xóa bản tin này?"""
         value = self.env['dialog.box.confirm'].sudo().create({'message': message})
         return {
