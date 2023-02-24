@@ -51,6 +51,17 @@ class tb_users(models.Model):
                     break
         return check
 
+    def set_status_active(self):
+        per_name = 'perm_approve_resident_user'
+        error_messenger = 'Bạn chưa được phân quyền này!'
+        can_do = self.check_permission(per_name, raise_exception=False)
+        if can_do:
+            for item in self:
+                users_with_email = item.filtered('email')
+                users_with_email.with_context(create_user=True).action_reset_password()
+                item.active = True
+        raise ValidationError(error_messenger)
+
     @api.model
     def read_group(self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True):
         user = request.env.user
@@ -105,9 +116,10 @@ class tb_users(models.Model):
             error_messenger = 'Bạn không có quyền tạo tài khoản quản trị.'
         can_do = self.check_permission(per_name, raise_exception=False)
         if can_do:
-            # type_user = self._context['default_user_type']
-            # if type_user != 'ADMIN':
-            #     vals["active"] = False
+            type_user = self._context['default_user_type']
+            if type_user != 'ADMIN':
+                # self.env.context['install_mode'] = True
+                vals["active"] = False
             return super(tb_users, self).create(vals)
         raise ValidationError(error_messenger)
 
@@ -163,6 +175,26 @@ class tb_users(models.Model):
             return {
                 'type': 'ir.actions.act_window',
                 'name': 'Cập nhật người dùng cư dân',
+                'res_model': 'res.users',
+                'res_id': self.id,
+                'view_type': 'form',
+                'view_mode': 'form',
+                'view_id': form_id.id,
+                'context': {'form_view_initial_mode': 'edit'},
+                # if you want to open the form in edit mode direclty
+                'target': 'current',
+            }
+        raise ValidationError(error_messenger)
+
+    def open_edit_resident_approve_form(self):
+        per_name = 'perm_write_resident_user'
+        error_messenger = 'Bạn chưa được phân quyền này!'
+        can_do = self.check_permission(per_name, raise_exception=False)
+        if can_do:
+            form_id = self.env.ref('resident_management.view_resident_users_approve_form_inherit')
+            return {
+                'type': 'ir.actions.act_window',
+                'name': 'Cập nhật và phê duyệt người dùng cư dân',
                 'res_model': 'res.users',
                 'res_id': self.id,
                 'view_type': 'form',

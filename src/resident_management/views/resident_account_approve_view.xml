@@ -5,11 +5,15 @@
 -->
 <odoo>
 
-    <record id="view_resident_users_tree" model="ir.ui.view">
-        <field name="name">res.resident.users.tree</field>
+    <record id="view_resident_users_approve_tree" model="ir.ui.view">
+        <field name="name">res.resident.users.approve.tree</field>
         <field name="model">res.users</field>
         <field name="arch" type="xml">
             <tree string="Users" js_class="tree_action_resident_user">
+                <header>
+                    <button class="fa fa-check btn btn-info" type="object"
+                            name="set_status_active" string=" Phê duyệt và gửi thư mời"/>
+                </header>
                 <field name="row_number" string="STT" optional="show"/>
                 <field name="name" string="HỌ TÊN"/>
                 <field name="login" string="TÊN ĐĂNG NHẬP"/>
@@ -21,20 +25,30 @@
                 <field name="create_date" string="NGÀY TẠO"/>
 <!--                <field name="company_id" groups="base.group_multi_company"/>-->
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
-                        name="open_edit_resident_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
+                        name="open_edit_resident_approve_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                         name="confirm_resident_delete" class="btn btn-danger" title="Xóa" type="object" icon="fa-trash-o"/>
             </tree>
         </field>
     </record>
 
-    <record id="view_resident_users_form_inherit" model="ir.ui.view">
+    <record id="view_resident_users_approve_form_inherit" model="ir.ui.view">
         <field name="name">res.users.resident.form.inherit</field>
         <field name="model">res.users</field>
         <field name="arch" type="xml">
             <form string="Users" js_class="form_action_resident_user">
+                <field name="id" invisible="1"/>
+                <header attrs="{'invisible':[('id','=',False)]}">
+                    <button class="fa fa-check btn btn-info"
+                            attrs="{'invisible':[('active','=',True)]}"
+                            name="set_status_active" string=" Phê duyệt và gửi thư mời" type="object"
+                    />
+                    <button class="fa fa-check btn btn-info" disabled="True"
+                            attrs="{'invisible':[('active','=',False)]}" title="Tài khoản đã được duyệt"
+                            name="set_status_active" string=" Phê duyệt và gửi thư mời" type="object"
+                    />
+                </header>
                 <sheet>
-                    <field name="id" invisible="1"/>
                     <div class="row">
                         <div class="col-md-12">
 <!--                            <label>Tên đăng nhập *</label>-->
@@ -86,7 +100,7 @@
                         </div>
                         <div class="col-md-12" attrs="{'invisible': [('id','=', False)]}">
                             <group>
-                                <field name="active" readonly="1"/>
+                                <field name="active"/>
                             </group>
                         </div>
                     </div>
@@ -129,8 +143,8 @@
         </field>
     </record>
 
-    <record id="view_resident_users_search" model="ir.ui.view">
-        <field name="name">resident_users.search</field>
+    <record id="view_resident_users_approve_search" model="ir.ui.view">
+        <field name="name">resident_users_approve.search</field>
         <field name="model">res.users</field>
         <field name="inherit_id" ref="base.view_users_search"/>
         <field name="arch" type="xml">
@@ -145,14 +159,14 @@
         </field>
     </record>
 
-    <record id="action_account_resident" model="ir.actions.act_window">
-        <field name="name">TÀI KHOẢN CƯ DÂN</field>
+    <record id="action_account_resident_approve" model="ir.actions.act_window">
+        <field name="name">DUYỆT TÀI KHOẢN CƯ DÂN</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">res.users</field>
         <field name="view_mode">tree,form</field>
         <field name="view_ids" eval="[(5, 0, 0),
-                (0, 0, {'view_mode': 'tree', 'view_id': ref('view_resident_users_tree')}),
-                (0, 0, {'view_mode': 'form', 'view_id': ref('view_resident_users_form_inherit')})]"
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('view_resident_users_approve_tree')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('view_resident_users_approve_form_inherit')})]"
         />
         <field name="domain">[('user_type', '=', 'RESIDENT')]</field>
         <field name="limit">10</field>
@@ -162,11 +176,11 @@
         </field>
     </record>
 
-    <record id="menu_create_account_resident" model="ir.ui.menu">
-        <field name="name">Tài khoản cư dân</field>
-        <field name="action" ref="action_account_resident"/>
+    <record id="menu_approve_account_resident" model="ir.ui.menu">
+        <field name="name">Duyệt tài khoản cư dân</field>
+        <field name="action" ref="action_account_resident_approve"/>
         <field name="parent_id" ref="menu_account_resident"/>
-        <field name="sequence">1</field>
+        <field name="sequence">2</field>
     </record>
 
 

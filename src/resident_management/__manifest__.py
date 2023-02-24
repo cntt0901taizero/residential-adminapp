@@ -15,6 +15,7 @@
         'views/menu.xml',
         'views/admin_account_view.xml',
         'views/resident_account_view.xml',
+        'views/resident_account_approve_view.xml',
         'views/user_blockhouse_res_groups_rel_view.xml',
         'views/groups_inherit_view.xml',
         # 'views/templates.xml',
