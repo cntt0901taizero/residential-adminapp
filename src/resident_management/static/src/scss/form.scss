@@ -50,6 +50,9 @@
     margin: 0px !important;
 }
 
+.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-primary.disabled:after, .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-primary.disabled:before{
+    border-left-color: #087346 !important
+}
 .o_form_statusbar .o_statusbar_buttons .btn {
     margin-right: 15px !important;
 }

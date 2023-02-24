@@ -40,6 +40,9 @@
             'resident_management/static/src/js/button_resident_user.js',
             'resident_management/static/src/js/button_news.js',
             'resident_management/static/src/js/button_notifications.js',
+            'resident_management/static/src/js/button_banner.js',
+            'resident_management/static/src/js/form_controller.js',
+            'resident_management/static/src/js/list_renderer.js',
         ],
         'web.assets_qweb': [
             # 'resident_management/static/src/xml/styles.xml',

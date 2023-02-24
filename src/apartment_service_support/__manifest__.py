@@ -14,6 +14,7 @@
         'views/news_approve_view.xml',
         'views/notification_view.xml',
         'views/banner_view.xml',
+        'views/banner_approve_view.xml',
         'views/feekind_view.xml',
         'views/paybillconfig_view.xml',
         'views/apartment_utilities_view.xml',

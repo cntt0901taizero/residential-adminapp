@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="view_tb_banner_tree" model="ir.ui.view">
-        <field name="name">tb_banner.tree</field>
+    <record id="view_tb_banner_approve_tree" model="ir.ui.view">
+        <field name="name">tb_banner.approve.tree</field>
         <field name="model">tb_banner</field>
         <field name="arch" type="xml">
-            <tree js_class="tree_action_banner">
+            <tree create="0">
                 <field name="create_uid" string="Người tạo"/>
                 <field name="image" widget="image" width="100px"/>
                 <field name="name" decoration-bf="1"/>
                 <field name="create_date" widget="date"/>
-                <field name="status" widget="label_selection" options="{'classes': {'PENDING': 'info', 'ACTIVE': 'success', 'REJECT':'warning'}}"/>
                 <button name="open_edit_form" class="fa fa-pencil fa-lg btn btn-light"
                         title="Sửa" aria-label="Sửa" type="object"/>
                 <button name="confirm_delete" class="fa fa-trash-o fa-lg btn btn-danger"
@@ -20,12 +19,19 @@
     </record>
 
 
-    <record id="view_tb_banner_form" model="ir.ui.view">
-        <field name="name">tb_banner.form</field>
+    <record id="view_tb_banner_approve_form" model="ir.ui.view">
+        <field name="name">tb_banner.approve.form</field>
         <field name="model">tb_banner</field>
         <field name="arch" type="xml">
-            <form js_class="form_action_banner">
-                <header>
+            <form create="0">
+                 <header>
+                    <button icon="fa-check" class="oe_highlight"
+                            name="set_status_active" string="Phê duyệt" type="object"
+                            attrs="{'invisible':[('status','!=','PENDING')]}"
+                    />
+                    <button icon="fa-times"
+                            attrs="{'invisible':[('status','!=','PENDING')]}"
+                            name="set_status_reject" string="Từ chối duyệt" type="object" status="DRAFT, ACTIVE"/>
                     <field name="status" widget="statusbar"/>
                 </header>
                 <sheet>
@@ -42,7 +48,9 @@
                                         <field name="link"/>
                                     </group>
                                 </div>
+
                             </div>
+
                         </div>
                         <div class="col-md-6">
                             <group>
@@ -57,10 +65,8 @@
                                 </field>
                             </group>
                         </div>
-
                     </div>
                 </sheet>
-
             </form>
         </field>
     </record>
@@ -76,29 +82,24 @@
     </record>
 
 
-    <record id="action_tb_banner" model="ir.actions.act_window">
-        <field name="name">Quảng cáo</field>
+    <record id="action_tb_banner_approve" model="ir.actions.act_window">
+        <field name="name">Duyệt quảng cáo</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">tb_banner</field>
         <field name="view_mode">tree,form</field>
-         <field name="view_ids" eval="[(5, 0, 0),
-                (0, 0, {'view_mode': 'tree', 'view_id': ref('view_tb_banner_tree')}),
-                (0, 0, {'view_mode': 'form', 'view_id': ref('view_tb_banner_form')})]"
+        <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('view_tb_banner_approve_tree')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('view_tb_banner_approve_form')})]"
         />
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Tạo bản ghi đầu tiên của bạn</p>
         </field>
     </record>
 
-    <menuitem id="menu_banners_root"
-              name="Quảng cáo"
-              parent="menu_apartment_service_support"
-              sequence="1"/>
-    <menuitem id="menu_banners_list"
-              name="Danh sách quảng cáo"
+    <menuitem id="menu_banners_approve"
+              name="Phê duyệt quảng cáo"
               parent="menu_banners_root"
-              action="action_tb_banner"
-              sequence="1"/>
-
+              action="action_tb_banner_approve"
+              sequence="2"/>
 </odoo>
 
