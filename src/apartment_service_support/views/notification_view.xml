@@ -34,46 +34,58 @@
                     <field name="status" widget="statusbar"/>
                 </header>
                 <sheet>
-                    <div class="oe_title pr-0">
-                        <xpath expr="//form" position="attributes">
-                            <strong>Tiêu đề</strong>
-                        </xpath>
-                        <h1 class="d-flex flex-row justify-content-between">
-                            <field name="name" class="text-truncate" placeholder="Tiêu đề thông báo..."
-                                   default_focus="1"/>
-                        </h1>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <group>
+                                <field name="name" class="text-truncate" placeholder="Tiêu đề thông báo..."
+                                       default_focus="1"/>
+                            </group>
+                        </div>
+                        <div class="col-md-6">
+                            <group>
+                                <field name="image" widget="image" class="oe_left oe_avatar"/>
+                            </group>
+                        </div>
+                        <div class="col-md-6">
+                            <group>
+                                <field name="receiver" widget="radio" options="{'horizontal': true}"/>
+                            </group>
+                        </div>
+                        <div class="col-md-12">
+                            <group col="12" class="oe_invoice_lines_tab">
+                                <group colspan="4">
+                                    <field name="blockhouse_id"
+                                           attrs="{'required' : [('receiver','in',['BUILDING','APARTMENT', 'PROJECT_APARTMENT'])], 'invisible': [('receiver','=','USER_GROUP')]}"
+                                           options="{'no_quick_create':True,'no_create': True, 'no_edit': True, 'no_open': True}"/>
+                                </group>
+                                <group colspan="4">
+                                    <field name="building_id"
+                                           attrs="{'required' : [('receiver','in',['BUILDING','APARTMENT'])], 'invisible': ['|', ('receiver','=','PROJECT_APARTMENT'), ('receiver','=', 'USER_GROUP')]}"
+                                           options="{'no_quick_create':True,'no_create': True, 'no_edit': True, 'no_open': True}"
+                                    />
+                                </group>
+                                <group colspan="4">
+                                    <field name="building_house_id"
+                                           attrs="{'required' : [('receiver', '=', 'APARTMENT')], 'invisible': ['|', '|', ('receiver','=','PROJECT_APARTMENT'), ('receiver','=', 'BUILDING'), ('receiver','=', 'USER_GROUP')]}"
+                                           options="{'no_quick_create':True,'no_create': True, 'no_edit': True, 'no_open': True}"
+                                    />
+                                </group>
+                            </group>
+                        </div>
+                        <div class="col-md-12">
+                            <group>
+                                <field name="content" options="{'collaborative':true}"
+                                       widget="html"
+                                       placeholder="Nhập vào nội dung thông báo">
+                                </field>
+                            </group>
+                        </div>
                     </div>
-                    <group colspan="4">
-                        <field name="receiver" widget="radio" options="{'horizontal': true}"/>
-                    </group>
-                    <group col="12" class="oe_invoice_lines_tab">
-                        <group colspan="4">
-                            <field name="blockhouse_id"
-                                   attrs="{'required' : [('receiver','in',['BUILDING','APARTMENT', 'PROJECT_APARTMENT'])], 'invisible': [('receiver','=','USER_GROUP')]}"
-                                   options="{'no_quick_create':True,'no_create': True, 'no_edit': True, 'no_open': True}"/>
-                        </group>
-                        <group colspan="4">
-                            <field name="building_id"
-                                   attrs="{'required' : [('receiver','in',['BUILDING','APARTMENT'])], 'invisible': ['|', ('receiver','=','PROJECT_APARTMENT'), ('receiver','=', 'USER_GROUP')]}"
-                                   options="{'no_quick_create':True,'no_create': True, 'no_edit': True, 'no_open': True}"
-                            />
-                        </group>
-                        <group colspan="4">
-                            <field name="building_house_id"
-                                   attrs="{'required' : [('receiver', '=', 'APARTMENT')], 'invisible': ['|', '|', ('receiver','=','PROJECT_APARTMENT'), ('receiver','=', 'BUILDING'), ('receiver','=', 'USER_GROUP')]}"
-                                   options="{'no_quick_create':True,'no_create': True, 'no_edit': True, 'no_open': True}"
-                            />
-                        </group>
-                    </group>
+
                     <group attrs="{'invisible': [('receiver','!=','USER_GROUP')]}">
                         <field name="user_ids" options="{'no_create': True, 'no_edit': True}"/>
                     </group>
-                    <group>
-                        <field name="content" options="{'collaborative':true}"
-                               widget="html"
-                               placeholder="Nhập vào nội dung thông báo">
-                        </field>
-                    </group>
+
                 </sheet>
             </form>
         </field>
