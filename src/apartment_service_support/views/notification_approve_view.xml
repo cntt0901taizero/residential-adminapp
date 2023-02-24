@@ -4,34 +4,38 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 <odoo>
-    <record id="view_tb_notification_tree" model="ir.ui.view">
-        <field name="name">tb_notification.tree</field>
+    <record id="view_tb_notification_approve_tree" model="ir.ui.view">
+        <field name="name">tb_notification.approve.tree</field>
         <field name="model">tb_notification</field>
 
         <field name="arch" type="xml">
-            <tree js_class="tree_action_notifications">
+            <tree create="0" js_class="tree_action_notifications">
                 <field name="create_uid" string="Người tạo"/>
                 <field name="name"/>
                 <field name="content"/>
                 <field name="type"/>
                 <field name="status" widget="label_selection"
                        options="{'classes': {'PENDING': 'info', 'ACTIVE': 'success', 'REJECT':'warning'}}"/>
-                <button name="open_edit_form" class="fa fa-pencil fa-lg btn btn-light"
-                        title="Sửa" aria-label="Sửa" type="object"/>
-                <button name="confirm_delete" class="fa fa-trash-o fa-lg btn btn-danger"
-                        title="Xóa"
-                        aria-label="Xóa" type="object"/>
             </tree>
         </field>
     </record>
 
-    <record id="view_tb_notification_form" model="ir.ui.view">
-        <field name="name">tb_notification.form</field>
+    <record id="view_tb_notification_approve_form" model="ir.ui.view">
+        <field name="name">tb_notification.approve.form</field>
         <field name="model">tb_notification</field>
         <field name="arch" type="xml">
             <form js_class="form_action_notifications">
                 <header>
-                    <field name="status" widget="statusbar"/>
+                    <button icon="fa-check"
+                            class="oe_highlight"
+                            attrs="{'invisible':[('status','!=','PENDING')]}"
+                            name="set_status_active" string="Phê duyệt" type="object"
+                    />
+                    <button icon="fa-times"
+                            name="set_status_reject" string="Từ chối duyệt" type="object"
+                            attrs="{'invisible':[('status','!=','PENDING')]}"/>
+                    <field name="status" widget="statusbar"
+                           groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"/>
                 </header>
                 <sheet>
                     <div class="oe_title pr-0">
@@ -79,42 +83,27 @@
         </field>
     </record>
 
-    <record model="ir.ui.view" id="view_tb_notification_search">
-        <field name="name">tb_notification.search</field>
-        <field name="model">tb_notification</field>
-        <field name="arch" type="xml">
-            <search>
-                <field name="name" string="Tiêu đề"/>
-            </search>
-        </field>
-    </record>
-
-    <record id="action_tb_notification" model="ir.actions.act_window">
-        <field name="name">Thông báo</field>
+    <record id="action_tb_notification_approve" model="ir.actions.act_window">
+        <field name="name">Duyệt thông báo</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">tb_notification</field>
         <field name="view_mode">tree,form</field>
         <field name="context">{}</field>
         <field name="domain">[('type','=','ACTIVE_BY_ADMIN')]</field>
         <field name="view_ids" eval="[(5, 0, 0),
-                (0, 0, {'view_mode': 'tree', 'view_id': ref('view_tb_notification_tree')}),
-                (0, 0, {'view_mode': 'form', 'view_id': ref('view_tb_notification_form')})]"
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('view_tb_notification_approve_tree')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('view_tb_notification_approve_form')})]"
         />
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Thêm mới thông báo!</p>
         </field>
     </record>
 
-    <menuitem id="menu_notification_root"
-              name="Thông báo"
-              parent="menu_apartment_service_support"
-              sequence="3"/>
 
-    <menuitem id="menu_notification_list"
-              name="Danh sách thông báo"
+    <menuitem id="menu_notification_approve"
+              name="Phê duyệt thông báo"
               parent="menu_notification_root"
-              action="action_tb_notification"
-              sequence="1"/>
-
+              action="action_tb_notification_approve"
+              sequence="2"/>
 
 </odoo>
