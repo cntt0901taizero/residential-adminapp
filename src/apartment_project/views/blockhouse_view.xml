@@ -12,7 +12,7 @@
                 <field name="row_number" string="STT" optional="show"/>
                 <field name="image" string="ẢNH" widget="image" width="100px" optional="show"/>
                 <field name="name" string="TÊN DỰ ÁN" optional="show" decoration-bf="1"/>
-                <field name="code" string="MÃ" optional="show" decoration-bf="1"/>
+                <field name="code" string="MÃ" optional="show"/>
                 <field name="website" string="WEBSITE" optional="show"/>
                 <field name="address" string="ĐỊA CHỈ" optional="show"/>
 <!--                <field name="building_ids" widget="one2many" mode="tree">-->

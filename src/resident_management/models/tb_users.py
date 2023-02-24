@@ -105,6 +105,9 @@ class tb_users(models.Model):
             error_messenger = 'Bạn không có quyền tạo tài khoản quản trị.'
         can_do = self.check_permission(per_name, raise_exception=False)
         if can_do:
+            # type_user = self._context['default_user_type']
+            # if type_user != 'ADMIN':
+            #     vals["active"] = False
             return super(tb_users, self).create(vals)
         raise ValidationError(error_messenger)
 

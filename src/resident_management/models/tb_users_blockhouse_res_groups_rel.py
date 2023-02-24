@@ -19,6 +19,7 @@ USER_GROUP_CODE = [
     ('[BQL]', '[BQL]'),
     ('[BQT]', '[BQT]'),
 ]
+
 str_bql = USER_GROUP_CODE[2][0]
 str_bqt = USER_GROUP_CODE[3][0]
 
