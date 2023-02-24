@@ -15,6 +15,7 @@ ul.o_menu_apps {
     overflow: hidden overlay;
     transition: 0.4s;
     transform: translateX(0%);
+    box-shadow: 0px 3px 30px 0px #0000000F !important;
 
     @media (min-width: $breakpoint-sm) {
         transform: translateX(-100%);
@@ -60,7 +61,8 @@ ul.o_menu_apps .logo-container{
     position: sticky;
     z-index: 1000;
     top: 0;
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), radial-gradient(88.27% 267.44% at 21.2% 43.57%, #30C084 0%, #00844D 100%)
+    box-shadow: inset 0px 0px 20px 15px #0000000F !important;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), radial-gradient(88.27% 267.44% at 21.2% 43.57%, #30C084 0%, #00844D 100%);
 }
 
 ul.o_menu_apps .logo-img {
