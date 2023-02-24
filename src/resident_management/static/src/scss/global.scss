@@ -1,3 +1,4 @@
+$breakpoint-sm: 460px;
 $breakpoint-md: 768px;
 $breakpoint-lg: 992px;
 $breakpoint-xl: 1200px;
@@ -22,7 +23,9 @@ body {
 }
 .o_action_manager {
     padding-left: 250px;
-
+    @media (min-width: $breakpoint-sm) {
+        padding-left: 0;
+    }
     @media (min-width: $breakpoint-md) {
         padding-left: 0;
     }
@@ -82,7 +85,7 @@ button.btn {
     font-size: 12px !important;
 //     padding: 6px 12px !important;
     border: none;
-    box-shadow: none !important;
+    box-shadow: 2px 5px 20px 0px rgba(0, 0, 0, 0.15) !important;
     outline: none !important;
 //     margin: 2px !important
 }
@@ -149,3 +152,8 @@ button.btn.btn-fill-light, button.btn.btn-light {
 .table-hover tbody tr:hover {
     background-color: #ECFAE6 !important;
 }
+
+table.o_list_table {
+    box-shadow: 0px 3px 30px 0px #0000000F !important;
+}
+
