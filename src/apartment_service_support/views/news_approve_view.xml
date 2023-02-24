@@ -20,17 +20,17 @@
     </record>
 
     <record id="view_tb_news_approve_form" model="ir.ui.view">
-        <field name="name">tb_news.form</field>
+        <field name="name">tb_news.approve.form</field>
         <field name="model">tb_news</field>
         <field name="arch" type="xml">
             <form create="0" js_class="form_action_news">
                 <header>
                     <button icon="fa-check" class="oe_highlight"
                             name="set_status_active" string="Phê duyệt" type="object"
-                            attrs="{'invisible':[('status','=','ACTIVE')]}"
+                            attrs="{'invisible':[('status','!=','DRAFT')]}"
                     />
                     <button icon="fa-times"
-                            attrs="{'invisible':[('id','=',False)]}"
+                            attrs="{'invisible':[('status','!=','DRAFT')]}"
                             name="set_status_reject" string="Từ chối duyệt" type="object" status="DRAFT, ACTIVE"/>
                     <field name="status" widget="statusbar"/>
                 </header>
