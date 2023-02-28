@@ -30,26 +30,22 @@
                 </header>
                 <sheet>
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <group>
-                                        <field name="name"/>
-                                    </group>
-                                </div>
-                                <div class="col-md-12">
-                                    <group>
-                                        <field name="link"/>
-                                    </group>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <group>
-                                <field name="image" readonly="0" widget="image" class="oe_left oe_avatar"/>
+                                <field string="Ảnh" name="image"
+                                       height="400px" widget="image" class="oe_left oe_avatar"/>
                             </group>
                         </div>
-
+                        <div class="col-md-12">
+                            <group>
+                                <field name="name"/>
+                            </group>
+                        </div>
+                        <div class="col-md-12">
+                            <group>
+                                <field name="link"/>
+                            </group>
+                        </div>
                         <div class="col-md-12">
                             <group>
                                 <field name="banner_description" options="{'collaborative':true}"
@@ -57,10 +53,8 @@
                                 </field>
                             </group>
                         </div>
-
                     </div>
                 </sheet>
-
             </form>
         </field>
     </record>

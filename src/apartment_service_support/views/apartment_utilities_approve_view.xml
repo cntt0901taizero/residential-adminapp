@@ -76,7 +76,7 @@
                         </div>
                         <div class="col-md-12">
                             <group>
-                                <field name="blockhouse_id" options="{'no_open': True}"/>
+                                <field name="blockhouse_id" required="1" options="{'no_open': True}"/>
                             </group>
                         </div>
                         <div class="col-md-12">

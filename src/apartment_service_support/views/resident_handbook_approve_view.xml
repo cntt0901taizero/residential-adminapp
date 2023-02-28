@@ -44,17 +44,45 @@
                     <field name="status" widget="statusbar"/>
                 </header>
                 <sheet>
-                    <group string="Thông tin nội dung cẩm nang">
-                        <field name="name"/>
-                        <field name="description"/>
-                        <field name="detail_description"/>
-                        <field name="is_active"/>
-                    </group>
                     <group string="Thông tin khu vực">
-                        <field name="blockhouse_id"
+                        <div class="row">
+                            <div class="col-md-6">
+                                <group>
+                                    <field name="blockhouse_id"
                                options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
-                        <field name="building_id"
+                                </group>
+                            </div>
+                            <div class="col-md-6">
+                                <group>
+                                    <field name="building_id"
                                options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                                </group>
+                            </div>
+                        </div>
+                    </group>
+                    <group string="Thông tin nội dung cẩm nang">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <group>
+                                    <field name="name" required="1"/>
+                                </group>
+                            </div>
+                            <div class="col-md-12">
+                                <group>
+                                    <field name="description"/>
+                                </group>
+                            </div>
+                            <div class="col-md-12">
+                                <group>
+                                    <field name="detail_description"/>
+                                </group>
+                            </div>
+                            <div class="col-md-12">
+                                <group>
+                                    <field name="is_active" readonly="1"/>
+                                </group>
+                            </div>
+                        </div>
                     </group>
                 </sheet>
             </form>

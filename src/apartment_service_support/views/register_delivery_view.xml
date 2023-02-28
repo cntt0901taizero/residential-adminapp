@@ -33,7 +33,15 @@
         <field name="arch" type="xml">
             <form create="false">
                 <sheet>
-                    <group>
+                    <group string="Căn hộ">
+                        <field name="blockhouse_id" required="1"
+                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                        <field name="building_id" required="1"
+                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                        <field name="building_house_id" required="1"
+                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                    </group>
+                    <group string="Thông tin đăng ký chuyển đồ">
                         <field name="shipping_method"/>
                         <field name="through_method"/>
                         <field name="time_start"/>
@@ -41,12 +49,6 @@
                         <field name="freight_detail"/>
                         <field name="use_freight_elevator"/>
                         <field name="status" readonly="1"/>
-                        <field name="blockhouse_id"
-                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
-                        <field name="building_id"
-                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
-                        <field name="building_house_id"
-                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                     </group>
                 </sheet>
             </form>

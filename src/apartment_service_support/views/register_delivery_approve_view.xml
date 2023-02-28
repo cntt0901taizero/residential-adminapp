@@ -50,19 +50,21 @@
                     <field name="status" widget="statusbar"/>
                 </header>
                 <sheet>
-                    <group>
+                    <group string="Căn hộ">
+                        <field name="blockhouse_id" required="1"
+                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                        <field name="building_id" required="1"
+                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                        <field name="building_house_id" required="1"
+                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                    </group>
+                    <group string="Thông tin đăng ký chuyển đồ">
                         <field name="shipping_method"/>
                         <field name="through_method"/>
                         <field name="time_start"/>
                         <field name="time_end"/>
                         <field name="freight_detail"/>
                         <field name="use_freight_elevator"/>
-                        <field name="blockhouse_id"
-                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
-                        <field name="building_id"
-                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
-                        <field name="building_house_id"
-                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                     </group>
                 </sheet>
             </form>
