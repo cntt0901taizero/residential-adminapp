@@ -44,6 +44,12 @@
             'resident_management/static/src/js/button_banner.js',
             'resident_management/static/src/js/form_controller.js',
             'resident_management/static/src/js/list_renderer.js',
+            'resident_management/static/src/js/button_access_card.js',
+            'resident_management/static/src/js/button_complain.js',
+            'resident_management/static/src/js/button_delivery.js',
+            'resident_management/static/src/js/button_handbook.js',
+            'resident_management/static/src/js/button_utilities.js',
+            'resident_management/static/src/js/button_vehicle.js',
         ],
         'web.assets_qweb': [
             # 'resident_management/static/src/xml/styles.xml',
