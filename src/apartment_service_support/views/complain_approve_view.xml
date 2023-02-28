@@ -140,6 +140,6 @@
           name="Phê duyệt khiếu nại"
           parent="menu_complain_root"
           action="action_tb_complain_approve"
-          sequence="1"/>
+          sequence="2"/>
 
 </odoo>
