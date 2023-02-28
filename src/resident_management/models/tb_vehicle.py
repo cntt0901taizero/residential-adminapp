@@ -43,8 +43,8 @@ class tb_vehicle(models.Model):
     def _domain_user_id(self):
         user = request.env.user
         if user and user.id != 1 and user.id != 2:
-            user_ids = self.env['tb_users_blockhouse_res_groups_rel'].sudo() \
-                .search([('building_id', 'in', self.building_house_id)])
+            user_ids = (self.env['tb_users_blockhouse_res_groups_rel'].sudo()
+                        .search([('building_id', 'in', self.building_house_id)])).user_id.ids
             return ["&", ("active", "=", True), ("id", "in", user_ids)]
         else:
             return [("active", "=", True)]

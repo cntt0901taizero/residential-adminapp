@@ -174,9 +174,7 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
 
         view_id = ''
         name = ''
-        context = {
-            'default_user_id': self.user_id.id,
-        }
+        context = {}
         if self.user_id.user_type != 'RESIDENT':
             name = 'Phân quyền quản lý quản trị'
             view_id = self.env.ref('resident_management.view_tb_users_blockhouse_res_groups_rel_form').id
@@ -189,6 +187,7 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
             'name': name,
             'res_model': 'tb_users_blockhouse_res_groups_rel',
             'target': 'new',
+            'res_id': self.id,
             'view_id': view_id,
             'view_mode': 'form',
             'context': context,

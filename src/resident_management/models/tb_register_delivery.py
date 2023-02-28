@@ -71,10 +71,10 @@ class tb_register_delivery(models.Model):
                     bql_bh_id.append(int(item.blockhouse_id.id))
                     bql_bd_id.append(int(item.building_id.id))
 
-            user_ids_1 = self.env['tb_users_blockhouse_res_groups_rel'].sudo()\
-                .search([('building_id', 'in', list(set(bqt_bd_id + bql_bd_id)))])
-            user_ids_2 = self.env['tb_users_blockhouse_res_groups_rel'].sudo()\
-                .search([('blockhouse_id', 'in', list(set(bqt_bh_id + bql_bh_id)))])
+            user_ids_1 = (self.env['tb_users_blockhouse_res_groups_rel'].sudo()
+                          .search([('building_id', 'in', list(set(bqt_bd_id + bql_bd_id)))])).user_id.ids
+            user_ids_2 = (self.env['tb_users_blockhouse_res_groups_rel'].sudo()
+                          .search([('blockhouse_id', 'in', list(set(bqt_bh_id + bql_bh_id)))])).user_id.ids
 
             return ["&", ("active", "=", True), ("id", "in", list(set(user_ids_1 + user_ids_2)))]
         else:

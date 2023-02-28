@@ -30,7 +30,7 @@
         <field name="arch" type="xml">
             <form create="false" js_class="form_action_access_card">
                 <sheet>
-                    <group string="Thông tin nơi đăng ký">
+                    <group string="Thông tin thẻ xe">
                         <div class="row">
                             <div class="col-md-4">
                                 <group>
@@ -50,22 +50,23 @@
                                         options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                                 </group>
                             </div>
-                        </div>
-                    </group>
-                    <group string="Thông tin chủ thẻ">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <group>
-                                    <field name="name" required="1"/>
-                                </group>
-                            </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <group>
                                     <field name="user_id" required="1"
                                            options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                                 </group>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
+                                <group>
+                                    <field name="name" required="1"/>
+                                </group>
+                            </div>
+                            <div class="col-md-4">
+                                <group>
+                                    <field name="relationship_type"/>
+                                </group>
+                            </div>
+                            <div class="col-md-4">
                                 <group>
                                     <field name="status" readonly="1"/>
                                 </group>
