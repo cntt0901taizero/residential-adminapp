@@ -8,7 +8,7 @@
         <field name="name">tb_access_card.tree</field>
         <field name="model">tb_access_card</field>
         <field name="arch" type="xml">
-            <tree string="Bảng quản lý thẻ ra vào" expand="1">
+            <tree string="Bảng quản lý thẻ ra vào" js_class="tree_action_access_card" expand="1">
                 <field name="name" optional="show"/>
                 <field name="user_id" optional="show"/>
                 <field name="blockhouse_id" optional="show"/>
@@ -28,7 +28,7 @@
         <field name="name">tb_access_card.form</field>
         <field name="model">tb_access_card</field>
         <field name="arch" type="xml">
-            <form create="false">
+            <form create="false" js_class="form_action_access_card">
                 <sheet>
                     <group string="Thông tin nơi đăng ký">
                         <div class="row">

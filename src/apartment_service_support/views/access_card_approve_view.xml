@@ -8,7 +8,7 @@
         <field name="name">tb_access_card.approve.tree</field>
         <field name="model">tb_access_card</field>
         <field name="arch" type="xml">
-            <tree string="Bảng phê duyệt thẻ ra vào" expand="1">
+            <tree string="Bảng phê duyệt thẻ ra vào" js_class="tree_action_access_card" expand="1">
                 <header>
                     <button class="fa fa-check btn btn-info"
                             name="set_status_active" string=" Phê duyệt" type="object"/>
@@ -34,7 +34,7 @@
         <field name="name">tb_access_card.approve.form</field>
         <field name="model">tb_access_card</field>
         <field name="arch" type="xml">
-            <form create="false">
+            <form create="false" js_class="form_action_access_card">
                 <field name="id" invisible="1"/>
                 <field name="status" invisible="1"/>
                 <header attrs="{'invisible':[('id','=',False)]}">

@@ -12,9 +12,7 @@
                 <button name="open_edit_form_news" class="fa fa-pencil fa-lg btn btn-light"
                         title="Sửa" aria-label="Sửa" type="object"/>
                 <button name="confirm_delete_news" class="fa fa-trash-o fa-lg btn btn-danger"
-                        title="Xóa"
-                        aria-label="Xóa" type="object"/>
-
+                        title="Xóa" aria-label="Xóa" type="object"/>
             </tree>
         </field>
     </record>

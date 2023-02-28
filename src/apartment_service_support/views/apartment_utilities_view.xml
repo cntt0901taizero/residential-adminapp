@@ -8,7 +8,7 @@
         <field name="name">tb_apartment_utilities.tree</field>
         <field name="model">tb_apartment_utilities</field>
         <field name="arch" type="xml">
-            <tree string="Bảng quản lý tiện ích chung cư" expand="1">
+            <tree string="Bảng quản lý tiện ích chung cư" js_class="tree_action_utilities" expand="1">
                 <field name="image" width="100px" widget="image" class="oe_left oe_avatar" optional="show"/>
                 <field name="name" optional="show"/>
                 <field name="description" optional="show"/>
@@ -32,7 +32,7 @@
         <field name="name">tb_apartment_utilities.form</field>
         <field name="model">tb_apartment_utilities</field>
         <field name="arch" type="xml">
-            <form create="false">
+            <form create="false" js_class="form_action_utilities">
                 <sheet>
                     <field name="id" invisible="1"/>
                     <div class="row">

@@ -8,12 +8,12 @@
         <field name="name">tb_resident_handbook.approve.tree</field>
         <field name="model">tb_resident_handbook</field>
         <field name="arch" type="xml">
-            <tree string="Bảng cẩm nang cư dân" expand="1">
+            <tree string="Bảng cẩm nang cư dân" js_class="tree_action_handbook" expand="1">
                 <header>
                     <button class="fa fa-check btn btn-info" confirm="Remove this attachment?"
                             name="set_status_active" string=" Phê duyệt" type="object"/>
-<!--                    <button class="fa fa-times btn btn-warning" confirm="Remove this attachment?"-->
-<!--                            name="set_status_reject" string=" Từ chối duyệt" type="object"/>-->
+                    <!--                    <button class="fa fa-times btn btn-warning" confirm="Remove this attachment?"-->
+                    <!--                            name="set_status_reject" string=" Từ chối duyệt" type="object"/>-->
                 </header>
                 <field name="name" optional="show"/>
                 <field name="description" optional="show"/>
@@ -31,7 +31,7 @@
         <field name="name">tb_resident_handbook.approve.form</field>
         <field name="model">tb_resident_handbook</field>
         <field name="arch" type="xml">
-            <form create="false">
+            <form create="false" js_class="form_action_handbook">
                 <field name="id" invisible="1"/>
                 <field name="status" invisible="1"/>
                 <header attrs="{'invisible':[('id','=',False)]}">
@@ -49,13 +49,13 @@
                             <div class="col-md-6">
                                 <group>
                                     <field name="blockhouse_id"
-                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                                           options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                                 </group>
                             </div>
                             <div class="col-md-6">
                                 <group>
                                     <field name="building_id"
-                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                                           options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                                 </group>
                             </div>
                         </div>

@@ -8,7 +8,7 @@
         <field name="name">tb_register_delivery.tree</field>
         <field name="model">tb_register_delivery</field>
         <field name="arch" type="xml">
-            <tree string="Bảng quản lý đăng ký vận chuyển đồ" expand="1">
+            <tree string="Bảng quản lý đăng ký vận chuyển đồ" js_class="tree_action_delivery" expand="1">
                 <field name="shipping_method" optional="show"/>
                 <field name="through_method" optional="show"/>
                 <field name="time_start" optional="show"/>
@@ -31,7 +31,7 @@
         <field name="name">tb_register_delivery.form</field>
         <field name="model">tb_register_delivery</field>
         <field name="arch" type="xml">
-            <form create="false">
+            <form create="false" js_class="form_action_delivery">
                 <sheet>
                     <group string="Căn hộ">
                         <field name="blockhouse_id" required="1"

@@ -8,7 +8,7 @@
         <field name="name">tb_vehicle.tree</field>
         <field name="model">tb_vehicle</field>
         <field name="arch" type="xml">
-            <tree string="Bảng quản lý phương tiện" expand="1">
+            <tree string="Bảng quản lý phương tiện" js_class="tree_action_vehicle" expand="1">
                 <field name="name" optional="show"/>
                 <field name="vehicle_type" optional="show"/>
                 <field name="note" optional="show"/>
@@ -28,7 +28,7 @@
         <field name="name">tb_vehicle.form</field>
         <field name="model">tb_vehicle</field>
         <field name="arch" type="xml">
-            <form create="false">
+            <form create="false" js_class="form_action_vehicle">
                 <sheet>
                     <group string="Thông tin cơ bản phương tiện">
                         <field string="Ảnh thực tế" name="image"

@@ -8,7 +8,7 @@
         <field name="name">tb_complain.tree</field>
         <field name="model">tb_complain</field>
         <field name="arch" type="xml">
-            <tree string="Bảng quản lý khiếu nại" expand="1">
+            <tree string="Bảng quản lý khiếu nại" js_class="tree_action_complain" expand="1">
                 <field name="name" optional="show"/>
                 <field name="user_id" optional="show"/>
                 <field name="blockhouse_id" optional="show"/>
@@ -28,7 +28,7 @@
         <field name="name">tb_complain.form</field>
         <field name="model">tb_complain</field>
         <field name="arch" type="xml">
-            <form create="false">
+            <form create="false" js_class="form_action_complain">
                 <sheet>
                     <field name="id" invisible="1"/>
                     <group string="Thông tin người khiếu nại">

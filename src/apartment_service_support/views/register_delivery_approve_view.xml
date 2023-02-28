@@ -8,7 +8,7 @@
         <field name="name">tb_register_delivery.approve.tree</field>
         <field name="model">tb_register_delivery</field>
         <field name="arch" type="xml">
-            <tree string="Bảng quản lý đăng ký vận chuyển đồ" expand="1">
+            <tree string="Bảng quản lý đăng ký vận chuyển đồ" js_class="tree_action_delivery" expand="1">
                 <header>
                     <button class="fa fa-check btn btn-info" confirm="Remove this attachment?"
                             name="set_status_active" string=" Phê duyệt" type="object"/>
@@ -37,7 +37,7 @@
         <field name="name">tb_register_delivery.approve.form</field>
         <field name="model">tb_register_delivery</field>
         <field name="arch" type="xml">
-            <form create="false">
+            <form create="false" js_class="form_action_delivery">
                 <field name="id" invisible="1"/>
                 <field name="status" invisible="1"/>
                 <header attrs="{'invisible':[('id','=',False)]}">
