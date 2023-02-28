@@ -101,6 +101,24 @@ const defineMenuWithPerm = {
 
     "apartment_service_support.menu_resident_handbook_root" : "perm_read_handbook",
     "apartment_service_support.menu_resident_handbook_approve" : "perm_approve_handbook",
+
+    "apartment_service_support.menu_access_card_root" : "perm_read_access_card",
+    "apartment_service_support.menu_access_card_approve" : "perm_approve_access_card",
+
+    "apartment_service_support.menu_utilities_root" : "perm_read_utilities",
+    "apartment_service_support.menu_utilities_approve" : "perm_approve_utilities",
+
+    "apartment_service_support.menu_complain_root" : "perm_read_complain",
+    "apartment_service_support.menu_complain_approve" : "perm_approve_complain",
+
+    "apartment_service_support.menu_register_delivery_root" : "perm_read_delivery",
+    "apartment_service_support.menu_register_delivery_approve" : "perm_approve_delivery",
+
+    "apartment_service_support.menu_resident_handbook_root" : "perm_read_handbook",
+    "apartment_service_support.menu_resident_handbook_approve" : "perm_approve_handbook",
+
+    "apartment_service_support.menu_vehicle_card_root" : "perm_read_vehicle",
+    "apartment_service_support.menu_vehicle_card_approve" : "perm_approve_vehicle",
 }
 const get_perm =  (perm) => rpc.query({
          model: 'res.users',

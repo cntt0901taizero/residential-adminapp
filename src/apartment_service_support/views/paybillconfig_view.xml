@@ -8,7 +8,7 @@
         <field name="name">tb_paybill_config.tree</field>
         <field name="model">tb_paybill_config</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree expand="1">
                 <field name="description"/>
                 <field name="price"/>
                 <field name="is_active"/>
@@ -51,7 +51,7 @@
     </record>
 
     <record id="action_tb_paybill_config" model="ir.actions.act_window">
-        <field name="name">Cấu hình thanh toán phí</field>
+        <field name="name">CẤU HÌNH THANH TOÁN PHÍ</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">tb_paybill_config</field>
         <field name="view_mode">tree,form</field>

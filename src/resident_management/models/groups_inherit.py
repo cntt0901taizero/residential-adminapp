@@ -71,17 +71,26 @@ class ResGroupsInherit(models.Model):
     perm_create_access_card = fields.Boolean('Tạo thẻ ra vào')
     perm_delete_access_card = fields.Boolean('Xóa thẻ ra vào')
     perm_write_access_card = fields.Boolean('Sửa thẻ ra vào')
+    perm_approve_access_card = fields.Boolean('Phê duyệt thẻ ra vào')
     perm_read_access_card = fields.Boolean('Xem thẻ ra vào', default=True)
 
     perm_create_vehicle = fields.Boolean('Tạo thẻ xe')
     perm_delete_vehicle = fields.Boolean('Xóa thẻ xe')
     perm_write_vehicle = fields.Boolean('Sửa thẻ xe')
+    perm_approve_vehicle = fields.Boolean('Phê duyệt thẻ xe')
     perm_read_vehicle = fields.Boolean('Xem thẻ xe', default=True)
 
-    # perm_create_delivery = fields.Boolean('')
-    # perm_delete_delivery = fields.Boolean('Xóa thẻ xe')
-    # perm_write_delivery = fields.Boolean('Sửa thẻ xe')
-    # perm_read_delivery = fields.Boolean('Xem thẻ xe', default=True)
+    perm_create_delivery = fields.Boolean('Tạo ĐK chuyển đồ')
+    perm_delete_delivery = fields.Boolean('Xóa ĐK chuyển đồ')
+    perm_write_delivery = fields.Boolean('Sửa ĐK chuyển đồ')
+    perm_approve_delivery = fields.Boolean('Phê duyệt ĐK chuyển đồ')
+    perm_read_delivery = fields.Boolean('Xem ĐK chuyển đồ', default=True)
+
+    perm_create_complain = fields.Boolean('Tạo khiếu nại')
+    perm_delete_complain = fields.Boolean('Xóa khiếu nại')
+    perm_write_complain = fields.Boolean('Sửa khiếu nại')
+    perm_approve_complain = fields.Boolean('Phê duyệt khiếu nại')
+    perm_read_complain = fields.Boolean('Xem khiếu nại', default=True)
 
     def get_application_groups(self, domain):
         group_system = self.env.ref('base.group_system').id

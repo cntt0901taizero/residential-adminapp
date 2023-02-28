@@ -3,6 +3,8 @@ from odoo.exceptions import ValidationError
 from odoo.http import request
 
 from odoo.addons.resident_management.models.tb_users_blockhouse_res_groups_rel import USER_GROUP_CODE
+from odoo.addons.resident_management.enum import STATUS_TYPES
+
 str_bql = USER_GROUP_CODE[2][0]
 str_bqt = USER_GROUP_CODE[3][0]
 
@@ -15,13 +17,24 @@ class tb_resident_handbook(models.Model):
     # image = fields.Image(string='Ảnh', copy=False)
     description = fields.Char(string='Tiêu đề', copy=False)
     detail_description = fields.Html(string='Mô tả', copy=False)
-    is_active = fields.Boolean(string='Có hiệu lực', default=True)
+    is_active = fields.Boolean(string='Có hiệu lực', default=False)
+    status = fields.Selection(string='Trạng thái', selection=STATUS_TYPES, default=STATUS_TYPES[0][0])
 
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Dự án",
                                     ondelete="cascade")
     building_id = fields.Many2one(comodel_name='tb_building', string="Tòa nhà",
                                   domain="[('blockhouse_id', '=', blockhouse_id)]",
                                   ondelete="cascade")
+
+    def set_status_active(self):
+        for item in self:
+            item.status = 'ACTIVE'
+            item.is_active = True
+
+    def set_status_reject(self):
+        for item in self:
+            item.status = 'REJECT'
+            item.is_active = False
 
     @api.model
     def read_group(self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True):
@@ -79,6 +92,22 @@ class tb_resident_handbook(models.Model):
             'view_type': 'form',
             'view_mode': 'form',
             'view_id': self.env.ref('apartment_service_support.view_tb_resident_handbook_form').id,
+            'context': {'form_view_initial_mode': 'edit'},
+            'target': 'current',
+        }
+
+    def open_edit_approve_form(self):
+        can_do = self.check_access_rights('write', raise_exception=False)
+        if not can_do:
+            raise ValidationError('Bạn không có quyền chỉnh sửa thông tin!')
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Sửa: ' + self.name,
+            'res_model': 'tb_resident_handbook',
+            'res_id': self.id,
+            'view_type': 'form',
+            'view_mode': 'form',
+            'view_id': self.env.ref('apartment_service_support.view_tb_resident_handbook_approve_form').id,
             'context': {'form_view_initial_mode': 'edit'},
             'target': 'current',
         }

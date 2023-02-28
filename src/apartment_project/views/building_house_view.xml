@@ -96,10 +96,4 @@
               action="action_tb_building_house"
               sequence="4"/>
 
-<!--    <menuitem id="menu_building_house_information"-->
-<!--              name="Khai báo Thông tin căn hộ"-->
-<!--              parent="menu_apartment_project_root"-->
-<!--              action="action_tb_building_house"-->
-<!--              sequence="5"/>-->
-
 </odoo>

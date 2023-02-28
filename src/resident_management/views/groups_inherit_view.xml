@@ -139,6 +139,7 @@
                                 <field name="perm_delete_access_card"/>
                                 <field name="perm_write_access_card"/>
                                 <field name="perm_read_access_card"/>
+                                <field name="perm_approve_access_card"/>
                             </group>
                             <h5>Thẻ xe</h5>
                             <group col="4">
@@ -146,6 +147,23 @@
                                 <field name="perm_delete_vehicle"/>
                                 <field name="perm_write_vehicle"/>
                                 <field name="perm_read_vehicle"/>
+                                <field name="perm_approve_vehicle"/>
+                            </group>
+                            <h5>Đăng ký chuyển đồ</h5>
+                            <group col="4">
+                                <field name="perm_create_delivery"/>
+                                <field name="perm_delete_delivery"/>
+                                <field name="perm_write_delivery"/>
+                                <field name="perm_read_delivery"/>
+                                <field name="perm_approve_delivery"/>
+                            </group>
+                            <h5>Khiếu nại</h5>
+                            <group col="4">
+                                <field name="perm_create_complain"/>
+                                <field name="perm_delete_complain"/>
+                                <field name="perm_write_complain"/>
+                                <field name="perm_read_complain"/>
+                                <field name="perm_approve_complain"/>
                             </group>
                         </page>
                         <page string="Cấu hình hệ thống">

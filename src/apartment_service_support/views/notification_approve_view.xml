@@ -9,7 +9,13 @@
         <field name="model">tb_notification</field>
 
         <field name="arch" type="xml">
-            <tree create="0" js_class="tree_action_notifications">
+            <tree create="0" js_class="tree_action_notifications" expand="1">
+                <header>
+                    <button class="fa fa-check btn btn-info" confirm="Remove this attachment?"
+                            name="set_status_active" string=" Phê duyệt" type="object"/>
+<!--                    <button class="fa fa-times btn btn-warning" confirm="Remove this attachment?"-->
+<!--                            name="set_status_reject" string=" Từ chối duyệt" type="object"/>-->
+                </header>
                 <field name="create_uid" string="Người tạo"/>
                 <field name="name"/>
                 <field name="content"/>
@@ -25,17 +31,16 @@
         <field name="model">tb_notification</field>
         <field name="arch" type="xml">
             <form js_class="form_action_notifications">
-                <header>
-                    <button icon="fa-check"
-                            class="oe_highlight"
-                            attrs="{'invisible':[('status','!=','PENDING')]}"
-                            name="set_status_active" string="Phê duyệt" type="object"
-                    />
-                    <button icon="fa-times"
-                            name="set_status_reject" string="Từ chối duyệt" type="object"
-                            attrs="{'invisible':[('status','!=','PENDING')]}"/>
-                    <field name="status" widget="statusbar"
-                           groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"/>
+                <field name="id" invisible="1"/>
+                <field name="status" invisible="1"/>
+                <header attrs="{'invisible':[('id','=',False)]}">
+                    <button class="fa fa-check btn btn-info"
+                            name="set_status_active" string=" Phê duyệt" type="object"
+                            attrs="{'invisible':[('status','=','ACTIVE')]}"/>
+                    <button class="fa fa-times btn btn-warning"
+                            name="set_status_reject" string=" Từ chối duyệt" type="object"
+                            attrs="{'invisible':[('status','=','REJECT')]}"/>
+                    <field name="status" widget="statusbar"/>
                 </header>
                 <sheet>
                     <div class="oe_title pr-0">
@@ -84,7 +89,7 @@
     </record>
 
     <record id="action_tb_notification_approve" model="ir.actions.act_window">
-        <field name="name">Duyệt thông báo</field>
+        <field name="name">PHÊ DUYỆT THÔNG BÁO</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">tb_notification</field>
         <field name="view_mode">tree,form</field>

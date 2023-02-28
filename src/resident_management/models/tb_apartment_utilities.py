@@ -29,13 +29,20 @@ class tb_apartment_utilities(models.Model):
     detail_description = fields.Html(string='Mô tả chi tiết', copy=False, help='')
     # active_days = fields.Selection(string='Ngày hoạt động', selection=DAYS_LIST)
     # active_time = fields.Char(string='Giờ hoạt động', size=50,  help='9h30p - 21h')
-    is_active = fields.Boolean(string='Có hiệu lực', default=True)
-    status = fields.Selection(string='Trạng thái phê duyệt', selection=STATUS_TYPES, default=STATUS_TYPES[0][0])
+    is_active = fields.Boolean(string='Có hiệu lực', default=False)
+    status = fields.Selection(string='Trạng thái', selection=STATUS_TYPES, default=STATUS_TYPES[0][0])
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Dự án",
                                     ondelete="cascade")
 
     def set_status_active(self):
-        self.is_active = True
+        for item in self:
+            item.status = 'ACTIVE'
+            item.is_active = True
+
+    def set_status_reject(self):
+        for item in self:
+            item.status = 'REJECT'
+            item.is_active = False
 
     @api.model
     def read_group(self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True):
@@ -88,6 +95,22 @@ class tb_apartment_utilities(models.Model):
             'view_type': 'form',
             'view_mode': 'form',
             'view_id': self.env.ref('apartment_project.view_tb_apartment_utilities_form').id,
+            'context': {'form_view_initial_mode': 'edit'},
+            'target': 'current',
+        }
+
+    def open_edit_approve_form(self):
+        can_do = self.check_access_rights('write', raise_exception=False)
+        if not can_do:
+            raise ValidationError('Bạn không có quyền chỉnh sửa thông tin!')
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Sửa tiện ích cư dân ' + self.name,
+            'res_model': 'tb_apartment_utilities',
+            'res_id': self.id,
+            'view_type': 'form',
+            'view_mode': 'form',
+            'view_id': self.env.ref('apartment_project.view_tb_apartment_utilities_approve_form').id,
             'context': {'form_view_initial_mode': 'edit'},
             'target': 'current',
         }

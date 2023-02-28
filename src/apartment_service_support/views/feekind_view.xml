@@ -8,7 +8,7 @@
         <field name="name">tb_feekind.tree</field>
         <field name="model">tb_feekind</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree expand="1">
                 <field name="code"/>
                 <field name="name"/>
                 <field name="note"/>
@@ -47,7 +47,7 @@
     </record>
 
     <record id="action_tb_feekind" model="ir.actions.act_window">
-        <field name="name">Danh mục loại phí</field>
+        <field name="name">DANH MỤC PHÍ</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">tb_feekind</field>
         <field name="view_mode">tree,form</field>

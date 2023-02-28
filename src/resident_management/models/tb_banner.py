@@ -2,6 +2,7 @@ from builtins import print
 
 from odoo import models, fields
 from odoo.exceptions import ValidationError
+from odoo.addons.resident_management.enum import STATUS_TYPES
 
 
 class tb_banner(models.Model):
@@ -13,11 +14,7 @@ class tb_banner(models.Model):
     image = fields.Image(string="Ảnh", required=True)
     link = fields.Char(string='Link', size=500, copy=False, required=True)
     sort = fields.Integer(string='Thứ tự', copy=False)
-    status = fields.Selection([
-        ('PENDING', 'Chờ phê duyệt'),
-        ('REJECT', 'Từ chối duyệt'),
-        ('ACTIVE', 'Đã đăng'),
-    ], required=True, default='PENDING', tracking=True, string="Trạng thái")
+    status = fields.Selection(string='Trạng thái', selection=STATUS_TYPES, default=STATUS_TYPES[0][0])
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="dự án", ondelete="cascade")
 
     def write(self, values):

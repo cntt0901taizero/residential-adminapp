@@ -31,6 +31,14 @@ class tb_vehicle(models.Model):
                               domain=lambda self: self._domain_user_id(),
                               ondelete="cascade")
 
+    def set_status_active(self):
+        for item in self:
+            item.status = 'ACTIVE'
+
+    def set_status_reject(self):
+        for item in self:
+            item.status = 'REJECT'
+
     @api.model
     def _domain_user_id(self):
         user = request.env.user
@@ -113,6 +121,22 @@ class tb_vehicle(models.Model):
             'view_type': 'form',
             'view_mode': 'form',
             'view_id': self.env.ref('apartment_service_support.view_tb_vehicle_form').id,
+            'context': {'form_view_initial_mode': 'edit'},
+            'target': 'current',
+        }
+
+    def open_edit_approve_form(self):
+        can_do = self.check_access_rights('write', raise_exception=False)
+        if not can_do:
+            raise ValidationError('Bạn không có quyền chỉnh sửa thông tin!')
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Sửa phương tiện ' + self.name,
+            'res_model': 'tb_vehicle',
+            'res_id': self.id,
+            'view_type': 'form',
+            'view_mode': 'form',
+            'view_id': self.env.ref('apartment_service_support.view_tb_vehicle_approve_form').id,
             'context': {'form_view_initial_mode': 'edit'},
             'target': 'current',
         }

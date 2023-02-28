@@ -6,6 +6,7 @@ from odoo.exceptions import ValidationError
 from odoo.http import request
 from odoo.tools import GettextAlias
 from odoo.addons.resident_management.models.tb_users_blockhouse_res_groups_rel import USER_GROUP_CODE
+from odoo.addons.resident_management.enum import STATUS_TYPES
 
 str_bql = USER_GROUP_CODE[2][0]
 str_bqt = USER_GROUP_CODE[3][0]
@@ -30,11 +31,7 @@ class tb_news(models.Model):
     create_date = fields.Date(string="Ngày tạo", default=datetime.datetime.today())
     # active = fields.Boolean(string='Có hiệu lực', default=True)
     expired_date = fields.Date(string="Ngày hết hạn", default=datetime.datetime.today())
-    status = fields.Selection([
-        ('DRAFT', 'Chờ phê duyệt'),
-        ('REJECT', 'Từ chối duyệt'),
-        ('ACTIVE', 'Đã đăng'),
-    ], required=True, default='DRAFT', tracking=True, string="Trạng thái", )
+    status = fields.Selection(string='Trạng thái', selection=STATUS_TYPES, default=STATUS_TYPES[0][0])
     news_type = fields.Selection([
         ('PROJECT_APARTMENT', 'Dự án'),
         ('BUILDING', 'Tòa nhà'),

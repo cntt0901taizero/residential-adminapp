@@ -4,11 +4,17 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 <odoo>
-    <record id="view_tb_vehicle_tree" model="ir.ui.view">
-        <field name="name">tb_vehicle.tree</field>
+    <record id="view_tb_vehicle_approve_tree" model="ir.ui.view">
+        <field name="name">tb_vehicle.approve.tree</field>
         <field name="model">tb_vehicle</field>
         <field name="arch" type="xml">
             <tree string="Bảng quản lý phương tiện" expand="1">
+                <header>
+                    <button class="fa fa-check btn btn-info" confirm="Remove this attachment?"
+                            name="set_status_active" string=" Phê duyệt" type="object"/>
+<!--                    <button class="fa fa-times btn btn-warning" confirm="Remove this attachment?"-->
+<!--                            name="set_status_reject" string=" Từ chối duyệt" type="object"/>-->
+                </header>
                 <field name="name" optional="show"/>
                 <field name="vehicle_type" optional="show"/>
                 <field name="note" optional="show"/>
@@ -17,18 +23,29 @@
                 <field name="building_house_id" optional="show"/>
                 <field name="status" optional="show"/>
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
-                        name="open_edit_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
+                        name="open_edit_approve_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                         name="confirm_delete" class="btn btn-danger" title="Xóa" type="object" icon="fa-trash-o"/>
             </tree>
         </field>
     </record>
 
-    <record id="view_tb_vehicle_form" model="ir.ui.view">
-        <field name="name">tb_vehicle.form</field>
+    <record id="view_tb_vehicle_approve_form" model="ir.ui.view">
+        <field name="name">tb_vehicle.approve.form</field>
         <field name="model">tb_vehicle</field>
         <field name="arch" type="xml">
             <form create="false">
+                <field name="id" invisible="1"/>
+                <field name="status" invisible="1"/>
+                <header attrs="{'invisible':[('id','=',False)]}">
+                    <button class="fa fa-check btn btn-info"
+                            name="set_status_active" string=" Phê duyệt" type="object"
+                            attrs="{'invisible':[('status','=','ACTIVE')]}"/>
+                    <button class="fa fa-times btn btn-warning"
+                            name="set_status_reject" string=" Từ chối duyệt" type="object"
+                            attrs="{'invisible':[('status','=','REJECT')]}"/>
+                    <field name="status" widget="statusbar"/>
+                </header>
                 <sheet>
                     <group string="Thông tin cơ bản phương tiện">
                         <field string="Ảnh thực tế" name="image"
@@ -37,7 +54,6 @@
                         <field name="name"/>
                         <field name="vehicle_type" widget="selection_badge"/>
                         <field name="note"/>
-                        <field name="status" readonly="1"/>
                     </group>
                     <group string="Thông tin sở hữu thuộc">
                         <field name="blockhouse_id"
@@ -55,8 +71,8 @@
         </field>
     </record>
 
-    <record model="ir.ui.view" id="view_tb_vehicle_search">
-        <field name="name">tb_vehicle.search</field>
+    <record model="ir.ui.view" id="view_tb_vehicle_approve_search">
+        <field name="name">tb_vehicle.approve.search</field>
         <field name="model">tb_vehicle</field>
         <field name="arch" type="xml">
             <search>
@@ -68,8 +84,8 @@
         </field>
     </record>
 
-    <record id="action_tb_vehicle" model="ir.actions.act_window">
-        <field name="name">QUẢN LÝ ĐĂNG KÝ PHƯƠNG TIỆN</field>
+    <record id="action_tb_vehicle_approve" model="ir.actions.act_window">
+        <field name="name">PHÊ DUYỆT ĐANG KÝ PHƯƠNG TIỆN</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">tb_vehicle</field>
         <field name="view_mode">tree,form</field>
@@ -79,16 +95,11 @@
             <p class="o_view_nocontent_smiling_face">Thêm mới!</p>
         </field>
     </record>
-
-    <menuitem id="menu_vehicle_card_root"
-          name="Đăng ký phương tiện"
-          parent="menu_apartment_service_support"
-          sequence="8"/>
-
-    <menuitem id="menu_vehicle_card_list"
-          name="Danh sách đăng ký phương tiện"
-          action="action_tb_vehicle"
+    
+    <menuitem id="menu_vehicle_card_approve"
+          name="Phê duyệt đăng ký phương tiện"
+          action="action_tb_vehicle_approve"
           parent="menu_vehicle_card_root"
-          sequence="1"/>
+          sequence="2"/>
 
 </odoo>

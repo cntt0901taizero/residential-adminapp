@@ -3,6 +3,7 @@ from odoo import models, fields, http, api
 from odoo.exceptions import ValidationError
 from odoo.tools import GettextAlias
 from odoo.addons.resident_management.models.tb_users_blockhouse_res_groups_rel import USER_GROUP_CODE
+from odoo.addons.resident_management.enum import STATUS_TYPES
 
 _ = GettextAlias()
 push_service = FCMNotification(
@@ -25,11 +26,7 @@ class tb_notification(models.Model):
         ('ACTIVE_BY_ADMIN', 'Thông báo từ quản trị viên'),
     ], required=True, default='ACTIVE_BY_ADMIN', tracking=True, string="Loại thông báo", )
     is_push = fields.Boolean(string='Đẩy thông báo', default=True)
-    status = fields.Selection([
-        ('PENDING', 'Chờ duyệt'),
-        ('REJECT', 'Chưa duyệt'),
-        ('ACTIVE', 'Đã đăng'),
-    ], required=True, default='PENDING', tracking=True, string="Trạng thái", )
+    status = fields.Selection(string='Trạng thái', selection=STATUS_TYPES, default=STATUS_TYPES[0][0])
     receiver = fields.Selection([
         ('PROJECT_APARTMENT', 'Dự án'),
         ('BUILDING', 'Tòa nhà'),

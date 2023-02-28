@@ -4,35 +4,51 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 <odoo>
-    <record id="view_tb_resident_handbook_tree" model="ir.ui.view">
-        <field name="name">tb_resident_handbook.tree</field>
+    <record id="view_tb_resident_handbook_approve_tree" model="ir.ui.view">
+        <field name="name">tb_resident_handbook.approve.tree</field>
         <field name="model">tb_resident_handbook</field>
         <field name="arch" type="xml">
             <tree string="Bảng cẩm nang cư dân" expand="1">
+                <header>
+                    <button class="fa fa-check btn btn-info" confirm="Remove this attachment?"
+                            name="set_status_active" string=" Phê duyệt" type="object"/>
+<!--                    <button class="fa fa-times btn btn-warning" confirm="Remove this attachment?"-->
+<!--                            name="set_status_reject" string=" Từ chối duyệt" type="object"/>-->
+                </header>
                 <field name="name" optional="show"/>
                 <field name="description" optional="show"/>
                 <field name="detail_description" optional="show"/>
                 <field name="is_active" optional="show"/>
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
-                        name="open_edit_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
+                        name="open_edit_approve_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                         name="confirm_delete" class="btn btn-danger" title="Xóa" type="object" icon="fa-trash-o"/>
             </tree>
         </field>
     </record>
 
-    <record id="view_tb_resident_handbook_form" model="ir.ui.view">
-        <field name="name">tb_resident_handbook.form</field>
+    <record id="view_tb_resident_handbook_approve_form" model="ir.ui.view">
+        <field name="name">tb_resident_handbook.approve.form</field>
         <field name="model">tb_resident_handbook</field>
         <field name="arch" type="xml">
             <form create="false">
+                <field name="id" invisible="1"/>
+                <field name="status" invisible="1"/>
+                <header attrs="{'invisible':[('id','=',False)]}">
+                    <button class="fa fa-check btn btn-info"
+                            name="set_status_active" string=" Phê duyệt" type="object"
+                            attrs="{'invisible':[('status','=','ACTIVE')]}"/>
+                    <button class="fa fa-times btn btn-warning"
+                            name="set_status_reject" string=" Từ chối duyệt" type="object"
+                            attrs="{'invisible':[('status','=','REJECT')]}"/>
+                    <field name="status" widget="statusbar"/>
+                </header>
                 <sheet>
                     <group string="Thông tin nội dung cẩm nang">
                         <field name="name"/>
                         <field name="description"/>
                         <field name="detail_description"/>
-                        <field name="is_active" readonly="1"/>
-                        <field name="status" readonly="1"/>
+                        <field name="is_active"/>
                     </group>
                     <group string="Thông tin khu vực">
                         <field name="blockhouse_id"
@@ -45,8 +61,8 @@
         </field>
     </record>
 
-    <record model="ir.ui.view" id="view_tb_resident_handbook_search">
-        <field name="name">tb_resident_handbook.search</field>
+    <record model="ir.ui.view" id="view_tb_resident_handbook_approve_search">
+        <field name="name">tb_resident_handbook.approve.search</field>
         <field name="model">tb_resident_handbook</field>
         <field name="arch" type="xml">
             <search>
@@ -61,8 +77,8 @@
         </field>
     </record>
 
-    <record id="action_tb_resident_handbook" model="ir.actions.act_window">
-        <field name="name">QUẢN LÝ CẨM NANG CƯ DÂN</field>
+    <record id="action_tb_resident_handbook_approve" model="ir.actions.act_window">
+        <field name="name">PHÊ DUYỆT CẨM NANG</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">tb_resident_handbook</field>
         <field name="view_mode">tree,form</field>
@@ -75,15 +91,10 @@
         </field>
     </record>
 
-    <menuitem id="menu_resident_handbook_root"
-          name="Cẩm nang cư dân"
-          parent="menu_apartment_service_support"
-          sequence="8"/>
-
-    <menuitem id="menu_resident_handbook_list"
-              name="Danh sách cẩm nang"
-              action="action_tb_resident_handbook"
+    <menuitem id="menu_resident_handbook_approve"
+              name="Phê duyệt cẩm nang"
+              action="action_tb_resident_handbook_approve"
               parent="menu_resident_handbook_root"
-              sequence="1"/>
+              sequence="2"/>
 
 </odoo>

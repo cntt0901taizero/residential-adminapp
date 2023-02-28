@@ -76,7 +76,7 @@
         <field name="name">tb_news.form</field>
         <field name="model">tb_news</field>
         <field name="arch" type="xml">
-            <form js_class="form_action_news">
+            <form js_class="form_action_news" expand="1">
                 <header>
                     <field name="status" widget="statusbar"
                            groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"/>
@@ -150,18 +150,17 @@
         <field name="arch" type="xml">
             <search>
                 <filter name="name" string="Tiêu đề"/>
-                <filter name="filter_draft" string="Nháp" domain="[('status', '=', 'DRAFT')]"/>
-                <filter name="filter_active" string="Đã đăng" domain="[('status', '=', 'ACTIVE')]"/>
-                <!--                <group expand="1" string="Group By">-->
-                <!--                    <filter name="group_status" string="Trạng thái" context="{'group_by': 'status'}"/>-->
-                <!--                </group>-->
+                <group expand="1" string="Group By">
+                    <filter name="group_block_house" string="Dự án" context="{'group_by':'blockhouse_id'}"/>
+                    <filter name="group_status" string="Trạng thái" context="{'group_by':'status'}"/>
+                </group>
             </search>
         </field>
     </record>
 
 
     <record id="action_tb_news" model="ir.actions.act_window">
-        <field name="name">Bản tin</field>
+        <field name="name">QUẢN LÝ BẢN TIN</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">tb_news</field>
         <field name="view_mode">tree,form</field>

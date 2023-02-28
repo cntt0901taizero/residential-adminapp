@@ -4,11 +4,17 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 <odoo>
-    <record id="view_tb_register_delivery_tree" model="ir.ui.view">
-        <field name="name">tb_register_delivery.tree</field>
+    <record id="view_tb_register_delivery_approve_tree" model="ir.ui.view">
+        <field name="name">tb_register_delivery.approve.tree</field>
         <field name="model">tb_register_delivery</field>
         <field name="arch" type="xml">
             <tree string="Bảng quản lý đăng ký vận chuyển đồ" expand="1">
+                <header>
+                    <button class="fa fa-check btn btn-info" confirm="Remove this attachment?"
+                            name="set_status_active" string=" Phê duyệt" type="object"/>
+<!--                    <button class="fa fa-times btn btn-warning" confirm="Remove this attachment?"-->
+<!--                            name="set_status_reject" string=" Từ chối duyệt" type="object"/>-->
+                </header>
                 <field name="shipping_method" optional="show"/>
                 <field name="through_method" optional="show"/>
                 <field name="time_start" optional="show"/>
@@ -20,18 +26,29 @@
                 <field name="building_id" optional="show"/>
                 <field name="building_house_id" optional="show"/>
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
-                        name="open_edit_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
+                        name="open_edit_approve_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                         name="confirm_delete" class="btn btn-danger" title="Xóa" type="object" icon="fa-trash-o"/>
             </tree>
         </field>
     </record>
 
-    <record id="view_tb_register_delivery_form" model="ir.ui.view">
-        <field name="name">tb_register_delivery.form</field>
+    <record id="view_tb_register_delivery_approve_form" model="ir.ui.view">
+        <field name="name">tb_register_delivery.approve.form</field>
         <field name="model">tb_register_delivery</field>
         <field name="arch" type="xml">
             <form create="false">
+                <field name="id" invisible="1"/>
+                <field name="status" invisible="1"/>
+                <header attrs="{'invisible':[('id','=',False)]}">
+                    <button class="fa fa-check btn btn-info"
+                            name="set_status_active" string=" Phê duyệt" type="object"
+                            attrs="{'invisible':[('status','=','ACTIVE')]}"/>
+                    <button class="fa fa-times btn btn-warning"
+                            name="set_status_reject" string=" Từ chối duyệt" type="object"
+                            attrs="{'invisible':[('status','=','REJECT')]}"/>
+                    <field name="status" widget="statusbar"/>
+                </header>
                 <sheet>
                     <group>
                         <field name="shipping_method"/>
@@ -40,7 +57,6 @@
                         <field name="time_end"/>
                         <field name="freight_detail"/>
                         <field name="use_freight_elevator"/>
-                        <field name="status" readonly="1"/>
                         <field name="blockhouse_id"
                                options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                         <field name="building_id"
@@ -53,8 +69,8 @@
         </field>
     </record>
 
-    <record model="ir.ui.view" id="view_tb_register_delivery_search">
-        <field name="name">tb_register_delivery.search</field>
+    <record model="ir.ui.view" id="view_tb_register_delivery_approve_search">
+        <field name="name">tb_register_delivery.approve.search</field>
         <field name="model">tb_register_delivery</field>
         <field name="arch" type="xml">
             <search>
@@ -66,8 +82,8 @@
         </field>
     </record>
 
-    <record id="action_tb_register_delivery" model="ir.actions.act_window">
-        <field name="name">QUẢN LÝ ĐĂNG KÝ VẬN CHUYỂN ĐỒ</field>
+    <record id="action_tb_register_delivery_approve" model="ir.actions.act_window">
+        <field name="name">PHÊ DUYỆT ĐĂNG KÝ VẬN CHUYỂN ĐỒ</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">tb_register_delivery</field>
         <field name="view_mode">tree,form</field>
@@ -78,16 +94,10 @@
         </field>
     </record>
 
-    <menuitem id="menu_register_delivery_root"
-          name="Đăng ký vận chuyển đồ"
-          parent="menu_apartment_service_support"
-          sequence="8"/>
-
-    <menuitem id="menu_register_delivery_list"
-          name="Danh sách đăng ký vận chuyển đồ"
+    <menuitem id="menu_register_delivery_approve"
+          name="Phê duyệt đăng ký vận chuyển đồ"
           parent="menu_register_delivery_root"
-          action="action_tb_register_delivery"
-          sequence="1"/>
-
+          action="action_tb_register_delivery_approve"
+          sequence="2"/>
 
 </odoo>

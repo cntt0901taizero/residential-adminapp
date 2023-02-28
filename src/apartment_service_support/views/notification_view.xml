@@ -7,9 +7,8 @@
     <record id="view_tb_notification_tree" model="ir.ui.view">
         <field name="name">tb_notification.tree</field>
         <field name="model">tb_notification</field>
-
         <field name="arch" type="xml">
-            <tree js_class="tree_action_notifications">
+            <tree js_class="tree_action_notifications" expand="1">
                 <field name="create_uid" string="Người tạo"/>
                 <field name="name"/>
                 <field name="content"/>
@@ -97,12 +96,16 @@
         <field name="arch" type="xml">
             <search>
                 <field name="name" string="Tiêu đề"/>
+                <group expand="1" string="Group By">
+                    <filter name="group_block_house" string="Dự án" context="{'group_by':'blockhouse_id'}"/>
+                    <filter name="group_status" string="Trạng thái" context="{'group_by':'status'}"/>
+                </group>
             </search>
         </field>
     </record>
 
     <record id="action_tb_notification" model="ir.actions.act_window">
-        <field name="name">Thông báo</field>
+        <field name="name">QUẢN LÝ THÔNG BÁO</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">tb_notification</field>
         <field name="view_mode">tree,form</field>

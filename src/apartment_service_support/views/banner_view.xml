@@ -4,7 +4,7 @@
         <field name="name">tb_banner.tree</field>
         <field name="model">tb_banner</field>
         <field name="arch" type="xml">
-            <tree js_class="tree_action_banner">
+            <tree js_class="tree_action_banner" expand="1">
                 <field name="create_uid" string="Người tạo"/>
                 <field name="image" widget="image" width="100px"/>
                 <field name="name" decoration-bf="1"/>
@@ -71,13 +71,17 @@
         <field name="arch" type="xml">
             <search>
                 <filter name="name" string="Tên banner"/>
+                <group expand="1" string="Group By">
+                    <filter name="group_block_house" string="Dự án" context="{'group_by':'blockhouse_id'}"/>
+                    <filter name="group_status" string="Trạng thái" context="{'group_by':'status'}"/>
+                </group>
             </search>
         </field>
     </record>
 
 
     <record id="action_tb_banner" model="ir.actions.act_window">
-        <field name="name">Quảng cáo</field>
+        <field name="name">QUẢN LÝ QUẢNG KÝ</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">tb_banner</field>
         <field name="view_mode">tree,form</field>

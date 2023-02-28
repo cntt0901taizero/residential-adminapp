@@ -4,11 +4,17 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 <odoo>
-    <record id="view_tb_access_card_tree" model="ir.ui.view">
-        <field name="name">tb_access_card.tree</field>
+    <record id="view_tb_access_card_approve_tree" model="ir.ui.view">
+        <field name="name">tb_access_card.approve.tree</field>
         <field name="model">tb_access_card</field>
         <field name="arch" type="xml">
-            <tree string="Bảng quản lý thẻ ra vào" expand="1">
+            <tree string="Bảng phê duyệt thẻ ra vào" expand="1">
+                <header>
+                    <button class="fa fa-check btn btn-info"
+                            name="set_status_active" string=" Phê duyệt" type="object"/>
+<!--                    <button class="fa fa-times btn btn-warning"-->
+<!--                            name="set_status_reject" string=" Từ chối duyệt" type="object"/>-->
+                </header>
                 <field name="name" optional="show"/>
                 <field name="user_id" optional="show"/>
                 <field name="blockhouse_id" optional="show"/>
@@ -17,18 +23,29 @@
                 <field name="relationship_type" optional="show"/>
                 <field name="status" optional="show"/>
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
-                        name="open_edit_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
+                        name="open_edit_approve_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                         name="confirm_delete" class="btn btn-danger" title="Xóa" type="object" icon="fa-trash-o"/>
             </tree>
         </field>
     </record>
 
-    <record id="view_tb_access_card_form" model="ir.ui.view">
-        <field name="name">tb_access_card.form</field>
+    <record id="view_tb_access_card_approve_form" model="ir.ui.view">
+        <field name="name">tb_access_card.approve.form</field>
         <field name="model">tb_access_card</field>
         <field name="arch" type="xml">
             <form create="false">
+                <field name="id" invisible="1"/>
+                <field name="status" invisible="1"/>
+                <header attrs="{'invisible':[('id','=',False)]}">
+                    <button class="fa fa-check btn btn-info"
+                            name="set_status_active" string=" Phê duyệt" type="object"
+                            attrs="{'invisible':[('status','=','ACTIVE')]}"/>
+                    <button class="fa fa-times btn btn-warning"
+                            name="set_status_reject" string=" Từ chối duyệt" type="object"
+                            attrs="{'invisible':[('status','=','REJECT')]}"/>
+                    <field name="status" widget="statusbar"/>
+                </header>
                 <sheet>
                     <group string="Thông tin nơi đăng ký">
                         <div class="row">
@@ -52,7 +69,7 @@
                             </div>
                         </div>
                     </group>
-                    <group string="Thông tin chủ thẻ">
+                    <group string="Thông tin chủ thẻ xe">
                         <div class="row">
                             <div class="col-md-6">
                                 <group>
@@ -67,7 +84,7 @@
                             </div>
                             <div class="col-md-6">
                                 <group>
-                                    <field name="status" readonly="1"/>
+                                    <field name="relationship_type"/>
                                 </group>
                             </div>
                         </div>
@@ -77,8 +94,8 @@
         </field>
     </record>
 
-    <record model="ir.ui.view" id="view_tb_access_card_search">
-        <field name="name">tb_access_card.search</field>
+    <record model="ir.ui.view" id="view_tb_access_card_approve_search">
+        <field name="name">tb_access_card.approve.search</field>
         <field name="model">tb_access_card</field>
         <field name="arch" type="xml">
             <search>
@@ -90,8 +107,8 @@
         </field>
     </record>
 
-    <record id="action_tb_access_card" model="ir.actions.act_window">
-        <field name="name">QUẢN LÝ ĐĂNG KÝ THẺ RA VÀO</field>
+    <record id="action_tb_access_card_approve" model="ir.actions.act_window">
+        <field name="name">PHÊ DUYỆT ĐĂNG KÝ THẺ RA VÀO</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">tb_access_card</field>
         <field name="view_mode">tree,form</field>
@@ -102,15 +119,10 @@
         </field>
     </record>
 
-    <menuitem id="menu_access_card_root"
-              name="Đăng ký thẻ ra vào"
-              parent="menu_apartment_service_support"
-              sequence="8"/>
-
-    <menuitem id="menu_access_card_list"
-              name="Danh sách đăng ký thẻ ra vào"
-              parent="menu_access_card_root"
-              action="action_tb_access_card"
-              sequence="1"/>
+    <menuitem id="menu_access_card_approve"
+          name="Phê duyệt đăng ký thẻ ra vào"
+          action="action_tb_access_card_approve"
+          parent="menu_access_card_root"
+          sequence="2"/>
 
 </odoo>
