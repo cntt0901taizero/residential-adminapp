@@ -57,9 +57,9 @@ class tb_users(models.Model):
         can_do = self.check_permission(per_name, raise_exception=False)
         if can_do:
             for item in self:
-                users_with_email = item.filtered('email')
-                users_with_email.with_context(create_user=True).action_reset_password()
                 item.active = True
+                users_with_email = item.filtered('email')
+                users_with_email.with_context(create_user=True, install_mode=False).action_reset_password()
             return True
         raise ValidationError(error_messenger)
 
