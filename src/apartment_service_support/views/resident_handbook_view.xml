@@ -11,7 +11,6 @@
             <tree string="Bảng cẩm nang cư dân" js_class="tree_action_handbook" expand="1">
                 <field name="name" optional="show"/>
                 <field name="description" optional="show"/>
-                <field name="detail_description" optional="show"/>
                 <field name="is_active" optional="show"/>
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                         name="open_edit_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
