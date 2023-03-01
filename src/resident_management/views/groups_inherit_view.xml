@@ -8,7 +8,7 @@
         <field name="name">res.groups.form.inherit</field>
         <field name="model">res.groups</field>
         <field name="arch" type="xml">
-            <tree string="Bảng nhóm quyền" delete="0">
+            <tree string="Bảng nhóm quyền" create="0" delete="0">
                 <field name="full_name" string="TÊN NHÓM QUYỀN"/>
             </tree>
         </field>
