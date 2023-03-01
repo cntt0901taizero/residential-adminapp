@@ -41,6 +41,15 @@ class tb_building_floors(models.Model):
     def set_status_active(self):
         self.is_active = True
 
+    @api.model
+    def create(self, vals):
+        per_name = 'perm_create_floor'
+        error_messenger = 'Bạn chưa được phân quyền này!'
+        can_do = self.check_permission(per_name, raise_exception=False)
+        if can_do:
+            return super(tb_building_floors, self).create(vals)
+        raise ValidationError(error_messenger)
+
     def create_building_house(self):
         per_name = 'perm_create_apartment'
         error_messenger = 'Bạn chưa được phân quyền này!'
