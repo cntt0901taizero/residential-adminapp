@@ -60,6 +60,7 @@ class tb_users(models.Model):
                 users_with_email = item.filtered('email')
                 users_with_email.with_context(create_user=True).action_reset_password()
                 item.active = True
+            return True
         raise ValidationError(error_messenger)
 
     @api.model
