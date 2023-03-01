@@ -2,8 +2,8 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 
 access_res_users_administration,access_res_users_administration,base.model_res_users,group_administration,1,1,1,1
 access_res_users_management,access_res_users_management,base.model_res_users,group_management,1,1,1,1
-access_res_users_resident,access_res_users_group_cudan,base.model_res_users,group_resident,1,1,1,1
-access_res_users_public,access_res_users_group_public,base.model_res_users,base.group_public,1,0,0,0
+access_res_users_resident,access_res_users_resident,base.model_res_users,group_resident,1,1,1,1
+access_res_users_public,access_res_users_public,base.model_res_users,base.group_public,1,0,0,0
 
 access_change_password_wizard_administration,access_change_password_wizard_administration,base.model_change_password_wizard,group_administration,1,1,1,1
 access_change_password_wizard_management,access_change_password_wizard_management,base.model_change_password_wizard,group_management,1,1,1,1
@@ -21,6 +21,7 @@ access_tb_users_blockhouse_res_groups_rel_administration, access_tb_users_blockh
 access_tb_users_blockhouse_res_groups_rel_management, access_tb_users_blockhouse_res_groups_rel_management,model_tb_users_blockhouse_res_groups_rel,group_management,1,1,1,1
 access_tb_users_blockhouse_res_groups_rel_resident, access_tb_users_blockhouse_res_groups_rel_resident,model_tb_users_blockhouse_res_groups_rel,group_resident,1,1,1,1
 
+access_banner_erp_manager,access_banner_erp_manager,model_tb_banner,base.group_erp_manager,1,1,1,1
 access_banner_administration, access_banner_administration,model_tb_banner,group_administration,1,1,1,1
 access_banner_management, access_banner_management,model_tb_banner,group_management,1,1,1,1
 access_banner_resident, access_banner_resident,model_tb_banner,group_resident,1,1,1,1
@@ -39,9 +40,11 @@ access_news_management,access_news_management,model_tb_news,group_management,1,1
 access_news_resident,access_news_resident,model_tb_news,group_resident,1,1,1,1
 access_news_public,access_news_public,model_tb_news,base.group_public,1,0,0,0
 
+access_notifications_erp_manager,access_notifications_erp_manager,model_tb_notification,base.group_erp_manager,1,1,1,1
 access_notifications_administration, access_notifications_administration,model_tb_notification,group_administration,1,1,1,1
 access_notifications_management, access_notifications_management,model_tb_notification,group_management,1,1,1,1
 access_notifications_resident, access_notifications_resident,model_tb_notification,group_resident,1,1,1,1
+access_notifications_public,access_notifications_public,model_tb_notification,base.group_public,1,0,0,0
 
 access_feekind_quantrivien,access_feekind_quantrivien,model_tb_feekind,group_administration,1,1,1,1
 access_paybill_config_quantrivien,access_paybill_config_quantrivien,model_tb_paybill_config,group_administration,1,1,1,1

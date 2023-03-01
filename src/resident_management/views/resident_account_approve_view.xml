@@ -148,14 +148,17 @@
         <field name="model">res.users</field>
         <field name="inherit_id" ref="base.view_users_search"/>
         <field name="arch" type="xml">
-            <field name="share" position="after">
-                <field string="Tên dự án" name="tb_users_blockhouse_res_groups_rel_ids"
-                       filter_domain="[('tb_users_blockhouse_res_groups_rel_ids.blockhouse_id','ilike', self)]"/>
-                <field string="Tên tòa nhà" name="tb_users_blockhouse_res_groups_rel_ids"
-                       filter_domain="[('tb_users_blockhouse_res_groups_rel_ids.building_id','ilike', self)]"/>
-                <field string="Tên căn hộ" name="tb_users_blockhouse_res_groups_rel_ids"
-                       filter_domain="[('tb_users_blockhouse_res_groups_rel_ids.building_house_id','ilike', self)]"/>
-            </field>
+            <search>
+                <filter name="active" string="Chưa duyệt" domain="[('active', '=', False)]"/>
+            </search>
+<!--            <field name="share" position="after">-->
+<!--                <field string="Tên dự án" name="tb_users_blockhouse_res_groups_rel_ids"-->
+<!--                       filter_domain="[('tb_users_blockhouse_res_groups_rel_ids.blockhouse_id','ilike', self)]"/>-->
+<!--                <field string="Tên tòa nhà" name="tb_users_blockhouse_res_groups_rel_ids"-->
+<!--                       filter_domain="[('tb_users_blockhouse_res_groups_rel_ids.building_id','ilike', self)]"/>-->
+<!--                <field string="Tên căn hộ" name="tb_users_blockhouse_res_groups_rel_ids"-->
+<!--                       filter_domain="[('tb_users_blockhouse_res_groups_rel_ids.building_house_id','ilike', self)]"/>-->
+<!--            </field>-->
         </field>
     </record>
 
@@ -170,7 +173,7 @@
         />
         <field name="domain">[('user_type', '=', 'RESIDENT')]</field>
         <field name="limit">10</field>
-        <field name="context">{'default_user_type': 'RESIDENT', 'install_mode': True}</field>
+        <field name="context">{'search_default_active': 1, 'default_user_type': 'RESIDENT', 'install_mode': True}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Thêm mới tài khoản!</p>
         </field>

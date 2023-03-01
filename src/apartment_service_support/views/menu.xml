@@ -6,4 +6,42 @@
               web_icon="resident_management,static/description/menu-icon/notification.png"
               sequence="3"/>
 
+
+    <menuitem id="menu_access_card_root"
+              name="Đăng ký thẻ ra vào"
+              parent="menu_apartment_service_support"
+              sequence="8"/>
+    <menuitem id="menu_utilities_root"
+              name="Tiện ích cư dân"
+              parent="menu_apartment_service_support"
+              sequence="4"/>
+    <menuitem id="menu_banners_root"
+              name="Quảng cáo"
+              parent="menu_apartment_service_support"
+              sequence="1"/>
+    <menuitem id="menu_complain_root"
+              name="Khiếu nại"
+              parent="menu_apartment_service_support"
+              sequence="8"/>
+    <menuitem id="menu_news_root"
+              name="Tin tức"
+              parent="menu_apartment_service_support"
+              sequence="2"/>
+    <menuitem id="menu_notification_root"
+              name="Thông báo"
+              parent="menu_apartment_service_support"
+              sequence="3"/>
+    <menuitem id="menu_register_delivery_root"
+              name="Đăng ký vận chuyển đồ"
+              parent="menu_apartment_service_support"
+              sequence="8"/>
+    <menuitem id="menu_resident_handbook_root"
+              name="Cẩm nang cư dân"
+              parent="menu_apartment_service_support"
+              sequence="8"/>
+    <menuitem id="menu_vehicle_card_root"
+              name="Đăng ký phương tiện"
+              parent="menu_apartment_service_support"
+              sequence="8"/>
+
 </odoo>

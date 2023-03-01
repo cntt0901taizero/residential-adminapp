@@ -78,7 +78,7 @@
         </field>
     </record>
 
-    <record model="ir.ui.view" id="view_tb_access_card_search">
+    <record id="view_tb_access_card_search" model="ir.ui.view">
         <field name="name">tb_access_card.search</field>
         <field name="model">tb_access_card</field>
         <field name="arch" type="xml">
@@ -96,17 +96,16 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">tb_access_card</field>
         <field name="view_mode">tree,form</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('view_tb_access_card_tree')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('view_tb_access_card_form')})]"
+        />
         <field name="context">{'search_default_group_block_house':1,'search_default_group_status':1}</field>
         <field name="limit">10</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Thêm mới!</p>
         </field>
     </record>
-
-    <menuitem id="menu_access_card_root"
-              name="Đăng ký thẻ ra vào"
-              parent="menu_apartment_service_support"
-              sequence="8"/>
 
     <menuitem id="menu_access_card_list"
               name="Danh sách đăng ký thẻ ra vào"

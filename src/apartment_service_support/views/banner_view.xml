@@ -88,10 +88,6 @@
         </field>
     </record>
 
-    <menuitem id="menu_banners_root"
-              name="Quảng cáo"
-              parent="menu_apartment_service_support"
-              sequence="1"/>
     <menuitem id="menu_banners_list"
               name="Danh sách quảng cáo"
               parent="menu_banners_root"

@@ -172,12 +172,6 @@
         </field>
     </record>
 
-
-    <menuitem id="menu_news_root"
-              name="Tin tức"
-              parent="menu_apartment_service_support"
-              sequence="2"/>
-
     <menuitem id="menu_news_list"
               name="Danh sách tin tức"
               parent="menu_news_root"

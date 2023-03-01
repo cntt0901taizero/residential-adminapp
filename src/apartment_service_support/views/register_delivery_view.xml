@@ -73,6 +73,10 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">tb_register_delivery</field>
         <field name="view_mode">tree,form</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('view_tb_register_delivery_tree')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('view_tb_register_delivery_form')})]"
+        />
         <field name="context">{'search_default_group_block_house':1,'search_default_group_status':1}</field>
         <field name="limit">10</field>
         <field name="help" type="html">
@@ -80,16 +84,10 @@
         </field>
     </record>
 
-    <menuitem id="menu_register_delivery_root"
-          name="Đăng ký vận chuyển đồ"
-          parent="menu_apartment_service_support"
-          sequence="8"/>
-
     <menuitem id="menu_register_delivery_list"
           name="Danh sách đăng ký vận chuyển đồ"
           parent="menu_register_delivery_root"
           action="action_tb_register_delivery"
           sequence="1"/>
-
 
 </odoo>

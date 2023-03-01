@@ -120,16 +120,10 @@
         </field>
     </record>
 
-    <menuitem id="menu_notification_root"
-              name="Thông báo"
-              parent="menu_apartment_service_support"
-              sequence="3"/>
-
     <menuitem id="menu_notification_list"
               name="Danh sách thông báo"
               parent="menu_notification_root"
               action="action_tb_notification"
               sequence="1"/>
-
 
 </odoo>
