@@ -22,6 +22,8 @@
 <!--                <field name="active_time" widget="date" optional="show"/>-->
                 <field name="is_active" optional="show"/>
                 <field name="blockhouse_id" optional="show"/>
+                <field name="status" widget="label_selection" optional="show"
+                       options="{'classes': {'PENDING': 'info', 'ACTIVE': 'success', 'REJECT':'warning'}}"/>
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                         name="open_edit_approve_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
@@ -59,12 +61,12 @@
                                        height="400px" widget="image" class="oe_left oe_avatar"/>
                             </group>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <group>
                                 <field name="name" required="1"/>
                             </group>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <group>
                                 <field name="description"/>
                             </group>

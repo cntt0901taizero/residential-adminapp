@@ -15,6 +15,7 @@
                 <field name="image" widget="image" width="100px"/>
                 <field name="name" decoration-bf="1"/>
                 <field name="create_date" widget="date"/>
+                <field name="status" widget="label_selection" options="{'classes': {'PENDING': 'info', 'ACTIVE': 'success', 'REJECT':'warning'}}"/>
                 <button name="open_edit_form" class="fa fa-pencil fa-lg btn btn-light"
                         title="Sửa" aria-label="Sửa" type="object"/>
                 <button name="confirm_delete" class="fa fa-trash-o fa-lg btn btn-danger"
@@ -88,7 +89,7 @@
 
 
     <record id="action_tb_banner_approve" model="ir.actions.act_window">
-        <field name="name">PHÊ DUYỆT QUẢNG CÁO</field>
+        <field name="name">PHÊ DUYỆT BANNER QUẢNG CÁO</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">tb_banner</field>
         <field name="view_mode">tree,form</field>

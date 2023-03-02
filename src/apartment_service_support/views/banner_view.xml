@@ -75,7 +75,7 @@
 
 
     <record id="action_tb_banner" model="ir.actions.act_window">
-        <field name="name">QUẢN LÝ QUẢNG KÝ</field>
+        <field name="name">QUẢN LÝ BANNER QUẢNG CÁO</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">tb_banner</field>
         <field name="view_mode">tree,form</field>

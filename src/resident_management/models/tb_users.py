@@ -30,7 +30,6 @@ class tb_users(models.Model):
 
     @api.depends('create_date')
     def _compute_row_number(self):
-        type_user = self._context['default_user_type']
         index_row = 0
         for record in self:
             index_row += 1
