@@ -84,7 +84,7 @@
                 (0, 0, {'view_mode': 'form', 'view_id': ref('view_tb_banner_form')})]"
         />
         <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">Tạo bản ghi đầu tiên của bạn</p>
+            <p class="o_view_nocontent_smiling_face">Chưa có bản ghi nào!</p>
         </field>
     </record>
 

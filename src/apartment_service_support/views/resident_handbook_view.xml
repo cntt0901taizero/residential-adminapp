@@ -106,7 +106,7 @@
         </field>
         <field name="limit">10</field>
         <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">Thêm mới!</p>
+            <p class="o_view_nocontent_smiling_face">Chưa có bản ghi nào!</p>
         </field>
     </record>
 
