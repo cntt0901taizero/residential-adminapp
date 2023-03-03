@@ -17,14 +17,14 @@
                 <field name="building_level" string="HẠNG" optional="show"/>
                 <field name="website" string="WEBSITE" widget="url" optional="show"/>
                 <field name="address" string="ĐỊA CHỈ" optional="show"/>
-                <field name="blockhouse_id" string="DỰ ÁN" optional="show"/>
+                <field name="blockhouse_id" string="DỰ ÁN" widget="badge" optional="show"/>
                 <field name="is_active" string="TRẠNG THÁI" optional="show"/>
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                         name="open_edit_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                         name="confirm_delete" class="btn btn-danger" title="Xóa" type="object" icon="fa-trash-o"/>
                 <groupby name="blockhouse_id">
-                    <button name="create_building" string=" Thêm mới khu / tòa nhà"
+                    <button name="create_building" string=" Thêm mới Khu / Tòa nhà"
                             class="fa fa-plus btn btn-primary" type="object"/>
                 </groupby>
             </tree>

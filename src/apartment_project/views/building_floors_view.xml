@@ -15,9 +15,9 @@
                 <field name="name" string="TÊN TẦNG" optional="show" decoration-bf="1"/>
                 <field name="floors_type" string="KIỂU TẦNG" optional="show"/>
 <!--                <field name="total_house" optional="show"/>-->
-                <field name="building_id" string="TÒA NHÀ" optional="show"
+                <field name="building_id" string="TÒA NHÀ" widget="badge" optional="show"
                        options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
-                <field name="blockhouse_id" string="DỰ ÁN" optional="show"
+                <field name="blockhouse_id" string="DỰ ÁN" widget="badge" optional="show"
                        options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                 <field name="is_active" string="TRẠNG THÁI" optional="show"/>
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
@@ -25,6 +25,10 @@
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                         name="confirm_delete" class="btn btn-danger" title="Xóa" type="object" icon="fa-trash-o"/>
 <!--                widget="boolean_toggle"-->
+                <groupby name="building_id">
+                    <button name="create_building_floors" string=" Thêm mới Tầng"
+                            class="fa fa-plus btn btn-primary" type="object"/>
+                </groupby>
             </tree>
         </field>
     </record>
@@ -41,8 +45,8 @@
                         <field name="sort"/>
                         <field name="floors_type" widget="selection_badge"/>
 <!--                        <field name="total_house"/>-->
-                        <field name="blockhouse_id" attrs="{'readonly':[('blockhouse_id','>',0)]}" options="{'no_open': True}"/>
-                        <field name="building_id" attrs="{'readonly':[('building_id','>',0)]}" options="{'no_open': True}"/>
+                        <field name="blockhouse_id" options="{'no_open': True}"/>
+                        <field name="building_id" options="{'no_open': True}"/>
                         <field name="is_active"/>
                     </group>
                     <notebook>

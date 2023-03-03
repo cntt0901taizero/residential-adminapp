@@ -13,6 +13,7 @@
                 <field name="image" string="ẢNH" widget="image" width="100px" optional="show"/>
                 <field name="name" string="TÊN DỰ ÁN" optional="show" decoration-bf="1"/>
                 <field name="code" string="MÃ" optional="show"/>
+                <field name="investor_name" string="CHỦ ĐẦU TƯ" optional="show"/>
                 <field name="website" string="WEBSITE" optional="show"/>
                 <field name="address" string="ĐỊA CHỈ" optional="show"/>
 <!--                <field name="building_ids" widget="one2many" mode="tree">-->
@@ -39,12 +40,12 @@
                         <group string="Thông tin cơ bản">
                             <field name="image" string="Ảnh đại diện" height="400px"
                                    widget="image" class="oe_left oe_avatar"/>
-                            <field name="name" string="Tên dự án *"/>
                             <field name="code"/>
-                            <field name="investor_name" widget="text"/>
+                            <field name="name" string="Tên dự án *"/>
+                            <field name="investor_name"/>
                             <field name="is_active"/>
                         </group>
-                        <group string="Thông tin địa chỉ liên hệ">
+                        <group string="Thông tin liên hệ">
                             <field name="phone" widget="phone" placeholder=""/>
                             <field name="address" widget="text"/>
                             <field name="website" widget="CopyClipboardChar" placeholder=""/>

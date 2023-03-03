@@ -104,7 +104,6 @@
         </field>
     </record>
 
-
     <record id="action_tb_news_approve" model="ir.actions.act_window">
         <field name="name">PHÊ DUYỆT BẢN TIN</field>
         <field name="type">ir.actions.act_window</field>

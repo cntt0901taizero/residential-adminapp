@@ -22,19 +22,19 @@
                 <sheet>
                     <field name="id" invisible="1"/>
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <group>
                                 <field name="category_id" readonly="1"
                                        options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                             </group>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <group>
                                 <field name="name" readonly="1"
                                        options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                             </group>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-12">
                             <group>
                                 <field name="comment"/>
                             </group>

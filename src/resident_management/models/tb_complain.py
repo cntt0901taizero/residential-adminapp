@@ -14,10 +14,10 @@ class tb_complain(models.Model):
     _description = 'Phương tiện'
 
     name = fields.Char(string='Tiêu đề', copy=False)
-    content = fields.Html(string='Nội dung', copy=False)
+    content = fields.Html(string='Nội dung')
     image = fields.Image(string="Ảnh")
     file = fields.Binary(string='Tài liệu', attachment=True, help='Chọn tài liệu tải lên')
-    status_description = fields.Html(string='Ghi chú trạng thái', copy=False)
+    status_description = fields.Html(string='Phản hồi từ quản lý')
     status = fields.Selection(string='Trạng thái', selection=STATUS_TYPES, default=STATUS_TYPES[0][0])
 
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Dự án",

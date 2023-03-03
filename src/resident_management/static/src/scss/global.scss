@@ -157,6 +157,10 @@ table.o_list_table {
     box-shadow: 0px 3px 30px 0px #0000000F !important;
 }
 
+.oe-toolbar .btn {
+    box-shadow: none !important;
+}
+
 .dropdown-menu {
     z-index: 2000;
 }
@@ -180,3 +184,4 @@ table.o_list_table {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+

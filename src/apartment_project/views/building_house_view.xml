@@ -23,7 +23,7 @@
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                         name="confirm_delete" class="btn btn-danger" title="Xóa" type="object" icon="fa-trash-o"/>
                 <groupby name="building_floors_id">
-                    <button name="create_building_house" string=" Thêm mới căn hộ / biệt thự"
+                    <button name="create_building_house" string=" Thêm mới Căn hộ / Biệt thự"
                             class="fa fa-plus btn btn-primary" type="object"/>
                 </groupby>
             </tree>
@@ -42,9 +42,9 @@
                             <field name="code"/>
                             <field name="address"/>
                             <field name="house_type" widget="selection_badge"/>
-                            <field name="blockhouse_id" attrs="{'readonly':[('blockhouse_id','>',0)]}" options="{'no_open': True}"/>
-                            <field name="building_id" attrs="{'readonly':[('building_id','>',0)]}" options="{'no_open': True}"/>
-                            <field name="building_floors_id" attrs="{'readonly':[('building_floors_id','>',0)]}" options="{'no_open': True}"/>
+                            <field name="blockhouse_id" options="{'no_open': True}"/>
+                            <field name="building_id" options="{'no_open': True}"/>
+                            <field name="building_floors_id" options="{'no_open': True}"/>
                             <field name="is_active"/>
                         </group>
                         <group string="Thông tin chi tiết">
