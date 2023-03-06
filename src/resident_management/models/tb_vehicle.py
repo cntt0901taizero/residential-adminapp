@@ -116,7 +116,7 @@ class tb_vehicle(models.Model):
         if can_do:
             return {
                 'type': 'ir.actions.act_window',
-                'name': 'Sửa phương tiện ' + self.name,
+                'name': 'Sửa phương tiện',
                 'res_model': 'tb_vehicle',
                 'res_id': self.id,
                 'view_type': 'form',
@@ -134,7 +134,7 @@ class tb_vehicle(models.Model):
         if can_do:
             return {
                 'type': 'ir.actions.act_window',
-                'name': 'Sửa phương tiện ' + self.name,
+                'name': 'Sửa phương tiện',
                 'res_model': 'tb_vehicle',
                 'res_id': self.id,
                 'view_type': 'form',

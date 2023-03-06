@@ -9,17 +9,16 @@
         <field name="model">tb_notification</field>
         <field name="arch" type="xml">
             <tree js_class="tree_action_notifications" expand="1">
-                <field name="create_uid" string="Người tạo"/>
-                <field name="name"/>
-                <field name="content"/>
-                <field name="type"/>
-                <field name="status" widget="label_selection"
+                <field name="create_uid" string="NGƯỜI TẠO"/>
+                <field name="name" string="TIÊU ĐỀ"/>
+                <field name="content" string="NỘI DUNG"/>
+                <field name="type" string="LOẠI THÔNG BÁO"/>
+                <field name="status" string="TRẠNG THÁI" widget="label_selection"
                        options="{'classes': {'PENDING': 'info', 'ACTIVE': 'success', 'REJECT':'warning'}}"/>
                 <button name="open_edit_form" class="fa fa-pencil fa-lg btn btn-light"
                         title="Sửa" aria-label="Sửa" type="object"/>
                 <button name="confirm_delete" class="fa fa-trash-o fa-lg btn btn-danger"
-                        title="Xóa"
-                        aria-label="Xóa" type="object"/>
+                        title="Xóa" aria-label="Xóa" type="object"/>
             </tree>
         </field>
     </record>
@@ -37,7 +36,7 @@
                         <div class="col-md-6">
                             <group>
                                 <field name="name" class="text-truncate" placeholder="Tiêu đề thông báo..."
-                                       default_focus="1"/>
+                                       default_focus="1" string="Tiêu đề *"/>
                             </group>
                         </div>
                         <div class="col-md-6">
@@ -53,18 +52,18 @@
                         <div class="col-md-12">
                             <group col="12" class="oe_invoice_lines_tab">
                                 <group colspan="4">
-                                    <field name="blockhouse_id"
+                                    <field name="blockhouse_id" string="Dự án *"
                                            attrs="{'required' : [('receiver','in',['BUILDING','APARTMENT', 'PROJECT_APARTMENT'])], 'invisible': [('receiver','=','USER_GROUP')]}"
                                            options="{'no_quick_create':True,'no_create': True, 'no_edit': True, 'no_open': True}"/>
                                 </group>
                                 <group colspan="4">
-                                    <field name="building_id"
+                                    <field name="building_id" string="Tòa nhà *"
                                            attrs="{'required' : [('receiver','in',['BUILDING','APARTMENT'])], 'invisible': ['|', ('receiver','=','PROJECT_APARTMENT'), ('receiver','=', 'USER_GROUP')]}"
                                            options="{'no_quick_create':True,'no_create': True, 'no_edit': True, 'no_open': True}"
                                     />
                                 </group>
                                 <group colspan="4">
-                                    <field name="building_house_id"
+                                    <field name="building_house_id" string="Căn hộ *"
                                            attrs="{'required' : [('receiver', '=', 'APARTMENT')], 'invisible': ['|', '|', ('receiver','=','PROJECT_APARTMENT'), ('receiver','=', 'BUILDING'), ('receiver','=', 'USER_GROUP')]}"
                                            options="{'no_quick_create':True,'no_create': True, 'no_edit': True, 'no_open': True}"
                                     />
@@ -74,8 +73,7 @@
                         <div class="col-md-12">
                             <group>
                                 <field name="content" options="{'collaborative':true}"
-                                       widget="html"
-                                       placeholder="Nhập vào nội dung thông báo">
+                                       widget="html" placeholder="Nhập vào nội dung thông báo">
                                 </field>
                             </group>
                         </div>

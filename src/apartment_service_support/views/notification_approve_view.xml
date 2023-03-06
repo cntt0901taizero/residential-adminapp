@@ -16,11 +16,11 @@
 <!--                    <button class="fa fa-times btn btn-warning" confirm="Remove this attachment?"-->
 <!--                            name="set_status_reject" string=" Từ chối duyệt" type="object"/>-->
                 </header>
-                <field name="create_uid" string="Người tạo"/>
-                <field name="name"/>
-                <field name="content"/>
-                <field name="type"/>
-                <field name="status" widget="label_selection"
+                <field name="create_uid" string="NGƯỜI TẠO"/>
+                <field name="name" string="TIÊU ĐỀ"/>
+                <field name="content" string="NỘI DUNG"/>
+                <field name="type" string="LOẠI THÔNG BÁO"/>
+                <field name="status" string="TRẠNG THÁI" widget="label_selection"
                        options="{'classes': {'PENDING': 'info', 'ACTIVE': 'success', 'REJECT':'warning'}}"/>
             </tree>
         </field>
@@ -49,7 +49,7 @@
                         </xpath>
                         <h1 class="d-flex flex-row justify-content-between">
                             <field name="name" class="text-truncate" placeholder="Tiêu đề thông báo..."
-                                   default_focus="1"/>
+                                   default_focus="1" string="Tiêu đề *"/>
                         </h1>
                     </div>
                     <group colspan="4">
@@ -57,18 +57,18 @@
                     </group>
                     <group col="12" class="oe_invoice_lines_tab">
                         <group colspan="4">
-                            <field name="blockhouse_id"
+                            <field name="blockhouse_id" string="Dự án *"
                                    attrs="{'required' : [('receiver','in',['BUILDING','APARTMENT', 'PROJECT_APARTMENT'])], 'invisible': [('receiver','=','USER_GROUP')]}"
                                    options="{'no_quick_create':True,'no_create': True, 'no_edit': True, 'no_open': True}"/>
                         </group>
                         <group colspan="4">
-                            <field name="building_id"
+                            <field name="building_id" string="Tòa nhà *"
                                    attrs="{'required' : [('receiver','in',['BUILDING','APARTMENT'])], 'invisible': ['|', ('receiver','=','PROJECT_APARTMENT'), ('receiver','=', 'USER_GROUP')]}"
                                    options="{'no_quick_create':True,'no_create': True, 'no_edit': True, 'no_open': True}"
                             />
                         </group>
                         <group colspan="4">
-                            <field name="building_house_id"
+                            <field name="building_house_id" string="Căn hộ *"
                                    attrs="{'required' : [('receiver', '=', 'APARTMENT')], 'invisible': ['|', '|', ('receiver','=','PROJECT_APARTMENT'), ('receiver','=', 'BUILDING'), ('receiver','=', 'USER_GROUP')]}"
                                    options="{'no_quick_create':True,'no_create': True, 'no_edit': True, 'no_open': True}"
                             />
@@ -79,8 +79,7 @@
                     </group>
                     <group>
                         <field name="content" options="{'collaborative':true}"
-                               widget="html"
-                               placeholder="Nhập vào nội dung thông báo">
+                               widget="html" placeholder="Nhập vào nội dung thông báo">
                         </field>
                     </group>
                 </sheet>

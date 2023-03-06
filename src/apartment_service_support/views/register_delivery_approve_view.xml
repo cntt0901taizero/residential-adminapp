@@ -15,16 +15,17 @@
 <!--                    <button class="fa fa-times btn btn-warning" confirm="Remove this attachment?"-->
 <!--                            name="set_status_reject" string=" Từ chối duyệt" type="object"/>-->
                 </header>
-                <field name="shipping_method" optional="show"/>
-                <field name="through_method" optional="show"/>
-                <field name="time_start" optional="show"/>
-                <field name="time_end" optional="show"/>
-                <field name="freight_detail" optional="show"/>
-                <field name="use_freight_elevator" optional="show"/>
-                <field name="blockhouse_id" optional="show"/>
-                <field name="building_id" optional="show"/>
-                <field name="building_house_id" optional="show"/>
-                <field name="status" widget="label_selection" optional="show"
+                <field name="create_uid" string="NGƯỜI TẠO"/>
+                <field name="shipping_method" string="LOẠI CHUYỂN ĐỒ" optional="show"/>
+                <field name="through_method" string="VẬN CHUYỂN QUA" optional="show"/>
+                <field name="time_start" string="THỜI GIAN BẮT ĐẦU" optional="show"/>
+                <field name="time_end" string="THỜI GIAN KẾT THÚC" optional="show"/>
+                <field name="freight_detail" string="CHI TIẾT CHUYỂN ĐỒ" optional="show"/>
+                <field name="use_freight_elevator" string="SỬ DỤNG THANG HÀNG" optional="show"/>
+                <field name="blockhouse_id" string="DỰ ÁN" optional="show"/>
+                <field name="building_id" string="TÒA NHÀ" optional="show"/>
+                <field name="building_house_id" string="CĂN HỘ" optional="show"/>
+                <field name="status" string="TRẠNG THÁI" widget="label_selection" optional="show"
                        options="{'classes': {'PENDING': 'info', 'ACTIVE': 'success', 'REJECT':'warning'}}"/>
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                         name="open_edit_approve_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
@@ -52,11 +53,11 @@
                 </header>
                 <sheet>
                     <group string="Căn hộ">
-                        <field name="blockhouse_id" required="1"
+                        <field name="blockhouse_id" required="1" string="Dự án *"
                                options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
-                        <field name="building_id" required="1"
+                        <field name="building_id" required="1" string="Tòa nhà *"
                                options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
-                        <field name="building_house_id" required="1"
+                        <field name="building_house_id" required="1" string="Căn hộ *"
                                options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                     </group>
                     <group string="Thông tin đăng ký chuyển đồ">

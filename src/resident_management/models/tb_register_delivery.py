@@ -24,7 +24,7 @@ class tb_register_delivery(models.Model):
     _description = 'Đăng ký chuyển đồ'
 
     name = fields.Char(string='Người đăng ký', copy=False)
-    shipping_method = fields.Selection(string='Phương thức chuyển đồ', selection=SHIPPING_METHOD,
+    shipping_method = fields.Selection(string='Loại chuyển đồ', selection=SHIPPING_METHOD,
                                        default=SHIPPING_METHOD[0][0])
     through_method = fields.Selection(string='Vận chuyển qua', selection=THROUGH_METHOD,
                                       default=THROUGH_METHOD[0][0])

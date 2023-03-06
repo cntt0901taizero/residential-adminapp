@@ -9,14 +9,14 @@
         <field name="model">tb_apartment_utilities</field>
         <field name="arch" type="xml">
             <tree string="Bảng quản lý tiện ích chung cư" js_class="tree_action_utilities" expand="1">
-                <field name="image" width="100px" widget="image" class="oe_left oe_avatar" optional="show"/>
-                <field name="name" optional="show"/>
-                <field name="description" optional="show"/>
+                <field name="image" string="ẢNH" width="100px" widget="image" class="oe_left oe_avatar" optional="show"/>
+                <field name="name" string="TÊN" optional="show"/>
+                <field name="description" string="MÔ TẢ" optional="show"/>
 <!--                <field name="active_days" optional="show"/>-->
 <!--                <field name="active_time" widget="date" optional="show"/>-->
-                <field name="is_active" optional="show"/>
-                <field name="blockhouse_id" optional="show"/>
-                <field name="status" widget="label_selection" optional="show"
+                <field name="is_active" string="CÓ HIỆU LỰC" optional="show"/>
+                <field name="blockhouse_id" string="DỰ ÁN" optional="show"/>
+                <field name="status" string="TRẠNG THÁI" widget="label_selection" optional="show"
                        options="{'classes': {'PENDING': 'info', 'ACTIVE': 'success', 'REJECT':'warning'}}"/>
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                         name="open_edit_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
@@ -46,7 +46,7 @@
                         </div>
                         <div class="col-md-12">
                             <group>
-                                <field name="name" required="1"/>
+                                <field name="name" string="Tên *" required="1"/>
                             </group>
                         </div>
                         <div class="col-md-12">
@@ -61,7 +61,7 @@
                         </div>
                         <div class="col-md-12">
                             <group>
-                                <field name="blockhouse_id" required="1" options="{'no_open': True}"/>
+                                <field name="blockhouse_id" string="Dự án *" required="1" options="{'no_open': True}"/>
                             </group>
                         </div>
                         <div class="col-md-6">

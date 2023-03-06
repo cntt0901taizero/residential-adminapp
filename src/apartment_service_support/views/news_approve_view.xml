@@ -11,11 +11,11 @@
 <!--                    <button class="fa fa-times btn btn-warning" confirm="Remove this attachment?"-->
 <!--                            name="set_status_reject" string=" Từ chối duyệt" type="object"/>-->
                 </header>
-                <field name="create_uid" string="Người tạo"/>
-                <field name="name" />
-                <field name="news_description"/>
-                <field name="create_date" class="oe_inline"/>
-                <field name="status" widget="label_selection" options="{'classes': {'DRAFT': 'info', 'ACTIVE': 'success', 'REJECT':'warning'}}"/>
+                <field name="create_uid" string="NGƯỜI TẠO"/>
+                <field name="name" string="TIÊU ĐỀ BẢN TIN"/>
+                <field name="news_description" string="MÔ TẢ"/>
+                <field name="create_date" string="NGÀY TẠO" class="oe_inline"/>
+                <field name="status" string="TRẠNG THÁI" widget="label_selection" options="{'classes': {'DRAFT': 'info', 'ACTIVE': 'success', 'REJECT':'warning'}}"/>
                 <button name="open_edit_form_news" class="fa fa-pencil fa-lg btn btn-light"
                         title="Sửa" aria-label="Sửa" type="object"/>
                 <button name="confirm_delete_news" class="fa fa-trash-o fa-lg btn btn-danger"
@@ -44,7 +44,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <group>
-                                <field name="name" class="text-truncate"/>
+                                <field name="name" string="Tiêu đề bản tin *" class="text-truncate"/>
                             </group>
                         </div>
                         <div class="col-md-6">
@@ -74,14 +74,14 @@
                         </div>
                         <div class="col-md-6">
                             <group>
-                                <field name="blockhouse_id" attrs="{'required': True}"
+                                <field name="blockhouse_id" attrs="{'required': True}" string="Dự án *"
                                        options="{'no_quick_create':True,'no_create': True, 'no_edit': True, 'no_open': True}"/>
 
                             </group>
                         </div>
                         <div class="col-md-6">
                             <group>
-                                <field name="building_id"
+                                <field name="building_id" string="Tòa nhà *"
                                        attrs="{'required': [('news_type','!=','PROJECT_APARTMENT')], 'invisible':[('news_type','=','PROJECT_APARTMENT')]}"
                                        options="{'no_quick_create':True,'no_create': True, 'no_edit': True, 'no_open': True}"
                                 />
@@ -90,8 +90,7 @@
                         <div class="col-md-12">
                             <group>
                                 <field name="content" options="{'collaborative':true}"
-                                       widget="html"
-                                       placeholder="Nhập vào nội dung chi tiết bản tin">
+                                       widget="html" placeholder="Nhập vào nội dung chi tiết bản tin">
                                 </field>
                             </group>
                         </div>

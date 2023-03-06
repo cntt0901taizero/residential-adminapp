@@ -15,10 +15,10 @@
                     <!--                    <button class="fa fa-times btn btn-warning" confirm="Remove this attachment?"-->
                     <!--                            name="set_status_reject" string=" Từ chối duyệt" type="object"/>-->
                 </header>
-                <field name="name" optional="show"/>
-                <field name="description" optional="show"/>
-                <field name="is_active" optional="show"/>
-                <field name="status" widget="label_selection" optional="show"
+                <field name="name" string="CHỦ ĐỀ" optional="show"/>
+                <field name="description" string="TIÊU ĐỀ" optional="show"/>
+                <field name="is_active" string="CÓ HIỆU LỰC" optional="show"/>
+                <field name="status" string="TRẠNG THÁI" widget="label_selection" optional="show"
                        options="{'classes': {'PENDING': 'info', 'ACTIVE': 'success', 'REJECT':'warning'}}"/>
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                         name="open_edit_approve_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
@@ -49,13 +49,13 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <group>
-                                    <field name="blockhouse_id"
+                                    <field name="blockhouse_id" string="Dự án *"
                                            options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                                 </group>
                             </div>
                             <div class="col-md-6">
                                 <group>
-                                    <field name="building_id"
+                                    <field name="building_id" string="Tòa nhà *"
                                            options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                                 </group>
                             </div>
@@ -65,12 +65,12 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <group>
-                                    <field name="name" required="1"/>
+                                    <field name="name" string="Chủ đề *" required="1"/>
                                 </group>
                             </div>
                             <div class="col-md-12">
                                 <group>
-                                    <field name="description"/>
+                                    <field name="description" string="Tiêu đề *" required="1"/>
                                 </group>
                             </div>
                             <div class="col-md-12">

@@ -9,13 +9,13 @@
         <field name="model">tb_access_card</field>
         <field name="arch" type="xml">
             <tree string="Bảng quản lý thẻ ra vào" js_class="tree_action_access_card" expand="1">
-                <field name="name" optional="show"/>
-                <field name="user_id" optional="show"/>
-                <field name="blockhouse_id" optional="show"/>
-                <field name="building_id" optional="show"/>
-                <field name="building_house_id" optional="show"/>
-                <field name="relationship_type" optional="show"/>
-                <field name="status" widget="label_selection" optional="show"
+                <field name="name" string="HỌ TÊN" optional="show"/>
+                <field name="user_id" string="CHỦ THẺ" optional="show"/>
+                <field name="blockhouse_id" string="DỰ ÁN" optional="show"/>
+                <field name="building_id" string="TÒA NHÀ" optional="show"/>
+                <field name="building_house_id" string="CĂN HỘ" optional="show"/>
+                <field name="relationship_type" string="QUAN HỆ VỚI CHỦ HỆ" optional="show"/>
+                <field name="status" string="TRẠNG THÁI" widget="label_selection" optional="show"
                        options="{'classes': {'PENDING': 'info', 'ACTIVE': 'success', 'REJECT':'warning'}}"/>
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                         name="open_edit_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
@@ -35,31 +35,31 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <group>
-                                    <field name="blockhouse_id" required="1"
+                                    <field name="blockhouse_id" required="1" string="Dự án *"
                                         options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                                 </group>
                             </div>
                             <div class="col-md-4">
                                 <group>
-                                    <field name="building_id" required="1"
+                                    <field name="building_id" required="1" string="Tòa nhà *"
                                         options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                                 </group>
                             </div>
                             <div class="col-md-4">
                                 <group>
-                                    <field name="building_house_id" required="1"
+                                    <field name="building_house_id" required="1" string="Căn hộ *"
                                         options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                                 </group>
                             </div>
                             <div class="col-md-4">
                                 <group>
-                                    <field name="user_id" required="1"
+                                    <field name="user_id" required="1" string="Chủ thẻ *"
                                            options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                                 </group>
                             </div>
                             <div class="col-md-4">
                                 <group>
-                                    <field name="name" required="1"/>
+                                    <field name="name" string="Tên *" required="1"/>
                                 </group>
                             </div>
                             <div class="col-md-4">
