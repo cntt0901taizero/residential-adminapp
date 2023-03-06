@@ -116,7 +116,7 @@ class tb_users(models.Model):
             error_messenger = 'Bạn không có quyền tạo tài khoản quản trị.'
         can_do = self.check_permission(per_name, raise_exception=False)
         if can_do:
-            password = vals["password"]
+            password = self.password
             if password and (len(password) < 7 or len(password) > 35):
                 raise ValidationError("Độ dài mật khẩu phải từ 8 đến 35 kí tự!")
                 return
@@ -129,8 +129,8 @@ class tb_users(models.Model):
 
     @api.model
     def write(self, vals):
-        password = vals["password"]
-        if password.length < 7 or password.length > 35:
+        password = self.password
+        if password and (len(password) < 7 or len(password) > 35):
             raise ValidationError("Độ dài mật khẩu phải từ 8 đến 35 kí tự!")
             return
         return super(tb_users, self).write(vals)
