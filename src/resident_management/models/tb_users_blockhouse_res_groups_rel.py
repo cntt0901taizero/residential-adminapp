@@ -154,6 +154,19 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
         self.env['ir.actions.actions'].clear_caches()
         return super(tb_users_blockhouse_res_groups_rel, self).create(value)
 
+    @api.model
+    def write(self, records, value):
+        return super(tb_users_blockhouse_res_groups_rel, self).write(value)
+        # return {
+        #     'type': 'ir.actions.client',
+        #     'tag': 'display_notification',
+        #     'params': {
+        #         'type': 'success',
+        #         'message': "Thêm mới thành công!",
+        #         'next': {'type': 'ir.actions.act_window_close'},
+        #     }
+        # }
+
     def _insert_record_res_groups_users_rel(self, uid, gid, *args, **kwargs):
         self.env.cr.execute("""SELECT count(*) FROM res_groups_users_rel WHERE uid=%s AND gid=%s""", (uid, gid))
         total = self.env.cr.fetchone()[0]
@@ -213,3 +226,4 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
         for record in self:
             record.unlink()
             pass
+

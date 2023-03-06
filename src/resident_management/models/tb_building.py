@@ -110,25 +110,6 @@ class tb_building(models.Model):
         error_messenger = 'Bạn chưa được phân quyền này!'
         can_do = self.check_permission(per_name, raise_exception=False)
         if can_do:
-            return {
-                'type': 'ir.actions.act_window',
-                'name': 'Tạo mới Tầng',
-                'res_model': 'tb_building_house',
-                'target': 'new',
-                'view_id': self.env.ref('apartment_project.view_tb_building_floors_form').id,
-                'view_mode': 'form',
-                'context': {
-                    'default_building_id': self.building_id.id,
-                    'default_blockhouse_id': self.blockhouse_id.id,
-                },
-            }
-        raise ValidationError(error_messenger)
-
-    def create_building_floors(self):
-        per_name = 'perm_create_floor'
-        error_messenger = 'Bạn chưa được phân quyền này!'
-        can_do = self.check_permission(per_name, raise_exception=False)
-        if can_do:
             max_number: int = 0
             if self.building_floors_ids.ids:
                 max_number = max(self.building_floors_ids.ids)

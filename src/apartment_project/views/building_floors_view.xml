@@ -57,15 +57,24 @@
                             <button name="create_building_house" string=" Thêm mới Căn hộ"
                                     class="fa fa-plus btn btn-primary mb-2" type="object"
                                     attrs="{'invisible':[('id','=',False)]}"/>
-                            <field name="building_house_ids" widget="one2many" mode="tree,kanban"
-                                   decoration-danger="is_active == False">
-                                <tree string="Bảng căn hộ" default_order="name" create="false" edit="0">
-                                    <field name="name"/>
-                                    <field name="code"/>
-                                    <field name="address"/>
-                                    <field name="building_floors_id" widget="badge"/>
-                                    <field name="building_id" widget="badge"/>
-                                    <field name="blockhouse_id" widget="badge"/>
+                            <field name="building_house_ids" widget="searchbar_one2many_list">
+                                <tree string="Bảng căn hộ" decoration-danger="is_active == False"
+                                      default_order="name" create="0" delete="0" multi_edit="1" edit="0">
+                                    <field name="name" optional="show"/>
+                                    <field name="code" optional="show"/>
+                                    <field name="address" optional="show"/>
+                                    <field name="house_type" optional="show"/>
+                                    <field name="building_floors_id" widget="badge" optional="show"
+                                           options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                                    <field name="building_id" widget="badge" optional="show"
+                                           options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                                    <field name="blockhouse_id" widget="badge" optional="show"
+                                           options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                                    <field name="is_active" optional="show"/>
+                                    <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
+                                            name="open_edit_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
+                                    <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
+                                            name="confirm_delete" class="btn btn-danger" title="Xóa" type="object" icon="fa-trash-o"/>
                                 </tree>
                             </field>
                         </page>
