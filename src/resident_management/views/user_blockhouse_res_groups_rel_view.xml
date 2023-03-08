@@ -58,11 +58,13 @@
                         </group>
                         <field name="user_group_code" invisible="1"/>
                     </group>
+<!--                    <footer>-->
+<!--                        <button name="close_dialog" string="Đóng" type="object" class="btn-secondary" />-->
+<!--                    </footer>-->
                 </sheet>
             </form>
         </field>
     </record>
-
 
     <record id="action_tb_users_blockhouse_res_groups_rel" model="ir.actions.act_window">
         <field name="name">Thêm nhóm người dùng</field>
@@ -77,6 +79,7 @@
             <p class="o_view_nocontent_smiling_face">Tạo bản ghi đầu tiên của bạn</p>
         </field>
     </record>
+
 
 
     <record id="view_tb_users_blockhouse_res_groups_rel_form_resident" model="ir.ui.view">
@@ -121,7 +124,6 @@
             </form>
         </field>
     </record>
-
 
     <record id="action_tb_users_blockhouse_res_groups_rel_resident" model="ir.actions.act_window">
         <field name="name">Thêm nhóm người dùng</field>

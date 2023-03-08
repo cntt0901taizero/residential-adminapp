@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 from odoo.http import request
 
@@ -152,20 +152,13 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
                 self._insert_record_res_groups_users_rel(uid, gid)
 
         self.env['ir.actions.actions'].clear_caches()
-        return super(tb_users_blockhouse_res_groups_rel, self).create(value)
-
-    @api.model
-    def write(self, records, value):
-        return super(tb_users_blockhouse_res_groups_rel, self).write(value)
-        # return {
-        #     'type': 'ir.actions.client',
-        #     'tag': 'display_notification',
-        #     'params': {
-        #         'type': 'success',
-        #         'message': "Thêm mới thành công!",
-        #         'next': {'type': 'ir.actions.act_window_close'},
-        #     }
-        # }
+        res = super(tb_users_blockhouse_res_groups_rel, self).create(value)
+        # self.env['bus.bus']._sendone((self._cr.dbname, 'tb_users_blockhouse_res_groups_rel', self.env.uid),
+        #                              {'type': 'create', 'id': res.id},
+        #                              {'type': 'ir.actions.act_window_close', 'context': {'form_view_ref': False}})
+        return res
+        # return super(tb_users_blockhouse_res_groups_rel, self).create(value)
+        # return self._notification(type_message="success", title="Thông báo", message="Đã thành công")
 
     def _insert_record_res_groups_users_rel(self, uid, gid, *args, **kwargs):
         self.env.cr.execute("""SELECT count(*) FROM res_groups_users_rel WHERE uid=%s AND gid=%s""", (uid, gid))
@@ -199,11 +192,17 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
             'type': 'ir.actions.act_window',
             'name': name,
             'res_model': 'tb_users_blockhouse_res_groups_rel',
-            'target': 'new',
             'res_id': self.id,
-            'view_id': view_id,
+            # 'view_id': view_id,
+            'views': [(view_id, 'form')],
+            'view_type': 'form',
             'view_mode': 'form',
             'context': context,
+            'target': 'new',
+            # 'nodestroy': True,
+            # 'flags': {
+            #     'action_buttons': True,
+            # },
         }
 
     def confirm_delete(self):
@@ -226,4 +225,46 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
         for record in self:
             record.unlink()
             pass
+
+    # def close_dialog(self):
+    #     return {
+    #         'type': 'ir.actions.act_window_close',
+    #         'context': {'form_view_ref': False},
+    #     }
+    #
+    # def _notification(self, type_message="info", title="", message="", action_form=None, model=None):
+    #     action = self.env.ref(action_form)
+    #     if action_form:
+    #         return {
+    #             'type': 'ir.actions.client',
+    #             'tag': 'display_notification',
+    #             'params': {
+    #                 'title': _(title),
+    #                 'message': _(message),
+    #                 'type': type_message,
+    #                 'sticky': False,
+    #                 'links': [{
+    #                     'label': 'string',
+    #                     'url': f'#action={action.id}&id={self.id}&model={model}',
+    #                 }],
+    #                 'next': {
+    #                     'type': 'ir.actions.act_window_close',
+    #                     'context': {'form_view_ref': False},
+    #                 },
+    #             }
+    #         }
+    #     return {
+    #         'type': 'ir.actions.client',
+    #         'tag': 'display_notification',
+    #         'params': {
+    #             'title': _(title),
+    #             'message': _(message),
+    #             'type': type_message,
+    #             'sticky': False,
+    #             'next': {
+    #                 'type': 'ir.actions.act_window_close',
+    #                 'context': {'form_view_ref': False},
+    #             },
+    #         }
+    #     }
 

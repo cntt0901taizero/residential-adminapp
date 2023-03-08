@@ -114,13 +114,11 @@ odoo.define('resident_management.button_admin_user', function (require) {
             });
        },
     });
-
     var FormActionView = FormView.extend({
         config: _.extend({}, FormView.prototype.config, {
             Controller: FormActionController
         }),
     });
-
     viewRegistry.add('form_action_admin_user', FormActionView);
 
 });

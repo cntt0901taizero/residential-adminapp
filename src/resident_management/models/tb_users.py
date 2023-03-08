@@ -127,13 +127,15 @@ class tb_users(models.Model):
             return super(tb_users, self).create(vals)
         raise ValidationError(error_messenger)
 
-    @api.model
-    def write(self, vals):
-        password = self.password
-        if password and (len(password) < 7 or len(password) > 35):
-            raise ValidationError("Độ dài mật khẩu phải từ 8 đến 35 kí tự!")
-            return
-        return super(tb_users, self).write(vals)
+    # @api.model
+    # def write(self, records, value):
+    #     password = self.password
+    #     if password and (len(password) < 7 or len(password) > 35):
+    #         raise ValidationError("Độ dài mật khẩu phải từ 8 đến 35 kí tự!")
+    #         return
+    #     res = self.env['res.users'].browse(id).write(value)
+    #     # return super(tb_users, self).browse(records[0]).write(value)
+    #     return res
 
     def create_user_blockhouse_groups_rel(self):
         view_id = ''
