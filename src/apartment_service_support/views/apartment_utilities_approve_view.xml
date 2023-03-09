@@ -106,6 +106,7 @@
                     <filter name="group_block_house" string="Dự án" context="{'group_by':'blockhouse_id'}"/>
                     <filter name="group_status" string="Trạng thái" context="{'group_by':'status'}"/>
                 </group>
+
             </search>
         </field>
     </record>
