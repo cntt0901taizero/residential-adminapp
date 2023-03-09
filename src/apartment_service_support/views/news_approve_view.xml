@@ -11,9 +11,9 @@
 <!--                    <button class="fa fa-times btn btn-warning" confirm="Remove this attachment?"-->
 <!--                            name="set_status_reject" string=" Từ chối duyệt" type="object"/>-->
                 </header>
-                <field name="create_uid" string="NGƯỜI TẠO"/>
                 <field name="name" string="TIÊU ĐỀ BẢN TIN"/>
-                <field name="news_description" string="MÔ TẢ"/>
+                <field name="create_uid" string="NGƯỜI TẠO"/>
+<!--                <field name="news_description" string="MÔ TẢ"/>-->
                 <field name="create_date" string="NGÀY TẠO" class="oe_inline"/>
                 <field name="status" string="TRẠNG THÁI" widget="label_selection" options="{'classes': {'DRAFT': 'info', 'ACTIVE': 'success', 'REJECT':'warning'}}"/>
                 <button name="open_edit_form_news" class="fa fa-pencil fa-lg btn btn-light"
@@ -44,17 +44,17 @@
                     <div class="row">
                         <div class="col-md-6">
                             <group>
-                                <field name="name" string="Tiêu đề bản tin *" class="text-truncate"/>
+                                <field name="name" required="1" string="Tiêu đề bản tin *" class="text-truncate"/>
                             </group>
                         </div>
                         <div class="col-md-6">
                             <group>
-                                <field name="image" string="Ảnh" readonly="0" widget="image" class="oe_left oe_avatar"/>
+                                <field name="image" required="1" string="Ảnh *" readonly="0" widget="image" class="oe_left oe_avatar"/>
                             </group>
                         </div>
                         <div class="col-md-6">
                             <group>
-                                <field name="news_description"/>
+                                <field name="news_description" required="1" string="Mô tả *"/>
                             </group>
                         </div>
                         <div class="col-md-6">

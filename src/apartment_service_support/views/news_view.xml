@@ -5,9 +5,9 @@
         <field name="model">tb_news</field>
         <field name="arch" type="xml">
             <tree js_class="tree_action_news">
-                <field name="create_uid" string="NGƯỜI TẠO"/>
                 <field name="name" string="TIÊU ĐỀ BẢN TIN"/>
-                <field name="news_description" string="MÔ TẢ"/>
+                <field name="create_uid" string="NGƯỜI TẠO"/>
+<!--                <field name="news_description" string="MÔ TẢ"/>-->
                 <field name="create_date" string="NGÀY TẠO"/>
                 <field name="status" string="TRẠNG THÁI" widget="label_selection"
                        options="{'classes': {'DRAFT': 'info', 'ACTIVE': 'success', 'REJECT':'warning'}}"/>
@@ -85,17 +85,18 @@
                     <div class="row">
                         <div class="col-md-6">
                             <group>
-                                <field name="name" string="Tiêu đề bản tin *" class="text-truncate"/>
+                                <field name="name" required="1" string="Tiêu đề bản tin *" class="text-truncate"/>
                             </group>
                         </div>
                         <div class="col-md-6">
                             <group>
-                                <field name="image" string="Ảnh" readonly="0" widget="image" class="oe_left oe_avatar"/>
+                                <field name="image" required="1" height="400px" string="Ảnh *"
+                                       widget="image" class="oe_left oe_avatar"/>
                             </group>
                         </div>
                         <div class="col-md-6">
                             <group>
-                                <field name="news_description"/>
+                                <field name="news_description" string="Mô tả *" required="1"/>
                             </group>
                         </div>
                         <div class="col-md-6">

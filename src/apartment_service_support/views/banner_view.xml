@@ -39,7 +39,7 @@
                         </div>
                         <div class="col-md-12">
                             <group>
-                                <field name="name" string="Tiêu đề *"/>
+                                <field name="name" required="1" string="Tiêu đề *"/>
                             </group>
                         </div>
                         <div class="col-md-12">
@@ -50,7 +50,7 @@
                         <div class="col-md-12">
                             <group>
                                 <field name="banner_description" options="{'collaborative':true}"
-                                       placeholder="Nhập mô tả quảng cáo">
+                                       placeholder="Nhập mô tả quảng cáo" required="1" string="Nội dung *">
                                 </field>
                             </group>
                         </div>

@@ -85,6 +85,11 @@
                                 <field name="phone"/>
                             </group>
                         </div>
+                        <div class="col-md-4">
+                            <group>
+                                <field name="status" widget="badge" readonly="1"/>
+                            </group>
+                        </div>
                         <div class="col-md-12" attrs="{'invisible': [('id','=', False)]}">
                             <group>
                                 <field name="active" readonly="1"/>

@@ -36,7 +36,7 @@
                         <div class="col-md-6">
                             <group>
                                 <field name="name" class="text-truncate" placeholder="Tiêu đề thông báo..."
-                                       default_focus="1" string="Tiêu đề *"/>
+                                       default_focus="1" required="1" string="Tiêu đề *"/>
                             </group>
                         </div>
                         <div class="col-md-6">
@@ -72,8 +72,8 @@
                         </div>
                         <div class="col-md-12">
                             <group>
-                                <field name="content" options="{'collaborative':true}"
-                                       widget="html" placeholder="Nhập vào nội dung thông báo">
+                                <field name="content" options="{'collaborative':true}" required="1"
+                                       widget="html" placeholder="Nội dung thông báo *">
                                 </field>
                             </group>
                         </div>

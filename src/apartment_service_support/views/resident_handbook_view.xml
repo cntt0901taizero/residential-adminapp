@@ -68,7 +68,7 @@
                             </div>
                             <div class="col-md-12">
                                 <group>
-                                    <field name="status" readonly="1"/>
+                                    <field name="status" widget="badge" readonly="1"/>
                                 </group>
                             </div>
                         </div>

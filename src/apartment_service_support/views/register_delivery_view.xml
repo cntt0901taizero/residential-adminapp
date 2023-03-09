@@ -50,7 +50,7 @@
                         <field name="time_end"/>
                         <field name="freight_detail"/>
                         <field name="use_freight_elevator"/>
-                        <field name="status" readonly="1"/>
+                        <field name="status" widget="badge" readonly="1"/>
                     </group>
                 </sheet>
             </form>

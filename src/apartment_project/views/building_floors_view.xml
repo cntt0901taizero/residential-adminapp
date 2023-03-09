@@ -41,12 +41,12 @@
                 <sheet>
                     <group>
                         <field name="id" invisible="1"/>
-                        <field name="name" string="Tên tầng *"/>
+                        <field name="name" required="1" string="Tên tầng *"/>
                         <field name="sort"/>
                         <field name="floors_type" widget="selection_badge"/>
 <!--                        <field name="total_house"/>-->
-                        <field name="blockhouse_id" options="{'no_open': True}"/>
-                        <field name="building_id" options="{'no_open': True}"/>
+                        <field name="blockhouse_id" string="Dự án *" required="1" options="{'no_open': True}"/>
+                        <field name="building_id" string="Khu / Tòa nhà *" required="1" options="{'no_open': True}"/>
                         <field name="is_active"/>
                     </group>
                     <notebook>

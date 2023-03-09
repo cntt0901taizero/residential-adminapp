@@ -97,11 +97,11 @@
                     <group>
                         <field name="id" invisible="1"/>
                         <group string="Thông tin cơ bản">
-                            <field name="name" string="Tên khu / tòa nhà *"/>
-                            <field name="code"/>
+                            <field name="name" string="Tên khu / tòa nhà *" required="1"/>
+                            <field name="code" string="Mã *"/>
                             <field name="building_level" widget="selection_badge"/>
                             <field name="founding_date" widget="date"/>
-                            <field name="blockhouse_id"
+                            <field name="blockhouse_id" string="Dự án *" required="1"
                                    options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                             <field name="is_active"/>
                         </group>

@@ -49,7 +49,7 @@
                         </xpath>
                         <h1 class="d-flex flex-row justify-content-between">
                             <field name="name" class="text-truncate" placeholder="Tiêu đề thông báo..."
-                                   default_focus="1" string="Tiêu đề *"/>
+                                   default_focus="1" required="1" string="Tiêu đề *"/>
                         </h1>
                     </div>
                     <group colspan="4">
@@ -78,8 +78,8 @@
                         <field name="user_ids" options="{'no_create': True, 'no_edit': True}"/>
                     </group>
                     <group>
-                        <field name="content" options="{'collaborative':true}"
-                               widget="html" placeholder="Nhập vào nội dung thông báo">
+                        <field name="content" options="{'collaborative':true}" required="1"
+                               widget="html" placeholder="Nội dung thông báo">
                         </field>
                     </group>
                 </sheet>

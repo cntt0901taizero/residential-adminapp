@@ -38,15 +38,16 @@
         <field name="arch" type="xml">
             <form string="Users" js_class="form_action_resident_user">
                 <field name="id" invisible="1"/>
+                <field name="status" invisible="1"/>
                 <header attrs="{'invisible':[('id','=',False)]}">
                     <button class="fa fa-check btn btn-info"
-                            attrs="{'invisible':[('active','=',True)]}"
+                            attrs="{'invisible':[('status','=','ACTIVE')]}"
                             name="set_status_active" string=" Phê duyệt và gửi thư mời" type="object"
                     />
-                    <button class="fa fa-check btn btn-info" disabled="True"
-                            attrs="{'invisible':[('active','=',False)]}" title="Tài khoản đã được duyệt"
-                            name="set_status_active" string=" Phê duyệt và gửi thư mời" type="object"
-                    />
+                    <button class="fa fa-times btn btn-warning"
+                            name="set_status_reject" string=" Từ chối duyệt" type="object"
+                            attrs="{'invisible':[('status','=','REJECT')]}"/>
+                    <field name="status" widget="statusbar"/>
                 </header>
                 <sheet>
                     <div class="row">
@@ -92,6 +93,11 @@
                         <div class="col-md-4">
                             <group>
                                 <field name="email" required="1" string="Email *"/>
+                            </group>
+                        </div>
+                        <div class="col-md-4">
+                            <group>
+                                <field name="phone"/>
                             </group>
                         </div>
                         <div class="col-md-4">

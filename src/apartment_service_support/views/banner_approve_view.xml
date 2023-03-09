@@ -11,12 +11,12 @@
 <!--                    <button class="fa fa-times btn btn-warning" confirm="Remove this attachment?"-->
 <!--                            name="set_status_reject" string=" Từ chối duyệt" type="object"/>-->
                 </header>
-                <field name="create_uid" string="NGƯỜI TẠO"/>
-                <field name="image" string="ẢNH" widget="image" width="100px"/>
                 <field name="name" string="TIÊU ĐỀ" decoration-bf="1"/>
-                <field name="create_date" string="NGÀY TẠO" widget="date"/>
+                <field name="image" string="ẢNH" widget="image" width="100px"/>
                 <field name="status" string="TRẠNG THÁI" widget="label_selection"
                        options="{'classes': {'PENDING': 'info', 'ACTIVE': 'success', 'REJECT':'warning'}}"/>
+                <field name="create_date" string="NGÀY TẠO" widget="date"/>
+                <field name="create_uid" string="NGƯỜI TẠO"/>
                 <button name="open_edit_form" class="fa fa-pencil fa-lg btn btn-light"
                         title="Sửa" aria-label="Sửa" type="object"/>
                 <button name="confirm_delete" class="fa fa-trash-o fa-lg btn btn-danger"
@@ -53,7 +53,7 @@
                         </div>
                         <div class="col-md-12">
                             <group>
-                                <field name="name" string="Tiêu đề *"/>
+                                <field name="name" required="1" string="Tiêu đề *"/>
                             </group>
                         </div>
                         <div class="col-md-12">
@@ -64,7 +64,7 @@
                         <div class="col-md-12">
                             <group>
                                 <field name="banner_description" options="{'collaborative':true}"
-                                       placeholder="Nhập mô tả quảng cáo">
+                                       placeholder="Nhập mô tả quảng cáo" required="1" string="Nội dung *">
                                 </field>
                             </group>
                         </div>
