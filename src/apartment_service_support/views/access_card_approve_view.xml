@@ -96,6 +96,11 @@
         <field name="model">tb_access_card</field>
         <field name="arch" type="xml">
             <search>
+                <field name="name"/>
+                <separator/>
+                <filter name="status_pending" string="Trạng thái chờ" domain="[('status', '=', 'PENDING')]"/>
+                <filter name="status_active" string="Trạng thái đã duyệt" domain="[('status', '=', 'ACTIVE')]"/>
+                <filter name="status_reject" string="Trạng thái bị từ chối" domain="[('status', '=', 'REJECT')]"/>
                 <group expand="1" string="Group By">
                     <filter name="group_block_house" string="Dự án" context="{'group_by':'blockhouse_id'}"/>
                     <filter name="group_status" string="Trạng thái" context="{'group_by':'status'}"/>
@@ -109,6 +114,7 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">tb_access_card</field>
         <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_tb_access_card_approve_search"/>
         <field name="view_ids" eval="[(5, 0, 0),
                 (0, 0, {'view_mode': 'tree', 'view_id': ref('view_tb_access_card_approve_tree')}),
                 (0, 0, {'view_mode': 'form', 'view_id': ref('view_tb_access_card_approve_form')})]"

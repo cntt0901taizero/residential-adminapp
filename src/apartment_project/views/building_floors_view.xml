@@ -89,7 +89,13 @@
         <field name="model">tb_building_floors</field>
         <field name="arch" type="xml">
             <search>
-                <filter name="is_active" string="Trạng thái active" domain="[('is_active', '=', 'True')]"/>
+                <field name="name"/>
+                <field name="floors_type"/>
+                <field name="building_id"/>
+                <field name="blockhouse_id"/>
+                <separator/>
+                <filter name="is_active_true" string="Có hiệu lực" domain="[('is_active', '=', True)]"/>
+                <filter name="is_active_false" string="Không có hiệu lực" domain="[('is_active', '=', False)]"/>
                 <group expand="1" string="Group By">
                     <filter name="group_block_house" string="Dự án" context="{'group_by': 'blockhouse_id'}"/>
                     <filter name="group_building" string="Tòa nhà" context="{'group_by': 'building_id'}"/>

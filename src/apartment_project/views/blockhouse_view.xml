@@ -45,11 +45,11 @@
                             <field name="investor_name"/>
                             <field name="is_active"/>
                         </group>
-                        <group string="Thông tin liên hệ">
+                        <group string="Thông tin địa chỉ và liên hệ">
                             <field name="phone" widget="phone" placeholder=""/>
-                            <field name="address" widget="text"/>
                             <field name="website" widget="CopyClipboardChar" placeholder=""/>
                             <field name="location_link" widget="CopyClipboardChar" placeholder=""/>
+                            <field name="address" widget="text"/>
                         </group>
                     </group>
                 </sheet>
@@ -62,7 +62,16 @@
         <field name="model">tb_blockhouse</field>
         <field name="arch" type="xml">
             <search>
-                <filter name="is_active" string="Trạng thái active" domain="[('is_active', '=', 'True')]"/>
+                <field name="name"/>
+                <field name="code"/>
+                <separator/>
+                <field name="investor_name"/>
+                <field name="phone"/>
+                <field name="website"/>
+                <field name="address"/>
+                <separator/>
+                <filter name="is_active_true" string="Có hiệu lực" domain="[('is_active', '=', True)]"/>
+                <filter name="is_active_false" string="Không có hiệu lực" domain="[('is_active', '=', False)]"/>
             </search>
         </field>
     </record>

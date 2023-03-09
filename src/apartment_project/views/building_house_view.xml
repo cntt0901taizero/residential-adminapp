@@ -8,16 +8,16 @@
         <field name="name">tb_building_house.tree</field>
         <field name="model">tb_building_house</field>
         <field name="arch" type="xml">
-            <tree string="Bảng căn hộ" decoration-danger="is_active == False" edit="0">
-                <field name="row_number" string="STT" optional="show"/>
-                <field name="name" string="SỐ NHÀ" optional="show" decoration-bf="1"/>
-                <field name="code" string="MÃ" optional="show" decoration-bf="1"/>
-                <field name="address" string="ĐỊA CHỈ" optional="show"/>
-                <field name="house_type" string="LOẠI NHÀ" optional="show"/>
-                <field name="blockhouse_id" string="DỰ ÁN" widget="badge" optional="show"/>
-                <field name="building_id" string="TÒA NHÀ" widget="badge" optional="show"/>
-                <field name="building_floors_id" string="TẦNG" widget="badge" optional="show"/>
-                <field name="is_active" string="TRẠNG THÁI" optional="show"/>
+            <tree string="Bảng căn hộ" decoration-danger="is_active == False">
+                <field name="row_number" string="STT"/>
+                <field name="name" string="SỐ NHÀ" decoration-bf="1"/>
+                <field name="code" string="MÃ" decoration-bf="1"/>
+                <field name="address" string="ĐỊA CHỈ"/>
+                <field name="house_type" string="LOẠI NHÀ"/>
+                <field name="blockhouse_id" string="DỰ ÁN" widget="badge"/>
+                <field name="building_id" string="TÒA NHÀ" widget="badge"/>
+                <field name="building_floors_id" string="TẦNG" widget="badge"/>
+                <field name="is_active" string="TRẠNG THÁI"/>
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                         name="open_edit_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
@@ -66,7 +66,16 @@
         <field name="model">tb_building_house</field>
         <field name="arch" type="xml">
             <search>
-                <filter name="is_active" string="Trạng thái active" domain="[('is_active', '=', 'True')]"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="address"/>
+                <field name="house_type"/>
+                <field name="blockhouse_id"/>
+                <field name="building_id"/>
+                <field name="building_floors_id"/>
+                <separator/>
+                <filter name="is_active_true" string="Có hiệu lực" domain="[('is_active', '=', True)]"/>
+                <filter name="is_active_false" string="Không có hiệu lực" domain="[('is_active', '=', False)]"/>
                 <group expand="1" string="Group By">
                     <filter name="group_block_house" string="Dự án" context="{'group_by':'blockhouse_id'}"/>
                     <filter name="group_building" string="Tòa nhà" context="{'group_by':'building_id'}"/>

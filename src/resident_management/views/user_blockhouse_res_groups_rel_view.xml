@@ -45,8 +45,7 @@
                                    attrs="{'required': True}" options="{'no_open': True}"/>
                         </group>
                         <group>
-                            <field name="building_id" string="Tòa nhà *"
-                                   attrs="{'required': True}" options="{'no_open': True}"/>
+                            <field name="building_id" string="Tòa nhà" options="{'no_open': True}"/>
                         </group>
                         <group>
                             <field name="group_id" attrs="{'required': True}" options="{'no_open': True}"

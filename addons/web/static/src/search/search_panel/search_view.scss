@@ -47,12 +47,13 @@
 
         .o_searchview_input {
             flex: 1 0 auto;
-            width: 75px;
+            width: 250px;
             height: 23px !important
         }
 
         .o_searchview_autocomplete {
             width: 100%;
+            border-radius: 10px;
             @include o-position-absolute(100%, $left: auto);
 
             .o_menu_item {

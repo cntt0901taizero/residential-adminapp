@@ -128,7 +128,7 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
         if "building_house_id" not in value:
             self.env.cr.execute("""SELECT count(*) FROM tb_users_blockhouse_res_groups_rel WHERE user_id=%s AND 
                                    blockhouse_id=%s AND building_id=%s AND group_id=%s""",
-                                (uid, blockhouse_id, building_id, gid))
+                                (uid, blockhouse_id, building_id if building_id else None, gid))
             total = self.env.cr.fetchone()[0]
             if total > 0:
                 raise ValidationError("Bạn đã là ban quản trị/ ban quản lý của tòa nhà này")
