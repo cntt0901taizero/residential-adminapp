@@ -103,15 +103,37 @@
         </field>
     </record>
 
+    <record id="view_tb_news_approve_search" model="ir.ui.view">
+        <field name="name">tb_news.approve.search</field>
+        <field name="model">tb_news</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <separator/>
+                <filter name="status_pending" string="Trạng thái chờ" domain="[('status', '=', 'PENDING')]"/>
+                <filter name="status_active" string="Trạng thái đã duyệt" domain="[('status', '=', 'ACTIVE')]"/>
+                <filter name="status_reject" string="Trạng thái bị từ chối" domain="[('status', '=', 'REJECT')]"/>
+                <group expand="1" string="Group By">
+                    <filter name="group_block_house" string="Dự án" context="{'group_by':'blockhouse_id'}"/>
+                    <filter name="group_status" string="Trạng thái" context="{'group_by':'status'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
     <record id="action_tb_news_approve" model="ir.actions.act_window">
         <field name="name">PHÊ DUYỆT BẢN TIN</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">tb_news</field>
         <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_tb_news_approve_search"/>
         <field name="view_ids" eval="[(5, 0, 0),
                 (0, 0, {'view_mode': 'tree', 'view_id': ref('view_tb_news_approve_tree')}),
                 (0, 0, {'view_mode': 'form', 'view_id': ref('view_tb_news_approve_form')})]"
         />
+        <field name="context">
+            {'search_default_status_pending':1}
+        </field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Chưa có bản ghi nào!</p>
         </field>

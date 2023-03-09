@@ -115,12 +115,13 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">tb_resident_handbook</field>
         <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_tb_resident_handbook_approve_search"/>
         <field name="view_ids" eval="[(5, 0, 0),
                 (0, 0, {'view_mode': 'tree', 'view_id': ref('view_tb_resident_handbook_approve_tree')}),
                 (0, 0, {'view_mode': 'form', 'view_id': ref('view_tb_resident_handbook_approve_form')})]"
         />
         <field name="context">
-            {'search_default_group_status':1,'search_default_group_block_house':1,'search_default_group_building':1,'search_default_group_name':1}
+            {'search_default_group_status':1,'search_default_group_block_house':1,'search_default_group_building':1,'search_default_group_name':1,'search_default_status_pending':1}
         </field>
         <field name="limit">10</field>
         <field name="help" type="html">
