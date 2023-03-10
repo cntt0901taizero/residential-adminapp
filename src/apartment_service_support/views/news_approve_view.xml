@@ -49,7 +49,7 @@
                         </div>
                         <div class="col-md-6">
                             <group>
-                                <field name="image" required="1" string="Ảnh *" readonly="0" widget="image" class="oe_left oe_avatar"/>
+                                <field name="image" widget="image" class="oe_left oe_avatar"/>
                             </group>
                         </div>
                         <div class="col-md-6">

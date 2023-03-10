@@ -90,8 +90,7 @@
                         </div>
                         <div class="col-md-6">
                             <group>
-                                <field name="image" required="1" height="400px" string="Ảnh *"
-                                       widget="image" class="oe_left oe_avatar"/>
+                                <field name="image" height="400px" widget="image" class="oe_left oe_avatar"/>
                             </group>
                         </div>
                         <div class="col-md-6">

@@ -14,7 +14,11 @@ class tb_vehicle(models.Model):
     _description = 'Phương tiện'
 
     name = fields.Char(string='Biển số xe', copy=False)  # license_plates
-    image = fields.Image(string='Ảnh', copy=False)
+    image = fields.Image(string='Ảnh phương tiện', copy=False)
+    image_citizen_identification_font = fields.Image(string='CMND/CCCD mặt trước', copy=False)
+    image_citizen_identification_back = fields.Image(string='CMND/CCCD mặt sau', copy=False)
+    image_vehicle_registration_certificate_font = fields.Image(string='Đăng ký xe mặt trước', copy=False)
+    image_vehicle_registration_certificate_back = fields.Image(string='Đăng ký xe mặt sau', copy=False)
     vehicle_type = fields.Selection(string='Loại xe', selection=VEHICLE_TYPES, default=VEHICLE_TYPES[0][0])
     note = fields.Text(string='Ghi chú', copy=False, help='Loại xe - màu xe - ...')
     status = fields.Selection(string='Trạng thái', selection=STATUS_TYPES, default=STATUS_TYPES[0][0])

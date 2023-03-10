@@ -63,8 +63,6 @@ class tb_news(models.Model):
         else:
             return [("is_active", "=", True)]
 
-
-
     @api.onchange('blockhouse_id')
     def on_change_blockhouse_id(self):
         self.building_id = None
