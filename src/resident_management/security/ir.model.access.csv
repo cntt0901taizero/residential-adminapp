@@ -1,5 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 
+access_res_users_erp_manager,access_res_users_erp_manager,base.model_res_users,base.group_erp_manager,1,1,1,1
 access_res_users_administration,access_res_users_administration,base.model_res_users,group_administration,1,1,1,1
 access_res_users_management,access_res_users_management,base.model_res_users,group_management,1,1,1,1
 access_res_users_resident,access_res_users_resident,base.model_res_users,group_resident,1,1,1,1

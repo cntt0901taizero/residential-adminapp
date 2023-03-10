@@ -38,17 +38,17 @@
         <field name="arch" type="xml">
             <form string="Users" js_class="form_action_resident_user">
                 <field name="id" invisible="1"/>
-                <field name="status" invisible="1"/>
-                <header attrs="{'invisible':[('id','=',False)]}">
-                    <button class="fa fa-check btn btn-info"
-                            attrs="{'invisible':[('status','=','ACTIVE')]}"
-                            name="set_status_active" string=" Phê duyệt và gửi thư mời" type="object"
-                    />
-                    <button class="fa fa-times btn btn-warning"
-                            name="set_status_reject" string=" Từ chối duyệt" type="object"
-                            attrs="{'invisible':[('status','=','REJECT')]}"/>
-                    <field name="status" widget="statusbar"/>
-                </header>
+<!--                <field name="status" invisible="1"/>-->
+<!--                <header attrs="{'invisible':[('id','=',False)]}">-->
+<!--                    <button class="fa fa-check btn btn-info"-->
+<!--                            attrs="{'invisible':[('status','=','ACTIVE')]}"-->
+<!--                            name="set_status_active" string=" Phê duyệt và gửi thư mời" type="object"-->
+<!--                    />-->
+<!--                    <button class="fa fa-times btn btn-warning"-->
+<!--                            name="set_status_reject" string=" Từ chối duyệt" type="object"-->
+<!--                            attrs="{'invisible':[('status','=','REJECT')]}"/>-->
+<!--                    <field name="status" widget="statusbar"/>-->
+<!--                </header>-->
                 <sheet>
                     <div class="row">
                         <div class="col-md-12">
@@ -151,16 +151,19 @@
         <field name="inherit_id" ref="base.view_users_search"/>
         <field name="arch" type="xml">
             <search>
-                <filter name="active" string="Chưa duyệt" domain="[('active', '=', False)]"/>
-            </search>
-<!--            <field name="share" position="after">-->
-<!--                <field string="Tên dự án" name="tb_users_blockhouse_res_groups_rel_ids"-->
+<!--                <separator/>-->
+<!--                <filter name="status_pending" string="Trạng thái chờ" domain="[('status', '=', 'PENDING')]"/>-->
+<!--                <filter name="status_active" string="Trạng thái đã duyệt" domain="[('status', '=', 'ACTIVE')]"/>-->
+<!--                <filter name="status_reject" string="Trạng thái bị từ chối" domain="[('status', '=', 'REJECT')]"/>-->
+<!--                <separator/>-->
+<!--                <field string="Dự án" name="tb_users_blockhouse_res_groups_rel_ids"-->
 <!--                       filter_domain="[('tb_users_blockhouse_res_groups_rel_ids.blockhouse_id','ilike', self)]"/>-->
-<!--                <field string="Tên tòa nhà" name="tb_users_blockhouse_res_groups_rel_ids"-->
+<!--                <field string="Khu / Tòa nhà" name="tb_users_blockhouse_res_groups_rel_ids"-->
 <!--                       filter_domain="[('tb_users_blockhouse_res_groups_rel_ids.building_id','ilike', self)]"/>-->
-<!--                <field string="Tên căn hộ" name="tb_users_blockhouse_res_groups_rel_ids"-->
+<!--                <field string="Căn hộ / biệt thự" name="tb_users_blockhouse_res_groups_rel_ids"-->
 <!--                       filter_domain="[('tb_users_blockhouse_res_groups_rel_ids.building_house_id','ilike', self)]"/>-->
-<!--            </field>-->
+<!--                <separator/>-->
+            </search>
         </field>
     </record>
 
@@ -175,7 +178,10 @@
         />
         <field name="domain">[('user_type', '=', 'RESIDENT')]</field>
         <field name="limit">10</field>
-        <field name="context">{'search_default_active': 1, 'default_user_type': 'RESIDENT', 'install_mode': True}</field>
+        <field name="context">
+            {'default_user_type': 'RESIDENT', 'install_mode': True}
+        </field>
+<!--        'search_default_status_pending': 1, -->
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Chưa có bản ghi nào!</p>
         </field>

@@ -4,7 +4,6 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 <odoo>
-
     <record id="view_resident_users_tree" model="ir.ui.view">
         <field name="name">res.resident.users.tree</field>
         <field name="model">res.users</field>
@@ -19,11 +18,13 @@
                 <field name="lang" string="NGÔN NGỮ"/>
                 <field name="login_date" string="NGÀY ĐĂNG NHẬP"/>
                 <field name="create_date" string="NGÀY TẠO"/>
-<!--                <field name="company_id" groups="base.group_multi_company"/>-->
+                <!--                <field name="company_id" groups="base.group_multi_company"/>-->
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
-                        name="open_edit_resident_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
+                        name="open_edit_resident_form" class="btn btn-light" title="Sửa" type="object"
+                        icon="fa-pencil"/>
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
-                        name="confirm_resident_delete" class="btn btn-danger" title="Xóa" type="object" icon="fa-trash-o"/>
+                        name="confirm_resident_delete" class="btn btn-danger" title="Xóa" type="object"
+                        icon="fa-trash-o"/>
             </tree>
         </field>
     </record>
@@ -37,8 +38,6 @@
                     <field name="id" invisible="1"/>
                     <div class="row">
                         <div class="col-md-12">
-<!--                            <label>Tên đăng nhập *</label>-->
-<!--                            <input type="text" class="o_input" t-att-value="login"/>-->
                             <group>
                                 <field name="image_1920" widget='image' class="oe_left oe_avatar"
                                        options='{"preview_image": "avatar_128"}'/>
@@ -85,11 +84,11 @@
                                 <field name="phone"/>
                             </group>
                         </div>
-                        <div class="col-md-4">
-                            <group>
-                                <field name="status" widget="badge" readonly="1"/>
-                            </group>
-                        </div>
+                        <!--                        <div class="col-md-4">-->
+                        <!--                            <group>-->
+                        <!--                                <field name="status" widget="badge" readonly="1"/>-->
+                        <!--                            </group>-->
+                        <!--                        </div>-->
                         <div class="col-md-12" attrs="{'invisible': [('id','=', False)]}">
                             <group>
                                 <field name="active" readonly="1"/>
@@ -140,14 +139,20 @@
         <field name="model">res.users</field>
         <field name="inherit_id" ref="base.view_users_search"/>
         <field name="arch" type="xml">
-            <field name="share" position="after">
-                <field string="Tên dự án" name="tb_users_blockhouse_res_groups_rel_ids"
-                       filter_domain="[('tb_users_blockhouse_res_groups_rel_ids.blockhouse_id','ilike', self)]"/>
-                <field string="Tên tòa nhà" name="tb_users_blockhouse_res_groups_rel_ids"
-                       filter_domain="[('tb_users_blockhouse_res_groups_rel_ids.building_id','ilike', self)]"/>
-                <field string="Tên căn hộ" name="tb_users_blockhouse_res_groups_rel_ids"
-                       filter_domain="[('tb_users_blockhouse_res_groups_rel_ids.building_house_id','ilike', self)]"/>
-            </field>
+            <search>
+<!--                            <separator/>-->
+<!--                            <filter name="status_pending" string="Trạng thái chờ" domain="[('status', '=', 'PENDING')]"/>-->
+<!--                            <filter name="status_active" string="Trạng thái đã duyệt" domain="[('status', '=', 'ACTIVE')]"/>-->
+<!--                            <filter name="status_reject" string="Trạng thái bị từ chối" domain="[('status', '=', 'REJECT')]"/>-->
+<!--                            <separator/>-->
+<!--                            <field string="Dự án" name="tb_users_blockhouse_res_groups_rel_ids"-->
+<!--                                   filter_domain="[('tb_users_blockhouse_res_groups_rel_ids.blockhouse_id','ilike', self)]"/>-->
+<!--                            <field string="Khu / Tòa nhà" name="tb_users_blockhouse_res_groups_rel_ids"-->
+<!--                                   filter_domain="[('tb_users_blockhouse_res_groups_rel_ids.building_id','ilike', self)]"/>-->
+<!--                            <field string="Căn hộ / biệt thự" name="tb_users_blockhouse_res_groups_rel_ids"-->
+<!--                                   filter_domain="[('tb_users_blockhouse_res_groups_rel_ids.building_house_id','ilike', self)]"/>-->
+<!--                            <separator/>-->
+            </search>
         </field>
     </record>
 
@@ -171,7 +176,7 @@
     <record id="menu_account_resident" model="ir.ui.menu">
         <field name="name">Nhóm tài khoản cư dân</field>
         <field name="parent_id" ref="menu_resident_root"/>
-<!--        <field name="groups_id" eval="[(4, ref('base.group_system')), (4, ref('base.group_erp_manager')), (4, ref('resident_management.group_management')), (4, ref('resident_management.group_administration'))]"/>-->
+        <!--        <field name="groups_id" eval="[(4, ref('base.group_system')), (4, ref('base.group_erp_manager')), (4, ref('resident_management.group_management')), (4, ref('resident_management.group_administration'))]"/>-->
         <field name="sequence">2</field>
     </record>
 

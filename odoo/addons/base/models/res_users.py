@@ -1605,8 +1605,6 @@ class ChangePasswordUser(models.TransientModel):
         for line in self:
             if not line.new_passwd:
                 raise UserError(_("Before clicking on 'Change Password', you have to write a new password."))
-            if line.new_passwd and (len(line.new_passwd) < 7 or len(line.new_passwd) > 35):
-                raise UserError(_("Độ dài mật khẩu phải từ 8 đến 35 kí tự!"))
             line.user_id.write({'password': line.new_passwd})
         # don't keep temporary passwords in the database longer than necessary
         self.write({'new_passwd': False})

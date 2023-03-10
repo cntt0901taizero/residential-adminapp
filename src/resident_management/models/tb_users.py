@@ -17,14 +17,15 @@ class tb_users(models.Model):
     date_of_birth = fields.Date(string='Ngày sinh', copy=False)
     gender = fields.Selection([
         ('Male', 'Nam'), ('Female', 'Nữ'), ('Other', 'Khác'),
-    ], default='Male', string="Giới tính", )
+    ], default='Male', string="Giới tính")
     user_type = fields.Selection([
         ('ADMIN', 'Quản trị'), ('RESIDENT', 'Cư dân'), ('OTHER', 'Other'),
-    ], default='OTHER', string="Loại tài khoản", )
-    status = fields.Selection(string='Trạng thái', selection=STATUS_TYPES, default=STATUS_TYPES[0][0])
+    ], default='OTHER', string="Loại tài khoản")
+    # status = fields.Selection(string='Trạng thái', selection=STATUS_TYPES, default=STATUS_TYPES[0][0])
+
     push_notifications = fields.One2many('tb_push_notification', 'user_id', string='Push Notification', readonly=True)
-    tb_users_blockhouse_res_groups_rel_ids = fields.One2many('tb_users_blockhouse_res_groups_rel',
-                                                             'user_id', string="Quan hệ phân quyền")
+    tb_users_blockhouse_res_groups_rel_ids = fields.One2many('tb_users_blockhouse_res_groups_rel', 'user_id',
+                                                             string="Quan hệ phân quyền")
 
     _sql_constraints = [
         ('citizen_identification', 'unique(citizen_identification)', 'Số định danh cá nhân không được trùng lặp')
@@ -59,33 +60,33 @@ class tb_users(models.Model):
         if can_do:
             for item in self:
                 item.active = True
-                item.status = STATUS_TYPES[0][1]
+                # item.status = STATUS_TYPES[0][1]
                 users_with_email = item.filtered('email')
                 users_with_email.with_context(create_user=True, install_mode=False).action_reset_password()
             return True
         raise ValidationError(error_messenger)
 
-    def set_status_reject(self):
-        per_name = 'perm_approve_resident_user'
-        error_messenger = 'Bạn chưa được phân quyền này!'
-        can_do = self.check_permission(per_name, raise_exception=False)
-        if can_do:
-            for item in self:
-                item.active = False
-                item.status = STATUS_TYPES[0][2]
-            return True
-        raise ValidationError(error_messenger)
-
-    def set_status_pending(self):
-        per_name = 'perm_approve_resident_user'
-        error_messenger = 'Bạn chưa được phân quyền này!'
-        can_do = self.check_permission(per_name, raise_exception=False)
-        if can_do:
-            for item in self:
-                item.active = False
-                item.status = STATUS_TYPES[0][0]
-            return True
-        raise ValidationError(error_messenger)
+    # def set_status_reject(self):
+    #     per_name = 'perm_approve_resident_user'
+    #     error_messenger = 'Bạn chưa được phân quyền này!'
+    #     can_do = self.check_permission(per_name, raise_exception=False)
+    #     if can_do:
+    #         for item in self:
+    #             item.active = False
+    #             item.status = STATUS_TYPES[0][2]
+    #         return True
+    #     raise ValidationError(error_messenger)
+    #
+    # def set_status_pending(self):
+    #     per_name = 'perm_approve_resident_user'
+    #     error_messenger = 'Bạn chưa được phân quyền này!'
+    #     can_do = self.check_permission(per_name, raise_exception=False)
+    #     if can_do:
+    #         for item in self:
+    #             item.active = False
+    #             item.status = STATUS_TYPES[0][0]
+    #         return True
+    #     raise ValidationError(error_messenger)
 
     @api.model
     def read_group(self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True):
