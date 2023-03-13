@@ -108,12 +108,14 @@
         <field name="model">res.users</field>
         <field name="inherit_id" ref="base.view_users_search"/>
         <field name="arch" type="xml">
-            <field name="share" position="after">
-                <field string="Tên dự án" name="tb_users_blockhouse_res_groups_rel_ids"
+            <search>
+                <separator/>
+                <field string="Dự án" name="tb_users_blockhouse_res_groups_rel_ids"
                        filter_domain="[('tb_users_blockhouse_res_groups_rel_ids.blockhouse_id','ilike', self)]"/>
-                <field string="Tên tòa nhà" name="tb_users_blockhouse_res_groups_rel_ids"
+                <field string="Khu / Tòa nhà" name="tb_users_blockhouse_res_groups_rel_ids"
                        filter_domain="[('tb_users_blockhouse_res_groups_rel_ids.building_id','ilike', self)]"/>
-            </field>
+                <separator/>
+            </search>
         </field>
     </record>
 
@@ -122,6 +124,7 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">res.users</field>
         <field name="view_mode">tree,form</field>
+<!--        <field name="search_view_id" ref="view_admin_users_search"/>-->
         <field name="view_ids" eval="[(5, 0, 0),
                 (0, 0, {'view_mode': 'tree', 'view_id': ref('view_admin_users_tree')}),
                 (0, 0, {'view_mode': 'form', 'view_id': ref('view_admin_users_form_inherit')})]"

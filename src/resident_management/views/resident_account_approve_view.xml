@@ -148,11 +148,14 @@
         <field name="model">res.users</field>
         <field name="inherit_id" ref="base.view_users_search"/>
         <field name="arch" type="xml">
-            <search>
+            <xpath expr="//search" position="inside">
                 <separator/>
-                <filter name="status_pending" string="Trạng thái chờ" domain="[('status', '=', 'PENDING')]"/>
-                <filter name="status_active" string="Trạng thái đã duyệt" domain="[('status', '=', 'ACTIVE')]"/>
-                <filter name="status_reject" string="Trạng thái bị từ chối" domain="[('status', '=', 'REJECT')]"/>
+                <filter name="status_pending" string="Trạng thái chờ"
+                        domain="[('status', '=', 'PENDING'), ('active', '=', False)]"/>
+                <filter name="status_active" string="Trạng thái đã duyệt"
+                        domain="[('status', '=', 'ACTIVE'), ('active', '=', True)]"/>
+                <filter name="status_reject" string="Trạng thái bị từ chối"
+                        domain="[('status', '=', 'REJECT'), ('active', '=', False)]"/>
                 <separator/>
                 <field string="Dự án" name="tb_users_blockhouse_res_groups_rel_ids"
                        filter_domain="[('tb_users_blockhouse_res_groups_rel_ids.blockhouse_id','ilike', self)]"/>
@@ -161,7 +164,7 @@
                 <field string="Căn hộ / biệt thự" name="tb_users_blockhouse_res_groups_rel_ids"
                        filter_domain="[('tb_users_blockhouse_res_groups_rel_ids.building_house_id','ilike', self)]"/>
                 <separator/>
-            </search>
+            </xpath>
         </field>
     </record>
 
@@ -170,6 +173,7 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">res.users</field>
         <field name="view_mode">tree,form</field>
+<!--        <field name="search_view_id" ref="view_resident_users_approve_search"/>-->
         <field name="view_ids" eval="[(5, 0, 0),
                 (0, 0, {'view_mode': 'tree', 'view_id': ref('view_resident_users_approve_tree')}),
                 (0, 0, {'view_mode': 'form', 'view_id': ref('view_resident_users_approve_form_inherit')})]"
@@ -177,9 +181,8 @@
         <field name="domain">[('user_type', '=', 'RESIDENT')]</field>
         <field name="limit">10</field>
         <field name="context">
-            {'default_user_type': 'RESIDENT', 'install_mode': True}
+            {'search_default_status_pending': 1, 'default_user_type': 'RESIDENT', 'install_mode': True}
         </field>
-<!--        'search_default_status_pending': 1, -->
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Chưa có bản ghi nào!</p>
         </field>
