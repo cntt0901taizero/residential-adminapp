@@ -18,12 +18,10 @@
                 <field name="name" string="HỌ TÊN"/>
                 <field name="login" string="TÊN ĐĂNG NHẬP"/>
                 <field name="email" string="EMAIL"/>
-                <field name="phone" string="ĐIỆN THOẠI"/>
-                <field name="citizen_identification" string="CCCD"/>
-                <field name="lang" string="NGÔN NGỮ"/>
                 <field name="login_date" string="NGÀY ĐĂNG NHẬP"/>
                 <field name="create_date" string="NGÀY TẠO"/>
-<!--                <field name="company_id" groups="base.group_multi_company"/>-->
+                <field name="status" string="TRẠNG THÁI" widget="label_selection" optional="show"
+                       options="{'classes': {'PENDING': 'info', 'ACTIVE': 'success', 'REJECT':'warning'}}"/>
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                         name="open_edit_resident_approve_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"

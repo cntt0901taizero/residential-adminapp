@@ -13,10 +13,8 @@
                 <field name="name" string="HỌ TÊN"/>
                 <field name="login" string="TÊN ĐĂNG NHẬP"/>
                 <field name="email" string="EMAIL"/>
-                <field name="lang" string="NGÔN NGỮ"/>
                 <field name="login_date" string="NGÀY ĐĂNG NHẬP"/>
                 <field name="create_date" string="NGÀY TẠO"/>
-<!--                <field name="company_id" groups="base.group_multi_company"/>-->
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                         name="open_edit_admin_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
