@@ -41,7 +41,8 @@ class tb_building(models.Model):
     building_house_ids = fields.One2many(comodel_name='tb_building_house', inverse_name='building_id', string="Căn hộ")
 
     _sql_constraints = [
-        ('code', 'unique(code)', 'Mã tòa nhà không được trùng lặp')
+        ('code', 'unique(code)', 'Mã tòa nhà không được trùng lặp'),
+        ('unique_building', 'unique(name, blockhouse_id)', 'Khu/Tòa nhà bị trùng lặp.')
     ]
 
     @api.depends('create_date')

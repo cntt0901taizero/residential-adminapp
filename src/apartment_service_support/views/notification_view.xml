@@ -15,6 +15,7 @@
                 <field name="type" string="LOẠI THÔNG BÁO"/>
                 <field name="status" string="TRẠNG THÁI" widget="label_selection"
                        options="{'classes': {'PENDING': 'info', 'ACTIVE': 'success', 'REJECT':'warning'}}"/>
+                <field name="create_uid" string="NGƯỜI TẠO" optional="show"/>
                 <field name="create_date" string="NGÀY TẠO" optional="show"/>
                 <button name="open_edit_form" class="fa fa-pencil fa-lg btn btn-light"
                         title="Sửa" aria-label="Sửa" type="object"/>
