@@ -84,11 +84,11 @@
                                 <field name="phone"/>
                             </group>
                         </div>
-                        <!--                        <div class="col-md-4">-->
-                        <!--                            <group>-->
-                        <!--                                <field name="status" widget="badge" readonly="1"/>-->
-                        <!--                            </group>-->
-                        <!--                        </div>-->
+                        <div class="col-md-4">
+                            <group>
+                                <field name="status" widget="badge" readonly="1"/>
+                            </group>
+                        </div>
                         <div class="col-md-12" attrs="{'invisible': [('id','=', False)]}">
                             <group>
                                 <field name="active" readonly="1"/>
@@ -140,18 +140,18 @@
         <field name="inherit_id" ref="base.view_users_search"/>
         <field name="arch" type="xml">
             <search>
-<!--                            <separator/>-->
-<!--                            <filter name="status_pending" string="Trạng thái chờ" domain="[('status', '=', 'PENDING')]"/>-->
-<!--                            <filter name="status_active" string="Trạng thái đã duyệt" domain="[('status', '=', 'ACTIVE')]"/>-->
-<!--                            <filter name="status_reject" string="Trạng thái bị từ chối" domain="[('status', '=', 'REJECT')]"/>-->
-<!--                            <separator/>-->
-<!--                            <field string="Dự án" name="tb_users_blockhouse_res_groups_rel_ids"-->
-<!--                                   filter_domain="[('tb_users_blockhouse_res_groups_rel_ids.blockhouse_id','ilike', self)]"/>-->
-<!--                            <field string="Khu / Tòa nhà" name="tb_users_blockhouse_res_groups_rel_ids"-->
-<!--                                   filter_domain="[('tb_users_blockhouse_res_groups_rel_ids.building_id','ilike', self)]"/>-->
-<!--                            <field string="Căn hộ / biệt thự" name="tb_users_blockhouse_res_groups_rel_ids"-->
-<!--                                   filter_domain="[('tb_users_blockhouse_res_groups_rel_ids.building_house_id','ilike', self)]"/>-->
-<!--                            <separator/>-->
+                <separator/>
+                <filter name="status_pending" string="Trạng thái chờ" domain="[('status', '=', 'PENDING')]"/>
+                <filter name="status_active" string="Trạng thái đã duyệt" domain="[('status', '=', 'ACTIVE')]"/>
+                <filter name="status_reject" string="Trạng thái bị từ chối" domain="[('status', '=', 'REJECT')]"/>
+                <separator/>
+                <field string="Dự án" name="tb_users_blockhouse_res_groups_rel_ids"
+                       filter_domain="[('tb_users_blockhouse_res_groups_rel_ids.blockhouse_id','ilike', self)]"/>
+                <field string="Khu / Tòa nhà" name="tb_users_blockhouse_res_groups_rel_ids"
+                       filter_domain="[('tb_users_blockhouse_res_groups_rel_ids.building_id','ilike', self)]"/>
+                <field string="Căn hộ / biệt thự" name="tb_users_blockhouse_res_groups_rel_ids"
+                       filter_domain="[('tb_users_blockhouse_res_groups_rel_ids.building_house_id','ilike', self)]"/>
+                <separator/>
             </search>
         </field>
     </record>

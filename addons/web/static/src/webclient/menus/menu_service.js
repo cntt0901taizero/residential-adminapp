@@ -80,6 +80,7 @@ function makeMenus(env, menusData, fetchLoadMenus) {
 const defineMenuWithPerm = {
     "resident_management.menu_account_admin" : "perm_read_admin_user",
     "resident_management.menu_account_resident" : "perm_read_resident_user",
+    "resident_management.menu_create_account_resident" : "perm_create_resident_user",
     "resident_management.menu_approve_account_resident" : "perm_approve_resident_user",
 
     "apartment_project.menu_blockhouse" : "perm_read_block_house",
@@ -88,36 +89,47 @@ const defineMenuWithPerm = {
     "apartment_project.menu_building_house" : "perm_read_apartment",
 
     "apartment_service_support.menu_banners_root" : "perm_read_advertisement",
+    "apartment_service_support.menu_banners_list" : "perm_create_advertisement",
     "apartment_service_support.menu_banners_approve" : "perm_approve_advertisement",
 
     "apartment_service_support.menu_notification_root" : "perm_read_notification",
+    "apartment_service_support.menu_notification_list" : "perm_create_notification",
     "apartment_service_support.menu_notification_approve" : "perm_approve_notification",
 
     "apartment_service_support.menu_news_root" : "perm_read_news",
+    "apartment_service_support.menu_news_list" : "perm_create_news",
     "apartment_service_support.menu_news_approve" : "perm_approve_news",
 
     "apartment_service_support.menu_utilities_root" : "perm_read_utilities",
+    "apartment_service_support.menu_utilities_list" : "perm_create_utilities",
     "apartment_service_support.menu_utilities_approve" : "perm_approve_utilities",
 
     "apartment_service_support.menu_resident_handbook_root" : "perm_read_handbook",
+    "apartment_service_support.menu_resident_handbook_list" : "perm_create_handbook",
     "apartment_service_support.menu_resident_handbook_approve" : "perm_approve_handbook",
 
     "apartment_service_support.menu_access_card_root" : "perm_read_access_card",
+    "apartment_service_support.menu_access_card_list" : "perm_create_access_card",
     "apartment_service_support.menu_access_card_approve" : "perm_approve_access_card",
 
     "apartment_service_support.menu_utilities_root" : "perm_read_utilities",
+    "apartment_service_support.menu_utilities_list" : "perm_create_utilities",
     "apartment_service_support.menu_utilities_approve" : "perm_approve_utilities",
 
     "apartment_service_support.menu_complain_root" : "perm_read_complain",
+    "apartment_service_support.menu_complain_list" : "perm_create_complain",
     "apartment_service_support.menu_complain_approve" : "perm_approve_complain",
 
     "apartment_service_support.menu_register_delivery_root" : "perm_read_delivery",
+    "apartment_service_support.menu_register_delivery_list" : "perm_create_delivery",
     "apartment_service_support.menu_register_delivery_approve" : "perm_approve_delivery",
 
     "apartment_service_support.menu_resident_handbook_root" : "perm_read_handbook",
+    "apartment_service_support.menu_resident_handbook_list" : "perm_create_handbook",
     "apartment_service_support.menu_resident_handbook_approve" : "perm_approve_handbook",
 
     "apartment_service_support.menu_vehicle_card_root" : "perm_read_vehicle",
+    "apartment_service_support.menu_vehicle_card_list" : "perm_create_vehicle",
     "apartment_service_support.menu_vehicle_card_approve" : "perm_approve_vehicle",
 }
 const get_perm =  (perm) => rpc.query({

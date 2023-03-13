@@ -23,6 +23,7 @@
                 <field name="building_house_id" string="CĂN HỘ" optional="show"/>
                 <field name="status" string="TRẠNG THÁI" widget="label_selection" optional="show"
                        options="{'classes': {'PENDING': 'info', 'ACTIVE': 'success', 'REJECT':'warning'}}"/>
+                <field name="create_date" string="NGÀY TẠO" optional="show"/>
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
                         name="open_edit_approve_form" class="btn btn-light" title="Sửa" type="object" icon="fa-pencil"/>
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
@@ -48,16 +49,6 @@
                     <field name="status" widget="statusbar"/>
                 </header>
                 <sheet>
-                    <group string="Thông tin sở hữu thuộc">
-                        <field name="blockhouse_id" required="1" string="Dự án *"
-                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
-                        <field name="building_id" required="1" string="Tòa nhà *"
-                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
-                        <field name="building_house_id" required="1" string="Căn hộ *"
-                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
-                        <field name="user_id" widget="many2one_avatar_user" required="1" string="Chủ xe *"
-                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
-                    </group>
                     <group>
                         <group string="Thông tin phương tiện cơ bản">
                             <field string="Ảnh phương tiện" name="image"
@@ -77,6 +68,16 @@
                             <field string="Đăng ký xe mặt sau" name="image_vehicle_registration_certificate_back"
                                    height="400px" widget="image" class="oe_left oe_avatar"/>
                         </group>
+                    </group>
+                    <group string="Thông tin sở hữu thuộc">
+                        <field name="blockhouse_id" required="1" string="Dự án *"
+                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                        <field name="building_id" required="1" string="Tòa nhà *"
+                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                        <field name="building_house_id" required="1" string="Căn hộ *"
+                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                        <field name="user_id" widget="many2one_avatar_user" required="1" string="Chủ xe *"
+                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                     </group>
                 </sheet>
             </form>
