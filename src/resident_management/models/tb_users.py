@@ -60,7 +60,7 @@ class tb_users(models.Model):
         if can_do:
             for item in self:
                 item.active = True
-                item.status = STATUS_TYPES[0][1]
+                item.status = STATUS_TYPES[1][0]
                 users_with_email = item.filtered('email')
                 users_with_email.with_context(create_user=True, install_mode=False).action_reset_password()
             return True
@@ -73,7 +73,7 @@ class tb_users(models.Model):
         if can_do:
             for item in self:
                 item.active = False
-                item.status = STATUS_TYPES[0][2]
+                item.status = STATUS_TYPES[2][0]
             return True
         raise ValidationError(error_messenger)
 
