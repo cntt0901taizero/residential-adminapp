@@ -22,7 +22,7 @@ class tb_users(models.Model):
         ('ADMIN', 'Quản trị'), ('RESIDENT', 'Cư dân'), ('OTHER', 'Other'),
     ], default='OTHER', string="Loại tài khoản")
     status = fields.Selection(string='Trạng thái', selection=STATUS_TYPES, default=STATUS_TYPES[0][0])
-    # mobile_change_password = fields.Boolean(string='Đổi password trên smartphone', default=False)
+    mobile_change_password = fields.Boolean(string='Đổi password trên smartphone', default=False)
     push_notifications = fields.One2many('tb_push_notification', 'user_id', string='Push Notification', readonly=True)
     tb_users_blockhouse_res_groups_rel_ids = fields.One2many('tb_users_blockhouse_res_groups_rel', 'user_id',
                                                              string="Quan hệ phân quyền")
@@ -61,7 +61,7 @@ class tb_users(models.Model):
             for item in self:
                 item.active = True
                 item.status = STATUS_TYPES[1][0]
-                # item.mobile_change_password = False
+                item.mobile_change_password = False
                 users_with_email = item.filtered('email')
                 users_with_email.with_context(create_user=True, install_mode=False).action_reset_password()
             return True
