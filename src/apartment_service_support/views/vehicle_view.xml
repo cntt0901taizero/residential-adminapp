@@ -9,9 +9,9 @@
         <field name="model">tb_vehicle</field>
         <field name="arch" type="xml">
             <tree string="Bảng quản lý phương tiện" js_class="tree_action_vehicle" expand="1">
-                <field name="name" string="BIỂN SỐ XE" optional="show"/>
+                <field name="name" string="HỌ TÊN CHỦ XE" optional="show"/>
                 <field name="vehicle_type" string="LOẠI XE" optional="show"/>
-                <field name="note" string="GHI CHÚ" optional="show"/>
+                <field name="phone" string="ĐIỆN THOẠI" optional="show"/>
                 <field name="blockhouse_id" string="DỰ ÁN" optional="show"/>
                 <field name="building_id" string="TÒA NHÀ" optional="show"/>
                 <field name="building_house_id" string="CĂN HỘ" optional="show"/>
@@ -34,12 +34,19 @@
             <form create="false" js_class="form_action_vehicle">
                 <sheet>
                     <group>
-                        <group string="Thông tin phương tiện cơ bản">
+                        <group string="Thông tin đăng ký phương tiện">
                             <field string="Ảnh phương tiện" name="image"
                                    height="400px" widget="image"
                                    class="oe_left oe_avatar"/>
-                            <field name="name"/>
+                            <field name="name" required="1"/>
+                            <field name="date_of_birth"/>
+                            <field name="citizen_identification"/>
+                            <field name="phone"/>
+                            <field name="relationship_type" widget="selection_badge"/>
                             <field name="vehicle_type" widget="selection_badge"/>
+                            <field name="license_plates"/>
+                            <field name="vehicle_brand"/>
+                            <field name="vehicle_color"/>
                             <field name="note"/>
                             <field name="status" widget="badge" readonly="1"/>
                         </group>

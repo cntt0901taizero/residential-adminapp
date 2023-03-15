@@ -2,7 +2,7 @@ from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 from odoo.http import request
 
-from odoo.addons.resident_management.models.tb_users_blockhouse_res_groups_rel import USER_GROUP_CODE
+from odoo.addons.resident_management.enum import USER_GROUP_CODE
 str_bql = USER_GROUP_CODE[2][0]
 str_bqt = USER_GROUP_CODE[3][0]
 

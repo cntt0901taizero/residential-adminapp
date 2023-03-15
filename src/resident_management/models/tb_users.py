@@ -2,8 +2,8 @@ from odoo import models, fields, api
 from odoo.exceptions import ValidationError, AccessDenied
 from odoo.http import request
 
-from odoo.addons.resident_management.models.tb_users_blockhouse_res_groups_rel import USER_GROUP_CODE
-from odoo.addons.resident_management.enum import STATUS_TYPES
+from odoo.addons.resident_management.enum import STATUS_TYPES, USER_GROUP_CODE
+from odoo.addons.resident_management.common import is_valid_email, is_valid_phone
 
 str_bql = USER_GROUP_CODE[2][0]
 str_bqt = USER_GROUP_CODE[3][0]
@@ -147,6 +147,14 @@ class tb_users(models.Model):
             if password and (len(password) < 7 or len(password) > 35):
                 raise ValidationError("Độ dài mật khẩu phải từ 8 đến 35 kí tự!")
                 return
+            email = vals["email"]
+            if email and not is_valid_email(str(email)):
+                raise ValidationError("Email chưa đúng định dạng.")
+                return
+            phone = vals["phone"]
+            if phone and not is_valid_phone(str(phone)):
+                raise ValidationError("Điện thoại chưa đúng định dạng.")
+                return
             type_user = self._context['default_user_type']
             if type_user != 'ADMIN':
                 # self.env.context['install_mode'] = True
@@ -160,7 +168,7 @@ class tb_users(models.Model):
     #     if password and (len(password) < 7 or len(password) > 35):
     #         raise ValidationError("Độ dài mật khẩu phải từ 8 đến 35 kí tự!")
     #         return
-    #     res = self.env['res.users'].browse(id).write(value)
+    #     res = self.env['res.users'].browse(records[0]).write(value)
     #     # return super(tb_users, self).browse(records[0]).write(value)
     #     return res
 

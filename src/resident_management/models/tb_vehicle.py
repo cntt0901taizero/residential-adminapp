@@ -2,8 +2,7 @@ from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 from odoo.http import request
 
-from odoo.addons.resident_management.models.tb_users_blockhouse_res_groups_rel import USER_GROUP_CODE
-from odoo.addons.resident_management.enum import STATUS_TYPES, VEHICLE_TYPES
+from odoo.addons.resident_management.enum import STATUS_TYPES, VEHICLE_TYPES, USER_GROUP_CODE, RELATIONSHIP_TYPES
 
 str_bql = USER_GROUP_CODE[2][0]
 str_bqt = USER_GROUP_CODE[3][0]
@@ -13,15 +12,27 @@ class tb_vehicle(models.Model):
     _name = 'tb_vehicle'
     _description = 'Phương tiện'
 
-    name = fields.Char(string='Biển số xe', copy=False)  # license_plates
+    license_plates = fields.Char(string='Biển số xe', copy=False)
+    vehicle_color = fields.Char(string='Màu xe', copy=False)
+    vehicle_brand = fields.Char(string='Nhãn hiệu xe', copy=False)
+
     image = fields.Image(string='Ảnh phương tiện', copy=False)
     image_citizen_identification_font = fields.Image(string='CMND/CCCD mặt trước', copy=False)
     image_citizen_identification_back = fields.Image(string='CMND/CCCD mặt sau', copy=False)
     image_vehicle_registration_certificate_font = fields.Image(string='Đăng ký xe mặt trước', copy=False)
     image_vehicle_registration_certificate_back = fields.Image(string='Đăng ký xe mặt sau', copy=False)
+
+    name = fields.Char(string='Tên chủ xe', required=True, copy=False)
+    date_of_birth = fields.Char(string='Tên chủ xe', copy=False)
+    phone = fields.Char(string='Điện thoại', copy=False)
+    citizen_identification = fields.Char(string='CMND / CCCD')
+    relationship_type = fields.Selection(string='Quan hệ với chủ hộ', selection=RELATIONSHIP_TYPES,
+                                         default=RELATIONSHIP_TYPES[0][0])
+
     vehicle_type = fields.Selection(string='Loại xe', selection=VEHICLE_TYPES, default=VEHICLE_TYPES[0][0])
-    note = fields.Text(string='Ghi chú', copy=False, help='Loại xe - màu xe - ...')
+    note = fields.Text(string='Ghi chú', copy=False, help='')
     status = fields.Selection(string='Trạng thái', selection=STATUS_TYPES, default=STATUS_TYPES[0][0])
+
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Dự án",
                                     domain=lambda self: self._domain_blockhouse_id(),
                                     ondelete="cascade")
@@ -31,7 +42,7 @@ class tb_vehicle(models.Model):
     building_house_id = fields.Many2one(comodel_name='tb_building_house', string="Căn hộ",
                                         domain="[('building_id', '!=', None), ('building_id', '=', building_id)]",
                                         ondelete="cascade")
-    user_id = fields.Many2one(comodel_name='res.users', string="Chủ sở hữu",
+    user_id = fields.Many2one(comodel_name='res.users', string="Chủ hộ",
                               domain=lambda self: self._domain_user_id(),
                               ondelete="cascade")
 

@@ -46,7 +46,7 @@
                         <div class="col-md-4" attrs="{'invisible': [('id','>', 0)]}">
                             <group>
                                 <field name="password" attrs="{'required': [('id','=', False)]}"
-                                       password="1" string="Mật khẩu *"/>
+                                       password="1" string="Mật khẩu *" placeholder="********"/>
                             </group>
                         </div>
                         <div class="col-md-4">
@@ -56,12 +56,12 @@
                         </div>
                         <div class="col-md-4">
                             <group>
-                                <field name="email" required="1" string="Email *"/>
+                                <field name="email" required="1" string="Email *" placeholder="example@gmail.com"/>
                             </group>
                         </div>
                         <div class="col-md-4">
                             <group>
-                                <field name="phone"/>
+                                <field name="phone" placeholder="+84326410748"/>
                             </group>
                         </div>
                         <div class="col-md-12">

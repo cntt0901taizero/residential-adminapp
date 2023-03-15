@@ -15,9 +15,9 @@
 <!--                    <button class="fa fa-times btn btn-warning" confirm="Remove this attachment?"-->
 <!--                            name="set_status_reject" string=" Từ chối duyệt" type="object"/>-->
                 </header>
-                <field name="name" string="BIỂN SỐ XE" optional="show"/>
+                <field name="name" string="HỌ TÊN CHỦ XE" optional="show"/>
                 <field name="vehicle_type" string="LOẠI XE" optional="show"/>
-                <field name="note" string="GHI CHÚ" optional="show"/>
+                <field name="phone" string="ĐIỆN THOẠI" optional="show"/>
                 <field name="blockhouse_id" string="DỰ ÁN" optional="show"/>
                 <field name="building_id" string="TÒA NHÀ" optional="show"/>
                 <field name="building_house_id" string="CĂN HỘ" optional="show"/>
@@ -55,8 +55,15 @@
                             <field string="Ảnh phương tiện" name="image"
                                    height="400px" widget="image"
                                    class="oe_left oe_avatar"/>
-                            <field name="name"/>
+                            <field name="name" required="1"/>
+                            <field name="date_of_birth"/>
+                            <field name="citizen_identification"/>
+                            <field name="phone"/>
+                            <field name="relationship_type" widget="selection_badge"/>
                             <field name="vehicle_type" widget="selection_badge"/>
+                            <field name="license_plates"/>
+                            <field name="vehicle_brand"/>
+                            <field name="vehicle_color"/>
                             <field name="note"/>
                         </group>
                         <group string="Thông tin giấy tờ liên quan">

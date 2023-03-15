@@ -2,23 +2,7 @@ from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 from odoo.http import request
 
-RELATIONSHIP_TYPES = [
-    ('none', '--'),
-    ('chuho', 'Chủ hộ'),
-    ('ongba', 'Ông bà'),
-    ('bome', 'Bố mẹ'),
-    ('vochong', 'Vợ chồng'),
-    ('concai', 'Con cái'),
-    ('anhchiem', 'Anh chị em'),
-    ('nguoithue', 'Người thuê'),
-]
-
-USER_GROUP_CODE = [
-    ('none', '--'),
-    ('[CD]', '[CD]'),
-    ('[BQL]', '[BQL]'),
-    ('[BQT]', '[BQT]'),
-]
+from odoo.addons.resident_management.enum import USER_GROUP_CODE, RELATIONSHIP_TYPES
 
 str_bql = USER_GROUP_CODE[2][0]
 str_bqt = USER_GROUP_CODE[3][0]

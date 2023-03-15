@@ -2,8 +2,7 @@ from pyfcm import FCMNotification
 from odoo import models, fields, http, api
 from odoo.exceptions import ValidationError
 from odoo.tools import GettextAlias
-from odoo.addons.resident_management.models.tb_users_blockhouse_res_groups_rel import USER_GROUP_CODE
-from odoo.addons.resident_management.enum import STATUS_TYPES
+from odoo.addons.resident_management.enum import STATUS_TYPES, USER_GROUP_CODE
 
 _ = GettextAlias()
 push_service = FCMNotification(
