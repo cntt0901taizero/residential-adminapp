@@ -247,6 +247,11 @@ class ResUsers(models.Model):
                     users_with_email.partner_id.with_context(create_user=True).signup_cancel()
         return users
 
+    # @api.model
+    # def write(self, vals):
+    #     res = super(ResUsers, self).write(vals)
+    #     return res
+
     @api.returns('self', lambda value: value.id)
     def copy(self, default=None):
         self.ensure_one()

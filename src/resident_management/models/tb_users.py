@@ -136,9 +136,10 @@ class tb_users(models.Model):
 
     @api.model
     def create(self, vals):
+        default_user_type = self._context['default_user_type']
         per_name = 'perm_create_resident_user'
         error_messenger = 'Bạn không có quyền tạo tài khoản cư dân.'
-        if self._context['default_user_type'] == 'ADMIN':
+        if default_user_type == 'ADMIN':
             per_name = 'perm_create_admin_user'
             error_messenger = 'Bạn không có quyền tạo tài khoản quản trị.'
         can_do = self.check_permission(per_name, raise_exception=False)
@@ -155,22 +156,39 @@ class tb_users(models.Model):
             if phone and not is_valid_phone(str(phone)):
                 raise ValidationError("Điện thoại chưa đúng định dạng.")
                 return
-            type_user = self._context['default_user_type']
-            if type_user != 'ADMIN':
+            if default_user_type != 'ADMIN':
                 # self.env.context['install_mode'] = True
                 vals["active"] = False
+            self.clear_caches()
             return super(tb_users, self).create(vals)
         raise ValidationError(error_messenger)
 
-    # @api.model
-    # def write(self, records, value):
-    #     password = self.password
-    #     if password and (len(password) < 7 or len(password) > 35):
-    #         raise ValidationError("Độ dài mật khẩu phải từ 8 đến 35 kí tự!")
-    #         return
-    #     res = self.env['res.users'].browse(records[0]).write(value)
-    #     # return super(tb_users, self).browse(records[0]).write(value)
-    #     return res
+    @api.model
+    def write(self, records, vals):
+        user_data = self.env['res.users'].browse(records[0])
+        per_name = 'perm_write_resident_user'
+        error_messenger = 'Bạn không có quyền cập nhật tài khoản cư dân.'
+        if user_data.user_type == 'ADMIN':
+            per_name = 'perm_write_admin_user'
+            error_messenger = 'Bạn không có quyền cập nhật tài khoản quản trị.'
+        can_do = self.check_permission(per_name, raise_exception=False)
+        if can_do:
+            password = vals.get("password")
+            if password and (len(password) < 7 or len(password) > 35):
+                raise ValidationError("Độ dài mật khẩu phải từ 8 đến 35 kí tự!")
+                return
+            email = vals.get("email")
+            if email and not is_valid_email(str(email)):
+                raise ValidationError("Email chưa đúng định dạng.")
+                return
+            phone = vals.get("phone")
+            if phone and not is_valid_phone(str(phone)):
+                raise ValidationError("Điện thoại chưa đúng định dạng.")
+                return
+            res = super(tb_users, user_data).write(vals)
+            self.clear_caches()
+            return res
+        raise ValidationError(error_messenger)
 
     def create_user_blockhouse_groups_rel(self):
         view_id = ''
