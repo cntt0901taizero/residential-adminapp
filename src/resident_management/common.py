@@ -6,7 +6,7 @@ import re
 
 _logger = logging.getLogger(__name__)
 regex_email = r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+'
-regex_phone = '^\\+?[1-9][0-9]{7,14}$'
+regex_phone = '[0-9]{7,14}$'
 
 
 def is_valid_email(email):
