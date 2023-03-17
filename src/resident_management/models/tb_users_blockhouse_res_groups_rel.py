@@ -23,14 +23,16 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
                                     domain=lambda self: self._domain_blockhouse_id(), )
 
     building_id = fields.Many2one(comodel_name='tb_building', string='Tòa nhà',
-                                  domain="[('blockhouse_id', '=', blockhouse_id)]", ondelete="cascade")
+                                  domain="[('is_active', '=', True), ('blockhouse_id', '=', blockhouse_id)]",
+                                  ondelete="cascade")
     building_floors_id = fields.Many2one(comodel_name='tb_building_floors', string='Tầng',
-                                         domain="[('building_id', '=', building_id)]", ondelete="cascade")
+                                         domain="[('is_active', '=', True), ('building_id', '=', building_id)]",
+                                         ondelete="cascade")
     building_house_id = fields.Many2one(comodel_name='tb_building_house', string='Căn hộ',
-                                        domain="[('building_floors_id', '=', building_floors_id)]",
+                                        domain="[('is_active', '=', True), "
+                                               "('building_floors_id', '=', building_floors_id)]",
                                         ondelete="cascade")
     owner = fields.Boolean(string='Chủ sở hữu', default=False)
-
     relationship_type = fields.Selection(string='Quan hệ với chủ hộ', selection=RELATIONSHIP_TYPES,
                                          default=RELATIONSHIP_TYPES[0][0])
     user_group_code = fields.Selection(string='Mã nhóm quyền', selection=USER_GROUP_CODE,

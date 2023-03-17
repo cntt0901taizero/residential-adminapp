@@ -111,7 +111,9 @@ class tb_building_house(models.Model):
             today = date.today()
             d = today.strftime('%d%m%y')
             vals["code"] = 'BDH' + str(d) + str(random.randint(1000, 9999))
-            return super(tb_building_house, self).create(vals)
+            res = super(tb_building_house, self).create(vals)
+            self.clear_caches()
+            return res
         raise ValidationError(error_messenger)
 
     @api.model

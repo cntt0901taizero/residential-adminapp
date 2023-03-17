@@ -76,7 +76,9 @@ class tb_blockhouse(models.Model):
             today = date.today()
             d = today.strftime('%d%m%y')
             vals["code"] = 'BH' + str(d) + str(random.randint(1000, 9999))
-            return super(tb_blockhouse, self).create(vals)
+            res = super(tb_blockhouse, self).create(vals)
+            self.clear_caches()
+            return res
         raise ValidationError(error_messenger)
 
     def create_building(self):
