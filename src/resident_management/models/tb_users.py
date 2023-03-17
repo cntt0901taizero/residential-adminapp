@@ -322,3 +322,4 @@ class tb_users(models.Model):
         for record in self:
             record.unlink()
             pass
+
