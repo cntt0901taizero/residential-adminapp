@@ -99,7 +99,7 @@
                         </div>
                         <div class="col-md-12" attrs="{'invisible': [('id','=', False)]}">
                             <group>
-                                <field name="active" readonly="1"/>
+                                <field name="active"/>
                             </group>
                         </div>
                     </div>
