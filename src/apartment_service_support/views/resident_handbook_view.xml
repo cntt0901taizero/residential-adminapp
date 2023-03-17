@@ -89,7 +89,7 @@
                 <separator/>
                 <filter name="status_pending" string="Trạng thái chờ" domain="[('status', '=', 'PENDING')]"/>
                 <filter name="status_active" string="Trạng thái đã duyệt" domain="[('status', '=', 'ACTIVE')]"/>
-                <filter name="status_reject" string="Trạng thái bị từ chối" domain="[('status', '=', 'REJECT')]"/>
+                <filter name="status_reject" string="Trạng thái từ chối" domain="[('status', '=', 'REJECT')]"/>
                 <group expand="1" string="Group By">
                     <filter name="group_status" string="Trạng thái" context="{'group_by':'status'}"/>
                     <filter name="group_block_house" string="Dự án" context="{'group_by': 'blockhouse_id'}"/>

@@ -144,7 +144,7 @@
 <!--                        domain="[('status', '=', 'PENDING'), ('active', '=', False)]"/>-->
 <!--                <filter name="status_active" string="Trạng thái đã duyệt"-->
 <!--                        domain="[('status', '=', 'ACTIVE'), ('active', '=', True)]"/>-->
-<!--                <filter name="status_reject" string="Trạng thái bị từ chối"-->
+<!--                <filter name="status_reject" string="Trạng thái từ chối"-->
 <!--                        domain="[('status', '=', 'REJECT'), ('active', '=', False)]"/>-->
                 <separator/>
                 <field string="Dự án" name="tb_users_blockhouse_res_groups_rel_ids"
@@ -170,7 +170,10 @@
         />
         <field name="domain">[('user_type', '=', 'RESIDENT')]</field>
         <field name="limit">10</field>
-        <field name="context">{'default_user_type': 'RESIDENT', 'install_mode': True}</field>
+        <field name="context">
+            {'search_default_status_pending': 1, 'search_default_status_active': 1,'search_default_status_reject': 1,
+            'default_user_type': 'RESIDENT', 'install_mode': True}
+        </field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Chưa có bản ghi nào!</p>
         </field>
