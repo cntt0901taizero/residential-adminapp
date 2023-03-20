@@ -21,6 +21,7 @@ class tb_building(models.Model):
 
     row_number = fields.Integer(string='STT', compute='_compute_row_number', store=False)
     name = fields.Char(string='Tên toà nhà', size=200, required=True, copy=False)
+    name_display = fields.Char(string='Tên hiển thị', size=200, required=True, copy=False)
     code = fields.Char(string='Mã', size=50, copy=False, readonly=True)
     founding_date = fields.Date(string='Ngày thành lập', copy=False)
     image = fields.Image(string='Ảnh', copy=False)
