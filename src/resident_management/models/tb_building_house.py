@@ -50,7 +50,8 @@ class tb_building_house(models.Model):
                                          ondelete="cascade")
 
     _sql_constraints = [
-        ('code', 'unique(code)', 'Mã căn hộ không được trùng lặp')
+        ('code', 'unique(code)', 'Mã căn hộ không được trùng lặp'),
+        ('unique_building_house', 'unique(name, building_floors_id, building_id, blockhouse_id)', 'Căn hộ bị trùng lặp.')
     ]
 
     @api.depends('create_date')

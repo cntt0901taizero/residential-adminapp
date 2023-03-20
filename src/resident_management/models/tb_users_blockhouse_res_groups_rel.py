@@ -29,8 +29,7 @@ class tb_users_blockhouse_res_groups_rel(models.Model):
                                          domain="[('is_active', '=', True), ('building_id', '=', building_id)]",
                                          ondelete="cascade")
     building_house_id = fields.Many2one(comodel_name='tb_building_house', string='Căn hộ',
-                                        domain="[('is_active', '=', True), "
-                                               "('building_floors_id', '=', building_floors_id)]",
+                                        domain="[('is_active', '=', True), ('building_floors_id', '=', building_floors_id)]",
                                         ondelete="cascade")
     owner = fields.Boolean(string='Chủ sở hữu', default=False)
     relationship_type = fields.Selection(string='Quan hệ với chủ hộ', selection=RELATIONSHIP_TYPES,

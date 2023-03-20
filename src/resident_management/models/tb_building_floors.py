@@ -1,6 +1,8 @@
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
+from datetime import date
 from odoo.http import request
+import random
 
 from odoo.addons.resident_management.enum import USER_GROUP_CODE
 str_bql = USER_GROUP_CODE[2][0]
@@ -22,6 +24,7 @@ class tb_building_floors(models.Model):
 
     row_number = fields.Integer(string='STT', compute='_compute_row_number', store=False)
     name = fields.Char(string='Tên tầng sàn', size=100, required=True, copy=False)
+    code = fields.Char(string='Mã', size=50, copy=False, readonly=True)
     sort = fields.Integer(string='Thứ tự', copy=False)
     total_house = fields.Integer(string='Tổng căn hộ', copy=False)
     floors_type = fields.Selection(string='Loại tầng', selection=FLOORS_TYPES, default=FLOORS_TYPES[0][0])
@@ -35,6 +38,10 @@ class tb_building_floors(models.Model):
 
     building_house_ids = fields.One2many(comodel_name='tb_building_house', string="Căn hộ",
                                          inverse_name='building_floors_id')
+
+    _sql_constraints = [
+        ('unique_building_floors', 'unique(name, building_id, blockhouse_id)', 'Tên tầng bị trùng lặp.')
+    ]
 
     @api.depends('create_date')
     def _compute_row_number(self):
@@ -91,6 +98,9 @@ class tb_building_floors(models.Model):
         error_messenger = 'Bạn chưa được phân quyền này!'
         can_do = self.check_permission(per_name, raise_exception=False)
         if can_do:
+            today = date.today()
+            d = today.strftime('%d%m%y')
+            vals["code"] = 'BF' + str(d) + str(random.randint(1000, 9999))
             res = super(tb_building_floors, self).create(vals)
             self.clear_caches()
             return res
