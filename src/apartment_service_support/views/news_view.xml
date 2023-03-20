@@ -6,9 +6,6 @@
         <field name="arch" type="xml">
             <tree js_class="tree_action_news">
                 <field name="name" string="TIÊU ĐỀ BẢN TIN"/>
-                <field name="create_uid" string="NGƯỜI TẠO"/>
-<!--                <field name="news_description" string="MÔ TẢ"/>-->
-                <field name="create_date" string="NGÀY TẠO"/>
                 <field name="status" string="TRẠNG THÁI" widget="label_selection"
                        options="{'classes': {'DRAFT': 'info', 'ACTIVE': 'success', 'REJECT':'warning'}}"/>
                 <field name="create_uid" string="NGƯỜI TẠO" optional="show"/>

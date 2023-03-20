@@ -163,9 +163,7 @@ class tb_notification(models.Model):
                 raise ValidationError(_("Vui lòng liên hệ ban quản trị để được duyệt thông báo!"))
         if 'status' not in values:
             values['status'] = 'PENDING'
-        # here you can do accordingly
         return super(tb_notification, self).write(values)
-
 
     def open_edit_form(self):
         form_id = self.env.ref('apartment_service_support.view_tb_notification_form')
@@ -189,6 +187,27 @@ class tb_notification(models.Model):
             'target': 'current',
         }
 
+    def open_edit_approve_form(self):
+        form_id = self.env.ref('apartment_service_support.view_tb_notification_approve_form')
+        per_name = 'perm_write_notification'
+        error_messenger = 'Bạn không có quyền chỉnh sửa thông báo.'
+        can_do = self.check_permission(per_name, raise_exception=False)
+        if not can_do:
+            raise ValidationError(error_messenger)
+        self.check_access_rights('write')
+        # then open the form
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Cập nhật thông báo',
+            'res_model': 'tb_notification',
+            'res_id': self.id,
+            'view_type': 'form',
+            'view_mode': 'form',
+            'view_id': form_id.id,
+            'context': {'form_view_initial_mode': 'edit'},
+            # if you want to open the form in edit mode direclty
+            'target': 'current',
+        }
 
     def confirm_delete(self):
         per_name = 'perm_delete_notification'
@@ -202,7 +221,6 @@ class tb_notification(models.Model):
             'type': 'ir.actions.act_window',
             'name': 'Xóa thông báo',
             'res_model': 'dialog.box.confirm',
-
             'view_type': 'form',
             'view_mode': 'form',
             'target': 'new',

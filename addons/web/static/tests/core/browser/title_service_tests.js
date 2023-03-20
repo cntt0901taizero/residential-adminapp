@@ -24,48 +24,48 @@ QUnit.module("Title", {
 
 QUnit.test("simple title", async (assert) => {
     assert.expect(1);
-    env.services.title.setParts({ zopenerp: "Odoo" });
-    assert.strictEqual(env.services.title.current, "Odoo");
+    env.services.title.setParts({ zopenerp: "QL Cư dân" });
+    assert.strictEqual(env.services.title.current, "QL Cư dân");
 });
 
 QUnit.test("add title part", async (assert) => {
     assert.expect(2);
-    env.services.title.setParts({ zopenerp: "Odoo", chat: null });
-    assert.strictEqual(env.services.title.current, "Odoo");
+    env.services.title.setParts({ zopenerp: "QL Cư dân", chat: null });
+    assert.strictEqual(env.services.title.current, "QL Cư dân");
     env.services.title.setParts({ action: "Import" });
-    assert.strictEqual(env.services.title.current, "Odoo - Import");
+    assert.strictEqual(env.services.title.current, "QL Cư dân - Import");
 });
 
 QUnit.test("modify title part", async (assert) => {
     assert.expect(2);
-    env.services.title.setParts({ zopenerp: "Odoo" });
-    assert.strictEqual(env.services.title.current, "Odoo");
+    env.services.title.setParts({ zopenerp: "QL Cư dân" });
+    assert.strictEqual(env.services.title.current, "QL Cư dân");
     env.services.title.setParts({ zopenerp: "Zopenerp" });
     assert.strictEqual(env.services.title.current, "Zopenerp");
 });
 
 QUnit.test("delete title part", async (assert) => {
     assert.expect(2);
-    env.services.title.setParts({ zopenerp: "Odoo" });
-    assert.strictEqual(env.services.title.current, "Odoo");
+    env.services.title.setParts({ zopenerp: "QL Cư dân" });
+    assert.strictEqual(env.services.title.current, "QL Cư dân");
     env.services.title.setParts({ zopenerp: null });
     assert.strictEqual(env.services.title.current, "");
 });
 
 QUnit.test("all at once", async (assert) => {
     assert.expect(2);
-    env.services.title.setParts({ zopenerp: "Odoo", action: "Import" });
-    assert.strictEqual(env.services.title.current, "Odoo - Import");
+    env.services.title.setParts({ zopenerp: "QL Cư dân", action: "Import" });
+    assert.strictEqual(env.services.title.current, "QL Cư dân - Import");
     env.services.title.setParts({ action: null, zopenerp: "Zopenerp", chat: "Sauron" });
     assert.strictEqual(env.services.title.current, "Zopenerp - Sauron");
 });
 
 QUnit.test("get title parts", async (assert) => {
     assert.expect(3);
-    env.services.title.setParts({ zopenerp: "Odoo", action: "Import" });
-    assert.strictEqual(env.services.title.current, "Odoo - Import");
+    env.services.title.setParts({ zopenerp: "QL Cư dân", action: "Import" });
+    assert.strictEqual(env.services.title.current, "QL Cư dân - Import");
     const parts = env.services.title.getParts();
-    assert.deepEqual(parts, { zopenerp: "Odoo", action: "Import" });
+    assert.deepEqual(parts, { zopenerp: "QL Cư dân", action: "Import" });
     parts.action = "Export";
-    assert.strictEqual(env.services.title.current, "Odoo - Import"); // parts is a copy!
+    assert.strictEqual(env.services.title.current, "QL Cư dân - Import"); // parts is a copy!
 });

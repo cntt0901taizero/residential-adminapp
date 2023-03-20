@@ -16,7 +16,7 @@ version_info = (15, 0, 0, FINAL, 0, '')
 version = '.'.join(str(s) for s in version_info[:2]) + RELEASE_LEVELS_DISPLAY[version_info[3]] + str(version_info[4] or '') + version_info[5]
 series = serie = major_version = '.'.join(str(s) for s in version_info[:2])
 
-product_name = 'Odoo'
+product_name = 'QL Cư dân'
 description = 'Odoo Server'
 long_desc = '''Odoo is a complete ERP and CRM. The main features are accounting (analytic
 and financial), stock management, sales and purchases management, tasks

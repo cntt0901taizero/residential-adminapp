@@ -43,9 +43,14 @@
                             attrs="{'invisible':[('status','=','ACTIVE')]}"
                             name="set_status_active" string=" Phê duyệt và gửi thư mời" type="object"
                     />
-                    <button class="fa fa-times btn btn-warning"
+                    <button class="fa fa-ban btn btn-warning"
                             name="set_status_reject" string=" Từ chối duyệt" type="object"
-                            attrs="{'invisible':[('status','=','REJECT')]}"/>
+                            attrs="{'invisible':[('status','=','REJECT')]}"
+                    />
+                    <button class="fa fa-undo btn btn-warning"
+                            attrs="{'invisible':[('status','=','PENDING')]}"
+                            name="set_status_pending" string=" Trả về tiếp nhận" type="object"
+                    />
                     <field name="status" widget="statusbar"/>
                 </header>
                 <sheet>

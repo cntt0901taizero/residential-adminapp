@@ -12,7 +12,7 @@
                 <header>
                     <button class="fa fa-check btn btn-info" confirm="Remove this attachment?"
                             name="set_status_active" string=" Phê duyệt" type="object"/>
-<!--                    <button class="fa fa-times btn btn-warning" confirm="Remove this attachment?"-->
+<!--                    <button class="fa fa-ban btn btn-warning" confirm="Remove this attachment?"-->
 <!--                            name="set_status_reject" string=" Từ chối duyệt" type="object"/>-->
                 </header>
                 <field name="name" string="TIÊU ĐỀ" optional="show"/>

@@ -67,42 +67,64 @@ class tb_news(models.Model):
         self.building_id = None
 
     def set_status_active(self):
-        push_service.notify_single_device(
-            registration_id=registration_id,
-            message_title="Bản tin mới",
-            message_body=self.name
-        )
-        self.write({'status': 'ACTIVE'})
+        for item in self:
+            push_service.notify_single_device(
+                registration_id=registration_id,
+                message_title="Bản tin mới",
+                message_body=item.name
+            )
+            item.status = 'ACTIVE'
 
     def set_status_reject(self):
-        self.write({'status': 'REJECT'})
+        for item in self:
+            item.status = 'REJECT'
 
     def set_status_draft(self):
-        self.write({'status': 'DRAFT'})
-
-    def write(self, values):
-        per_name = 'perm_approve_news'
-        can_do = self.check_permission(per_name, raise_exception=False)
-        if 'news_type' in values:
-            if values["news_type"] == 'PROJECT_APARTMENT':
-                values["building_id"] = None
-        if can_do:
-            values['status'] = 'ACTIVE'
-        else:
-            values['status'] = 'DRAFT'
-        return super(tb_news, self).write(values)
-
-        # here you can do accordingly
+        for item in self:
+            item.status = 'DRAFT'
 
     @api.model
     def create(self, vals):
         if vals["news_type"] == 'PROJECT_APARTMENT':
-          vals["building_id"] = None
+            vals["building_id"] = None
         return super(tb_news, self).create(vals)
 
+    # def write(self, values):
+    #     per_name = 'perm_approve_news'
+    #     can_do = self.check_permission(per_name, raise_exception=False)
+    #     if 'news_type' in values:
+    #         if values["news_type"] == 'PROJECT_APARTMENT':
+    #             values["building_id"] = None
+    #     if can_do:
+    #         values['status'] = 'ACTIVE'
+    #     else:
+    #         values['status'] = 'DRAFT'
+    #     return super(tb_news, self).write(values)
 
     def open_edit_form_news(self):
         form_id = self.env.ref('apartment_service_support.view_tb_news_form')
+        per_name = 'perm_write_news'
+        error_messenger = 'Bạn không có quyền chỉnh sửa bản tin.'
+        can_do = self.check_permission(per_name, raise_exception=False)
+        if not can_do:
+            raise ValidationError(error_messenger)
+        self.check_access_rights('write')
+        # then open the form
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Cập nhật bản tin',
+            'res_model': 'tb_news',
+            'res_id': self.id,
+            'view_type': 'form',
+            'view_mode': 'form',
+            'view_id': form_id.id,
+            'context': {'form_view_initial_mode': 'edit'},
+            # if you want to open the form in edit mode direclty
+            'target': 'current',
+        }
+
+    def open_edit_approve_form_news(self):
+        form_id = self.env.ref('apartment_service_support.view_tb_news_approve_form')
         per_name = 'perm_write_news'
         error_messenger = 'Bạn không có quyền chỉnh sửa bản tin.'
         can_do = self.check_permission(per_name, raise_exception=False)

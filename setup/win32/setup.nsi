@@ -70,7 +70,7 @@ Unicode True
 	!define TOOLSDIR 'c:\odoobuild'
 !endif
 
-!define PRODUCT_NAME "Odoo"
+!define PRODUCT_NAME "QL Cư dân"
 !define DISPLAY_NAME "${PRODUCT_NAME} ${MAJOR_VERSION}.${MINOR_VERSION}"
 
 !define UNINSTALL_BASE_REGISTRY_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall"
