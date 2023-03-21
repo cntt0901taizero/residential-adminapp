@@ -12,11 +12,10 @@
                   expand="context.get('expand', True)">
                 <field name="row_number" string="STT" optional="show"/>
                 <field name="image" string="ẢNH" width="100px" widget="image" class="oe_left oe_avatar" optional="show"/>
-                <field name="name" string="TÊN TÒA/KHU" optional="show" decoration-bf="1"/>
-                <field name="code" string="MÃ" optional="show" decoration-bf="1"/>
+                <field name="name_display" string="TÊN HIỂN THỊ" optional="show" decoration-bf="1"/>
+                <field name="name" string="TÊN TÒA/KHU" optional="show"/>
                 <field name="building_level" string="HẠNG" optional="show"/>
                 <field name="website" string="WEBSITE" widget="url" optional="show"/>
-                <field name="address" string="ĐỊA CHỈ" optional="show"/>
                 <field name="blockhouse_id" string="DỰ ÁN" widget="badge" optional="show"/>
                 <field name="is_active" string="TRẠNG THÁI" optional="show"/>
                 <button groups="resident_management.group_administration, resident_management.group_management, base.group_erp_manager"
@@ -97,8 +96,9 @@
                     <group>
                         <field name="id" invisible="1"/>
                         <group string="Thông tin cơ bản">
-                            <field name="name" string="Tên khu / tòa nhà *" required="1"/>
+                            <field name="name_display" string="Tên hiển thị *" required="1"/>
                             <field name="code" string="Mã *"/>
+                            <field name="name" string="Tên khu / tòa nhà *"/>
                             <field name="building_level" widget="selection_badge"/>
                             <field name="founding_date" widget="date"/>
                             <field name="blockhouse_id" string="Dự án *" required="1"

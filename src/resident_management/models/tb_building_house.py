@@ -26,7 +26,8 @@ class tb_building_house(models.Model):
     _description = 'Căn hộ'
 
     row_number = fields.Integer(string='STT', compute='_compute_row_number', store=False)
-    name = fields.Char(string='Số nhà', size=50, required=False, copy=False)
+    name = fields.Char(string='Tên căn hộ', size=200, copy=False, readonly=True)
+    name_display = fields.Char(string='Số nhà', size=200, required=True, copy=False)
     code = fields.Char(string='Mã', size=50, copy=False, readonly=True)
     address = fields.Char(string='Địa chỉ', size=200, copy=False)
     house_type = fields.Selection(string='Loại hình căn hộ', selection=HOUSE_TYPES, default=HOUSE_TYPES[0][0])
@@ -50,6 +51,7 @@ class tb_building_house(models.Model):
                                          ondelete="cascade")
 
     _sql_constraints = [
+        ('name', 'unique(name)', 'Tên căn hộ không được trùng lặp'),
         ('code', 'unique(code)', 'Mã căn hộ không được trùng lặp'),
         ('unique_building_house', 'unique(name, building_floors_id, building_id, blockhouse_id)', 'Căn hộ bị trùng lặp.')
     ]
@@ -111,7 +113,9 @@ class tb_building_house(models.Model):
         if can_do:
             today = date.today()
             d = today.strftime('%d%m%y')
-            vals["code"] = 'BDH' + str(d) + str(random.randint(1000, 9999))
+            code = 'BDH' + str(d) + str(random.randint(1000, 9999))
+            vals["code"] = code
+            vals["name"] = code + " - " + self.name_display
             res = super(tb_building_house, self).create(vals)
             self.clear_caches()
             return res

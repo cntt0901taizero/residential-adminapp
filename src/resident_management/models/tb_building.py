@@ -20,7 +20,7 @@ class tb_building(models.Model):
     _description = 'Toà nhà'
 
     row_number = fields.Integer(string='STT', compute='_compute_row_number', store=False)
-    name = fields.Char(string='Tên toà nhà', size=200, required=True, copy=False)
+    name = fields.Char(string='Tên toà nhà', size=200, copy=False, readonly=True)
     name_display = fields.Char(string='Tên hiển thị', size=200, required=True, copy=False)
     code = fields.Char(string='Mã', size=50, copy=False, readonly=True)
     founding_date = fields.Date(string='Ngày thành lập', copy=False)
@@ -42,8 +42,8 @@ class tb_building(models.Model):
     building_house_ids = fields.One2many(comodel_name='tb_building_house', inverse_name='building_id', string="Căn hộ")
 
     _sql_constraints = [
+        ('name', 'unique(name)', 'Tên tòa nhà không được trùng lặp'),
         ('code', 'unique(code)', 'Mã tòa nhà không được trùng lặp'),
-        ('unique_building', 'unique(name, blockhouse_id)', 'Khu/Tòa nhà bị trùng lặp.')
     ]
 
     @api.depends('create_date')
@@ -103,7 +103,9 @@ class tb_building(models.Model):
         if can_do:
             today = date.today()
             d = today.strftime('%d%m%y')
-            vals["code"] = 'BD' + str(d) + str(random.randint(1000, 9999))
+            code = 'BD' + str(d) + str(random.randint(1000, 9999))
+            vals["code"] = code
+            vals["name"] = code + " - " + self.name_display
             res = super(tb_building, self).create(vals)
             self.clear_caches()
             return res

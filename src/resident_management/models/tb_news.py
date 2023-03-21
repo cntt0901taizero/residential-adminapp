@@ -101,7 +101,7 @@ class tb_news(models.Model):
     #         values['status'] = 'DRAFT'
     #     return super(tb_news, self).write(values)
 
-    def open_edit_form_news(self):
+    def open_edit_form(self):
         form_id = self.env.ref('apartment_service_support.view_tb_news_form')
         per_name = 'perm_write_news'
         error_messenger = 'Bạn không có quyền chỉnh sửa bản tin.'
@@ -123,7 +123,7 @@ class tb_news(models.Model):
             'target': 'current',
         }
 
-    def open_edit_approve_form_news(self):
+    def open_edit_approve_form(self):
         form_id = self.env.ref('apartment_service_support.view_tb_news_approve_form')
         per_name = 'perm_write_news'
         error_messenger = 'Bạn không có quyền chỉnh sửa bản tin.'
@@ -146,7 +146,7 @@ class tb_news(models.Model):
         }
 
     # @api.multi
-    def confirm_delete_news(self):
+    def confirm_delete(self):
         per_name = 'perm_delete_news'
         error_messenger = 'Bạn không có quyền xóa bản tin.'
         can_do = self.check_permission(per_name, raise_exception=False)
