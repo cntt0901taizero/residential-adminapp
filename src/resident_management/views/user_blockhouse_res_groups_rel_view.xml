@@ -37,18 +37,18 @@
                     </group>
                     <group>
                         <field name="user_id" string="Tài khoản *" readonly="1"
-                               force_save="1" options="{'no_open': True}"/>
+                               force_save="1" options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                     </group>
                     <group>
                         <group>
                             <field name="blockhouse_id" string="Dự án *"
-                                   attrs="{'required': True}" options="{'no_open': True}"/>
+                                   attrs="{'required': True}" options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                         </group>
                         <group>
-                            <field name="building_id" string="Tòa nhà" options="{'no_open': True}"/>
+                            <field name="building_id" string="Tòa nhà" options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                         </group>
                         <group>
-                            <field name="group_id" attrs="{'required': True}" options="{'no_open': True}"
+                            <field name="group_id" attrs="{'required': True}" options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"
                                    domain="['&amp;', ('category_id.name', '=', '[QLCD] Quản lý cư dân'), ('name', '!=', '[CD] Cư dân')]"
                                    string="Nhóm quyền *"/>
                         </group>
@@ -92,24 +92,24 @@
                     </group>
                     <group>
                         <field name="user_id" string="Tài khoản *" readonly="1"
-                               force_save="1" options="{'no_open': True}"/>
+                               force_save="1" options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                     </group>
                     <group>
                         <group>
                             <field name="blockhouse_id" string="Dự án *"
-                                   attrs="{'required': True}" options="{'no_open': True}"/>
+                                   attrs="{'required': True}" options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                         </group>
                         <group>
                             <field name="building_id" string="Khu / Tòa nhà *"
-                                   attrs="{'required': True}" options="{'no_open': True}"/>
+                                   attrs="{'required': True}" options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                         </group>
                         <group>
                             <field name="building_floors_id" string="Tầng *"
-                                   attrs="{'required': True}" options="{'no_open': True}"/>
+                                   attrs="{'required': True}" options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                         </group>
                         <group>
                             <field name="building_house_id" string="Căn hộ / biệt thự *"
-                                   attrs="{'required': True}" options="{'no_open': True}"/>
+                                   attrs="{'required': True}" options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                         </group>
                         <group>
                             <field name="relationship_type" string="Quan hệ với chủ hộ *"

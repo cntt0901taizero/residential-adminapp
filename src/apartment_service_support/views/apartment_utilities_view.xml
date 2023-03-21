@@ -68,7 +68,7 @@
                         </div>
                         <div class="col-md-12">
                             <group>
-                                <field name="blockhouse_id" string="Dự án *" required="1" options="{'no_open': True}"/>
+                                <field name="blockhouse_id" string="Dự án *" required="1" options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                             </group>
                         </div>
                         <div class="col-md-6">

@@ -112,7 +112,8 @@
                         </group>
                     </group>
                     <group string="Danh mục tiện ích của khu / tòa nhà">
-                        <field name="apartment_utilities_ids"  string="Tiện ích" widget="many2many_tags"/>
+                        <field name="apartment_utilities_ids"  string="Tiện ích" widget="many2many_tags"
+                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                     </group>
                     <notebook>
                         <page string="Tầng sàn">

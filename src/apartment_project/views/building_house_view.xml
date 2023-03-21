@@ -42,9 +42,9 @@
                             <field name="name" string="Tên căn hộ *"/>
                             <field name="address"/>
                             <field name="house_type" widget="selection_badge"/>
-                            <field name="blockhouse_id" string="Dự án *" required="1" options="{'no_open': True}"/>
-                            <field name="building_id" string="Khu / Tòa nhà *" required="1" options="{'no_open': True}"/>
-                            <field name="building_floors_id" string="Tầng *" required="1" options="{'no_open': True}"/>
+                            <field name="blockhouse_id" string="Dự án *" required="1" options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                            <field name="building_id" string="Khu / Tòa nhà *" required="1" options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                            <field name="building_floors_id" string="Tầng *" required="1" options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                             <field name="is_active"/>
                         </group>
                         <group string="Thông tin chi tiết">
