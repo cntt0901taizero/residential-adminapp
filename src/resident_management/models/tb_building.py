@@ -15,6 +15,7 @@ BUILDING_LEVEL = [
     ('c', 'Hạng C'),
 ]
 
+
 class tb_building(models.Model):
     _name = 'tb_building'
     _description = 'Toà nhà'
@@ -108,6 +109,17 @@ class tb_building(models.Model):
             vals["code"] = code
             vals["name"] = code + " - " + vals["name_display"]
             res = super(tb_building, self).create(vals)
+            self.clear_caches()
+            return res
+        raise ValidationError(error_messenger)
+
+    def write(self, vals):
+        per_name = 'perm_write_building'
+        error_messenger = 'Bạn chưa được phân quyền này!'
+        can_do = self.check_permission(per_name, raise_exception=False)
+        if can_do:
+            vals["name"] = self.code + " - " + vals["name_display"]
+            res = super(tb_building, self).write(vals)
             self.clear_caches()
             return res
         raise ValidationError(error_messenger)

@@ -111,6 +111,17 @@ class tb_building_floors(models.Model):
             return res
         raise ValidationError(error_messenger)
 
+    def write(self, vals):
+        per_name = 'perm_write_floor'
+        error_messenger = 'Bạn chưa được phân quyền này!'
+        can_do = self.check_permission(per_name, raise_exception=False)
+        if can_do:
+            vals["name"] = self.code + " - " + vals["name_display"]
+            res = super(tb_building_floors, self).write(vals)
+            self.clear_caches()
+            return res
+        raise ValidationError(error_messenger)
+
     def create_building_house(self):
         per_name = 'perm_create_apartment'
         error_messenger = 'Bạn chưa được phân quyền này!'

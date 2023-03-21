@@ -1,6 +1,8 @@
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 from odoo.http import request
+from datetime import date
+import random
 
 from odoo.addons.resident_management.enum import STATUS_TYPES, USER_GROUP_CODE
 str_bql = USER_GROUP_CODE[2][0]
@@ -21,7 +23,8 @@ class tb_apartment_utilities(models.Model):
     _name = 'tb_apartment_utilities'
     _description = 'Tiện ích chung cư'
 
-    name = fields.Char(string='Tên', required=True, copy=False)
+    name = fields.Char(string='Tên', size=200, copy=False, readonly=True)
+    name_display = fields.Char(string='Tên hiển thị', size=200, required=True, copy=False)
     image = fields.Image(string='Ảnh', copy=False)
     description = fields.Text(string='Mô tả', copy=False, help='')
     detail_description = fields.Html(string='Mô tả chi tiết', copy=False, help='')
@@ -31,6 +34,10 @@ class tb_apartment_utilities(models.Model):
     status = fields.Selection(string='Trạng thái', selection=STATUS_TYPES, default=STATUS_TYPES[0][0])
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Dự án",
                                     ondelete="cascade")
+
+    _sql_constraints = [
+        ('unique_apartment_utilities', 'unique(name, blockhouse_id)', 'Tiện ích cư dân bị trùng lặp.')
+    ]
 
     def set_status_active(self):
         for item in self:
@@ -80,6 +87,30 @@ class tb_apartment_utilities(models.Model):
             domain.append(('id', 'in', list(set(bqt_bh_id + bql_bh_id))))
         res = super(tb_apartment_utilities, self).search_read(domain, fields, offset, limit, order)
         return res
+
+    @api.model
+    def create(self, vals):
+        per_name = 'perm_create_utilities'
+        error_messenger = 'Bạn chưa được phân quyền này!'
+        can_do = self.check_permission(per_name, raise_exception=False)
+        if can_do:
+            blockhouse = self.env['tb_blockhouse'].sudo().browse(vals.get('blockhouse_id'))
+            vals["name"] = blockhouse.code + " - " + vals["name_display"]
+            res = super(tb_apartment_utilities, self).create(vals)
+            self.clear_caches()
+            return res
+        raise ValidationError(error_messenger)
+
+    def write(self, vals):
+        per_name = 'perm_write_utilities'
+        error_messenger = 'Bạn chưa được phân quyền này!'
+        can_do = self.check_permission(per_name, raise_exception=False)
+        if can_do:
+            vals["name"] = self.blockhouse_id.code + " - " + vals["name_display"]
+            res = super(tb_apartment_utilities, self).write(vals)
+            self.clear_caches()
+            return res
+        raise ValidationError(error_messenger)
 
     def open_edit_form(self):
         per_name = 'perm_write_utilities'

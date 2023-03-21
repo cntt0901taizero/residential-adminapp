@@ -121,6 +121,17 @@ class tb_building_house(models.Model):
             return res
         raise ValidationError(error_messenger)
 
+    def write(self, vals):
+        per_name = 'perm_write_apartment'
+        error_messenger = 'Bạn chưa được phân quyền này!'
+        can_do = self.check_permission(per_name, raise_exception=False)
+        if can_do:
+            vals["name"] = self.code + " - " + vals["name_display"]
+            res = super(tb_building_house, self).write(vals)
+            self.clear_caches()
+            return res
+        raise ValidationError(error_messenger)
+
     @api.model
     def default_get(self, data):
         res = super(tb_building_house, self).default_get(data)

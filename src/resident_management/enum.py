@@ -1,6 +1,6 @@
 STATUS_TYPES = [
     ('PENDING', 'Đang tiếp nhận'),
-    ('ACTIVE', 'Đã Duyệt'),
+    ('ACTIVE', 'Đã duyệt'),
     ('REJECT', 'Từ chối')
 ]
 

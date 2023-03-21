@@ -16,7 +16,7 @@
 <!--                            name="set_status_reject" string=" Từ chối duyệt" type="object"/>-->
                 </header>
                 <field name="image" string="ẢNH" width="100px" widget="image" class="oe_left oe_avatar" optional="show"/>
-                <field name="name" string="TÊN" optional="show"/>
+                <field name="name_display" string="TÊN HIỂN THỊ" optional="show"/>
                 <field name="description" string="MÔ TẢ" optional="show"/>
 <!--                <field name="active_days" optional="show"/>-->
 <!--                <field name="active_time" widget="date" optional="show"/>-->
@@ -65,7 +65,12 @@
                         </div>
                         <div class="col-md-12">
                             <group>
-                                <field name="name" string="Tên *" required="1"/>
+                                <field name="name_display" string="Tên hiển thị *" required="1"/>
+                            </group>
+                        </div>
+                        <div class="col-md-12">
+                            <group>
+                                <field name="name" string="Tên tiện ích cư dân *"/>
                             </group>
                         </div>
                         <div class="col-md-12">
