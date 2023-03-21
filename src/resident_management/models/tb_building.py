@@ -44,6 +44,7 @@ class tb_building(models.Model):
     _sql_constraints = [
         ('name', 'unique(name)', 'Tên tòa nhà không được trùng lặp'),
         ('code', 'unique(code)', 'Mã tòa nhà không được trùng lặp'),
+        ('unique_building', 'unique(name_display, blockhouse_id)', 'Tên tòa nhà bị trùng lặp.')
     ]
 
     @api.depends('create_date')
