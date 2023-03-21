@@ -105,7 +105,7 @@ class tb_building_floors(models.Model):
             d = today.strftime('%d%m%y')
             code = 'BDF' + str(d) + str(random.randint(1000, 9999))
             vals["code"] = code
-            vals["name"] = code + " - " + self.name_display
+            vals["name"] = code + " - " + vals["name_display"]
             res = super(tb_building_floors, self).create(vals)
             self.clear_caches()
             return res

@@ -8,12 +8,10 @@
         <field name="name">tb_building_floors.tree</field>
         <field name="model">tb_building_floors</field>
         <field name="arch" type="xml">
-            <tree default_order="sort" decoration-danger="is_active == False"
-                  delete="0" multi_edit="1" edit="0">
+            <tree default_order="sort" decoration-danger="is_active == False">
                 <field name="row_number" string="STT" optional="show"/>
                 <field name="sort" string="THỨ TỰ" widget="handle" optional="show"/>
                 <field name="name_display" string="TÊN HIỂN THỊ" optional="show" decoration-bf="1"/>
-                <field name="name" string="TÊN TẦNG" optional="show"/>
                 <field name="floors_type" string="KIỂU TẦNG" optional="show"/>
 <!--                <field name="total_house" optional="show"/>-->
                 <field name="building_id" string="TÒA NHÀ" widget="badge" optional="show"
