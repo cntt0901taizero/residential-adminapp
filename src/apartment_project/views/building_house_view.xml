@@ -11,6 +11,7 @@
             <tree string="Bảng căn hộ" decoration-danger="is_active == False">
                 <field name="row_number" string="STT" optional="show"/>
                 <field name="name_display" string="SỐ NHÀ" decoration-bf="1" optional="show"/>
+                <field name="name" string="TÊN" optional="show"/>
                 <field name="address" string="ĐỊA CHỈ" optional="show"/>
                 <field name="house_type" string="LOẠI NHÀ" optional="show"/>
                 <field name="blockhouse_id" string="DỰ ÁN" widget="badge" optional="show"/>
