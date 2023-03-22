@@ -118,7 +118,8 @@ class tb_building(models.Model):
         error_messenger = 'Bạn chưa được phân quyền này!'
         can_do = self.check_permission(per_name, raise_exception=False)
         if can_do:
-            vals["name"] = self.code + " - " + vals["name_display"]
+            if self.code and vals.get("name_display"):
+                vals["name"] = self.code + " - " + vals["name_display"]
             res = super(tb_building, self).write(vals)
             self.clear_caches()
             return res

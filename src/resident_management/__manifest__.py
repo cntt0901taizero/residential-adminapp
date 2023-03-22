@@ -4,7 +4,7 @@
     'category': 'Resident',
     'summary': 'RESIDENTIAL MANAGEMENT',
     'description': """RESIDENTIAL MANAGEMENT""",
-    'depends': ['base', 'mail'],
+    'depends': ['bus', 'base', 'mail'],
     'sequence': -100,
     'data': [
         'views/icons.xml',

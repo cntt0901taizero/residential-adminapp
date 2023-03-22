@@ -5,6 +5,7 @@ from odoo.exceptions import ValidationError
 import random
 
 from odoo.addons.resident_management.enum import USER_GROUP_CODE
+
 str_bql = USER_GROUP_CODE[2][0]
 str_bqt = USER_GROUP_CODE[3][0]
 
@@ -175,5 +176,3 @@ class tb_blockhouse(models.Model):
         for record in self:
             record.unlink()
             pass
-
-
