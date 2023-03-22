@@ -95,7 +95,7 @@ class tb_apartment_utilities(models.Model):
         can_do = self.check_permission(per_name, raise_exception=False)
         if can_do:
             blockhouse = self.env['tb_blockhouse'].sudo().browse(vals.get('blockhouse_id'))
-            vals["name"] = blockhouse.code + " - " + vals["name_display"]
+            vals["name"] = blockhouse.code + " - " + str(vals["name_display"]).strip()
             res = super(tb_apartment_utilities, self).create(vals)
             self.clear_caches()
             return res
@@ -109,12 +109,12 @@ class tb_apartment_utilities(models.Model):
             if vals.get("blockhouse_id") or vals.get("name_display"):
                 if vals.get("blockhouse_id") and vals.get("name_display"):
                     blockhouse = self.env['tb_blockhouse'].sudo().browse(vals.get('blockhouse_id'))
-                    vals["name"] = blockhouse.code + " - " + vals["name_display"]
+                    vals["name"] = blockhouse.code + " - " + str(vals["name_display"]).strip()
                 if vals.get("name_display"):
-                    vals["name"] = self.blockhouse_id.code + " - " + vals["name_display"]
+                    vals["name"] = self.blockhouse_id.code + " - " + str(vals["name_display"]).strip()
                 if vals.get("blockhouse_id"):
                     blockhouse = self.env['tb_blockhouse'].sudo().browse(vals.get('blockhouse_id'))
-                    vals["name"] = blockhouse.code + " - " + self.name_display
+                    vals["name"] = blockhouse.code + " - " + str(self.name_display).strip()
             res = super(tb_apartment_utilities, self).write(vals)
             self.clear_caches()
             return res

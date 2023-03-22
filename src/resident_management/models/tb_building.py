@@ -107,7 +107,7 @@ class tb_building(models.Model):
             d = today.strftime('%d%m%y')
             code = 'BD' + str(d) + str(random.randint(1000, 9999))
             vals["code"] = code
-            vals["name"] = code + " - " + vals["name_display"]
+            vals["name"] = code + " - " + str(vals["name_display"]).strip()
             res = super(tb_building, self).create(vals)
             self.clear_caches()
             return res
