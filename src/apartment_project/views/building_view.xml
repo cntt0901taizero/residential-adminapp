@@ -85,7 +85,7 @@
         <field name="name">tb_building.form</field>
         <field name="model">tb_building</field>
         <field name="arch" type="xml">
-            <form create="false">
+            <form>
                 <sheet>
                     <group>
                         <field string="Ảnh đại diện tòa nhà" name="image"

@@ -34,7 +34,7 @@
         <field name="name">tb_blockhouse.form</field>
         <field name="model">tb_blockhouse</field>
         <field name="arch" type="xml">
-            <form create="false">
+            <form>
                 <sheet>
                     <group>
                         <group string="Thông tin cơ bản">
