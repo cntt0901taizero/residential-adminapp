@@ -33,7 +33,8 @@ class tb_apartment_utilities(models.Model):
     is_active = fields.Boolean(string='Có hiệu lực', default=False)
     status = fields.Selection(string='Trạng thái', selection=STATUS_TYPES, default=STATUS_TYPES[0][0])
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Dự án",
-                                    domain="[('is_active', '=', True)]", ondelete="cascade")
+                                    domain=lambda self: self._domain_blockhouse_id(),
+                                    ondelete="cascade")
 
     _sql_constraints = [
         ('unique_apartment_utilities', 'unique(name, blockhouse_id)', 'Tiện ích cư dân bị trùng lặp.')
@@ -48,6 +49,25 @@ class tb_apartment_utilities(models.Model):
         for item in self:
             item.status = 'REJECT'
             item.is_active = False
+
+    @api.model
+    def _domain_blockhouse_id(self):
+        user = request.env.user
+        bqt_bh_id = []  # ban quan tri - blockhouse - id
+        bqt_bd_id = []  # ban quan tri - building - id
+        bql_bh_id = []  # ban quan ly - blockhouse - id
+        bql_bd_id = []  # ban quan ly - building - id
+        if user and user.id != 1 and user.id != 2:
+            for item in user.tb_users_blockhouse_res_groups_rel_ids:
+                if item.group_id.name and str_bqt in item.user_group_code:
+                    bqt_bh_id.append(int(item.blockhouse_id.id))
+                    bqt_bd_id.append(int(item.building_id.id))
+                if item.group_id.name and str_bql in item.user_group_code:
+                    bql_bh_id.append(int(item.blockhouse_id.id))
+                    bql_bd_id.append(int(item.building_id.id))
+            return ["&", ("is_active", "=", True), ("id", "in", list(set(bqt_bh_id + bql_bh_id)))]
+        else:
+            return [("is_active", "=", True)]
 
     @api.model
     def read_group(self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True):
