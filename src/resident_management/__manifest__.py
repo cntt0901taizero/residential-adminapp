@@ -51,8 +51,6 @@
             'resident_management/static/src/js/button_utilities.js',
             'resident_management/static/src/js/button_vehicle.js',
 
-            # 'resident_management/static/src/js/toaster_mixin_success.js',
-            # 'resident_management/static/src/js/toaster_mixin_error.js',
         ],
         'web.assets_qweb': [
             # 'resident_management/static/src/xml/styles.xml',
