@@ -15,7 +15,8 @@ class tb_banner(models.Model):
     link = fields.Char(string='Link', size=500, copy=False, required=True)
     sort = fields.Integer(string='Thứ tự', copy=False)
     status = fields.Selection(string='Trạng thái', selection=STATUS_TYPES, default=STATUS_TYPES[0][0])
-    blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="dự án", ondelete="cascade")
+    blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="dự án", ondelete="cascade",
+                                    domain="[('is_active', '=', True)]")
 
     def write(self, values):
         per_name = 'perm_approve_advertisement'

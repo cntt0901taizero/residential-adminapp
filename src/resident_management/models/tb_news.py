@@ -39,7 +39,7 @@ class tb_news(models.Model):
                                     domain=lambda self: self._domain_blockhouse_id(),
                                     ondelete="cascade")
     building_id = fields.Many2one(comodel_name='tb_building', string="Toà nhà",
-                                  domain="[('blockhouse_id', '=', blockhouse_id)]",
+                                  domain="[('is_active', '=', True), ('blockhouse_id', '=', blockhouse_id)]",
                                   ondelete="cascade")
 
     perm_approve = fields.Boolean(string='Phê duyệt', compute='_compute_perm_approve')

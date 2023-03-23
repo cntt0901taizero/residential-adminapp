@@ -33,7 +33,7 @@ class tb_apartment_utilities(models.Model):
     is_active = fields.Boolean(string='Có hiệu lực', default=False)
     status = fields.Selection(string='Trạng thái', selection=STATUS_TYPES, default=STATUS_TYPES[0][0])
     blockhouse_id = fields.Many2one(comodel_name='tb_blockhouse', string="Dự án",
-                                    ondelete="cascade")
+                                    domain="[('is_active', '=', True)]", ondelete="cascade")
 
     _sql_constraints = [
         ('unique_apartment_utilities', 'unique(name, blockhouse_id)', 'Tiện ích cư dân bị trùng lặp.')

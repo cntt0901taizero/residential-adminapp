@@ -21,10 +21,10 @@ class tb_access_card(models.Model):
                                     domain=lambda self: self._domain_blockhouse_id(),
                                     ondelete="cascade")
     building_id = fields.Many2one(comodel_name='tb_building', string="Toà nhà",
-                                  domain="[('blockhouse_id', '!=', None), ('blockhouse_id', '=', blockhouse_id)]",
+                                  domain="[('is_active', '=', True), ('blockhouse_id', '!=', None), ('blockhouse_id', '=', blockhouse_id)]",
                                   ondelete="cascade")
     building_house_id = fields.Many2one(comodel_name='tb_building_house', string="Căn hộ",
-                                        domain="[('building_id', '!=', None), ('building_id', '=', building_id)]",
+                                        domain="[('is_active', '=', True), ('building_id', '!=', None), ('building_id', '=', building_id)]",
                                         ondelete="cascade")
     user_id = fields.Many2one(comodel_name='res.users', string="Chủ thẻ",
                               domain=lambda self: self._domain_user_id(),
